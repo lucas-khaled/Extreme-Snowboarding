@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float characterHeight = 2;
 
+    public Item coletavel;
+
 
     public float CharacterHeight
     {
@@ -85,6 +87,11 @@ public class Player : MonoBehaviour
 
         playerState = newState;
         playerState.StateStart(this);
+    }
+
+    public void StartEffect(Effect[] atributes)
+    {
+        /*foreach(Effect efeito in atributes) {} */
     }
 }
 
