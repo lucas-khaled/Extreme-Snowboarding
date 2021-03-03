@@ -12,9 +12,19 @@ public class Player : MonoBehaviour
     private float deaccelerationOnSlope = 0.5f;
     [SerializeField]
     private float characterHeight = 2;
+    [SerializeField]
+    private float jumpFactor = 0.1f;
 
+    public float rotateFactor = 3;
     public Item coletavel;
 
+    public float JumpForce
+    {
+        get
+        {
+            return jumpFactor * velocity;
+        }
+    }
 
     public float CharacterHeight
     {
@@ -70,7 +80,7 @@ public class Player : MonoBehaviour
     {
         playerState.StateUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             playerState.InterpretateInput(GameInput.SPACE);
         }
@@ -93,6 +103,21 @@ public class Player : MonoBehaviour
     {
         /*foreach(Effect efeito in atributes) {} */
     }
+
+    public void StartStateCoroutine(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(playerState.GetType() == typeof(Jumping))
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(((Jumping)playerState).groundingCheck, 0.2f);
+        }
+    }
 }
 
 public enum GameInput { SPACE }
+

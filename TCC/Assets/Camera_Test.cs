@@ -5,13 +5,13 @@ using UnityEngine;
 public class Camera_Test : MonoBehaviour
 {
 
-    Player_Test player;
+    Player player;
     Vector3 offset;
 
 
     private void Awake()
     {
-        player = GameObject.FindObjectOfType<Player_Test>();
+        player = GameObject.FindObjectOfType<Player>();
     }
 
 

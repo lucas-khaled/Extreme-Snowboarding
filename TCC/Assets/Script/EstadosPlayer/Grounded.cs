@@ -17,8 +17,8 @@ public class Grounded : IPlayerState
 
     public void StateEnd()
     {
-        coroutineStarter.StopAllCoroutines();
-        coroutineStarter = null;
+        player.StopAllCoroutines();
+        player = null;
     }
 
     public void StateStart(Player player)
@@ -27,10 +27,8 @@ public class Grounded : IPlayerState
         movementStep = player.CheckingPointDistance * 10;
         velocityRate = 2 / (player.Velocity * movementStep);
 
-        coroutineStarter = new MonoBehaviour();
-
-        coroutineStarter.StartCoroutine(CalculateNextPoint());
-        coroutineStarter.StartCoroutine(CorrectRotation());
+        player.StartStateCoroutine(CalculateNextPoint());
+        player.StartStateCoroutine(CorrectRotation());
     }
 
     public void StateUpdate()
@@ -50,11 +48,11 @@ public class Grounded : IPlayerState
             Coroutine movingCoroutine = null;
 
             if (Physics.Raycast(checkingPosition, Vector3.down, out hit, 1000f, LayerMask.GetMask("Track")))
-                movingCoroutine = coroutineStarter.StartCoroutine(Movement(CalculatePlayerPosition(hit)));
+                movingCoroutine = player.StartCoroutine(Movement(CalculatePlayerPosition(hit)));
             else if (Physics.Raycast(checkingPosition, (Vector3.left * (player.DeaccelerationOnSlope) + Vector3.up * (1 - player.DeaccelerationOnSlope)).normalized, out hit, 1000f, LayerMask.GetMask("Track")))
-                movingCoroutine = coroutineStarter.StartCoroutine(Movement(CalculatePlayerPosition(hit, true)));
+                movingCoroutine = player.StartCoroutine(Movement(CalculatePlayerPosition(hit, true)));
             else
-                movingCoroutine = coroutineStarter.StartCoroutine(Movement(checkingPosition));
+                movingCoroutine = player.StartCoroutine(Movement(checkingPosition));
 
             yield return movingCoroutine;
         }
