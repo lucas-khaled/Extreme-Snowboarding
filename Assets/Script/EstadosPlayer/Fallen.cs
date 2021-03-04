@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Fallen : IPlayerState
 {
+    float timeFall = 3;
+    Player player;
     public void InterpretateInput(GameInput input)
     {
-        throw new System.NotImplementedException();
     }
 
     public void StateEnd()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void StateStart(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Fallen");
+        this.player = player;
     }
 
     public void StateUpdate()
     {
-        throw new System.NotImplementedException();
+        timeFall -= Time.deltaTime;
+        if (timeFall <= 0)
+        {
+            player.ChangeState(new Grounded());
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Grounded : IPlayerState
 {
     float velocityRate;
@@ -24,8 +25,8 @@ public class Grounded : IPlayerState
     public void StateStart(Player player)
     {
         this.player = player;
-        movementStep = player.CheckingPointDistance * 10;
-        velocityRate = 2 / (player.Velocity * movementStep);
+        movementStep = player.SharedValues.CheckingPointDistance * 10;
+        velocityRate = 2 / (player.SharedValues.Velocity * movementStep);
 
         player.StartStateCoroutine(CalculateNextPoint());
         player.StartStateCoroutine(CorrectRotation());
@@ -43,13 +44,13 @@ public class Grounded : IPlayerState
             //Debug.Log("<color=red> Calculating </color>");
 
             RaycastHit hit;
-            Vector3 checkingPosition = player.transform.position + Vector3.right * player.CheckingPointDistance;
+            Vector3 checkingPosition = player.transform.position + Vector3.right * player.SharedValues.CheckingPointDistance;
 
             Coroutine movingCoroutine = null;
 
             if (Physics.Raycast(checkingPosition, Vector3.down, out hit, 1000f, LayerMask.GetMask("Track")))
                 movingCoroutine = player.StartCoroutine(Movement(CalculatePlayerPosition(hit)));
-            else if (Physics.Raycast(checkingPosition, (Vector3.left * (player.DeaccelerationOnSlope) + Vector3.up * (1 - player.DeaccelerationOnSlope)).normalized, out hit, 1000f, LayerMask.GetMask("Track")))
+            else if (Physics.Raycast(checkingPosition, (Vector3.left * (player.SharedValues.DeaccelerationOnSlope) + Vector3.up * (1 - player.SharedValues.DeaccelerationOnSlope)).normalized, out hit, 1000f, LayerMask.GetMask("Track")))
                 movingCoroutine = player.StartCoroutine(Movement(CalculatePlayerPosition(hit, true)));
             else
                 movingCoroutine = player.StartCoroutine(Movement(checkingPosition));
@@ -79,7 +80,7 @@ public class Grounded : IPlayerState
     {
         int invertionValue = (invert) ? -1 : 1;
         float X = hit.point.x + hit.normal.x * invertionValue;
-        float Y = hit.point.y + (player.CharacterHeight / 2) * hit.normal.y * invertionValue;
+        float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y * invertionValue;
 
         return new Vector2(X, Y);
     }
@@ -91,6 +92,7 @@ public class Grounded : IPlayerState
         {
             if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
             {
+                player.SharedValues.ActualGroundNormal = rotationHit.normal;
                 Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
 
                 newRotation.x = Mathf.Lerp(player.transform.rotation.x, newRotation.x, 0.5f);

@@ -10,7 +10,7 @@ public class ItemPickup : MonoBehaviour
     {
         //Talvez uma animação de randomização??
 
-        player.GetComponent<Player>().coletavel = availableItems[Random.Range(0, availableItems.Length)];
+        player.GetComponent<Player>().Coletavel = availableItems[Random.Range(0, availableItems.Length)];
     }
 
     private void OnTriggerEnter(Collider other)

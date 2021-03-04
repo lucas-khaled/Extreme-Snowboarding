@@ -5,7 +5,81 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float velocity = 5f;
+    private PlayerSharedValues sharedValues;
+
+    public PlayerSharedValues SharedValues
+    {
+        get
+        {
+            return sharedValues;
+        }
+        private set
+        {
+            sharedValues = value;
+        }
+    }
+
+    public Item Coletavel { get; set; }
+
+    IPlayerState playerState = new Grounded();
+
+    public bool update { get; set; }
+
+    private void Update()
+    {
+        if(update)
+            playerState.StateUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerState.InterpretateInput(GameInput.SPACE);
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            playerState.InterpretateInput(GameInput.SPACE_HOLD);
+        }
+    }
+
+    private void Start()
+    {
+        playerState.StateStart(this);
+        update = true;
+    }
+
+    public void ChangeState(IPlayerState newState)
+    {
+        playerState.StateEnd();
+
+        playerState = newState;
+        playerState.StateStart(this);
+    }
+
+    public void StartEffect(Effect[] atributes)
+    {
+        /*foreach(Effect efeito in atributes) {} */
+    }
+
+    public void StartStateCoroutine(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(playerState.GetType() == typeof(Jumping))
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(((Jumping)playerState).groundingCheck, 0.2f);
+        }
+    }
+}
+
+[System.Serializable]
+public class PlayerSharedValues
+{
+    [Header("Movement Values")]
+    [SerializeField]
+    private float velocity = 10f;
     [SerializeField, Range(1f, 2f)]
     private float checkingPointDistance = 1f;
     [SerializeField, Range(0f, 1f)]
@@ -13,10 +87,23 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float characterHeight = 2;
     [SerializeField]
-    private float jumpFactor = 0.1f;
+    private float jumpFactor = 0.5f;
+    [SerializeField]
+    private float rotationFactor = 3;
 
-    public float rotateFactor = 3;
-    public Item coletavel;
+    public Vector3 ActualGroundNormal { get; set; }
+
+    public float RotationFactor
+    {
+        get
+        {
+            return rotationFactor;
+        }
+        private set
+        {
+            rotationFactor = value;
+        }
+    }
 
     public float JumpForce
     {
@@ -73,51 +160,7 @@ public class Player : MonoBehaviour
             checkingPointDistance = value;
         }
     }
-
-    IPlayerState playerState = new Grounded();
-
-    private void Update()
-    {
-        playerState.StateUpdate();
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            playerState.InterpretateInput(GameInput.SPACE);
-        }
-    }
-
-    private void Start()
-    {
-        playerState.StateStart(this);
-    }
-
-    public void ChangeState(IPlayerState newState)
-    {
-        playerState.StateEnd();
-
-        playerState = newState;
-        playerState.StateStart(this);
-    }
-
-    public void StartEffect(Effect[] atributes)
-    {
-        /*foreach(Effect efeito in atributes) {} */
-    }
-
-    public void StartStateCoroutine(IEnumerator coroutine)
-    {
-        StartCoroutine(coroutine);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if(playerState.GetType() == typeof(Jumping))
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(((Jumping)playerState).groundingCheck, 0.2f);
-        }
-    }
 }
 
-public enum GameInput { SPACE }
+public enum GameInput { SPACE, SPACE_HOLD }
 
