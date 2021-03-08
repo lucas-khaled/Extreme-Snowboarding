@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dead : IPlayerState
+public class Dead : PlayerState
 {
-    public void InterpretateInput(GameInput input)
+    public override void InterpretateInput(GameInput input)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void StateEnd()
+    public override void StateEnd()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void StateStart(Player player)
+    public override void StateStart(Player player)
     {
-        throw new System.NotImplementedException();
+        base.StateStart(player);
+        MonoBehaviour.Destroy(player.gameObject);
     }
 
-    public void StateUpdate()
+    public override void StateUpdate()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
