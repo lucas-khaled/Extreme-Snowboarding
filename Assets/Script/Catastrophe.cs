@@ -12,18 +12,20 @@ public class Catastrophe : MonoBehaviour
     [SerializeField]    
     private float velocity;
     [SerializeField]
-    private LayerMask layerMask;
-    [SerializeField]
     private float shakingDuration;
     [SerializeField]
     private float magnetude;
+    [SerializeField]
+    private float tempoEspera;
 
     private Vector3 nextMovementPoint;
     private bool isMoving;
     private GameObject mainCamera;
+    private LayerMask layerMask;
 
     void Start()
     {
+        layerMask = LayerMask.GetMask("Track");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         isMoving = false;
         StartCoroutine(CatastropheStartTimer());
@@ -36,7 +38,7 @@ public class Catastrophe : MonoBehaviour
 
     IEnumerator CatastropheStartTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(tempoEspera);
         isMoving = true;
         StartCatastrophe();
     }
@@ -109,7 +111,8 @@ public class Catastrophe : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<Player>(); /// Mudar estado;
+            Debug.Log("Morreu animal");
+            other.gameObject.GetComponent<Player>().ChangeState(new Dead());
         }
     }
 }
