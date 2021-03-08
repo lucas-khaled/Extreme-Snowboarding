@@ -3,38 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Grounded : IPlayerState
+public class Grounded : PlayerState
 {
-    float velocityRate;
     float movementStep;
-    MonoBehaviour coroutineStarter;
-    Player player;
 
-    public void InterpretateInput(GameInput input)
+    public override void InterpretateInput(GameInput input)
     {
         if(input == GameInput.SPACE)
             player.ChangeState(new Jumping());
     }
 
-    public void StateEnd()
+    public override void StateEnd()
     {
         player.StopAllCoroutines();
         player = null;
     }
 
-    public void StateStart(Player player)
+    public override void StateStart(Player player)
     {
-        this.player = player;
-        movementStep = player.SharedValues.CheckingPointDistance * 10;
-        velocityRate = 2 / (player.SharedValues.Velocity * movementStep);
+        base.StateStart(player);
+
+        movementStep = player.SharedValues.CheckingPointDistance * 10;     
 
         player.StartStateCoroutine(CalculateNextPoint());
-        player.StartStateCoroutine(CorrectRotation());
     }
 
-    public void StateUpdate()
+    public override void StateUpdate()
     {
+        CorrectRotation();
+    }
 
+    void CorrectRotation()
+    {
+        RaycastHit rotationHit;
+        if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
+        {
+            player.SharedValues.ActualGroundNormal = rotationHit.normal;
+            Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
+            newRotation.y = newRotation.x = 0;
+
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+        }
     }
 
     IEnumerator CalculateNextPoint()
@@ -62,11 +71,12 @@ public class Grounded : IPlayerState
     IEnumerator Movement(Vector3 position)
     {
         Vector3 steps = (position - player.transform.position) / movementStep;
-
+        float velocityRate = 2 / (player.SharedValues.Velocity * movementStep);
         //Debug.Log(position);
 
         while (Vector3.Distance(player.transform.position, position) > 0.01f)
         {
+           
             player.transform.position += steps;
 
             //Debug.Log(Vector3.Distance(transform.position, position));
@@ -82,24 +92,8 @@ public class Grounded : IPlayerState
         float X = hit.point.x + hit.normal.x * invertionValue;
         float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y * invertionValue;
 
+        player.SharedValues.InclinationVelocity = hit.normal.x * 2 * invertionValue;
+
         return new Vector2(X, Y);
-    }
-
-    IEnumerator CorrectRotation()
-    {
-        RaycastHit rotationHit;
-        while (true)
-        {
-            if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
-            {
-                player.SharedValues.ActualGroundNormal = rotationHit.normal;
-                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
-
-                newRotation.x = Mathf.Lerp(player.transform.rotation.x, newRotation.x, 0.5f);
-                player.transform.rotation = newRotation;//Quaternion.Lerp(transform.rotation, newRotation, 0.5f);
-            }
-
-            yield return new WaitForSeconds(0.2f);
-        }
     }
 }
