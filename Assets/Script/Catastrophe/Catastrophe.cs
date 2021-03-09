@@ -17,16 +17,16 @@ public class Catastrophe : MonoBehaviour
     private float magnetude;
     [SerializeField]
     private float tempoEspera;
+    [SerializeField]
+    private Camera_Test[] cameraScript;
 
     private Vector3 nextMovementPoint;
     private bool isMoving;
-    private GameObject mainCamera;
     private LayerMask layerMask;
 
     void Start()
     {
         layerMask = LayerMask.GetMask("Track");
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         isMoving = false;
         StartCoroutine(CatastropheStartTimer());
     }
@@ -48,36 +48,13 @@ public class Catastrophe : MonoBehaviour
         // Animação catastrophe iniciando
         this.GetComponent<MeshRenderer>().enabled = true;
         this.GetComponent<SphereCollider>().enabled = true;
-        StartCoroutine(CameraShake());
+        cameraScript[0].StartCoroutine(cameraScript[0].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
+        cameraScript[1].StartCoroutine(cameraScript[1].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
+        cameraScript[2].StartCoroutine(cameraScript[2].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
+        cameraScript[3].StartCoroutine(cameraScript[3].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
         // Aviso?
 
         GetNextMovementPoint();
-    }
-
-    IEnumerator CameraShake()
-    {
-        if (!deactivateCameraShake)
-        {
-            Vector3 originalPoisition = mainCamera.transform.localPosition;
-
-            float timeElapsed = 0f;
-
-            while (timeElapsed < shakingDuration)
-            {
-                float x = Random.Range(-1f, 1f) * magnetude;
-                float y = Random.Range(-1f, 1f) * magnetude;
-
-                mainCamera.transform.localPosition = new Vector3(x + originalPoisition.x, 
-                                                 y + originalPoisition.y,
-                                                 originalPoisition.z);
-
-                timeElapsed += Time.deltaTime;
-
-                yield return null;
-            }
-
-            mainCamera.transform.localPosition = originalPoisition;
-        }
     }
 
     Vector3 GetNextMovementPoint()

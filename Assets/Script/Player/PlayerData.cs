@@ -15,8 +15,10 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private Player player;
 
-    public void InstancePlayer(Vector3 position)
+    public void InstancePlayer(Vector3 position, int playerCode, Camera_Test camera)
     {
-        Instantiate(player, position, Quaternion.identity);
+        var instantiatedPlayer = Instantiate(player, position, Quaternion.identity);
+        camera.SetPlayer(instantiatedPlayer.GetComponent<Player>());
+        instantiatedPlayer.GetComponent<Player>().SharedValues.playerCode = playerCode;
     }
 }

@@ -99,14 +99,14 @@ public class Grounded : PlayerState
 
         player.SharedValues.InclinationVelocity = hit.normal.x * 2 * invertionValue;
 
-        return new Vector2(X, Y);
+        return new Vector3(X, Y, player.transform.position.z);
     }
 
     IEnumerator BeEtherium()
     {
-        player.etherium = true;
+        player.SharedValues.etherium = true;
         yield return new WaitForSeconds(timeEtherium);
-        player.etherium = false;
+        player.SharedValues.etherium = false;
     }
 
     #endregion

@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (!player.etherium)
+            if (!player.SharedValues.etherium)
                 player.ChangeState(new Fallen());
         }
     }

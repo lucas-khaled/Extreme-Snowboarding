@@ -7,6 +7,6 @@ public class PowerUp : Item
     Effect[] effect;
     public override void Activate(Player player)
     {
-        player.StartEffect(effect);
+        //player.StartEffect(effect);
     }
 }

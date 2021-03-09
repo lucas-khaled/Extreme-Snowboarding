@@ -25,25 +25,35 @@ public class Player : MonoBehaviour
 
     public bool update { get; set; }
 
-    public bool etherium { get; set; } 
-
     public Camera_Test playerCamera { get;  set; }
 
     PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
+    private string jumpInput;
+    private string fireInput;
 
     private void Update()
     {
         if(update)
             playerState.StateUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        InputInterpretation();
+    }
+
+    private void InputInterpretation()
+    {
+        if (Input.GetButtonDown(jumpInput))
             playerState.InterpretateInput(GameInput.SPACE);
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton(jumpInput))
             playerState.InterpretateInput(GameInput.SPACE_HOLD);
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.Space))
             Restart();
+        if (Input.GetButtonDown(fireInput) && Coletavel != null)
+        {
+            Coletavel.Activate(this);
+            Coletavel = null;
+        }
     }
 
     void Restart()
@@ -56,6 +66,8 @@ public class Player : MonoBehaviour
         playerState.StateStart(this);
         update = true;
         startPoint = transform.position;
+        jumpInput = "JumpPlayer" + sharedValues.playerCode;
+        fireInput = "FirePlayer" + sharedValues.playerCode;
     }
 
     public void ChangeState(PlayerState newState)
@@ -64,11 +76,6 @@ public class Player : MonoBehaviour
 
         playerState = newState;
         playerState.StateStart(this);
-    }
-
-    public void StartEffect(Effect[] atributes)
-    {
-        /*foreach(Effect efeito in atributes) {} */
     }
 
     public void StartStateCoroutine(IEnumerator coroutine)
@@ -113,6 +120,10 @@ public class PlayerSharedValues
     private float jumpFactor = 0.5f;
     [SerializeField]
     private float rotationFactor = 3;
+
+    public int playerCode;
+
+    public bool etherium { get; set; }
 
     public Vector3 ActualGroundNormal { get; set; }
 

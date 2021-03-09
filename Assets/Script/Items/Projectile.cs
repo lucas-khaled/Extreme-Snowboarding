@@ -41,6 +41,6 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Effect[] effect = fuckfriend.GetAttributesToChange();
-        other.gameObject.GetComponent<Player>().StartEffect(effect);
+        //other.gameObject.GetComponent<Player>().StartEffect(effect);
     }
 }
