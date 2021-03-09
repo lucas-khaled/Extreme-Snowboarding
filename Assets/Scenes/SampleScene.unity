@@ -337,7 +337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 916500476e9d5494bad692cf2e9e6670, type: 2}
+  - {fileID: 2100000, guid: 0720cdd1814436c48935d63f1da9f370, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -793,6 +793,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1415444580
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2591059477645484035, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_Name
+      value: Avalanche
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484036, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: velocity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591059477645484039, guid: e610243eb0850994d8be515b926d6514, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e610243eb0850994d8be515b926d6514, type: 3}
 --- !u!1 &1477306513
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,11 +889,11 @@ MonoBehaviour:
   sharedValues:
     characterHeight: 2
     characterRadius: 1
-    velocity: 10
+    velocity: 1
     checkingPointDistance: 2
     deaccelerationOnSlope: 0.5
-    jumpFactor: 1
-    rotationFactor: 3
+    jumpFactor: 15
+    rotationFactor: 6
 --- !u!136 &1477306515
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -841,7 +902,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477306513}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -866,7 +927,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0df0ce043c8132242b4f91594ef5319e, type: 2}
+  - {fileID: 2100000, guid: 2fad7073970d201438f862d4712bb6fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

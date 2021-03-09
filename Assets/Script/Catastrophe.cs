@@ -111,7 +111,6 @@ public class Catastrophe : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Morreu animal");
             other.gameObject.GetComponent<Player>().ChangeState(new Dead());
         }
     }

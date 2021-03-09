@@ -21,9 +21,11 @@ public class Player : MonoBehaviour
 
     public Item Coletavel { get; set; }
 
-    PlayerState playerState = new Grounded();
-
     public bool update { get; set; }
+
+    public Camera_Test playerCamera { get;  set; }
+
+    PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
 

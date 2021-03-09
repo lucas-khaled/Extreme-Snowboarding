@@ -19,6 +19,7 @@ public class Camera_Test : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.parent.transform.position = player.transform.position;
+        if(player != null)
+            transform.parent.transform.position = player.transform.position;
     }
 }
