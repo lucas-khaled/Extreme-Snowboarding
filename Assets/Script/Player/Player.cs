@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
 
     public bool update { get; set; }
 
-    public bool etherium { get; set; } 
-
     public Camera_Test playerCamera { get;  set; }
 
     PlayerState playerState = new Grounded();
@@ -38,12 +36,23 @@ public class Player : MonoBehaviour
         if(update)
             playerState.StateUpdate();
 
+        InputInterpretation();
+    }
+
+    private void InputInterpretation()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
             playerState.InterpretateInput(GameInput.SPACE);
         if (Input.GetKey(KeyCode.Space))
             playerState.InterpretateInput(GameInput.SPACE_HOLD);
         if (Input.GetKey(KeyCode.R))
             Restart();
+        if (Input.GetKeyDown(KeyCode.T) && Coletavel != null)
+        {
+            Coletavel.Activate(this);
+            Coletavel = null;
+        }
+
     }
 
     void Restart()
@@ -64,11 +73,6 @@ public class Player : MonoBehaviour
 
         playerState = newState;
         playerState.StateStart(this);
-    }
-
-    public void StartEffect(Effect[] atributes)
-    {
-        /*foreach(Effect efeito in atributes) {} */
     }
 
     public void StartStateCoroutine(IEnumerator coroutine)
@@ -114,6 +118,8 @@ public class PlayerSharedValues
     [SerializeField]
     private float rotationFactor = 3;
 
+    public bool etherium { get; set; }
+
     public Vector3 ActualGroundNormal { get; set; }
 
     public float AddedVelocity { get; set; }
@@ -147,7 +153,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return jumpFactor * Velocity;
+            return jumpFactor * RealVelocity;
         }
     }
 
@@ -175,7 +181,7 @@ public class PlayerSharedValues
         }
     }
 
-    public float Velocity
+    public float RealVelocity
     {
         get
         {

@@ -687,11 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88080019c53a854d8d197fab3e22bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-  - {fileID: 8148589435511895470, guid: 7f381f22320b0bf4b8ce19324748c706, type: 3}
-  - {fileID: 8148589435511895470, guid: 7f381f22320b0bf4b8ce19324748c706, type: 3}
-  - {fileID: 8148589435511895470, guid: 7f381f22320b0bf4b8ce19324748c706, type: 3}
-  - {fileID: 8148589435511895470, guid: 7f381f22320b0bf4b8ce19324748c706, type: 3}
+  numOfPlayer: 1
 --- !u!4 &1876162900
 Transform:
   m_ObjectHideFlags: 0

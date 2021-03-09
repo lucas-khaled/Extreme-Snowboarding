@@ -8,10 +8,15 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
 
-    public PlayerData[] playerData;
+    [SerializeField, Min(0)]
+    private int numOfPlayer = 4;
+
+    public PlayerData[] playerData { get; set; }
 
     private void Awake()
     {
+        StartPlayerData();
+
         if (gameController == null)
         {
             gameController = this;
@@ -23,6 +28,16 @@ public class GameController : MonoBehaviour
         }
     }
     
+    private void StartPlayerData()
+    {
+        playerData = new PlayerData[numOfPlayer];
+
+        for(int i = 0; i<numOfPlayer; i++)
+        {
+            playerData[i] = new PlayerData();
+        }
+    }
+
     public void ChangeScene(string cena)    
     {
         SceneManager.LoadScene(cena);

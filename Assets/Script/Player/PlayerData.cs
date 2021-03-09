@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData
 {
-    [SerializeField]
     private Mesh playerMesh;
-    [SerializeField]
     private Color color1;
-    [SerializeField]
     private Color color2;
-    [SerializeField]
-    private Color snowBoardColor;
-    [SerializeField]
-    private Player player;
+    private Color snowboardColor;
+    public Player player;
 
-    public void InstancePlayer(Vector3 position)
+    public void InstancePlayer(Vector3 position, GameObject playerPrefab)
     {
-        Instantiate(player, position, Quaternion.identity);
+        GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
+        player = playerGO.GetComponent<Player>();
     }
 }

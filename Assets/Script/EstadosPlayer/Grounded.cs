@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Grounded : PlayerState
 {
-    float movementStep;
     float timeEtherium;
 
     public override void InterpretateInput(GameInput input)
@@ -22,9 +21,7 @@ public class Grounded : PlayerState
 
     public override void StateStart(Player player)
     {
-        base.StateStart(player);
-
-        movementStep = player.SharedValues.CheckingPointDistance * 10;     
+        base.StateStart(player);   
 
         player.StartStateCoroutine(CalculateNextPoint());
 
@@ -75,16 +72,15 @@ public class Grounded : PlayerState
 
     IEnumerator Movement(Vector3 position)
     {
+        float movementStep = player.SharedValues.CheckingPointDistance / player.SharedValues.RealVelocity * 100f;
         Vector3 steps = (position - player.transform.position) / movementStep;
-        float velocityRate = 2 / (player.SharedValues.Velocity * movementStep);
+        
         //Debug.Log(position);
 
         while (Vector3.Distance(player.transform.position, position) > 0.01f)
         {
-           
+            float velocityRate = 1 / (player.SharedValues.RealVelocity * player.SharedValues.RealVelocity);
             player.transform.position += steps;
-
-            //Debug.Log(Vector3.Distance(transform.position, position));
 
             yield return new WaitForSeconds(velocityRate);
         }
@@ -97,16 +93,16 @@ public class Grounded : PlayerState
         float X = hit.point.x + hit.normal.x * invertionValue;
         float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y * invertionValue;
 
-        player.SharedValues.InclinationVelocity = hit.normal.x * 2 * invertionValue;
+        //player.SharedValues.InclinationVelocity = hit.normal.x * 2 * invertionValue;
 
-        return new Vector2(X, Y);
+        return new Vector3(X, Y, player.transform.position.z);
     }
 
     IEnumerator BeEtherium()
     {
-        player.etherium = true;
+        player.SharedValues.etherium = true;
         yield return new WaitForSeconds(timeEtherium);
-        player.etherium = false;
+        player.SharedValues.etherium = false;
     }
 
     #endregion

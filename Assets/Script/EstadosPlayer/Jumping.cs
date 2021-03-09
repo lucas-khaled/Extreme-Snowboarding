@@ -90,7 +90,7 @@ public class Jumping : PlayerState
         float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 1);
         float Y = player.SharedValues.ActualGroundNormal.y;
 
-        return new Vector2(X, Y).normalized;
+        return new Vector3(X, Y, player.transform.position.z).normalized;
     }
 
     void RotatePlayer()

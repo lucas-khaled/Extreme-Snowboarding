@@ -8,13 +8,10 @@ public class Camera_Test : MonoBehaviour
     Player player;
     Vector3 offset;
 
-
-    private void Awake()
+    public void SetPlayer(Player player)
     {
-        player = GameObject.FindObjectOfType<Player>();
+        this.player = player;
     }
-
-
 
     // Update is called once per frame
     void LateUpdate()
