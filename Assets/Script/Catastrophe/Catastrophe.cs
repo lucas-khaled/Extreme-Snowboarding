@@ -46,6 +46,8 @@ public class Catastrophe : MonoBehaviour
     void StartCatastrophe()
     {
         // Animação catastrophe iniciando
+        this.GetComponent<MeshRenderer>().enabled = true;
+        this.GetComponent<SphereCollider>().enabled = true;
         StartCoroutine(CameraShake());
         // Aviso?
 

@@ -18,8 +18,6 @@ public class Jumping : PlayerState
         if (GameInput.SPACE_HOLD == input && airTime >= 0.2f)
             RotatePlayer();
     }
-
-
     public override void StateEnd()
     {
         rb.velocity = Vector3.zero;
