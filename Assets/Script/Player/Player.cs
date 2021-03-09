@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     public bool update { get; set; }
 
+    public bool etherium { get; set; } 
+
     public Camera_Test playerCamera { get;  set; }
 
     PlayerState playerState = new Grounded();

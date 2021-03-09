@@ -6,6 +6,7 @@ using UnityEngine;
 public class Grounded : PlayerState
 {
     float movementStep;
+    float timeEtherium;
 
     public override void InterpretateInput(GameInput input)
     {
@@ -26,12 +27,16 @@ public class Grounded : PlayerState
         movementStep = player.SharedValues.CheckingPointDistance * 10;     
 
         player.StartStateCoroutine(CalculateNextPoint());
+
+        player.StartStateCoroutine(BeEtherium());
     }
 
     public override void StateUpdate()
     {
         CorrectRotation();
     }
+
+    #region PRIVATE METHODS
 
     void CorrectRotation()
     {
@@ -96,4 +101,28 @@ public class Grounded : PlayerState
 
         return new Vector2(X, Y);
     }
+
+    IEnumerator BeEtherium()
+    {
+        player.etherium = true;
+        yield return new WaitForSeconds(timeEtherium);
+        player.etherium = false;
+    }
+
+    #endregion
+
+    #region CONSTRUCTORS
+
+    public Grounded()
+    {
+        timeEtherium = 0;
+    }
+
+    public Grounded(float time)
+    {
+        timeEtherium = time;
+        Debug.Log(time);
+    }
+
+    #endregion
 }

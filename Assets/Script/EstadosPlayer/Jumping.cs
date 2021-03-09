@@ -21,7 +21,9 @@ public class Jumping : PlayerState
     public override void StateEnd()
     {
         rb.velocity = Vector3.zero;
-        MonoBehaviour.Destroy(rb);
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
         airTime = 0;
     }
 
@@ -29,7 +31,9 @@ public class Jumping : PlayerState
     {
         base.StateStart(player);
 
-        rb = player.gameObject.AddComponent<Rigidbody>();
+        rb = player.gameObject.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.useGravity = true;
         rb.AddForce(player.SharedValues.JumpForce * CalculateJumpDirection(player), ForceMode.Impulse);
     }
 
@@ -52,24 +56,25 @@ public class Jumping : PlayerState
         groundingCheck.y -= Y;
         groundingCheck.x += X;
 
-        if (Physics.SphereCast(groundingCheck, 0.02f, Vector3.down, out groundingHit, 0.3f, LayerMask.GetMask("Track")))
+        if (Physics.SphereCast(groundingCheck, 0.05f, Vector3.down, out groundingHit, 0.3f, LayerMask.GetMask("Track")))
         {
             PlayerState newPlayerState;
 
             Vector3 realNormal = (groundingHit.normal.y < 0) ? -groundingHit.normal : groundingHit.normal;
 
-            float groundAngle = Vector3.SignedAngle(Vector3.up, realNormal, Vector3.back);
+            float groundAngle = Vector3.SignedAngle(Vector3.up, realNormal, Vector3.forward);
 
             float playerAngle = (player.transform.eulerAngles.z) % 360;
             float normalizedPlayerAngle = (playerAngle <= 180) ? playerAngle : playerAngle - 360;
 
             float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
 
-            Debug.Log("player Angle: " + playerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
+            Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
 
             if (angleDifference < 60f)
             {
-                newPlayerState = new Grounded();
+                int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f); 
+                newPlayerState = new Grounded(timeEtherium);
                 if (howMuchRotation > 180)
                     Debug.Log("<color=red> Mortaaaal "+Mathf.RoundToInt(howMuchRotation/360)+"x </color>");
             }

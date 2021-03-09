@@ -38,7 +38,7 @@ public class Fallen : PlayerState
         }      
         if (time >= timeFall)
         {
-            player.ChangeState(new Grounded());
+            player.ChangeState(new Grounded(1f));
         }
 
         time += Time.deltaTime;
