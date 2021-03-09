@@ -72,7 +72,7 @@ public class Grounded : PlayerState
 
     IEnumerator Movement(Vector3 position)
     {
-        float movementStep = player.SharedValues.CheckingPointDistance / player.SharedValues.RealVelocity * 100f;
+        int movementStep = Mathf.RoundToInt(player.SharedValues.CheckingPointDistance / player.SharedValues.RealVelocity * 100f);
         Vector3 steps = (position - player.transform.position) / movementStep;
         
         //Debug.Log(position);
