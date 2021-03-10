@@ -8,6 +8,8 @@ public class CorridaController : MonoBehaviour
     private Vector3 posicaoSpawnPlayers;
     [SerializeField]
     private Player playerPrefab;
+    [SerializeField]
+    private Camera_Test[] cameras;
 
 
     private PlayerData[] players;
@@ -20,7 +22,7 @@ public class CorridaController : MonoBehaviour
     {
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].InstancePlayer(posicaoSpawnPlayers, playerPrefab.gameObject);
+            players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
         }
     }
     private void LoadPlayers()

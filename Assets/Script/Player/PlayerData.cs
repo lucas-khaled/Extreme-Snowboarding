@@ -10,9 +10,12 @@ public class PlayerData
     private Color snowboardColor;
     public Player player;
 
-    public void InstancePlayer(Vector3 position, GameObject playerPrefab)
+    public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, Camera_Test camera)
     {
         GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
         player = playerGO.GetComponent<Player>();
+
+        player.SharedValues.playerCode = playerCode;
+        camera.SetPlayer(player);
     }
 }

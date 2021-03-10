@@ -121,7 +121,7 @@ public class PlayerSharedValues
     [SerializeField]
     private float rotationFactor = 3;
 
-    public int playerCode;
+    public int playerCode { get; set; }
 
     public bool etherium { get; set; }
 
@@ -158,7 +158,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return jumpFactor * Velocity;
+            return jumpFactor * RealVelocity;
         }
     }
 
@@ -186,7 +186,7 @@ public class PlayerSharedValues
         }
     }
 
-    public float Velocity
+    public float RealVelocity
     {
         get
         {
