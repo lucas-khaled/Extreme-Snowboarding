@@ -24,23 +24,29 @@ public class Projectile : MonoBehaviour
 
     private void Movement()
     {
-        if (movement == MovementType.RIGHT)
+        switch (movement)
         {
-            // movimentar para a direita
-        }
-        else if (movement == MovementType.LEFT)
-        {
-            // movimentar para a esquerda
-        }
-        else if (movement == MovementType.STOPPED)
-        {
-            // Ficar parado, ou uma animação de jogar?
+            case MovementType.STRAIGHT:
+                // movimento para frente sem seguir a pista
+                break;
+            case MovementType.FOWARD:
+                // movimento para frente seguindo a pista
+                break;
+            case MovementType.STOPPED:
+                // sem movimento, só mente parado
+                break;
+            case MovementType.BACK:
+                // movimento para trás seguindo a pista
+                break;
+            case MovementType.STRAIGHT_BACK:
+                // movimento para trás sem seguir a pista
+                break;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Effect[] effect = fuckfriend.GetAttributesToChange();
-        //other.gameObject.GetComponent<Player>().StartEffect(effect);
+        if (other.gameObject.CompareTag("Player"))
+            fuckfriend.StartEffects(other.GetComponent<Player>());
     }
 }
