@@ -8,15 +8,12 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
 
-    [SerializeField, Min(0)]
-    private int numOfPlayer = 4;
+    private int numOfPlayer = 1;
 
     public PlayerData[] playerData { get; set; }
 
     private void Awake()
     {
-        StartPlayerData();
-
         if (gameController == null)
         {
             gameController = this;
@@ -36,6 +33,17 @@ public class GameController : MonoBehaviour
         {
             playerData[i] = new PlayerData();
         }
+    }
+
+    public void ChangeNumOfPlayers(int num)
+    {
+        numOfPlayer = num;
+    }
+
+    public void Play()
+    {
+        StartPlayerData();
+        ChangeScene("SampleScene");
     }
 
     public void ChangeScene(string cena)    

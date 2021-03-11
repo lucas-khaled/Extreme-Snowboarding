@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private FuckFriend fuckfriend;
+    public FuckFriend fuckfriend { private get; set; }
+    public Player caster { private get; set; }
+
+
     private MovementType movement;
+
+    [SerializeField]
+    private float speed = 5f;
 
     private void Start()
     {
@@ -27,7 +33,7 @@ public class Projectile : MonoBehaviour
         switch (movement)
         {
             case MovementType.STRAIGHT:
-                // movimento para frente sem seguir a pista
+                MoveStraight();
                 break;
             case MovementType.FOWARD:
                 // movimento para frente seguindo a pista
@@ -44,9 +50,24 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    void MoveStraight()
+    {
+        transform.position += Vector3.right * speed * Time.deltaTime * 10;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-            fuckfriend.StartEffects(other.GetComponent<Player>());
+        {
+            Player playerHitted = other.GetComponent<Player>();
+            if(playerHitted != caster)
+            {
+                fuckfriend.StartEffects(other.GetComponent<Player>());
+                Destroy(this.gameObject);
+            }
+        }
+        else
+            Destroy(this.gameObject);
+
     }
 }

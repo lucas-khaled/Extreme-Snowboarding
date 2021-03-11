@@ -39,7 +39,7 @@ public class Jumping : PlayerState
 
     public override void StateUpdate()
     {
-        if(airTime >= 1)
+        if(airTime >= 0.5f)
         {
             CheckGround();
         }
@@ -87,8 +87,10 @@ public class Jumping : PlayerState
 
     Vector3 CalculateJumpDirection(Player player)
     {
-        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 1);
+        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.5f, 1);
         float Y = player.SharedValues.ActualGroundNormal.y;
+
+        Debug.Log(X + " - "+ Y);
 
         return new Vector3(X, Y, player.transform.position.z).normalized;
     }

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
             playerState.InterpretateInput(GameInput.SPACE);
         if (Input.GetButton(jumpInput))
             playerState.InterpretateInput(GameInput.SPACE_HOLD);
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Z))
             Restart();
         if (Input.GetButtonDown(fireInput) && Coletavel != null)
         {
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
 
     void Restart()
     {
-        transform.position = startPoint;
+        SceneManager.LoadScene("MenuPrincipal");
     }
 
     private void Start()
@@ -158,7 +159,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return jumpFactor * RealVelocity;
+            return Mathf.Clamp(jumpFactor * RealVelocity, 1, float.MaxValue);
         }
     }
 

@@ -31,7 +31,5 @@ public class CorridaController : MonoBehaviour
         players = GameController.gameController.playerData;
 
         InstantiatePlayers();
-
-        Camera.main.GetComponent<Camera_Test>().SetPlayer(players[0].player);
     }
 }
