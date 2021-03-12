@@ -9,7 +9,7 @@ public class Grounded : PlayerState
 
     public override void InterpretateInput(GameInput input)
     {
-        if(input == GameInput.SPACE)
+        if(input == GameInput.UP)
             player.ChangeState(new Jumping());
     }
 
@@ -117,7 +117,6 @@ public class Grounded : PlayerState
     public Grounded(float time)
     {
         timeEtherium = time;
-        Debug.Log(time);
     }
 
     #endregion

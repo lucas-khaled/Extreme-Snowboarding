@@ -15,7 +15,7 @@ public class Jumping : PlayerState
 
     public override void InterpretateInput(GameInput input)
     {
-        if (GameInput.SPACE_HOLD == input && airTime >= 0.2f)
+        if (GameInput.UP_HOLD == input && airTime >= 0.2f)
             RotatePlayer();
     }
     public override void StateEnd()
@@ -39,7 +39,7 @@ public class Jumping : PlayerState
 
     public override void StateUpdate()
     {
-        if(airTime >= 1)
+        if(airTime >= 0.5f)
         {
             CheckGround();
         }
@@ -69,7 +69,7 @@ public class Jumping : PlayerState
 
             float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
 
-            Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
+            //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
 
             if (angleDifference < 60f)
             {

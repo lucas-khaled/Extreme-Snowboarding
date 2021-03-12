@@ -18,8 +18,11 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PickRandomItem(other.gameObject);
-            Destroy(gameObject);
+            if(other.GetComponent<Player>().Coletavel == null)
+            {
+                PickRandomItem(other.gameObject);
+                Destroy(gameObject);
+            }
         }
 
         

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +26,18 @@ public class Player : MonoBehaviour
 
     public bool update { get; set; }
 
-    public Camera_Test playerCamera { get;  set; }
+    public GameCamera playerCamera { get;  set; }
 
     PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
     private string jumpInput;
     private string fireInput;
+
+    public PlayerState GetPlayerState()
+    {
+        return playerState;
+    }
 
     private void Update()
     {
@@ -44,10 +50,10 @@ public class Player : MonoBehaviour
     private void InputInterpretation()
     {
         if (Input.GetButtonDown(jumpInput))
-            playerState.InterpretateInput(GameInput.SPACE);
+            playerState.InterpretateInput(GameInput.UP);
         if (Input.GetButton(jumpInput))
-            playerState.InterpretateInput(GameInput.SPACE_HOLD);
-        if (Input.GetKey(KeyCode.Space))
+            playerState.InterpretateInput(GameInput.UP_HOLD);
+        if (Input.GetKey(KeyCode.Z))
             Restart();
         if (Input.GetButtonDown(fireInput) && Coletavel != null)
         {
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour
 
     void Restart()
     {
-        transform.position = startPoint;
+        SceneManager.LoadScene("MenuPrincipal");
     }
 
     private void Start()
@@ -158,7 +164,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return jumpFactor * RealVelocity;
+            return Mathf.Clamp(jumpFactor * RealVelocity, 1, float.MaxValue);
         }
     }
 
@@ -211,5 +217,5 @@ public class PlayerSharedValues
     }
 }
 
-public enum GameInput { SPACE, SPACE_HOLD }
+public enum GameInput { UP, UP_HOLD }
 

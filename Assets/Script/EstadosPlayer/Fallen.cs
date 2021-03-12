@@ -26,8 +26,6 @@ public class Fallen : PlayerState
     {
         base.StateStart(player);
         player.StartCoroutine(CorrectPlayerPosition());
-
-        Debug.Log("<color=red> FALLEN </color>");
     }
     public override void StateUpdate()
     {

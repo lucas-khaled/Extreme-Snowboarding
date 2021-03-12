@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Test : MonoBehaviour
+public class GameCamera : MonoBehaviour
 {
 
     Player player;
@@ -11,6 +11,7 @@ public class Camera_Test : MonoBehaviour
     public void SetPlayer(Player player)
     {
         this.player = player;
+        player.playerCamera = this;
     }
 
     // Update is called once per frame

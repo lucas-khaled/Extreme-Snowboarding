@@ -18,7 +18,7 @@ public class Catastrophe : MonoBehaviour
     [SerializeField]
     private float tempoEspera;
     [SerializeField]
-    private Camera_Test[] cameraScript;
+    private GameCamera[] cameraScript;
 
     private Vector3 nextMovementPoint;
     private bool isMoving;
