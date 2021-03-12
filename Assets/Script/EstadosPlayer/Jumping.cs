@@ -15,7 +15,7 @@ public class Jumping : PlayerState
 
     public override void InterpretateInput(GameInput input)
     {
-        if (GameInput.SPACE_HOLD == input && airTime >= 0.2f)
+        if (GameInput.UP_HOLD == input && airTime >= 0.2f)
             RotatePlayer();
     }
     public override void StateEnd()
@@ -69,7 +69,7 @@ public class Jumping : PlayerState
 
             float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
 
-            Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
+            //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
 
             if (angleDifference < 60f)
             {
@@ -87,10 +87,8 @@ public class Jumping : PlayerState
 
     Vector3 CalculateJumpDirection(Player player)
     {
-        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.5f, 1);
+        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 1);
         float Y = player.SharedValues.ActualGroundNormal.y;
-
-        Debug.Log(X + " - "+ Y);
 
         return new Vector3(X, Y, player.transform.position.z).normalized;
     }
