@@ -17,9 +17,8 @@ public class Catastrophe : MonoBehaviour
     private float magnetude;
     [SerializeField]
     private float tempoEspera;
-    [SerializeField]
-    private GameCamera[] cameraScript;
 
+    private GameCamera[] cameraScript;
     private Vector3 nextMovementPoint;
     private bool isMoving;
     private LayerMask layerMask;
@@ -29,6 +28,7 @@ public class Catastrophe : MonoBehaviour
         layerMask = LayerMask.GetMask("Track");
         isMoving = false;
         StartCoroutine(CatastropheStartTimer());
+        cameraScript = GameObject.FindGameObjectWithTag("CorridaController").GetComponent<CorridaController>().cameras;
     }
 
     void Update()

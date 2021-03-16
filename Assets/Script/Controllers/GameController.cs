@@ -39,6 +39,10 @@ public class GameController : MonoBehaviour
     {
         numOfPlayer = num;
     }
+    public int GetNumberOfPlayers()
+    {
+        return numOfPlayer;
+    }
 
     public void Play()
     {

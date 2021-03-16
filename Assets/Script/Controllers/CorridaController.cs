@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CorridaController : MonoBehaviour
@@ -8,10 +9,8 @@ public class CorridaController : MonoBehaviour
     private Vector3 posicaoSpawnPlayers;
     [SerializeField]
     private Player playerPrefab;
-    [SerializeField]
-    private GameCamera[] cameras;
 
-
+    public GameCamera[] cameras;
     private PlayerData[] players;
 
     public static CorridaController instance { get; private set; }
@@ -32,17 +31,24 @@ public class CorridaController : MonoBehaviour
                 return returnPlayer;
         }
         else
-            return player;        
+            return player;
     }
 
     private void Awake()
     {
+        EventSystem.onPlayerPass += OnPlayerPass;
         instance = this;
+    }
+
+    private void OnPlayerPass(Player player)
+    {
+
     }
 
     private void Start()
     {
         LoadPlayers();
+        InvokeRepeating("CheckPlayerClassification",0,0.5f);
     }
     private void InstantiatePlayers()
     {
@@ -53,9 +59,36 @@ public class CorridaController : MonoBehaviour
     }
     private void LoadPlayers()
     {
-
         players = GameController.gameController.playerData;
 
         InstantiatePlayers();
+    }
+
+    private void CheckPlayerClassification()
+    {
+        bool changed = false;
+        PlayerData playerChanged = null;
+
+        for (int i = 0; i < players.Length - 1; i++)
+        {
+            float distanceXPlayer1 = players[i].player.transform.position.x;
+            float distanceXPlayer2 = players[i + 1].player.transform.position.x;
+
+            if (distanceXPlayer1 < distanceXPlayer2)
+            {
+                PlayerData changePlayerAux = players[i];
+                playerChanged = players[i];
+                players[i] = players[i + 1];
+                players[i + 1] = changePlayerAux;
+                changed = true;
+            }
+        }
+        if (changed)
+        {
+            if (EventSystem.onPlayerPass != null && playerChanged != null)
+                EventSystem.onPlayerPass.Invoke(playerChanged.player);
+
+            changed = false;
+        }
     }
 }

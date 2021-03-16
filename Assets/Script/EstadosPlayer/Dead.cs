@@ -23,6 +23,9 @@ public class Dead : PlayerState
         playerView = player;
         ChangePlayerView();
 
+        if (EventSystem.onPlayerDeath != null)
+            EventSystem.onPlayerDeath.Invoke(player);
+
         MonoBehaviour.Destroy(player.GetComponent<MeshRenderer>()); 
     }
 
