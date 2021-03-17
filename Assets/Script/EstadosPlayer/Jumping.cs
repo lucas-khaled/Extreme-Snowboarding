@@ -77,7 +77,7 @@ public class Jumping : PlayerState
             if (angleDifference < 60f)
             {
                 int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f); 
-                newPlayerState = new Grounded(timeEtherium, 0.5f);
+                newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                 ApplyAirEffects();
             }
@@ -100,7 +100,7 @@ public class Jumping : PlayerState
 
     Vector3 CalculateJumpDirection(Player player)
     {
-        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 1);
+        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 0.7f);
         float Y = player.SharedValues.ActualGroundNormal.y;
 
         return new Vector3(X, Y, player.transform.position.z).normalized;
