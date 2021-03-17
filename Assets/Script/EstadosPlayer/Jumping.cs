@@ -25,6 +25,7 @@ public class Jumping : PlayerState
         rb.useGravity = false;
 
         airTime = 0;
+        player.SetOnAnimator("jumping", false);
     }
 
     public override void StateStart(Player player)
@@ -35,6 +36,8 @@ public class Jumping : PlayerState
         rb.isKinematic = false;
         rb.useGravity = true;
         rb.AddForce(player.SharedValues.JumpForce * CalculateJumpDirection(player), ForceMode.Impulse);
+
+        player.SetOnAnimator("jumping", true);
     }
 
     public override void StateUpdate()
@@ -74,12 +77,22 @@ public class Jumping : PlayerState
             if (angleDifference < 60f)
             {
                 int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f); 
-                newPlayerState = new Grounded(timeEtherium);
-                if (howMuchRotation > 180)
-                    Debug.Log("<color=red> Mortaaaal "+Mathf.RoundToInt(howMuchRotation/360)+"x </color>");
+                newPlayerState = new Grounded(timeEtherium, 0.5f);
+
+                ApplyAirEffects();
             }
             else
-                newPlayerState = new Fallen();
+            {
+                float timeFall = 3;
+                if (angleDifference > 120)
+                {
+                    player.SetOnAnimator("hardFall", true);
+                    timeFall = 4f ;
+                }
+
+                    newPlayerState = new Fallen(timeFall);
+
+            }
 
             player.ChangeState(newPlayerState);
         }
@@ -95,7 +108,27 @@ public class Jumping : PlayerState
 
     void RotatePlayer()
     {
-        player.transform.Rotate(Vector3.forward * player.SharedValues.RotationFactor * Time.deltaTime * 100, Space.Self);
-        howMuchRotation += player.SharedValues.RotationFactor * Time.deltaTime * 100;
+        float rotation = player.SharedValues.RotationFactor * Time.deltaTime * 100;
+        player.transform.Rotate(Vector3.forward * rotation, Space.Self);
+        howMuchRotation += rotation;
+    }
+
+    void ApplyAirEffects()
+    {
+        if (airTime > 1)
+        {
+            Effect airEffect = new Effect("AddedVelocity", airTime / 2f, airTime, Effect.EffectMode.ADD);
+            player.StartCoroutine(airEffect.StartEffect(player));
+        }
+            
+
+        if (howMuchRotation > 180)
+        {
+            int numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
+            Debug.Log("Mortal :" + numOfMortals + "x");
+
+            Effect mortalEffect = new Effect("AddedVelocity", 1.5f*numOfMortals, airTime*numOfMortals, Effect.EffectMode.ADD);
+            player.StartCoroutine(mortalEffect.StartEffect(player));
+        }
     }
 }

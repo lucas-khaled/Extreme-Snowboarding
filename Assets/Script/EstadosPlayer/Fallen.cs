@@ -20,17 +20,22 @@ public class Fallen : PlayerState
     public override void StateEnd()
     {
         player.StopAllCoroutines();
+
+        player.SetOnAnimator("fallen", false);
+        player.SetOnAnimator("hardFall", false);
     }
 
     public override void StateStart(Player player)
     {
         base.StateStart(player);
         player.StartCoroutine(CorrectPlayerPosition());
+
+        player.SetOnAnimator("fallen", true);
     }
     public override void StateUpdate()
     {
         
-        if(time <= timeFall && canRotate)
+        if(time <= timeToCorrect && canRotate)
         {
             CorrectPlayerRotation();
         }      
@@ -47,7 +52,7 @@ public class Fallen : PlayerState
         if (rotationDifference == 0)
             rotationDifference = Mathf.Abs((player.transform.eulerAngles.z%360) - newRotation.eulerAngles.z);
 
-        player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, (rotationDifference/timeFall)* Time.deltaTime);
+        player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, (rotationDifference/timeToCorrect)* Time.deltaTime);
     }
 
     IEnumerator CorrectPlayerPosition()
@@ -73,4 +78,12 @@ public class Fallen : PlayerState
         }
     }
 
+    public Fallen(float timeFall)
+    {
+        this.timeFall = timeFall;
+    }
+
+    public Fallen()
+    {
+    }
 }

@@ -8,6 +8,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
+    private Animator animator;
+    [SerializeField]
     private PlayerSharedValues sharedValues;
 
     public PlayerSharedValues SharedValues
@@ -34,9 +36,16 @@ public class Player : MonoBehaviour
     private string jumpInput;
     private string fireInput;
 
+    
+
     public PlayerState GetPlayerState()
     {
         return playerState;
+    }
+
+    private void Awake()
+    {
+        sharedValues.player = this;
     }
 
     private void Update()
@@ -89,6 +98,12 @@ public class Player : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    public void SetOnAnimator(string variable, bool value)
+    {
+        if(animator != null)
+            animator.SetBool(variable, value);
+    }
+
     private void OnDrawGizmos()
     {
         if(playerState.GetType() == typeof(Jumping))
@@ -96,14 +111,17 @@ public class Player : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(((Jumping)playerState).groundingCheck, 0.2f);
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
         Gizmos.DrawLine(transform.position + (Vector3.right * sharedValues.CharacterRadius / 2), transform.position + (Vector3.left * sharedValues.CharacterRadius / 2));
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        
+    }
+
+
 }
 
 [System.Serializable]
@@ -127,13 +145,33 @@ public class PlayerSharedValues
     [SerializeField]
     private float rotationFactor = 3;
 
+    private float addedVelocity = 0;
+
+    public Player player { get; set; }
+
     public int playerCode { get; set; }
 
     public bool etherium { get; set; }
 
     public Vector3 ActualGroundNormal { get; set; }
 
-    public float AddedVelocity { get; set; }
+    public float AddedVelocity
+    {
+        get
+        {
+            return addedVelocity;
+        }
+        set
+        {
+            addedVelocity = value;
+            bool setAnim = false;
+
+            if (addedVelocity > 5)
+                setAnim = true;
+
+            player.SetOnAnimator("highSpeed", setAnim);
+        }
+    }
     public float InclinationVelocity { get; set; }
 
     public float CharacterRadius
@@ -197,10 +235,6 @@ public class PlayerSharedValues
         get
         {
             return velocity + AddedVelocity + InclinationVelocity;
-        }
-        set
-        {
-            velocity = value;
         }
     }
 

@@ -7,9 +7,12 @@ public class Grounded : PlayerState
 {
     float timeEtherium;
 
+    float timeOnGround = 0;
+    float timeToJump = 0;
+
     public override void InterpretateInput(GameInput input)
     {
-        if(input == GameInput.UP)
+        if(input == GameInput.UP && timeOnGround>=timeToJump)
             player.ChangeState(new Jumping());
     }
 
@@ -31,6 +34,7 @@ public class Grounded : PlayerState
     public override void StateUpdate()
     {
         CorrectRotation();
+        timeOnGround += Time.deltaTime;
     }
 
     #region PRIVATE METHODS
@@ -112,11 +116,18 @@ public class Grounded : PlayerState
     public Grounded()
     {
         timeEtherium = 0;
+        timeToJump = 0;
     }
 
-    public Grounded(float time)
+    public Grounded(float timeEtherium)
     {
-        timeEtherium = time;
+        this.timeEtherium = timeEtherium;
+    }
+
+    public Grounded(float timeEtherium, float timeToJump)
+    {
+        this.timeEtherium = timeEtherium;
+        this.timeToJump = timeToJump;
     }
 
     #endregion

@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &153869026
 Transform:
   m_ObjectHideFlags: 0
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posicaoSpawnPlayers: {x: 1.34, y: 11.16, z: 0}
-  playerPrefab: {fileID: -3156446801240346458, guid: d34b0c762d2a97e468746653d0b0510a, type: 3}
+  playerPrefab: {fileID: 7762838204622307548, guid: c3e62d779ea16ea45970e89c91f1a957, type: 3}
   cameras:
   - {fileID: 2118817853}
   - {fileID: 8373071860575484355}
@@ -1480,7 +1480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1777112489
 Transform:
   m_ObjectHideFlags: 0
