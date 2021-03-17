@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Catastrophe : MonoBehaviour
 {
-    [Header("Debug")]
+    [Header("Camera Shake")]
     [SerializeField]
     private bool deactivateCameraShake;
 
-    [Header("")]
-    [SerializeField]    
+    [Header("Values")]
+    [SerializeField]
     private float velocity;
     [SerializeField]
     private float shakingDuration;
@@ -17,6 +17,10 @@ public class Catastrophe : MonoBehaviour
     private float magnetude;
     [SerializeField]
     private float tempoEspera;
+
+    [Header("References")]
+    [SerializeField]
+    private ParticleSystem particles;
 
     private GameCamera[] cameraScript;
     private Vector3 nextMovementPoint;
@@ -48,6 +52,8 @@ public class Catastrophe : MonoBehaviour
         // Animação catastrophe iniciando
         this.GetComponent<MeshRenderer>().enabled = true;
         this.GetComponent<SphereCollider>().enabled = true;
+        particles.Play();
+
         cameraScript[0].StartCoroutine(cameraScript[0].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
         cameraScript[1].StartCoroutine(cameraScript[1].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
         cameraScript[2].StartCoroutine(cameraScript[2].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
