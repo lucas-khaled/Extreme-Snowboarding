@@ -23,7 +23,7 @@ public class Paralax : MonoBehaviour
         float dist = (camera.transform.position.x * paralaxEffect);
 
         transform.position = new Vector3(startpos + dist, 
-                                         transform.position.y, 
+                                         camera.transform.position.y, 
                                          transform.position.z);
 
         if (temp > startpos + length)

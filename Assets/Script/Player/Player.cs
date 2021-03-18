@@ -115,13 +115,6 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
         Gizmos.DrawLine(transform.position + (Vector3.right * sharedValues.CharacterRadius / 2), transform.position + (Vector3.left * sharedValues.CharacterRadius / 2));
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        
-    }
-
-
 }
 
 [System.Serializable]
@@ -166,7 +159,7 @@ public class PlayerSharedValues
             addedVelocity = value;
             bool setAnim = false;
 
-            if (addedVelocity > 5)
+            if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
                 setAnim = true;
 
             player.SetOnAnimator("highSpeed", setAnim);
@@ -202,7 +195,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return Mathf.Clamp(jumpFactor * RealVelocity, 1, float.MaxValue);
+            return Mathf.Clamp(jumpFactor * RealVelocity, 1, 10);
         }
     }
 

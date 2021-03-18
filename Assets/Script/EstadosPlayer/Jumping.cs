@@ -100,7 +100,7 @@ public class Jumping : PlayerState
 
     Vector3 CalculateJumpDirection(Player player)
     {
-        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.3f, 0.7f);
+        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.5f, 1f);
         float Y = player.SharedValues.ActualGroundNormal.y;
 
         return new Vector3(X, Y, player.transform.position.z).normalized;
@@ -117,7 +117,9 @@ public class Jumping : PlayerState
     {
         if (airTime > 1)
         {
-            Effect airEffect = new Effect("AddedVelocity", airTime / 2f, airTime, Effect.EffectMode.ADD);
+            float amount = Mathf.Clamp(airTime / 2f, 0, 3);
+            float time = Mathf.Clamp(airTime, 0, 2);
+            Effect airEffect = new Effect("AddedVelocity", amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(airEffect.StartEffect(player));
         }
             
@@ -127,7 +129,10 @@ public class Jumping : PlayerState
             int numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
             Debug.Log("Mortal :" + numOfMortals + "x");
 
-            Effect mortalEffect = new Effect("AddedVelocity", 1.5f*numOfMortals, airTime*numOfMortals, Effect.EffectMode.ADD);
+            float amount = 1.3f * numOfMortals;
+            float time = Mathf.Clamp(airTime * numOfMortals, 0, 2);
+
+            Effect mortalEffect = new Effect("AddedVelocity",amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(mortalEffect.StartEffect(player));
         }
     }

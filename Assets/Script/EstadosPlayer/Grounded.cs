@@ -78,8 +78,7 @@ public class Grounded : PlayerState
     {
         int movementStep = Mathf.RoundToInt(player.SharedValues.CheckingPointDistance / player.SharedValues.RealVelocity * 100f);
         Vector3 steps = (position - player.transform.position) / movementStep;
-        
-        //Debug.Log(position);
+       
 
         while (Vector3.Distance(player.transform.position, position) > 0.01f)
         {
@@ -97,7 +96,7 @@ public class Grounded : PlayerState
         float X = hit.point.x + hit.normal.x * invertionValue;
         float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y * invertionValue;
 
-        //player.SharedValues.InclinationVelocity = hit.normal.x * 2 * invertionValue;
+        player.SharedValues.InclinationVelocity = hit.normal.x * invertionValue;
 
         return new Vector3(X, Y, player.transform.position.z);
     }

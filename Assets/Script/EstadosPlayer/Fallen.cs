@@ -31,6 +31,8 @@ public class Fallen : PlayerState
         player.StartCoroutine(CorrectPlayerPosition());
 
         player.SetOnAnimator("fallen", true);
+
+        player.SetOnAnimator("highSpeed", false);
     }
     public override void StateUpdate()
     {

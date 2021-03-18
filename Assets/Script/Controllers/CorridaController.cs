@@ -13,6 +13,8 @@ public class CorridaController : MonoBehaviour
     public GameCamera[] cameras;
     private PlayerData[] players;
 
+    int alivePlayers;
+
     public static CorridaController instance { get; private set; }
 
     ///<summary> 
@@ -20,7 +22,7 @@ public class CorridaController : MonoBehaviour
     ///</summary>
     public Player GetOtherPlayerThan(Player player)
     {
-        if (players.Length > 1)
+        if (alivePlayers > 1)
         {
             int index = Random.Range(0, players.Length);
             Player returnPlayer = players[index].player;
@@ -37,13 +39,23 @@ public class CorridaController : MonoBehaviour
     private void Awake()
     {
         EventSystem.onPlayerPass += OnPlayerPass;
+        EventSystem.onPlayerDeath += OnPlayerDeath;
         instance = this;
+    }
+
+    #region Listeners
+
+    private void OnPlayerDeath(Player player)
+    {
+        alivePlayers--;
     }
 
     private void OnPlayerPass(Player player)
     {
 
     }
+
+    #endregion
 
     private void Start()
     {
@@ -60,7 +72,7 @@ public class CorridaController : MonoBehaviour
     private void LoadPlayers()
     {
         players = GameController.gameController.playerData;
-
+        alivePlayers = players.Length;
         InstantiatePlayers();
     }
 
@@ -90,5 +102,10 @@ public class CorridaController : MonoBehaviour
 
             changed = false;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");
     }
 }
