@@ -12,14 +12,24 @@ public class RaceEnd : MonoBehaviour
         quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
     }
 
+    private void Update()
+    {
+        Debug.Log(quantityOfActivePlayer);
+    }
+
     private void OnPlayerDeath(Player player)
     {
         quantityOfActivePlayer--;
+        if (quantityOfActivePlayer <= 0)
+        {
+            EndRace();
+        }
     }
 
     private void EndRace()
     {
         //Finalizar a corrida :)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
         EventSystem.onPlayerDeath -= OnPlayerDeath;
     }
 
