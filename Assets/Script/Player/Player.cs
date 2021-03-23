@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
     private string jumpInput;
     private string fireInput;
 
-    
 
     public PlayerState GetPlayerState()
     {

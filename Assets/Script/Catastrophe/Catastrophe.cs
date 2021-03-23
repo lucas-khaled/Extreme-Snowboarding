@@ -25,11 +25,9 @@ public class Catastrophe : MonoBehaviour
     private GameCamera[] cameraScript;
     private Vector3 nextMovementPoint;
     private bool isMoving;
-    private LayerMask layerMask;
 
     void Start()
     {
-        layerMask = LayerMask.GetMask("Track");
         isMoving = false;
         StartCoroutine(CatastropheStartTimer());
         cameraScript = GameObject.FindGameObjectWithTag("CorridaController").GetComponent<CorridaController>().cameras;
@@ -71,9 +69,9 @@ public class Catastrophe : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
             newPoint = hit.point;
-        else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity, layerMask))
+        else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
             newPoint = hit.point;
 
         return newPoint;
