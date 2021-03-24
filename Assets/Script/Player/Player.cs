@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Animator animator;
     [SerializeField]
+    private GameObject objectMesh;
+    [SerializeField]
     private PlayerSharedValues sharedValues;
 
     public PlayerSharedValues SharedValues
@@ -36,7 +38,10 @@ public class Player : MonoBehaviour
     private string jumpInput;
     private string fireInput;
 
-    
+    public GameObject GetMesh()
+    {
+        return objectMesh;
+    }
 
     public PlayerState GetPlayerState()
     {
@@ -242,6 +247,13 @@ public class PlayerSharedValues
             checkingPointDistance = value;
         }
     }
+}
+
+[System.Serializable]
+public struct PlayerVFX
+{
+    public ParticleSystem particle;
+    public string referenceName;
 }
 
 public enum GameInput { UP, UP_HOLD }

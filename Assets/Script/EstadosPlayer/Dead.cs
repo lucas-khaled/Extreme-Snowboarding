@@ -26,7 +26,7 @@ public class Dead : PlayerState
         if (EventSystem.onPlayerDeath != null)
             EventSystem.onPlayerDeath.Invoke(player);
 
-        MonoBehaviour.Destroy(player.GetComponent<MeshRenderer>()); 
+        MonoBehaviour.Destroy(player.GetMesh()); 
     }
 
     public override void StateUpdate()
