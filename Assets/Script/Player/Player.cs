@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private GameObject objectMesh;
+    [Header("Player Values")]
     [SerializeField]
     private PlayerSharedValues sharedValues;
+    [Header("Player VFX's")]
+    [SerializeField]
+    private PlayerVFXList playerVFXList;
 
     public PlayerSharedValues SharedValues
     {
@@ -48,9 +52,15 @@ public class Player : MonoBehaviour
         return playerState;
     }
 
+    public PlayerVFXList GetPlayerVFXList()
+    {
+        return playerVFXList;
+    }
+
     private void Awake()
     {
         sharedValues.player = this;
+        playerVFXList.StartHash();
     }
 
     private void Update()
@@ -162,12 +172,19 @@ public class PlayerSharedValues
         set
         {
             addedVelocity = value;
-            bool setAnim = false;
 
             if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
-                setAnim = true;
-
-            player.SetOnAnimator("highSpeed", setAnim);
+            {
+                player.SetOnAnimator("highSpeed", true);
+                player.GetPlayerVFXList().GetVFXByName("FastMovement").StartParticle();
+            }
+            else
+            {
+                player.SetOnAnimator("highSpeed", false);
+                player.GetPlayerVFXList().GetVFXByName("FastMovement").StopParticle();
+            }
+            
+            
         }
     }
     public float InclinationVelocity { get; set; }
@@ -250,10 +267,172 @@ public class PlayerSharedValues
 }
 
 [System.Serializable]
-public struct PlayerVFX
+public class PlayerVFXList
 {
-    public ParticleSystem particle;
-    public string referenceName;
+    [SerializeField]
+    private List<PlayerVFX> VFXList;
+
+    private PlayerVFX[] VFXHashedList;
+
+    private bool isHashed = false;
+
+    /// <summary>
+    /// This method starts hash on the list. It can oly be played once.
+    /// </summary>
+    public void StartHash()
+    {
+        if (isHashed)
+            return;
+
+        VFXHashedList = new PlayerVFX[VFXList.Count];
+
+        foreach(PlayerVFX vfx in VFXList)
+        {
+            if (vfx.GetParticle() != null)
+                VFXHashedList[GetHashedID(vfx.GetParticle().name)] = vfx;
+        }
+
+        isHashed = true;
+    }
+
+    #region GET_NAME_FUNCTIONS
+
+    /// <summary>
+    /// If the StartHash() was already called, it searches by hash. Otherwise, it will search the entire list. 
+    /// Returns null when the particle name doesn't exists.
+    /// </summary>
+    public PlayerVFX GetVFXByName(string name)
+    {
+        if (isHashed)
+            return GetVFXByNameHashed(name);
+        else
+            return GetVFXByNameNotHashed(name);
+    }
+
+    private PlayerVFX GetVFXByNameHashed(string name)
+    {
+        int index = GetHashedID(name, true);
+        if (index == -1)
+            return null;
+        else
+            return VFXHashedList[index];
+    }
+
+    private PlayerVFX GetVFXByNameNotHashed(string name)
+    {
+        foreach(PlayerVFX vfx in VFXList)
+        {
+            if (vfx.GetParticle().name == name)
+                return vfx;
+        }
+        return null;
+    }
+
+    #endregion
+
+    #region HASH_FUNCTIONS
+
+    private int GetHashedID(string name, bool onlySearchingName = false)
+    {
+        int sum = 0;
+        for(int i = 1; i<=name.Length; i++)
+        {
+            int operation = i % 3;
+            switch (operation)
+            {
+                case 1:
+                    sum += (int)name[i-1];
+                    break;
+                case 2:
+                    sum -= (int)name[i-1];
+                    break;
+                case 3:
+                    sum *= (int)name[i-1];
+                    break;
+            }
+        }
+
+        int initialIndex = Mathf.Abs(sum) % VFXList.Count;
+        int finalIndex = (onlySearchingName) ? GetOffset(initialIndex, name) : GetEmptyIndex(initialIndex);
+
+        Debug.Log(name + ": "+initialIndex + " - " + finalIndex);
+
+        return finalIndex;
+    }
+
+    private int GetOffset(int index, string name)
+    {
+        return GetOffsetRecursive(index, index, name);
+    }
+
+    private int GetOffsetRecursive(int index, int initialValue, string name)
+    {
+        if (VFXHashedList[index].GetParticle().name == name)
+            return index;
+        else
+        {
+            if (index + 1 == initialValue)
+                return index;
+            if (index == VFXHashedList.Length - 1)
+                return GetOffsetRecursive(0, initialValue, name);
+            else
+                return GetOffsetRecursive(index + 1, initialValue, name);
+        }
+    }
+
+
+
+    private int GetEmptyIndex(int index)
+    {
+        return GetEmptyIndexRecursive(index, index);
+    }
+
+    private int GetEmptyIndexRecursive(int index, int initialValue)
+    {
+        if (VFXHashedList[index] == null)
+            return index;
+        else
+        {
+            if (index + 1 == initialValue)
+                return -1;
+            if (index == VFXHashedList.Length - 1)
+                return GetEmptyIndexRecursive(0, index);
+            else
+                return GetEmptyIndexRecursive(index + 1, index);
+        }
+    }
+
+    #endregion
+}
+
+[System.Serializable]
+public class PlayerVFX
+{
+    [SerializeField]
+    private ParticleSystem particle;
+
+    public ParticleSystem GetParticle()
+    {
+        return particle;
+    }
+
+    public void StartParticle()
+    {
+        if (particle != null && particle.gameObject.scene.IsValid())
+        {
+            particle.gameObject.SetActive(true);
+            particle.Play();
+        }
+    }
+
+    public void StopParticle(bool deActivate = false)
+    {
+        if (particle != null && particle.gameObject.scene.IsValid())
+        {
+            particle.gameObject.SetActive(!deActivate);
+            particle.Stop();
+        }
+    }
 }
 
 public enum GameInput { UP, UP_HOLD }

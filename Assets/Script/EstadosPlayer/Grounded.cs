@@ -18,6 +18,7 @@ public class Grounded : PlayerState
 
     public override void StateEnd()
     {
+        player.GetPlayerVFXList().GetVFXByName("NeveEspalha").StopParticle();
         player.StopAllCoroutines();
         player = null;
     }
@@ -29,6 +30,8 @@ public class Grounded : PlayerState
         player.StartStateCoroutine(CalculateNextPoint());
 
         player.StartStateCoroutine(BeEtherium());
+
+        player.GetPlayerVFXList().GetVFXByName("NeveEspalha").StartParticle();
     }
 
     public override void StateUpdate()

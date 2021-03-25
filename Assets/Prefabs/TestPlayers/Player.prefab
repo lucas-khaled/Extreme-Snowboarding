@@ -107,6 +107,10 @@ MonoBehaviour:
     deaccelerationOnSlope: 0.5
     jumpFactor: 1.2
     rotationFactor: 1.5
+  playerVFXList:
+    VFXList:
+    - particle: {fileID: 3429947429285374079}
+    - particle: {fileID: 2780369582300063177}
 --- !u!1001 &793496288847988137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,9 +118,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1455760105367030561}
     m_Modifications:
+    - target: {fileID: 2637578483558100438, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7424977700236060891, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
       propertyPath: m_Name
-      value: NeveEspalha_VFX
+      value: NeveEspalha
       objectReference: {fileID: 0}
     - target: {fileID: 7488540605255522774, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
       propertyPath: m_RootOrder
@@ -167,6 +175,11 @@ PrefabInstance:
 --- !u!4 &7849691320136768639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7488540605255522774, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
+  m_PrefabInstance: {fileID: 793496288847988137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3429947429285374079 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2637578483558100438, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
   m_PrefabInstance: {fileID: 793496288847988137}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4963213957312602357
@@ -289,12 +302,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2979732210843173208, guid: eeecfbbafaaa033488d027050e9accca, type: 3}
       propertyPath: m_Name
-      value: FastGroundedMovement_VFX
+      value: FastMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820969565948800862, guid: eeecfbbafaaa033488d027050e9accca, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeecfbbafaaa033488d027050e9accca, type: 3}
 --- !u!4 &5875394967343408386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1987751626232835989, guid: eeecfbbafaaa033488d027050e9accca, type: 3}
+  m_PrefabInstance: {fileID: 5340267526470175383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2780369582300063177 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7820969565948800862, guid: eeecfbbafaaa033488d027050e9accca, type: 3}
   m_PrefabInstance: {fileID: 5340267526470175383}
   m_PrefabAsset: {fileID: 0}

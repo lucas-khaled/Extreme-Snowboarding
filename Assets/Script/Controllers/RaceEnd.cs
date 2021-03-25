@@ -12,11 +12,6 @@ public class RaceEnd : MonoBehaviour
         quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
     }
 
-    private void Update()
-    {
-        Debug.Log(quantityOfActivePlayer);
-    }
-
     private void OnPlayerDeath(Player player)
     {
         quantityOfActivePlayer--;
