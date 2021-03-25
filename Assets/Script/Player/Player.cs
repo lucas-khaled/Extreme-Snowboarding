@@ -84,6 +84,10 @@ public class Player : MonoBehaviour
             Coletavel.Activate(this);
             Coletavel = null;
         }
+        if (Input.GetButton(fireInput))
+        {
+            playerState.InterpretateInput(GameInput.DOWN_HOLD);
+        }
     }
 
     void Restart()
@@ -149,7 +153,7 @@ public class PlayerSharedValues
     [SerializeField, Range(0f, 1f)]
     private float deaccelerationOnSlope = 0.5f;
     [SerializeField]
-    private float jumpFactor = 0.5f;
+    private float jumpFactor = 1f;
     [SerializeField]
     private float rotationFactor = 3;
 
@@ -182,8 +186,7 @@ public class PlayerSharedValues
             {
                 player.SetOnAnimator("highSpeed", false);
                 player.GetPlayerVFXList().GetVFXByName("FastMovement").StopParticle();
-            }
-            
+            }          
             
         }
     }
@@ -217,7 +220,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return Mathf.Clamp(jumpFactor * RealVelocity, 1, 10);
+            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*20);
         }
     }
 
@@ -249,7 +252,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return velocity + AddedVelocity + InclinationVelocity;
+            return velocity + AddedVelocity;
         }
     }
 
@@ -411,13 +414,43 @@ public class PlayerVFX
     [SerializeField]
     private ParticleSystem particle;
 
+    private bool locked = false;
+
     public ParticleSystem GetParticle()
     {
         return particle;
     }
 
+    /// <summary>
+    /// Will lock the particle from having their state changed.
+    /// </summary>
+    /// <param name="stopPlaying"> Whether you want that particle locked state is on stop. </param>
+    /// <param name="deactivate"> Wheter you want to also deactivate the particle Game Object. </param>
+    public void LockParticle(bool stopPlaying = false, bool deactivate = false)
+    {
+        if (stopPlaying)
+            StopParticle(deactivate);
+
+        locked = true;
+    }
+
+    /// <summary>
+    /// It will unlock the particle from having their state changed.
+    /// </summary>
+    /// <param name="startPlaying"> Wheter you want to also start the particle </param>
+    public void UnlockParticle(bool startPlaying = false)
+    {
+        if (startPlaying)
+            StartParticle();
+
+        locked = false;
+    }
+
     public void StartParticle()
     {
+        if (locked)
+            return;
+
         if (particle != null && particle.gameObject.scene.IsValid())
         {
             particle.gameObject.SetActive(true);
@@ -427,6 +460,8 @@ public class PlayerVFX
 
     public void StopParticle(bool deActivate = false)
     {
+        if (locked)
+            return;
         if (particle != null && particle.gameObject.scene.IsValid())
         {
             particle.gameObject.SetActive(!deActivate);
@@ -435,5 +470,5 @@ public class PlayerVFX
     }
 }
 
-public enum GameInput { UP, UP_HOLD }
+public enum GameInput { UP, UP_HOLD, DOWN_HOLD }
 

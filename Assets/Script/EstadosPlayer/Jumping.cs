@@ -17,6 +17,8 @@ public class Jumping : PlayerState
     {
         if (GameInput.UP_HOLD == input && airTime >= 0.2f)
             RotatePlayer();
+        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f)
+            RotatePlayer(-1);
     }
     public override void StateEnd()
     {
@@ -106,9 +108,9 @@ public class Jumping : PlayerState
         return new Vector3(X, Y, player.transform.position.z).normalized;
     }
 
-    void RotatePlayer()
+    void RotatePlayer(int direction = 1)
     {
-        float rotation = player.SharedValues.RotationFactor * Time.deltaTime * 100;
+        float rotation = player.SharedValues.RotationFactor * Time.deltaTime * 100 * direction;
         player.transform.Rotate(Vector3.forward * rotation, Space.Self);
         howMuchRotation += rotation;
     }
