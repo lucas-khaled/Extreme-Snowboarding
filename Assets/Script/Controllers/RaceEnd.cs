@@ -5,16 +5,12 @@ using UnityEngine;
 public class RaceEnd : MonoBehaviour
 {
     private int quantityOfActivePlayer;
+    private Player firstPlayer;
 
     private void Awake()
     {
         EventSystem.onPlayerDeath += OnPlayerDeath;
         quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
-    }
-
-    private void Update()
-    {
-        Debug.Log(quantityOfActivePlayer);
     }
 
     private void OnPlayerDeath(Player player)
@@ -28,17 +24,23 @@ public class RaceEnd : MonoBehaviour
 
     private void EndRace()
     {
-        //Finalizar a corrida :)
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
         EventSystem.onPlayerDeath -= OnPlayerDeath;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        quantityOfActivePlayer--;
-        if (quantityOfActivePlayer <= 0)
+        if (other.gameObject.tag == "Player")
         {
-            EndRace();
+            other.gameObject.GetComponent<Player>().ChangeState(new RaceEndState());
+            quantityOfActivePlayer--;
+
+            CorridaController.instance.PlayerFinishedRace(other.gameObject.GetComponent<Player>());
+            
+            if (quantityOfActivePlayer <= 0)
+            {
+                EndRace();
+            }
         }
     }
 }

@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
 
+    private bool alreadyCasted = false;
+    private float relativeSpeed;
+
     private void Start()
     {
         movement = fuckfriend.GetMovementType();
@@ -33,27 +36,78 @@ public class Projectile : MonoBehaviour
         switch (movement)
         {
             case MovementType.STRAIGHT:
-                MoveStraight();
+                MoveStraight(1);
                 break;
             case MovementType.FOWARD:
-                // movimento para frente seguindo a pista
+                MoveFollowTrack(1);
                 break;
             case MovementType.STOPPED:
-                // sem movimento, só mente parado
+                MoveStopped();
                 break;
             case MovementType.BACK:
-                // movimento para trás seguindo a pista
+                MoveFollowTrack(-1);
                 break;
             case MovementType.STRAIGHT_BACK:
-                // movimento para trás sem seguir a pista
+                MoveStraight(-1);
                 break;
         }
     }
 
-    void MoveStraight()
+    #region Movement Types
+    void MoveStraight(int velocityFactor)
     {
-        transform.position += Vector3.right * speed * Time.deltaTime * 10;
+        transform.position += Vector3.right * speed * Time.deltaTime * 10 * velocityFactor;
     }
+    void MoveFollowTrack(int distanceFactor)
+    {
+        Vector3 newPoint = new Vector3(this.transform.position.x + distanceFactor,
+                                       this.transform.position.y,
+                                       this.transform.position.z);
+
+        RaycastHit hit;
+
+        if (!alreadyCasted)
+        {
+            relativeSpeed = speed + caster.SharedValues.RealVelocity * 2;
+            alreadyCasted = true;
+        }
+
+        if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
+            newPoint = hit.point;
+        else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
+            newPoint = hit.point;
+
+        newPoint = new Vector3(newPoint.x, newPoint.y + 1, newPoint.z);
+
+        this.transform.position = Vector3.MoveTowards(this.transform.position,              // Posicao inicial 
+                                                      newPoint,                             // Posicao destino
+                                                      relativeSpeed * Time.deltaTime);      // Velocidade movimento
+
+        transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+
+    }
+    void MoveStopped()
+    {
+        if (!alreadyCasted)
+        {
+            RaycastHit hit;
+
+            Vector3 newPoint = new Vector3(this.transform.position.x,
+                                           this.transform.position.y + 5f,
+                                           this.transform.position.z);
+
+            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.down), out hit, 500f, LayerMask.GetMask("Track")))
+            {
+                transform.position = hit.point;
+
+                transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+
+            alreadyCasted = true;
+        }
+    }
+
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
