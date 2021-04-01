@@ -42,10 +42,10 @@ public class PlayerMenu : MonoBehaviour
 
     public void ChangePrimaryColor(string colorString)
     {
-        Debug.Log(colorString);
+        
         Color color;
-        ColorUtility.TryParseHtmlString(colorString, out color);
-        ChangePrimaryColor(color);
+        if (ColorUtility.TryParseHtmlString(colorString, out color))
+            ChangePrimaryColor(color);
     }
 
     public void ChangeSecundaryColor(string colorString)
@@ -53,7 +53,7 @@ public class PlayerMenu : MonoBehaviour
         
         Color color;
         ColorUtility.TryParseHtmlString(colorString, out color);
-        ChangePrimaryColor(color);
+        ChangeSecondaryColor(color);
     }
 
     public void ChangePrimaryColor(Color color)
