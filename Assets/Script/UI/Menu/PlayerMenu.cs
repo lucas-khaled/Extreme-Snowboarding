@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerMenu : MonoBehaviour
 {
-    [SerializeField]
-    private Shader changeColorShader;
+    public Shader changeColorShader;
     
     [SerializeField]
     private SkinnedMeshRenderer meshRenderer;

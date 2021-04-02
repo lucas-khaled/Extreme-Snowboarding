@@ -42,9 +42,14 @@ public class Player : MonoBehaviour
     private string jumpInput;
     private string fireInput;
 
-    public GameObject GetMesh()
+    public GameObject GetMeshGameObject()
     {
         return objectMesh;
+    }
+
+    public SkinnedMeshRenderer GetMeshRenderer()
+    {
+        return objectMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
     }
 
     public PlayerState GetPlayerState()

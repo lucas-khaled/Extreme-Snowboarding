@@ -18,6 +18,7 @@ public class MenuUIController : MonoBehaviour
 
     public void PressPlay()
     {
+        escolhaController.SendPlayerData();
         GameController.gameController.Play();
     }
 

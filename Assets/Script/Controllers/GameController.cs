@@ -25,14 +25,9 @@ public class GameController : MonoBehaviour
         }
     }
     
-    private void StartPlayerData()
+    public void StartPlayerData(PlayerData[] players)
     {
-        playerData = new PlayerData[numOfPlayer];
-
-        for(int i = 0; i<numOfPlayer; i++)
-        {
-            playerData[i] = new PlayerData();
-        }
+        playerData = players;
     }
 
     public void ChangeNumOfPlayers(int num)
@@ -46,7 +41,6 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        StartPlayerData();
         ChangeScene("SampleScene");
     }
 

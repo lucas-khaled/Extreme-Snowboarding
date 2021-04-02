@@ -44,18 +44,50 @@ public class EscolhaController
 
     }
 
+    public void SendPlayerData()
+    {
+        GameController.gameController.StartPlayerData(ConstructPlayerData());
+    }
+
+    private PlayerData[] ConstructPlayerData()
+    {
+        PlayerData[] playersData = new PlayerData[playersModels.Count];
+        int index = 0;
+        foreach(PlayerMenu player in playersModels)
+        {
+            playersData[index] = new PlayerData(player.primaryColor, player.secondaryColor, player.changeColorShader);
+            index++;
+        }
+
+        return playersData;
+    }
+
     private void Ordenate()
     {
+        Vector3 thisPosition = escolhaPanel.transform.position;
+
         if (playersModels.Count == 1)
         {
-            playersModels[0].transform.position = escolhaPanel.transform.position;
+            playersModels[0].transform.position = thisPosition;
+            return;
+        }
+        else if(playersModels.Count == 2)
+        {
+            playersModels[0].transform.position = thisPosition - escolhaPanel.transform.right * rowSize * 0.25f;
+            playersModels[1].transform.position = thisPosition + escolhaPanel.transform.right * rowSize * 0.25f;
             return;
         }
 
         float offset = rowSize / (playersModels.Count-1);
-        for(int i = 0; i<playersModels.Count; i++)
+        bool isOdd = playersModels.Count % 2 == 1;
+        
+        for (int i = 0; i<playersModels.Count; i++)
         {
-            Vector3 newPosition = escolhaPanel.transform.position + -escolhaPanel.transform.right * (rowSize*0.5f-i*offset);
+            
+            Vector3 newPosition = (isOdd) 
+                ? thisPosition - escolhaPanel.transform.right * (rowSize/(playersModels.Count+1)) * (i-1)
+                : thisPosition - escolhaPanel.transform.right * (rowSize*0.5f-i*offset);
+
             playersModels[i].transform.position = newPosition;
         }
     }

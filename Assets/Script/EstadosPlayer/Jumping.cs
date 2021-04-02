@@ -61,7 +61,7 @@ public class Jumping : PlayerState
         groundingCheck.y -= Y;
         groundingCheck.x += X;
 
-        if (Physics.SphereCast(groundingCheck, 0.05f, Vector3.down, out groundingHit, 0.3f, LayerMask.GetMask("Track")))
+        if (Physics.SphereCast(groundingCheck, 0.1f, Vector3.down, out groundingHit, 0.3f, LayerMask.GetMask("Track")))
         {
             PlayerState newPlayerState;
 
