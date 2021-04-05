@@ -9,8 +9,13 @@ public class PlayerMenu : MonoBehaviour
     [SerializeField]
     private SkinnedMeshRenderer meshRenderer;
 
+    [Header("Interface")]
     [SerializeField]
     private Canvas canvas;
+    [SerializeField]
+    private FlexibleColorPicker primaryColorPicker;
+    [SerializeField]
+    private FlexibleColorPicker secondaryColorPicker;
 
     [Header("Meshs")]
     [SerializeField]
@@ -34,6 +39,9 @@ public class PlayerMenu : MonoBehaviour
 
         primaryColor = Random.ColorHSV();
         secondaryColor = Random.ColorHSV();
+
+        primaryColorPicker.color = primaryColor;
+        secondaryColorPicker.color = secondaryColor;
 
         ChangePrimaryColor(primaryColor);
         ChangeSecondaryColor(secondaryColor);
@@ -67,5 +75,13 @@ public class PlayerMenu : MonoBehaviour
         secondaryColor = color;
     }
 
+    public void OnPrimaryColorPickerChange()
+    {
+        ChangePrimaryColor(primaryColorPicker.color);
+    }
 
+    public void OnSecondaryColorPickerChange()
+    {
+        ChangeSecondaryColor(secondaryColorPicker.color);
+    }
 }
