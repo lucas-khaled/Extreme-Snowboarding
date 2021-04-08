@@ -10,8 +10,12 @@ public class CorridaController : MonoBehaviour
     [SerializeField]
     private Player playerPrefab;
 
+    [HideInInspector]
     public GameCamera[] cameras;
-    private PlayerData[] players;
+    [HideInInspector]
+    public PlayerData[] players;
+    [HideInInspector]
+    public List<Player> playersClassificated;
 
     int alivePlayers;
 
@@ -67,6 +71,7 @@ public class CorridaController : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
+
         }
     }
     private void LoadPlayers()
@@ -103,7 +108,10 @@ public class CorridaController : MonoBehaviour
             changed = false;
         }
     }
-
+    public void PlayerFinishedRace(Player player)
+    {
+        playersClassificated.Add(player);
+    }
     void OnDrawGizmos()
     {
         Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");

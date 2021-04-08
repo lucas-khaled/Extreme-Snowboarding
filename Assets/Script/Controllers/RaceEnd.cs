@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaceEnd : MonoBehaviour
 {
     private int quantityOfActivePlayer;
-    private Player playerWon;
+    private Player firstPlayer;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class RaceEnd : MonoBehaviour
         }
     }
 
-    private void EndRace(Player player = null)
+    private void EndRace()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
         EventSystem.onPlayerDeath -= OnPlayerDeath;
@@ -32,19 +32,15 @@ public class RaceEnd : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            other.gameObject.GetComponent<Player>().ChangeState(new RaceEndState());
             quantityOfActivePlayer--;
-            Player player = other.gameObject.GetComponent<Player>();
 
-            if (playerWon == null)
-            {
-                playerWon = player;
-                player.SetOnAnimator("wonRace", true);
-            }
-            else
-                player.SetOnAnimator("lostRace", true);
-
+            CorridaController.instance.PlayerFinishedRace(other.gameObject.GetComponent<Player>());
+            
             if (quantityOfActivePlayer <= 0)
-                EndRace(player);
+            {
+                EndRace();
+            }
         }
     }
 }

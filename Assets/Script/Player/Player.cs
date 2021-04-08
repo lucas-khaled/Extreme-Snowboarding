@@ -111,6 +111,8 @@ public class Player : MonoBehaviour
 
     public void ChangeState(PlayerState newState)
     {
+        Debug.Log("Trocou estado " + newState.GetType().ToString());
+
         playerState.StateEnd();
 
         playerState = newState;
