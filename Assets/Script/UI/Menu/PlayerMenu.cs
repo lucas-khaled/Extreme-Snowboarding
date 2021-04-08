@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerMenu : MonoBehaviour
 {
-    public Shader changeColorShader;
-    
     [SerializeField]
     private SkinnedMeshRenderer meshRenderer;
+
+    [Header("Shader References")]
+    public Shader changeColorShader;
+    [SerializeField]
+    private Texture2D mask01;
+    [SerializeField]
+    private Texture2D mask02;
+   
 
     [Header("Interface")]
     [SerializeField]
@@ -34,6 +40,9 @@ public class PlayerMenu : MonoBehaviour
     {
         myMaterial = new Material(changeColorShader);
         meshRenderer.material = myMaterial;
+
+        myMaterial.SetTexture("_Color1Mask", mask01);
+        myMaterial.SetTexture("_Color2Mask", mask02);
 
         canvas.worldCamera = Camera.main;
 
