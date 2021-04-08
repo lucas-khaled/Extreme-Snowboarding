@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
 
 
     private MovementType movement;
+    private bool alreadyStopped = false;
 
     [SerializeField]
     private float speed = 5f;
@@ -33,27 +34,61 @@ public class Projectile : MonoBehaviour
         switch (movement)
         {
             case MovementType.STRAIGHT:
-                MoveStraight();
+                MoveStraightForward();
                 break;
             case MovementType.FOWARD:
-                // movimento para frente seguindo a pista
+                MoveForward();
                 break;
             case MovementType.STOPPED:
-                // sem movimento, só mente parado
+                MoveStopped();
                 break;
             case MovementType.BACK:
-                // movimento para trás seguindo a pista
+                MoveBack();
                 break;
             case MovementType.STRAIGHT_BACK:
-                // movimento para trás sem seguir a pista
+                MoveStraightBack();
                 break;
         }
     }
 
-    void MoveStraight()
+    #region Movement Types
+    void MoveStraightForward()
     {
         transform.position += Vector3.right * speed * Time.deltaTime * 10;
     }
+    void MoveForward()
+    {
+        //movimento para frente seguindo a pista
+    }
+    void MoveStopped()
+    {
+        if (!alreadyStopped) 
+        {
+            RaycastHit hit;
+
+            Vector3 newPoint = new Vector3(this.transform.position.x,
+                                           this.transform.position.y + 5f,
+                                           this.transform.position.z);
+
+            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.down), out hit, 500f, LayerMask.GetMask("Track")))
+            {
+                transform.position = hit.point;
+
+                transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+
+            alreadyStopped = true;
+        }
+    }
+    void MoveBack()
+    {
+        // movimento para trás seguindo a pista
+    }
+    void MoveStraightBack()
+    {
+        transform.position += -Vector3.right * speed * Time.deltaTime * 10;
+    }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
