@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerVFXList playerVFXList;
 
+    private UnityEngine.UI.Image turboBarRef;
+
     public PlayerSharedValues SharedValues
     {
         get
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
     private Vector3 startPoint;
     private string jumpInput;
     private string fireInput;
+    private string boostInput;
+    private GameObject catastropheRef;
 
     public GameObject GetMeshGameObject()
     {
@@ -74,6 +78,7 @@ public class Player : MonoBehaviour
             playerState.StateUpdate();
 
         InputInterpretation();
+        CheckTurbo();
     }
 
     private void InputInterpretation()
@@ -93,6 +98,39 @@ public class Player : MonoBehaviour
         {
             playerState.InterpretateInput(GameInput.DOWN_HOLD);
         }
+        if (Input.GetButton(boostInput))
+        {
+            Debug.Log(sharedValues.Turbo);
+            if (sharedValues.Turbo >= 0.95)
+            {
+                //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
+                //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
+                Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, Effect.EffectMode.ADD);
+                StartCoroutine(boostEffect.StartEffect(this));
+                sharedValues.Turbo = 0;
+            }
+        }
+        if (Input.GetButton("TurboCheat"))
+        {
+            AddTurbo(100);
+        }
+    }
+    private void CheckTurbo()
+    {
+        if (catastropheRef != null)
+        {
+            float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
+            AddTurbo(1 / distance);
+            turboBarRef.fillAmount = sharedValues.Turbo / 1;
+        }
+        else if (CorridaController.instance.catastrophe != null)
+                catastropheRef = CorridaController.instance.catastrophe;
+    }
+
+    public void AddTurbo(float turboValue)
+    {
+        float turbo = turboValue * sharedValues.turboMultiplier / 100;
+        sharedValues.Turbo += turbo;
     }
 
     void Restart()
@@ -107,6 +145,10 @@ public class Player : MonoBehaviour
         startPoint = transform.position;
         jumpInput = "JumpPlayer" + sharedValues.playerCode;
         fireInput = "FirePlayer" + sharedValues.playerCode;
+        boostInput = "BoostInput" + sharedValues.playerCode;
+        catastropheRef = null;
+        turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+        turboBarRef.fillAmount = 0;
     }
 
     public void ChangeState(PlayerState newState)
@@ -165,6 +207,9 @@ public class PlayerSharedValues
     private float rotationFactor = 3;
 
     private float addedVelocity = 0;
+    private float turbo = 0;
+
+    public float turboMultiplier = 1;
 
     public Player player { get; set; }
 
@@ -173,6 +218,25 @@ public class PlayerSharedValues
     public bool etherium { get; set; }
 
     public Vector3 ActualGroundNormal { get; set; }
+
+    public float Turbo 
+    { 
+        get 
+        {
+            return turbo;
+        }
+        set
+        {
+            if (value > 1)
+            {
+                turbo = 1;
+            }
+            else if (value < 0)
+                turbo = 0;
+            else
+                turbo = value;
+        }
+    }
 
     public float AddedVelocity
     {

@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5373003195309094042, guid: 502424973d1d6d848bf8924b71e063aa, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7633960855405320352, guid: 502424973d1d6d848bf8924b71e063aa, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 328
+      value: 351
       objectReference: {fileID: 0}
     - target: {fileID: 7633960855405320352, guid: 502424973d1d6d848bf8924b71e063aa, type: 3}
       propertyPath: m_NormalizedViewPortRect.x

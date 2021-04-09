@@ -124,11 +124,12 @@ public class Jumping : PlayerState
             Effect airEffect = new Effect("AddedVelocity", amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(airEffect.StartEffect(player));
         }
-            
+
+        int numOfMortals = 0;
 
         if (howMuchRotation > 180)
         {
-            int numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
+            numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
             Debug.Log("Mortal :" + numOfMortals + "x");
 
             float amount = 1.3f * numOfMortals;
@@ -137,5 +138,7 @@ public class Jumping : PlayerState
             Effect mortalEffect = new Effect("AddedVelocity",amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(mortalEffect.StartEffect(player));
         }
+
+        player.AddTurbo(numOfMortals * 5);
     }
 }
