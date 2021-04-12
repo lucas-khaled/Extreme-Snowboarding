@@ -10,6 +10,8 @@ public class Grounded : PlayerState
     float timeOnGround = 0;
     float timeToJump = 0;
 
+    Rigidbody rb;
+
     public override void InterpretateInput(GameInput input)
     {
         if(input == GameInput.UP && timeOnGround>=timeToJump)
@@ -26,20 +28,35 @@ public class Grounded : PlayerState
 
     public override void StateStart(Player player)
     {
-        base.StateStart(player);   
+        base.StateStart(player);
 
-        player.StartStateCoroutine(CalculateNextPoint());
+        //player.StartStateCoroutine(CalculateNextPoint());
+
+        rb = player.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.useGravity = false;
 
         player.StartStateCoroutine(BeEtherium());
 
         player.GetPlayerVFXList().GetVFXByName("NeveEspalha").StartParticle();
         player.GetPlayerVFXList().GetVFXByName("FastMovement").UnlockParticle();
+
+        player.GetComponent<Rigidbody>().velocity = player.groundedVelocity;
     }
 
     public override void StateUpdate()
     {
         CorrectRotation();
+        MoveByRigidbody();
         timeOnGround += Time.deltaTime;
+    }
+
+    void MoveByRigidbody()
+    {
+        if(rb.velocity.x < player.SharedValues.RealVelocity)
+            rb.AddForce(Vector3.right * player.SharedValues.RealVelocity * Time.deltaTime, ForceMode.VelocityChange);
+
+        player.groundedVelocity = rb.velocity;
     }
 
     #region PRIVATE METHODS
@@ -53,6 +70,7 @@ public class Grounded : PlayerState
             Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
             newRotation.y = newRotation.x = 0;
 
+            player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
             player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
         }
     }

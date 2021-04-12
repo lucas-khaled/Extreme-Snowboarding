@@ -30,9 +30,13 @@ public class Fallen : PlayerState
         base.StateStart(player);
         player.StartCoroutine(CorrectPlayerPosition());
 
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         player.SetOnAnimator("fallen", true);
 
         player.SetOnAnimator("highSpeed", false);
+
+        player.groundedVelocity = Vector3.zero;
     }
     public override void StateUpdate()
     {

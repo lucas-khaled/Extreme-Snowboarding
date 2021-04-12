@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        ChangeScene("SampleScene");
+        ChangeScene("TesteRigidbody");
     }
 
     public void ChangeScene(string cena)    

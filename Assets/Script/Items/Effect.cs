@@ -30,20 +30,15 @@ public struct Effect
 
     public IEnumerator StartEffect(Player player)
     {
-        Debug.Log("Applying Effect");
         PropertyInfo accessProperty = player.SharedValues.GetType().GetProperty(name);
 
         var initialValue = accessProperty.GetValue(player.SharedValues);
 
         ChangeObjPropertyValue(accessProperty, player.SharedValues);
 
-        Debug.Log("Started effect: " + name);
-
         yield return new WaitForSeconds(timeOfChange);
 
         ReturnValue(accessProperty, player.SharedValues, initialValue);
-
-        Debug.Log("finished effect: " + name);
     }
 
     void ChangeObjPropertyValue(PropertyInfo accessProperty, object obj)

@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     public GameCamera playerCamera { get;  set; }
 
+    public Vector3 groundedVelocity { get; set; }
+
     PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         playerVFXList.StartHash();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(update)
             playerState.StateUpdate();
@@ -111,8 +113,6 @@ public class Player : MonoBehaviour
 
     public void ChangeState(PlayerState newState)
     {
-        Debug.Log("Trocou estado " + newState.GetType().ToString());
-
         playerState.StateEnd();
 
         playerState = newState;
@@ -128,6 +128,11 @@ public class Player : MonoBehaviour
     {
         if(animator != null)
             animator.SetBool(variable, value);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        playerState.OnCollisionEnter(collision);
     }
 
     private void OnDrawGizmos()
@@ -364,8 +369,6 @@ public class PlayerVFXList
 
         int initialIndex = Mathf.Abs(sum) % VFXList.Count;
         int finalIndex = (onlySearchingName) ? GetOffset(initialIndex, name) : GetEmptyIndex(initialIndex);
-
-        Debug.Log(name + ": "+initialIndex + " - " + finalIndex);
 
         return finalIndex;
     }

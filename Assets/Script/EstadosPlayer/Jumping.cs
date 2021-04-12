@@ -23,7 +23,6 @@ public class Jumping : PlayerState
     public override void StateEnd()
     {
         rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
         rb.useGravity = false;
 
         airTime = 0;
@@ -37,7 +36,7 @@ public class Jumping : PlayerState
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
-        rb.AddForce(player.SharedValues.JumpForce * CalculateJumpDirection(player), ForceMode.Impulse);
+        rb.AddForce(player.SharedValues.JumpForce * Vector3.up * 0.8f, ForceMode.Impulse);
 
         player.SetOnAnimator("jumping", true);
     }
@@ -46,10 +45,51 @@ public class Jumping : PlayerState
     {
         if(airTime >= 0.5f)
         {
-            CheckGround();
+            //CheckGround();
         }
 
         airTime += Time.deltaTime;
+    }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Track"))
+        {       
+            PlayerState newPlayerState;
+
+            Vector3 realNormal = (collision.GetContact(0).normal.y < 0) ? -collision.GetContact(0).normal : collision.GetContact(0).normal;
+
+            float groundAngle = Vector3.SignedAngle(Vector3.up, realNormal, Vector3.forward);
+
+            float playerAngle = (player.transform.eulerAngles.z) % 360;
+            float normalizedPlayerAngle = (playerAngle <= 180) ? playerAngle : playerAngle - 360;
+
+            float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
+
+            //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
+
+            if (angleDifference < 60f)
+            {
+                int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
+                newPlayerState = new Grounded(timeEtherium, 0.3f);
+
+                ApplyAirEffects();
+            }
+            else
+            {
+                float timeFall = 3;
+                if (angleDifference > 120)
+                {
+                    player.SetOnAnimator("hardFall", true);
+                    timeFall = 4f;
+                }
+
+                newPlayerState = new Fallen(timeFall);
+
+            }
+
+            player.ChangeState(newPlayerState);
+        }
     }
 
 
