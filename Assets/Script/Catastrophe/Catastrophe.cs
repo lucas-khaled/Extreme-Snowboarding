@@ -56,6 +56,8 @@ public class Catastrophe : MonoBehaviour
         cameraScript[1].StartCoroutine(cameraScript[1].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
         cameraScript[2].StartCoroutine(cameraScript[2].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
         cameraScript[3].StartCoroutine(cameraScript[3].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
+
+        CorridaController.instance.catastrophe = this.gameObject;
         // Aviso?
 
         GetNextMovementPoint();
