@@ -6,7 +6,6 @@ using UnityEngine;
 public class Jumping : PlayerState
 {
     Rigidbody rb;
-    RaycastHit groundingHit;
     float airTime = 0;
 
     float howMuchRotation = 0f;
@@ -43,12 +42,6 @@ public class Jumping : PlayerState
 
     public override void StateUpdate()
     {
-        if(airTime >= 0.5f)
-        {
-            //CheckGround();
-        }
-
-        airTime += Time.deltaTime;
     }
 
     public override void OnCollisionEnter(Collision collision)

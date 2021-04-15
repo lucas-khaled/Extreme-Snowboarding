@@ -186,7 +186,6 @@ public class Player : MonoBehaviour
         }
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
-        Gizmos.DrawLine(transform.position + (Vector3.right * sharedValues.CharacterRadius / 2), transform.position + (Vector3.left * sharedValues.CharacterRadius / 2));
     }
 }
 
@@ -196,18 +195,14 @@ public class PlayerSharedValues
     [Header("Player Values")]
     [SerializeField, Min(0)] 
     private float characterHeight = 2;
-    [SerializeField, Min(0)]
-    private float characterRadius = 1;
 
     [Header("Movement Values")]
     [SerializeField]
     private float velocity = 10f;
-    [SerializeField, Range(1f, 2f)]
-    private float checkingPointDistance = 1f;
-    [SerializeField, Range(0f, 1f)]
-    private float deaccelerationOnSlope = 0.5f;
     [SerializeField]
     private float jumpFactor = 1f;
+    [SerializeField] [Min(0)]
+    private float maxJumpForce = 20;
     [SerializeField]
     private float rotationFactor = 3;
 
@@ -266,19 +261,6 @@ public class PlayerSharedValues
             
         }
     }
-    public float InclinationVelocity { get; set; }
-
-    public float CharacterRadius
-    {
-        get
-        {
-            return characterRadius;
-        }
-        set
-        {
-            characterRadius = value;
-        }
-    }
 
     public float RotationFactor
     {
@@ -296,7 +278,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*20);
+            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*2);
         }
     }
 
@@ -312,35 +294,11 @@ public class PlayerSharedValues
         }
     }
 
-    public float DeaccelerationOnSlope
-    {
-        get
-        {
-            return deaccelerationOnSlope;
-        }
-        set
-        {
-            deaccelerationOnSlope = value;
-        }
-    }
-
     public float RealVelocity
     {
         get
         {
             return velocity + AddedVelocity;
-        }
-    }
-
-    public float CheckingPointDistance
-    {
-        get
-        {
-            return checkingPointDistance;
-        }
-        private set
-        {
-            checkingPointDistance = value;
         }
     }
 }
