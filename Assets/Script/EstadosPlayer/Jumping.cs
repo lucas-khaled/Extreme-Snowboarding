@@ -28,6 +28,7 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
+        player.SetOnAnimator("hitByFuckFriend", false);
     }
 
     public override void StateStart(Player player)
