@@ -21,8 +21,10 @@ public class Fallen : PlayerState
     {
         player.StopAllCoroutines();
 
+        player.SetOnAnimator("hitByFuckFriend", false);
         player.SetOnAnimator("fallen", false);
         player.SetOnAnimator("hardFall", false);
+
     }
 
     public override void StateStart(Player player)

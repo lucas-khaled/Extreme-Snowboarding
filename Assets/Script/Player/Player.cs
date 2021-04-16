@@ -130,6 +130,12 @@ public class Player : MonoBehaviour
             animator.SetBool(variable, value);
     }
 
+    //Start Daniboy code >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public bool GetAnimatorBoolVariable(string variable){
+        return animator.GetBool(variable);
+    }
+    //End Daniboy code >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     private void OnDrawGizmos()
     {
         if(playerState.GetType() == typeof(Jumping))

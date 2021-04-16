@@ -116,8 +116,13 @@ public class Projectile : MonoBehaviour
             Player playerHitted = other.GetComponent<Player>();
             if(playerHitted != caster)
             {
-                fuckfriend.StartEffects(other.GetComponent<Player>());
+                Player playerNome = other.GetComponent<Player>();
+                fuckfriend.StartEffects(playerNome);
                 Destroy(this.gameObject);
+                if(playerNome.GetAnimatorBoolVariable("fallen")){
+                    playerNome.SetOnAnimator("hitByFuckFriend", true);
+                }
+                
             }
         }
         else

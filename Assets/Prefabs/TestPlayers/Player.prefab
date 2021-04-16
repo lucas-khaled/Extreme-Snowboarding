@@ -4891,7 +4891,7 @@ MonoBehaviour:
     velocity: 12
     checkingPointDistance: 2
     deaccelerationOnSlope: 0.5
-    jumpFactor: 1
+    jumpFactor: 5
     rotationFactor: 1
   playerVFXList:
     VFXList:
@@ -4956,6 +4956,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4d8a2be3566ee80bcae1e9aeff59808d, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
 --- !u!95 &6610652510279584435 stripped
