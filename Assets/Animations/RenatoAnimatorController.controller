@@ -257,7 +257,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TornadoRotacaoFica
+  m_Name: ManobraFica
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -492,7 +492,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TornadoRotacaoSai
+  m_Name: ManobraSai
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -738,7 +738,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TornadoRotacaoEntra
+  m_Name: ManobraEntra
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1063,7 +1063,7 @@ AnimatorStateMachine:
     m_Position: {x: -540, y: 500, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -3136195293494456124}
-    m_Position: {x: -560, y: 640, z: 0}
+    m_Position: {x: -560, y: 630, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:

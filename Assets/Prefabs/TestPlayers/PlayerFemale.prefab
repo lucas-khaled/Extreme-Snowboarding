@@ -1819,8 +1819,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.000000014901161, y: 0.52926373, z: -0.05277036}
-    m_Extent: {x: 0.10098678, y: 0.096079946, z: 0.024194159}
+    m_Center: {x: 0, y: 0.52926373, z: -0.05277035}
+    m_Extent: {x: 0.10098676, y: 0.096079946, z: 0.024194133}
   m_DirtyAABB: 0
 --- !u!183 &5551393498413059175
 Cloth:
@@ -1834,7 +1834,7 @@ Cloth:
   m_BendingStiffness: 1
   m_UseTethers: 1
   m_UseGravity: 1
-  m_Damping: 1
+  m_Damping: 0.7
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
   m_WorldVelocityScale: 0.5
@@ -2229,7 +2229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5642259207749993529}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2240,7 +2240,7 @@ Transform:
   - {fileID: 7470319188912570439}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &1434018949922555129
 Animator:
   serializedVersion: 3
@@ -2251,7 +2251,7 @@ Animator:
   m_GameObject: {fileID: 5642259207749993529}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4d8a2be3566ee80bcae1e9aeff59808d, type: 2}
+  m_Controller: {fileID: 9100000, guid: ebddb40661457d1c5b6d23b4df5234df, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
