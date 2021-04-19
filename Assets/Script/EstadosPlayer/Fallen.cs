@@ -23,7 +23,6 @@ public class Fallen : PlayerState
 
         player.SetOnAnimator("fallen", false);
         player.SetOnAnimator("hardFall", false);
-
     }
 
     public override void StateStart(Player player)
@@ -32,8 +31,8 @@ public class Fallen : PlayerState
         player.StartCoroutine(CorrectPlayerPosition());
 
         player.SetOnAnimator("fallen", true);
-
         player.SetOnAnimator("highSpeed", false);
+        player.SetOnAnimator("hitByFuckFriend", false);
     }
     public override void StateUpdate()
     {

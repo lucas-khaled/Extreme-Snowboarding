@@ -15,10 +15,14 @@ public class Jumping : PlayerState
 
     public override void InterpretateInput(GameInput input)
     {
-        if (GameInput.UP_HOLD == input && airTime >= 0.2f)
+        if (GameInput.UP_HOLD == input && airTime >= 0.2f){
+            player.SetOnAnimator("trick", true);
             RotatePlayer();
-        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f)
+        }
+        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f){
+            player.SetOnAnimator("trick", true);
             RotatePlayer(-1);
+        }
     }
     public override void StateEnd()
     {
@@ -28,6 +32,7 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
+        player.SetOnAnimator("trick", false);
         player.SetOnAnimator("hitByFuckFriend", false);
     }
 
