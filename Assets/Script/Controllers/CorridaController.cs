@@ -16,6 +16,8 @@ public class CorridaController : MonoBehaviour
     public PlayerData[] players;
     [HideInInspector]
     public List<Player> playersClassificated;
+    [HideInInspector]
+    public GameObject catastrophe;
 
     int alivePlayers;
 

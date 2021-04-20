@@ -16,5 +16,10 @@ public abstract class PlayerState
     public abstract void StateUpdate();
 
     public abstract void InterpretateInput(GameInput input);
+
+    public virtual void OnCollisionEnter(Collision collision)
+    {
+    }
+
 }
     

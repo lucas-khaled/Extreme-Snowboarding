@@ -10,6 +10,8 @@ public class RaceEndState : PlayerState
     private bool alreadyCalled = false;
     private float distance = 20f;
 
+    private Rigidbody rb;
+
     public override void InterpretateInput(GameInput input)
     {
         if (GameInput.UP == input)
@@ -26,19 +28,20 @@ public class RaceEndState : PlayerState
         base.StateStart(player);
         distance += player.SharedValues.RealVelocity;
         timeToStop = distance * 2f / player.SharedValues.RealVelocity;
-        CalculateNextPoint();
-        Debug.Log(timeToStop);
+
+        rb = player.GetComponent<Rigidbody>();
     }
 
     public override void StateUpdate()
     {
-        if (timeToStop <= 0)
-        {
-            player.StopAllCoroutines();
-            FinishRaceAnimation();
-        }
+        DeaccelerateByRigidbody();
+        FinishRaceAnimation();
+    }
 
-        timeToStop -= Time.deltaTime * 2;
+    void DeaccelerateByRigidbody()
+    {
+        if (rb.velocity.x > 0)
+            rb.AddForce(Vector3.left * player.SharedValues.RealVelocity * Time.deltaTime, ForceMode.VelocityChange);
     }
 
     void FinishRaceAnimation()
@@ -77,46 +80,5 @@ public class RaceEndState : PlayerState
     {
         playerView = player;
         player.playerCamera.SetPlayer(player);
-    }
-
-    void CalculateNextPoint()
-    {
-        //Debug.Log("<color=red> Calculating </color>");
-
-        RaycastHit hit;
-        Vector3 checkingPosition = player.transform.position + Vector3.right * distance;
-
-        if (Physics.Raycast(checkingPosition, Vector3.down, out hit, 1000f, LayerMask.GetMask("Track")))
-            player.StartCoroutine(Movement(CalculatePlayerPosition(hit)));
-        else if (Physics.Raycast(checkingPosition, (Vector3.left * (player.SharedValues.DeaccelerationOnSlope) + Vector3.up * (1 - player.SharedValues.DeaccelerationOnSlope)).normalized, out hit, 1000f, LayerMask.GetMask("Track")))
-            player.StartCoroutine(Movement(CalculatePlayerPosition(hit, true)));
-        else
-            player.StartCoroutine(Movement(checkingPosition));
-
-    }
-
-    IEnumerator Movement(Vector3 position)
-    {
-        float movementStep = 18;
-
-        while (Vector3.Distance(player.transform.position, position) > 0.01f)
-        {
-            Vector3 steps = (position - player.transform.position) / movementStep;
-            movementStep *= 1.5f;
-
-            float velocityRate = 1 / (timeToStop * timeToStop);
-            player.transform.position += steps;
-
-            yield return new WaitForSeconds(velocityRate);
-        }
-    }
-
-    Vector3 CalculatePlayerPosition(RaycastHit hit, bool invert = false)
-    {
-        int invertionValue = (invert) ? -1 : 1;
-        float X = hit.point.x + hit.normal.x * invertionValue;
-        float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y * invertionValue;
-
-        return new Vector3(X, Y, player.transform.position.z);
     }
 }

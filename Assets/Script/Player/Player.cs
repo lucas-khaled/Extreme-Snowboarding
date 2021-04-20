@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerVFXList playerVFXList;
 
+    private UnityEngine.UI.Image turboBarRef;
+
     public PlayerSharedValues SharedValues
     {
         get
@@ -36,11 +38,15 @@ public class Player : MonoBehaviour
 
     public GameCamera playerCamera { get;  set; }
 
+    public Vector3 groundedVelocity { get; set; }
+
     PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
     private string jumpInput;
     private string fireInput;
+    private string boostInput;
+    private GameObject catastropheRef;
 
     public GameObject GetMeshGameObject()
     {
@@ -68,12 +74,13 @@ public class Player : MonoBehaviour
         playerVFXList.StartHash();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(update)
             playerState.StateUpdate();
 
         InputInterpretation();
+        CheckTurbo();
     }
 
     private void InputInterpretation()
@@ -93,6 +100,39 @@ public class Player : MonoBehaviour
         {
             playerState.InterpretateInput(GameInput.DOWN_HOLD);
         }
+        if (Input.GetButton(boostInput))
+        {
+            Debug.Log(sharedValues.Turbo);
+            if (sharedValues.Turbo >= 0.95)
+            {
+                //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
+                //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
+                Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, Effect.EffectMode.ADD);
+                StartCoroutine(boostEffect.StartEffect(this));
+                sharedValues.Turbo = 0;
+            }
+        }
+        if (Input.GetButton("TurboCheat"))
+        {
+            AddTurbo(100);
+        }
+    }
+    private void CheckTurbo()
+    {
+        if (catastropheRef != null)
+        {
+            float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
+            AddTurbo(1 / distance);
+            turboBarRef.fillAmount = sharedValues.Turbo / 1;
+        }
+        else if (CorridaController.instance.catastrophe != null)
+                catastropheRef = CorridaController.instance.catastrophe;
+    }
+
+    public void AddTurbo(float turboValue)
+    {
+        float turbo = turboValue * sharedValues.turboMultiplier / 100;
+        sharedValues.Turbo += turbo;
     }
 
     void Restart()
@@ -107,12 +147,14 @@ public class Player : MonoBehaviour
         startPoint = transform.position;
         jumpInput = "JumpPlayer" + sharedValues.playerCode;
         fireInput = "FirePlayer" + sharedValues.playerCode;
+        boostInput = "BoostInput" + sharedValues.playerCode;
+        catastropheRef = null;
+        turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+        turboBarRef.fillAmount = 0;
     }
 
     public void ChangeState(PlayerState newState)
     {
-        Debug.Log("Trocou estado " + newState.GetType().ToString());
-
         playerState.StateEnd();
 
         playerState = newState;
@@ -130,11 +172,10 @@ public class Player : MonoBehaviour
             animator.SetBool(variable, value);
     }
 
-    //Start Daniboy code >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public bool GetAnimatorBoolVariable(string variable){
-        return animator.GetBool(variable);
+    private void OnCollisionEnter(Collision collision)
+    {
+        playerState.OnCollisionEnter(collision);
     }
-    //End Daniboy code >>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     private void OnDrawGizmos()
     {
@@ -145,7 +186,6 @@ public class Player : MonoBehaviour
         }
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
-        Gizmos.DrawLine(transform.position + (Vector3.right * sharedValues.CharacterRadius / 2), transform.position + (Vector3.left * sharedValues.CharacterRadius / 2));
     }
 }
 
@@ -155,22 +195,21 @@ public class PlayerSharedValues
     [Header("Player Values")]
     [SerializeField, Min(0)] 
     private float characterHeight = 2;
-    [SerializeField, Min(0)]
-    private float characterRadius = 1;
 
     [Header("Movement Values")]
     [SerializeField]
     private float velocity = 10f;
-    [SerializeField, Range(1f, 2f)]
-    private float checkingPointDistance = 1f;
-    [SerializeField, Range(0f, 1f)]
-    private float deaccelerationOnSlope = 0.5f;
     [SerializeField]
     private float jumpFactor = 1f;
+    [SerializeField] [Min(0)]
+    private float maxJumpForce = 20;
     [SerializeField]
     private float rotationFactor = 3;
 
     private float addedVelocity = 0;
+    private float turbo = 0;
+
+    public float turboMultiplier = 1;
 
     public Player player { get; set; }
 
@@ -179,6 +218,25 @@ public class PlayerSharedValues
     public bool etherium { get; set; }
 
     public Vector3 ActualGroundNormal { get; set; }
+
+    public float Turbo 
+    { 
+        get 
+        {
+            return turbo;
+        }
+        set
+        {
+            if (value > 1)
+            {
+                turbo = 1;
+            }
+            else if (value < 0)
+                turbo = 0;
+            else
+                turbo = value;
+        }
+    }
 
     public float AddedVelocity
     {
@@ -203,19 +261,6 @@ public class PlayerSharedValues
             
         }
     }
-    public float InclinationVelocity { get; set; }
-
-    public float CharacterRadius
-    {
-        get
-        {
-            return characterRadius;
-        }
-        set
-        {
-            characterRadius = value;
-        }
-    }
 
     public float RotationFactor
     {
@@ -233,7 +278,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*20);
+            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*2);
         }
     }
 
@@ -249,35 +294,11 @@ public class PlayerSharedValues
         }
     }
 
-    public float DeaccelerationOnSlope
-    {
-        get
-        {
-            return deaccelerationOnSlope;
-        }
-        set
-        {
-            deaccelerationOnSlope = value;
-        }
-    }
-
     public float RealVelocity
     {
         get
         {
             return velocity + AddedVelocity;
-        }
-    }
-
-    public float CheckingPointDistance
-    {
-        get
-        {
-            return checkingPointDistance;
-        }
-        private set
-        {
-            checkingPointDistance = value;
         }
     }
 }
@@ -370,8 +391,6 @@ public class PlayerVFXList
 
         int initialIndex = Mathf.Abs(sum) % VFXList.Count;
         int finalIndex = (onlySearchingName) ? GetOffset(initialIndex, name) : GetEmptyIndex(initialIndex);
-
-        Debug.Log(name + ": "+initialIndex + " - " + finalIndex);
 
         return finalIndex;
     }

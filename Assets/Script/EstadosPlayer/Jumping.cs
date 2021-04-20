@@ -6,7 +6,6 @@ using UnityEngine;
 public class Jumping : PlayerState
 {
     Rigidbody rb;
-    RaycastHit groundingHit;
     float airTime = 0;
 
     float howMuchRotation = 0f;
@@ -27,7 +26,6 @@ public class Jumping : PlayerState
     public override void StateEnd()
     {
         rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
         rb.useGravity = false;
 
         airTime = 0;
@@ -43,35 +41,22 @@ public class Jumping : PlayerState
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
-        rb.AddForce(player.SharedValues.JumpForce * CalculateJumpDirection(player), ForceMode.Impulse);
+        rb.AddForce(player.SharedValues.JumpForce * Vector3.up * 0.8f, ForceMode.Impulse);
 
         player.SetOnAnimator("jumping", true);
     }
 
     public override void StateUpdate()
     {
-        if(airTime >= 0.5f)
-        {
-            CheckGround();
-        }
-
-        airTime += Time.deltaTime;
     }
 
-
-    void CheckGround()
+    public override void OnCollisionEnter(Collision collision)
     {
-        groundingCheck = player.transform.position;
-        float Y = player.SharedValues.CharacterHeight * 0.5f * Mathf.Cos(player.transform.rotation.z);
-        float X = player.SharedValues.CharacterHeight * 0.5f * Mathf.Sin(player.transform.rotation.z);
-        groundingCheck.y -= Y;
-        groundingCheck.x += X;
-
-        if (Physics.SphereCast(groundingCheck, 0.1f, Vector3.down, out groundingHit, 0.3f, LayerMask.GetMask("Track")))
-        {
+        if (collision.gameObject.CompareTag("Track"))
+        {       
             PlayerState newPlayerState;
 
-            Vector3 realNormal = (groundingHit.normal.y < 0) ? -groundingHit.normal : groundingHit.normal;
+            Vector3 realNormal = (collision.GetContact(0).normal.y < 0) ? -collision.GetContact(0).normal : collision.GetContact(0).normal;
 
             float groundAngle = Vector3.SignedAngle(Vector3.up, realNormal, Vector3.forward);
 
@@ -84,7 +69,7 @@ public class Jumping : PlayerState
 
             if (angleDifference < 60f)
             {
-                int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f); 
+                int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
                 newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                 ApplyAirEffects();
@@ -95,10 +80,10 @@ public class Jumping : PlayerState
                 if (angleDifference > 120)
                 {
                     player.SetOnAnimator("hardFall", true);
-                    timeFall = 4f ;
+                    timeFall = 4f;
                 }
 
-                    newPlayerState = new Fallen(timeFall);
+                newPlayerState = new Fallen(timeFall);
 
             }
 
@@ -106,13 +91,6 @@ public class Jumping : PlayerState
         }
     }
 
-    Vector3 CalculateJumpDirection(Player player)
-    {
-        float X = Mathf.Clamp(player.SharedValues.ActualGroundNormal.x, 0.5f, 1f);
-        float Y = player.SharedValues.ActualGroundNormal.y;
-
-        return new Vector3(X, Y, player.transform.position.z).normalized;
-    }
 
     void RotatePlayer(int direction = 1)
     {
@@ -130,11 +108,12 @@ public class Jumping : PlayerState
             Effect airEffect = new Effect("AddedVelocity", amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(airEffect.StartEffect(player));
         }
-            
+
+        int numOfMortals = 0;
 
         if (howMuchRotation > 180)
         {
-            int numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
+            numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
             Debug.Log("Mortal :" + numOfMortals + "x");
 
             float amount = 1.3f * numOfMortals;
@@ -143,5 +122,7 @@ public class Jumping : PlayerState
             Effect mortalEffect = new Effect("AddedVelocity",amount, time, Effect.EffectMode.ADD);
             player.StartCoroutine(mortalEffect.StartEffect(player));
         }
+
+        player.AddTurbo(numOfMortals * 5);
     }
 }
