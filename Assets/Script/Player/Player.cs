@@ -85,10 +85,12 @@ public class Player : MonoBehaviour
 
     private void InputInterpretation()
     {
+        GameInput gameInput = GameInput.NO_INPUT;        
+
         if (Input.GetButtonDown(jumpInput))
-            playerState.InterpretateInput(GameInput.UP);
+            gameInput = GameInput.UP;
         if (Input.GetButton(jumpInput))
-            playerState.InterpretateInput(GameInput.UP_HOLD);
+            gameInput = GameInput.UP_HOLD;
         if (Input.GetKey(KeyCode.Z))
             Restart();
         if (Input.GetButtonDown(fireInput) && Coletavel != null)
@@ -98,7 +100,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetButton(fireInput))
         {
-            playerState.InterpretateInput(GameInput.DOWN_HOLD);
+            gameInput = GameInput.DOWN_HOLD;
         }
         if (Input.GetButton(boostInput))
         {
@@ -116,6 +118,7 @@ public class Player : MonoBehaviour
         {
             AddTurbo(100);
         }
+        playerState.InterpretateInput(gameInput);
     }
     private void CheckTurbo()
     {
@@ -502,5 +505,5 @@ public class PlayerVFX
     }
 }
 
-public enum GameInput { UP, UP_HOLD, DOWN_HOLD }
+public enum GameInput { UP, UP_HOLD, DOWN_HOLD, NO_INPUT }
 

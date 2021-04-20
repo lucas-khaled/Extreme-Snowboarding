@@ -22,6 +22,9 @@ public class Jumping : PlayerState
             player.SetOnAnimator("trick", true);
             RotatePlayer(-1);
         }
+        else if (GameInput.NO_INPUT == input){
+            player.SetOnAnimator("trick", false);
+        }
     }
     public override void StateEnd()
     {
@@ -48,6 +51,7 @@ public class Jumping : PlayerState
 
     public override void StateUpdate()
     {
+        airTime += Time.deltaTime;
     }
 
     public override void OnCollisionEnter(Collision collision)
