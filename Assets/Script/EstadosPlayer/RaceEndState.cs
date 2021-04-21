@@ -6,17 +6,9 @@ public class RaceEndState : PlayerState
 {
     private Player playerView;
     private float timeToStop;
-    private float deaccelerationFactor = 4f;
-    private bool alreadyCalled = false;
     private float distance = 20f;
 
     private Rigidbody rb;
-
-    public override void InterpretateInput(GameInput input)
-    {
-        if (GameInput.UP == input)
-            ChangePlayerView();
-    }
 
     public override void StateEnd()
     {
@@ -62,23 +54,5 @@ public class RaceEndState : PlayerState
 
         player.Invoke("ChangePlayerView",5);
     }
-
-
-    ///<summary> 
-    ///Change the player camera visualization to a random alive player (doesn't work if there's no players alive)
-    ///</summary>
-    public void ChangePlayerView()
-    {
-        playerView = CorridaController.instance.GetOtherPlayerThan(playerView);
-        player.playerCamera.SetPlayer(playerView);
-    }
-
-    ///<summary>
-    ///Change the player camera visualization to the specified player 
-    ///</summary>
-    public void ChangePlayerView(Player player)
-    {
-        playerView = player;
-        player.playerCamera.SetPlayer(player);
-    }
+    
 }

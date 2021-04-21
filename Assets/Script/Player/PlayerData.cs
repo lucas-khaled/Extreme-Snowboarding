@@ -8,14 +8,16 @@ public class PlayerData
     private Color color1;
     private Color color2;
     private Shader playerShader;
-
+    private int index;
+    
     public Player player;
 
-    public PlayerData(Color color1, Color color2, Shader playerShader)
+    public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex)
     {
         this.color1 = color1;
         this.color2 = color2;
         this.playerShader = playerShader;
+        this.index = playerIndex + 1;
     }
 
     public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
@@ -30,5 +32,6 @@ public class PlayerData
 
         player.SharedValues.playerCode = playerCode;
         camera.SetPlayer(player);
+
     }
 }
