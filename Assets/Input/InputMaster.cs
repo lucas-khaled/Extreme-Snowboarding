@@ -240,7 +240,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""42985dc0-4076-4962-a259-35e7b780e4aa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)""
+                    ""interactions"": ""Hold(duration=0.1)""
                 }
             ],
             ""bindings"": [
@@ -258,7 +258,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""acecda28-8ee5-4240-81dd-4bff4d96c54d"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player1"",
@@ -269,7 +269,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""e3c9ca90-58ac-4341-aca0-9ebbe457cfcf"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player1"",
@@ -291,7 +291,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""9666890d-ac3b-48a7-9b5e-985d038c9ec3"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player2"",
@@ -302,7 +302,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""a10d29bc-e4c2-4fc5-a0bc-9ba181733168"",
-                    ""path"": ""<Keyboard>/y"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player2"",
@@ -324,7 +324,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""827079d3-c7bd-461b-8c94-b02eb86e753c"",
-                    ""path"": ""<Keyboard>/semicolon"",
+                    ""path"": ""<Keyboard>/quote"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player3"",
@@ -335,7 +335,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""bcb63d83-7a4b-49aa-b8cb-ccd8d9cd9a1c"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player3"",
@@ -357,7 +357,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""3e11a8ac-114c-4399-b932-689d098728c6"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player4"",
@@ -368,7 +368,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""96c2cfba-4161-4e62-aafb-2bf3c60b7f8f"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player1"",

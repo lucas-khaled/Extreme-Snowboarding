@@ -33,5 +33,6 @@ public class PlayerData
         player.SharedValues.playerCode = playerCode;
         camera.SetPlayer(player);
 
+        player.playerInput.SwitchCurrentControlScheme("Player" + index);
     }
 }

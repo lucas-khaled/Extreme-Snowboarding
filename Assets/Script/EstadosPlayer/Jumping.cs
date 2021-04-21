@@ -7,9 +7,8 @@ public class Jumping : PlayerState
     Rigidbody rb;
     float airTime = 0;
     float howMuchRotation = 0f;
-
-    bool rotating = false;
     float rotatingDirection = 0;
+    bool isJumpingPressed;
 
     /*public override void InterpretateInput(GameInput input)
     {
@@ -38,20 +37,24 @@ public class Jumping : PlayerState
     {
         base.StateStart(player);
         
+        SubscribeOnInputEvents();
+        
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
         rb.AddForce(player.SharedValues.JumpForce * Vector3.up * 0.8f, ForceMode.Impulse);
 
         player.SetOnAnimator("jumping", true);
-        SubscribeOnInputEvents();
     }
 
     public override void StateUpdate()
     {
         airTime += Time.deltaTime;
-        if(rotating)
+        if(airTime >= 0.2f)
             RotatePlayer();
+
+        if (isJumpingPressed)
+            rotatingDirection = 1;
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -104,16 +107,15 @@ public class Jumping : PlayerState
 
     void StartRotatePlayer(InputAction.CallbackContext context)
     {
-        if (context.started && airTime >= 0.2f)
+        rotatingDirection = context.ReadValue<float>();
+        
+        if (context.canceled)
         {
-            rotatingDirection = context.ReadValue<float>();
-            rotating = true;
-            //tocar animação de mortal
-        }
-        else if (context.canceled)
-        {
-            rotating = false;
             // parar de tocar animação de mortal
+        }
+        else
+        {
+            // tocar animação de mortal
         }
     }
 
@@ -148,8 +150,11 @@ public class Jumping : PlayerState
     {
         if (playerInput == null)
             playerInput = player.playerInput;
+
         playerInput.SwitchCurrentActionMap("Jumping");
 
+        playerInput.currentActionMap.Enable();
+        
         playerInput.currentActionMap.FindAction("Rotate").performed += StartRotatePlayer;
         playerInput.currentActionMap.FindAction("Rotate").canceled += StartRotatePlayer;
     }
@@ -158,7 +163,10 @@ public class Jumping : PlayerState
     {
         if (playerInput == null)
             playerInput = player.playerInput;
+
         playerInput.currentActionMap.FindAction("Rotate").performed -= StartRotatePlayer;
         playerInput.currentActionMap.FindAction("Rotate").canceled -= StartRotatePlayer;
+        
+        playerInput.currentActionMap.Enable();
     }
 }

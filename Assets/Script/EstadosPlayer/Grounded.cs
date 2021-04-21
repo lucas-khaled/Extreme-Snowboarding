@@ -58,6 +58,8 @@ public class Grounded : PlayerState
         timeOnGround += Time.deltaTime;
     }
 
+    #region PRIVATE METHODS
+    
     void MoveByRigidbody()
     {
         if(rb.velocity.x < player.SharedValues.RealVelocity)
@@ -66,7 +68,7 @@ public class Grounded : PlayerState
         player.groundedVelocity = rb.velocity;
     }
 
-    #region PRIVATE METHODS
+    
 
     void CorrectRotation()
     {
@@ -95,6 +97,8 @@ public class Grounded : PlayerState
             playerInput = player.playerInput;
         
         playerInput.SwitchCurrentActionMap("Grounded");
+        playerInput.currentActionMap.Enable();
+
         playerInput.currentActionMap.FindAction("Jump").started += Jump;
     }
     
@@ -102,7 +106,9 @@ public class Grounded : PlayerState
     {
         if (playerInput == null)
             playerInput = player.playerInput;
+        
         playerInput.currentActionMap.FindAction("Jump").started -= Jump;
+        playerInput.currentActionMap.Disable();
     }
 
     void Jump(InputAction.CallbackContext context)
