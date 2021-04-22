@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
     public PlayerInput playerInput;
@@ -74,11 +75,6 @@ public class Player : MonoBehaviour
         InputSubcribing();
     }
 
-    private void OnDestroy()
-    {
-        InputUnsubscribing();
-    }
-
     private void Start()
     {
         playerState.StateStart(this);
@@ -106,13 +102,6 @@ public class Player : MonoBehaviour
         playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
         playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;
         playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
-    }
-
-    private void InputUnsubscribing()
-    {
-        playerInput.currentActionMap.FindAction("Item").started -= ActivateItem;
-        playerInput.currentActionMap.FindAction("Boost").started -= ActivateBoost;
-        playerInput.currentActionMap.FindAction("BoostCheat").started -= BoostCheat;
     }
 
     private void BoostCheat(InputAction.CallbackContext context)
@@ -213,6 +202,8 @@ public class PlayerSharedValues
     private float jumpFactor = 1f;
     [SerializeField] [Min(0)]
     private float maxJumpForce = 20;
+    [SerializeField] [Range(1,7)]
+    private float maxAddedVelocity = 10;
     [SerializeField]
     private float rotationFactor = 3;
 
@@ -227,8 +218,7 @@ public class PlayerSharedValues
 
     public bool etherium { get; set; }
 
-    public Vector3 ActualGroundNormal { get; set; }
-
+    [MovimentationValue]
     public float Turbo 
     { 
         get 
@@ -248,6 +238,7 @@ public class PlayerSharedValues
         }
     }
 
+    [MovimentationValue]
     public float AddedVelocity
     {
         get
@@ -256,7 +247,7 @@ public class PlayerSharedValues
         }
         set
         {
-            addedVelocity = value;
+            addedVelocity = Mathf.Clamp(value, 0, maxAddedVelocity);
 
             if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
             {
@@ -271,7 +262,7 @@ public class PlayerSharedValues
             
         }
     }
-
+    
     public float RotationFactor
     {
         get
@@ -284,6 +275,7 @@ public class PlayerSharedValues
         }
     }
 
+    [MovimentationValue]
     public float JumpForce
     {
         get
@@ -291,7 +283,7 @@ public class PlayerSharedValues
             return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, maxJumpForce);
         }
     }
-
+    
     public float CharacterHeight
     {
         get
@@ -304,6 +296,7 @@ public class PlayerSharedValues
         }
     }
 
+    [MovimentationValue]
     public float RealVelocity
     {
         get

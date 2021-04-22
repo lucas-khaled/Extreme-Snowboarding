@@ -9,7 +9,7 @@ public class RaceEnd : MonoBehaviour
 
     private void Awake()
     {
-        EventSystem.onPlayerDeath += OnPlayerDeath;
+        PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
         quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
     }
 
@@ -25,7 +25,7 @@ public class RaceEnd : MonoBehaviour
     private void EndRace()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
-        EventSystem.onPlayerDeath -= OnPlayerDeath;
+        PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
     }
 
     private void OnTriggerEnter(Collider other)

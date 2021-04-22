@@ -44,8 +44,8 @@ public class CorridaController : MonoBehaviour
 
     private void Awake()
     {
-        EventSystem.onPlayerPass += OnPlayerPass;
-        EventSystem.onPlayerDeath += OnPlayerDeath;
+        PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
+        PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
         instance = this;
     }
 
@@ -104,8 +104,8 @@ public class CorridaController : MonoBehaviour
         }
         if (changed)
         {
-            if (EventSystem.onPlayerPass != null && playerChanged != null)
-                EventSystem.onPlayerPass.Invoke(playerChanged.player);
+            if (PlayerGeneralEvents.onPlayerPass != null && playerChanged != null)
+                PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player);
 
             changed = false;
         }

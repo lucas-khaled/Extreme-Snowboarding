@@ -34,5 +34,7 @@ public class PlayerData
         camera.SetPlayer(player);
 
         player.playerInput.SwitchCurrentControlScheme("Player" + index);
+        
+        PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
     }
 }
