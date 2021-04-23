@@ -121,17 +121,9 @@ public class Jumping : PlayerState
 
     void ApplyAirEffects()
     {
-        if (airTime > 1)
-        {
-            float amount = Mathf.Clamp(airTime / 2f, 0, 3);
-            float time = Mathf.Clamp(airTime, 0, 2);
-            Effect airEffect = new Effect("AddedVelocity", amount, time, Effect.EffectMode.ADD);
-            player.StartCoroutine(airEffect.StartEffect(player));
-        }
-
         int numOfMortals = 0;
 
-        if (howMuchRotation > 180)
+        if (Mathf.Abs(howMuchRotation) > 180)
         {
             numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
             Debug.Log("Mortal :" + numOfMortals + "x");

@@ -13,11 +13,13 @@ public class MovimentationValuesWindow : EditorWindow
     private List<Player> instatiatedPlayers = new List<Player>();
     private List<bool> playerFoldouts = new List<bool>();
     
+    
     [MenuItem("Tools/Analyze/Player Movimentation Showcase")]
     static void Init()
     {
         // Get existing open window or if none, make a new one:
         MovimentationValuesWindow window = (MovimentationValuesWindow)GetWindow(typeof(MovimentationValuesWindow));
+        window.titleContent = new GUIContent("Player Movimentation");
         window.Show();
     }
 
