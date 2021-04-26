@@ -37,6 +37,7 @@ public class PlayerData
 
         player.playerInput.SwitchCurrentControlScheme("Player" + index);
         
-        PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+        if(PlayerGeneralEvents.onPlayerInstantiate != null)
+            PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
     }
 }

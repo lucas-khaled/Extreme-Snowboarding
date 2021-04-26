@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: +Velocidade
   m_EditorClassIdentifier: 
   attributesToChange:
-  - name: AddedVelocity
-    floatValue: 10
-    stringValue: 
-    boolValue: 1
-    timeOfChange: 3
+  - timeOfChange: 3
+    quantification:
+      quantitity: 1
+      typeOfQuantityCall: 1
+    application:
+      propertyName: AddedVelocity
+      floatValue: 5
+      stringValue: 
+      boolValue: 0
+      effectMode: 0
+    recuperation:
+      haveRecuperation: 1

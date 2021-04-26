@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Script.Items.Effects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -125,8 +126,8 @@ public class Player : MonoBehaviour
         {
             //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
             //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
-            Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, Effect.EffectMode.ADD);
-            StartCoroutine(boostEffect.StartEffect(this));
+            Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, EffectMode.ADD);
+            boostEffect.StartEffect(this);
             sharedValues.Turbo = 0;
         }
     }

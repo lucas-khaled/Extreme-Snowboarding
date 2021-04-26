@@ -47,27 +47,9 @@ namespace Script.Editor.Analysis
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "Fase1")
-            {
-                EffectGeneralEvents.onEffectStarted += OnEffectStarted;
-                EffectGeneralEvents.onEffectEnded += OnEffectEnded;
-            }
-            else
-            {
-                EffectGeneralEvents.onEffectStarted -= OnEffectStarted;
-                EffectGeneralEvents.onEffectEnded -= OnEffectEnded;
-            }
+           
         }
-
-        void OnEffectStarted(Effect effect, Player player)
-        {
-            activeEffects.Add(new EffectPlayerStructure(effect, player));
-        }
-
-        void OnEffectEnded(Effect effect, Player player)
-        {
-            activeEffects.Remove(activeEffects.Find((x) => x.effect.Name == effect.Name && x.effect.FloatValue == effect.FloatValue));
-        }
+        
     }
 
     struct EffectPlayerStructure

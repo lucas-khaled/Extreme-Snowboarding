@@ -14,7 +14,7 @@ public abstract class Item : ScriptableObject
         Debug.Log("used: " + name);
         foreach (Effect effect in attributesToChange)
         {
-            player.StartCoroutine(effect.StartEffect(player));
+            effect.StartEffect(player);
         }
     }
 }

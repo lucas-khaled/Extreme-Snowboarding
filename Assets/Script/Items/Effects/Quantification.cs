@@ -32,8 +32,32 @@ namespace Script.Items.Effects
         public void StartQuantification(float totalTime)
         {
             this.totalTime = totalTime;
-            iterationsTime = totalTime / quantitity;
-            EffectsController.instance.StartCoroutine(QuantityProccess());
+            if (quantitity > 1)
+            {
+                iterationsTime = totalTime / quantitity;
+                EffectsController.instance.StartCoroutine(QuantityProccess());
+            }
+            else
+            {
+                EffectsController.instance.StartCoroutine(QuantityUnique());
+            }
+            
+        }
+
+        IEnumerator QuantityUnique()
+        {
+            if(quantificationCallback != null)
+                quantificationCallback.Invoke(QuantificationCallbackType.APPLICATION);
+
+            yield return new WaitForSeconds(totalTime);
+
+            if (quantificationCallback != null)
+            {
+                quantificationCallback.Invoke(QuantificationCallbackType.RECUPERATON);
+                quantificationCallback.Invoke(QuantificationCallbackType.END);
+            }
+
+            ClearQuantification();
         }
 
         IEnumerator QuantityProccess()

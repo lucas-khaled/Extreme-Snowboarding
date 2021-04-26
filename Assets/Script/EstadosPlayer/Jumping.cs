@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Script.Items.Effects;
 
 [System.Serializable]
 public class Jumping : PlayerState
@@ -131,8 +132,8 @@ public class Jumping : PlayerState
             float amount = 1.3f * numOfMortals;
             float time = Mathf.Clamp(airTime * numOfMortals, 0, 2);
 
-            Effect mortalEffect = new Effect("AddedVelocity",amount, time, Effect.EffectMode.ADD);
-            player.StartCoroutine(mortalEffect.StartEffect(player));
+            Effect mortalEffect = new Effect("AddedVelocity",amount, time, EffectMode.ADD);
+            mortalEffect.StartEffect(player);
         }
 
         player.AddTurbo(numOfMortals * 5);
