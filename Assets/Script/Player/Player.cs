@@ -186,7 +186,14 @@ public class Player : MonoBehaviour
         if(animator != null)
             animator.SetBool(variable, value);
     }
+    // Daniboy Code starts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public bool GetOnAnimator(string variable){
+        if(animator != null)
+            return animator.GetBool(variable);
 
+        return false;
+    }
+    // Daniboy Code ends >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     private void OnCollisionEnter(Collision collision)
     {
         playerState.OnCollisionEnter(collision);

@@ -30,6 +30,8 @@ public class Fallen : PlayerState
 
         player.SetOnAnimator("fallen", true);
 
+        player.SetOnAnimator("hitByFuckFriend", false);
+
         player.SetOnAnimator("highSpeed", false);
 
         player.groundedVelocity = Vector3.zero;

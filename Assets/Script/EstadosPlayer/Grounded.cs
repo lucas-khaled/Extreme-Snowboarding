@@ -49,6 +49,7 @@ public class Grounded : PlayerState
         player.GetPlayerVFXList().GetVFXByName("FastMovement").UnlockParticle();
 
         player.GetComponent<Rigidbody>().velocity = player.groundedVelocity;
+
     }
 
     public override void StateUpdate()

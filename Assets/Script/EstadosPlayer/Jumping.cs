@@ -29,8 +29,16 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
+        player.SetOnAnimator("trick", false);
         
         UnsubscribeOnInputEvents();
+
+        // Daniboy Code starts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        if(player.GetOnAnimator("hitByFuckFriend")){
+            
+        }
+        // Daniboy Code ends >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     }
 
     public override void StateStart(Player player)
@@ -55,6 +63,7 @@ public class Jumping : PlayerState
 
         if (isJumpingPressed)
             rotatingDirection = 1;
+
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -74,25 +83,35 @@ public class Jumping : PlayerState
 
             //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
 
-            if (angleDifference < 60f)
+            if (angleDifference < 60f && !player.GetOnAnimator("hitByFuckFriend"))
             {
                 int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
                 newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                 ApplyAirEffects();
             }
-            else
+            else if(!player.GetOnAnimator("hitByFuckFriend"))
             {
-                float timeFall = 3;
+                float timeFall = 3.2f;//44 frames a 30 frames por segundo fall + 69 nice levantando
+                
                 if (angleDifference > 120)
                 {
                     player.SetOnAnimator("hardFall", true);
-                    timeFall = 4f;
+                    timeFall = 4.6f;//84 frames a 30 frames por segundo hardfall + 69 nice levantando
                 }
 
                 newPlayerState = new Fallen(timeFall);
 
             }
+            // Daniboy Code starts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            else{
+                
+                float timeFall = 3.2f;//44 frames a 30 frames por segundo fall + 69 nice levantando
+                
+                newPlayerState = new Fallen(timeFall);
+
+            }
+            // Daniboy Code ends >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             player.ChangeState(newPlayerState);
         }
@@ -111,11 +130,11 @@ public class Jumping : PlayerState
         
         if (context.canceled)
         {
-            // parar de tocar animação de mortal
+            player.SetOnAnimator("trick", false);
         }
         else
         {
-            // tocar animação de mortal
+            player.SetOnAnimator("trick", true);
         }
     }
 
