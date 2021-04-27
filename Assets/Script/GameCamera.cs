@@ -1,12 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Camera))]
 public class GameCamera : MonoBehaviour
 {
-
     Player player;
     Vector3 offset;
+
+    public Camera MyCamera { get; private set; }
+
+    private void Awake()
+    {
+        MyCamera = GetComponent<Camera>();
+    }
 
     public void SetPlayer(Player player)
     {

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using  UnityEngine.InputSystem;
 
 public abstract class PlayerState
 {
     protected Player player;
+    protected PlayerInput playerInput;
 
     public virtual void StateStart(Player player)
     {
@@ -15,7 +17,7 @@ public abstract class PlayerState
 
     public abstract void StateUpdate();
 
-    public abstract void InterpretateInput(GameInput input);
+    //public abstract void InterpretateInput(GameInput input);
 
     public virtual void OnCollisionEnter(Collision collision)
     {

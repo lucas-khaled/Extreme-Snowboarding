@@ -1,31 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class Jumping : PlayerState
 {
     Rigidbody rb;
     float airTime = 0;
-
     float howMuchRotation = 0f;
+    float rotatingDirection = 0;
+    bool isJumpingPressed;
 
-    public Vector3 groundingCheck;
-
-    public override void InterpretateInput(GameInput input)
+    /*public override void InterpretateInput(GameInput input)
     {
-        if (GameInput.UP_HOLD == input && airTime >= 0.2f){
-            player.SetOnAnimator("trick", true);
+        if (GameInput.UP_HOLD == input && airTime >= 0.2f)
             RotatePlayer();
-        }
-        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f){
-            player.SetOnAnimator("trick", true);
+        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f)
             RotatePlayer(-1);
+        else if (GameInput.NO_INPUT == input)
+        {
+            Debug.Log("CARAAAAAAAAAAAAAAAAAAAAAIIII");
         }
-        else if (GameInput.NO_INPUT == input){
-            player.SetOnAnimator("trick", false);
-        }
-    }
+
+    }*/
     public override void StateEnd()
     {
         rb.velocity = Vector3.zero;
@@ -33,14 +29,16 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
-        player.SetOnAnimator("trick", false);
-        player.SetOnAnimator("hitByFuckFriend", false);
+        
+        UnsubscribeOnInputEvents();
     }
 
     public override void StateStart(Player player)
     {
         base.StateStart(player);
-
+        
+        SubscribeOnInputEvents();
+        
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
@@ -52,6 +50,11 @@ public class Jumping : PlayerState
     public override void StateUpdate()
     {
         airTime += Time.deltaTime;
+        if(airTime >= 0.2f)
+            RotatePlayer();
+
+        if (isJumpingPressed)
+            rotatingDirection = 1;
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -95,12 +98,25 @@ public class Jumping : PlayerState
         }
     }
 
-
-    void RotatePlayer(int direction = 1)
+    void RotatePlayer()
     {
-        float rotation = player.SharedValues.RotationFactor * Time.deltaTime * 100 * direction;
+        float rotation = player.SharedValues.RotationFactor * Time.deltaTime * 100 * rotatingDirection;
         player.transform.Rotate(Vector3.forward * rotation, Space.Self);
         howMuchRotation += rotation;
+    }
+
+    void StartRotatePlayer(InputAction.CallbackContext context)
+    {
+        rotatingDirection = context.ReadValue<float>();
+        
+        if (context.canceled)
+        {
+            // parar de tocar animação de mortal
+        }
+        else
+        {
+            // tocar animação de mortal
+        }
     }
 
     void ApplyAirEffects()
@@ -128,5 +144,29 @@ public class Jumping : PlayerState
         }
 
         player.AddTurbo(numOfMortals * 5);
+    }
+
+    void SubscribeOnInputEvents()
+    {
+        if (playerInput == null)
+            playerInput = player.playerInput;
+
+        playerInput.SwitchCurrentActionMap("Jumping");
+
+        playerInput.currentActionMap.Enable();
+        
+        playerInput.currentActionMap.FindAction("Rotate").performed += StartRotatePlayer;
+        playerInput.currentActionMap.FindAction("Rotate").canceled += StartRotatePlayer;
+    }
+    
+    void UnsubscribeOnInputEvents()
+    {
+        if (playerInput == null)
+            playerInput = player.playerInput;
+
+        playerInput.currentActionMap.FindAction("Rotate").performed -= StartRotatePlayer;
+        playerInput.currentActionMap.FindAction("Rotate").canceled -= StartRotatePlayer;
+        
+        playerInput.currentActionMap.Enable();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class Grounded : PlayerState
@@ -12,14 +13,20 @@ public class Grounded : PlayerState
 
     Rigidbody rb;
 
-    public override void InterpretateInput(GameInput input)
+    /*public override void InterpretateInput(GameInput input)
     {
-        if(input == GameInput.UP && timeOnGround>=timeToJump)
-            player.ChangeState(new Jumping());
-    }
+        Debug.Log(input.ToString());
+        if (input == GameInput.UP && timeOnGround>=timeToJump)
+        {
+            Debug.Log("VASIFUDE");
+            player.ChangeState(new Jumping()); 
+        }
+    }*/
 
     public override void StateEnd()
     {
+        UnsubscribeOnInputEvents();
+        
         player.GetPlayerVFXList().GetVFXByName("NeveEspalha").StopParticle();
         player.GetPlayerVFXList().GetVFXByName("FastMovement").LockParticle(true);
         player.StopAllCoroutines();
@@ -30,7 +37,7 @@ public class Grounded : PlayerState
     {
         base.StateStart(player);
 
-        //player.StartStateCoroutine(CalculateNextPoint());
+        SubscribeOnInputEvents();
 
         rb = player.GetComponent<Rigidbody>();
         rb.isKinematic = false;
@@ -51,6 +58,8 @@ public class Grounded : PlayerState
         timeOnGround += Time.deltaTime;
     }
 
+    #region PRIVATE METHODS
+    
     void MoveByRigidbody()
     {
         if(rb.velocity.x < player.SharedValues.RealVelocity)
@@ -59,7 +68,7 @@ public class Grounded : PlayerState
         player.groundedVelocity = rb.velocity;
     }
 
-    #region PRIVATE METHODS
+    
 
     void CorrectRotation()
     {
@@ -81,7 +90,33 @@ public class Grounded : PlayerState
         yield return new WaitForSeconds(timeEtherium);
         player.SharedValues.etherium = false;
     }
+    
+    void SubscribeOnInputEvents()
+    {
+        if (playerInput == null)
+            playerInput = player.playerInput;
+        
+        playerInput.SwitchCurrentActionMap("Grounded");
+        playerInput.currentActionMap.Enable();
 
+        playerInput.currentActionMap.FindAction("Jump").started += Jump;
+    }
+    
+    void UnsubscribeOnInputEvents()
+    {
+        if (playerInput == null)
+            playerInput = player.playerInput;
+        
+        playerInput.currentActionMap.FindAction("Jump").started -= Jump;
+        playerInput.currentActionMap.Disable();
+    }
+
+    void Jump(InputAction.CallbackContext context)
+    {
+        if(context.started)
+            player.ChangeState(new Jumping()); 
+    }
+    
     #endregion
 
     #region CONSTRUCTORS

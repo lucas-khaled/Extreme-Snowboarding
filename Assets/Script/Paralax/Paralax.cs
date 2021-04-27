@@ -6,24 +6,24 @@ public class Paralax : MonoBehaviour
 {
     [SerializeField] float paralaxEffect;
 
-    private GameObject camera;
+    private GameObject thisCamera;
     private float length;
     private float startpos;
 
     void Start()
     {
-        camera = transform.parent.transform.parent.gameObject;
+        thisCamera = transform.parent.transform.parent.gameObject;
         startpos = transform.position.x;
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     void Update()
     {
-        float temp = (camera.transform.position.x * (1 - paralaxEffect));
-        float dist = (camera.transform.position.x * paralaxEffect);
+        float temp = (thisCamera.transform.position.x * (1 - paralaxEffect));
+        float dist = (thisCamera.transform.position.x * paralaxEffect);
 
         transform.position = new Vector3(startpos + dist, 
-                                         camera.transform.position.y, 
+                                         thisCamera.transform.position.y, 
                                          transform.position.z);
 
         if (temp > startpos + length)

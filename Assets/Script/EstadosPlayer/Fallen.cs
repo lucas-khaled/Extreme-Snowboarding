@@ -12,10 +12,6 @@ public class Fallen : PlayerState
     Quaternion newRotation = Quaternion.identity;
     bool canRotate = false;
     float rotationDifference = 0;
-    public override void InterpretateInput(GameInput input)
-    {
-
-    }
 
     public override void StateEnd()
     {

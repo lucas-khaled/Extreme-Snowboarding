@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player : MonoBehaviour
 {
+    public PlayerInput playerInput;
     [SerializeField]
     private Animator animator;
     [SerializeField]
@@ -32,9 +35,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public Item Coletavel { get; set; }
 
-    public bool update { get; set; }
+    public Item Coletavel { get; set; }
 
     public GameCamera playerCamera { get;  set; }
 
@@ -43,9 +45,6 @@ public class Player : MonoBehaviour
     PlayerState playerState = new Grounded();
 
     private Vector3 startPoint;
-    private string jumpInput;
-    private string fireInput;
-    private string boostInput;
     private GameObject catastropheRef;
 
     public GameObject GetMeshGameObject()
@@ -72,54 +71,80 @@ public class Player : MonoBehaviour
     {
         sharedValues.player = this;
         playerVFXList.StartHash();
+        InputSubcribing();
+    }
+
+    private void OnDestroy()
+    {
+        InputUnsubscribing();
+    }
+
+    private void Start()
+    {
+        playerState.StateStart(this);
+        startPoint = transform.position;
+        catastropheRef = null;
+        turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+        turboBarRef.fillAmount = 0;
     }
 
     private void FixedUpdate()
     {
-        if(update)
-            playerState.StateUpdate();
+        playerState.StateUpdate();
+    }
 
-        InputInterpretation();
+    private void Update()
+    {
+        //InputInterpretation();
         CheckTurbo();
     }
 
-    private void InputInterpretation()
-    {
-        GameInput gameInput = GameInput.NO_INPUT;        
+    #region Inputs
 
-        if (Input.GetButtonDown(jumpInput))
-            gameInput = GameInput.UP;
-        if (Input.GetButton(jumpInput))
-            gameInput = GameInput.UP_HOLD;
-        if (Input.GetKey(KeyCode.Z))
-            Restart();
-        if (Input.GetButtonDown(fireInput) && Coletavel != null)
+    private void InputSubcribing()
+    {
+        playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
+        playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;
+        playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
+    }
+
+    private void InputUnsubscribing()
+    {
+        playerInput.currentActionMap.FindAction("Item").started -= ActivateItem;
+        playerInput.currentActionMap.FindAction("Boost").started -= ActivateBoost;
+        playerInput.currentActionMap.FindAction("BoostCheat").started -= BoostCheat;
+    }
+
+    private void BoostCheat(InputAction.CallbackContext context)
+    {
+        if(context.started)
+            AddTurbo(100);
+    }
+    
+    private void ActivateItem(InputAction.CallbackContext context)
+    {
+        if (context.started && Coletavel != null)
         {
             Coletavel.Activate(this);
             Coletavel = null;
         }
-        if (Input.GetButton(fireInput))
-        {
-            gameInput = GameInput.DOWN_HOLD;
-        }
-        if (Input.GetButton(boostInput))
-        {
-            Debug.Log(sharedValues.Turbo);
-            if (sharedValues.Turbo >= 0.95)
-            {
-                //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
-                //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
-                Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, Effect.EffectMode.ADD);
-                StartCoroutine(boostEffect.StartEffect(this));
-                sharedValues.Turbo = 0;
-            }
-        }
-        if (Input.GetButton("TurboCheat"))
-        {
-            AddTurbo(100);
-        }
-        playerState.InterpretateInput(gameInput);
     }
+    
+    private void ActivateBoost(InputAction.CallbackContext context)
+    {
+        if (context.started && sharedValues.Turbo >= 0.95)
+        {
+            //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
+            //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
+            Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, Effect.EffectMode.ADD);
+            StartCoroutine(boostEffect.StartEffect(this));
+            sharedValues.Turbo = 0;
+        }
+    }
+
+    #endregion
+    
+    
     private void CheckTurbo()
     {
         if (catastropheRef != null)
@@ -141,19 +166,6 @@ public class Player : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene("MenuPrincipal");
-    }
-
-    private void Start()
-    {
-        playerState.StateStart(this);
-        update = true;
-        startPoint = transform.position;
-        jumpInput = "JumpPlayer" + sharedValues.playerCode;
-        fireInput = "FirePlayer" + sharedValues.playerCode;
-        boostInput = "BoostInput" + sharedValues.playerCode;
-        catastropheRef = null;
-        turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-        turboBarRef.fillAmount = 0;
     }
 
     public void ChangeState(PlayerState newState)
@@ -182,11 +194,6 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(playerState.GetType() == typeof(Jumping))
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(((Jumping)playerState).groundingCheck, 0.2f);
-        }
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
     }
@@ -281,7 +288,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, jumpFactor*2);
+            return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, maxJumpForce);
         }
     }
 
@@ -504,6 +511,4 @@ public class PlayerVFX
         }
     }
 }
-
-public enum GameInput { UP, UP_HOLD, DOWN_HOLD, NO_INPUT }
 

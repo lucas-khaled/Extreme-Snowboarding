@@ -72,7 +72,7 @@ public class CorridaController : MonoBehaviour
     {
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
+            players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1) * 2, i+1, playerPrefab.gameObject, cameras[i]);
 
         }
     }
