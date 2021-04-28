@@ -15,6 +15,7 @@ public struct Effect
     [SerializeField] private Quantification quantification;
     [SerializeField] private Application application;
     [SerializeField] private Recuperation recuperation;
+    [SerializeField] private Conditioning conditioning;
     
     private Player player;
 
