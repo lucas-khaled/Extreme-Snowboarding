@@ -67,7 +67,7 @@ public class Fallen : PlayerState
         {
             float X = hit.point.x + hit.normal.x;
             float Y = hit.point.y + (player.SharedValues.CharacterHeight / 2) * hit.normal.y;
-            Vector3 newPosition = new Vector3(X, Y);
+            Vector3 newPosition = new Vector3(X, Y, player.transform.position.z);
 
             newRotation = Quaternion.FromToRotation(player.transform.up, hit.normal) * player.transform.rotation;
             newRotation.y = newRotation.x = 0;

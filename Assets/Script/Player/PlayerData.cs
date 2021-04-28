@@ -23,6 +23,8 @@ public class PlayerData
     public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
     {
         GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
+        playerGO.name = "Player" + index;
+        
         player = playerGO.GetComponent<Player>();
 
         Material material = new Material(playerShader);
@@ -34,5 +36,7 @@ public class PlayerData
         camera.SetPlayer(player);
 
         player.playerInput.SwitchCurrentControlScheme("Player" + index);
+        
+        PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
     }
 }

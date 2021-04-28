@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Script.EventSystem;
 using UnityEngine;
-
-
 
 [System.Serializable]
 public struct Effect
@@ -23,10 +22,20 @@ public struct Effect
     [SerializeField]
     private EffectMode effectMode;
 
-
-
     [SerializeField]
     private float timeOfChange;
+
+    public string Name => name;
+
+    public EffectMode GetEffectMode => effectMode;
+
+    public float FloatValue => floatValue;
+
+    public string StringValue => stringValue;
+
+    public bool BoolValue => boolValue;
+    
+    public int ID { get; }
 
     public IEnumerator StartEffect(Player player)
     {
@@ -36,9 +45,12 @@ public struct Effect
 
         ChangeObjPropertyValue(accessProperty, player.SharedValues);
 
+        EffectGeneralEvents.onEffectStarted.Invoke(this, player);
         yield return new WaitForSeconds(timeOfChange);
 
         ReturnValue(accessProperty, player.SharedValues, initialValue);
+        
+        EffectGeneralEvents.onEffectEnded.Invoke(this, player);
     }
 
     void ChangeObjPropertyValue(PropertyInfo accessProperty, object obj)

@@ -8,8 +8,8 @@ public class Grounded : PlayerState
 {
     float timeEtherium;
 
-    float timeOnGround = 0;
-    float timeToJump = 0;
+    float timeOnGround;
+    float timeToJump;
 
     Rigidbody rb;
 
@@ -48,8 +48,7 @@ public class Grounded : PlayerState
         player.GetPlayerVFXList().GetVFXByName("NeveEspalha").StartParticle();
         player.GetPlayerVFXList().GetVFXByName("FastMovement").UnlockParticle();
 
-        player.GetComponent<Rigidbody>().velocity = player.groundedVelocity;
-
+        rb.velocity = player.groundedVelocity;
     }
 
     public override void StateUpdate()
@@ -64,19 +63,16 @@ public class Grounded : PlayerState
     void MoveByRigidbody()
     {
         if(rb.velocity.x < player.SharedValues.RealVelocity)
-            rb.AddForce(Vector3.right * player.SharedValues.RealVelocity * Time.deltaTime, ForceMode.VelocityChange);
+            rb.AddForce(player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
 
         player.groundedVelocity = rb.velocity;
     }
-
-    
 
     void CorrectRotation()
     {
         RaycastHit rotationHit;
         if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
         {
-            player.SharedValues.ActualGroundNormal = rotationHit.normal;
             Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
             newRotation.y = newRotation.x = 0;
 
@@ -114,7 +110,7 @@ public class Grounded : PlayerState
 
     void Jump(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if((context.started || context.performed) && timeOnGround>=timeToJump)
             player.ChangeState(new Jumping()); 
     }
     
@@ -131,6 +127,7 @@ public class Grounded : PlayerState
     public Grounded(float timeEtherium)
     {
         this.timeEtherium = timeEtherium;
+        timeToJump = 0;
     }
 
     public Grounded(float timeEtherium, float timeToJump)
