@@ -81,8 +81,6 @@ public class Jumping : PlayerState
 
             float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
 
-            //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
-
             if (angleDifference < 60f && !player.GetOnAnimator("hitByFuckFriend"))
             {
                 int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
