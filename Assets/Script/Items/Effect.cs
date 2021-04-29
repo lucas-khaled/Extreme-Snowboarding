@@ -45,12 +45,15 @@ public struct Effect
 
         ChangeObjPropertyValue(accessProperty, player.SharedValues);
 
-        EffectGeneralEvents.onEffectStarted.Invoke(this, player);
+        if(EffectGeneralEvents.onEffectStarted != null)
+            EffectGeneralEvents.onEffectStarted.Invoke(this, player);
+        
         yield return new WaitForSeconds(timeOfChange);
 
         ReturnValue(accessProperty, player.SharedValues, initialValue);
         
-        EffectGeneralEvents.onEffectEnded.Invoke(this, player);
+        if(EffectGeneralEvents.onEffectEnded != null)
+            EffectGeneralEvents.onEffectEnded.Invoke(this, player);
     }
 
     void ChangeObjPropertyValue(PropertyInfo accessProperty, object obj)

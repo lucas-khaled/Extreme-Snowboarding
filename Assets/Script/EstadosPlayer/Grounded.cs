@@ -53,7 +53,7 @@ public class Grounded : PlayerState
 
     public override void StateUpdate()
     {
-        CorrectRotation();
+        ClampOnGround();
         MoveByRigidbody();
         timeOnGround += Time.deltaTime;
     }
@@ -68,11 +68,17 @@ public class Grounded : PlayerState
         player.groundedVelocity = rb.velocity;
     }
 
-    void CorrectRotation()
+    void ClampOnGround()
     {
         RaycastHit rotationHit;
         if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
         {
+            if(Vector3.Distance((player.transform.position + player.SharedValues.CharacterHeight * 0.5f * Vector3.down), rotationHit.point) > 2f)
+            {
+                player.ChangeState(new Jumping());
+                return;
+            }
+            
             Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
             newRotation.y = newRotation.x = 0;
 
