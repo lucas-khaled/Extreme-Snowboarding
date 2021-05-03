@@ -71,7 +71,7 @@ public class CorridaController : MonoBehaviour
             if (players[i] != null)
                 EventSystem.onPlayerPass.Invoke(players[i].player, i);
         }
-        InvokeRepeating("CheckPlayerClassification",0,0.5f);
+        InvokeRepeating("CheckPlayerClassification",0,0.1f);
     }
     private void InstantiatePlayers()
     {
@@ -110,20 +110,21 @@ public class CorridaController : MonoBehaviour
                 players[i + 1] = playerChanged;
                 playerChangedPosition = i + 1;
                 changed = true;
-
-                Debug.Log(playerChanged.player.name);
-                Debug.Log(playerChanged2.player.name);
             }
-        }
-        if (changed)
-        {
-            if (EventSystem.onPlayerPass != null && playerChanged != null)
+
+            if (changed)
             {
-                EventSystem.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
-                EventSystem.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
-            }
+                if (EventSystem.onPlayerPass != null)
+                {
+                    if (playerChanged != null && playerChanged2 != null)
+                    {
+                        EventSystem.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
+                        EventSystem.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+                    }
+                }
 
-            changed = false;
+                changed = false;
+            }
         }
     }
     public void PlayerFinishedRace(Player player)
