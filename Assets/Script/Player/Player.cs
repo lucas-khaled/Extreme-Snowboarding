@@ -18,8 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerVFXList playerVFXList;
 
-    private UnityEngine.UI.Image turboBarRef;
-
     public PlayerSharedValues SharedValues
     {
         get
@@ -123,7 +121,6 @@ public class Player : MonoBehaviour
         {
             float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
             AddTurbo(1 / distance);
-            turboBarRef.fillAmount = sharedValues.Turbo / 1;
         }
         else if (CorridaController.instance.catastrophe != null)
                 catastropheRef = CorridaController.instance.catastrophe;
@@ -133,6 +130,8 @@ public class Player : MonoBehaviour
     {
         float turbo = turboValue * sharedValues.turboMultiplier / 100;
         sharedValues.Turbo += turbo;
+        if (EventSystem.onTurboChange != null)
+            EventSystem.onTurboChange.Invoke(this, SharedValues.Turbo);
     }
 
     void Restart()
@@ -149,8 +148,6 @@ public class Player : MonoBehaviour
         fireInput = "FirePlayer" + sharedValues.playerCode;
         boostInput = "BoostInput" + sharedValues.playerCode;
         catastropheRef = null;
-        turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-        turboBarRef.fillAmount = 0;
     }
 
     public void ChangeState(PlayerState newState)

@@ -56,7 +56,7 @@ public class CorridaController : MonoBehaviour
         alivePlayers--;
     }
 
-    private void OnPlayerPass(Player player)
+    private void OnPlayerPass(Player player, int classification)
     {
 
     }
@@ -66,6 +66,11 @@ public class CorridaController : MonoBehaviour
     private void Start()
     {
         LoadPlayers();
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null)
+                EventSystem.onPlayerPass.Invoke(players[i].player, i);
+        }
         InvokeRepeating("CheckPlayerClassification",0,0.5f);
     }
     private void InstantiatePlayers()
@@ -87,6 +92,8 @@ public class CorridaController : MonoBehaviour
     {
         bool changed = false;
         PlayerData playerChanged = null;
+        PlayerData playerChanged2 = null;
+        int playerChangedPosition = 0;
 
         for (int i = 0; i < players.Length - 1; i++)
         {
@@ -95,17 +102,26 @@ public class CorridaController : MonoBehaviour
 
             if (distanceXPlayer1 < distanceXPlayer2)
             {
-                PlayerData changePlayerAux = players[i];
+                playerChanged = players[i];
+                playerChanged2 = players[i + 1];
+
                 playerChanged = players[i];
                 players[i] = players[i + 1];
-                players[i + 1] = changePlayerAux;
+                players[i + 1] = playerChanged;
+                playerChangedPosition = i + 1;
                 changed = true;
+
+                Debug.Log(playerChanged.player.name);
+                Debug.Log(playerChanged2.player.name);
             }
         }
         if (changed)
         {
             if (EventSystem.onPlayerPass != null && playerChanged != null)
-                EventSystem.onPlayerPass.Invoke(playerChanged.player);
+            {
+                EventSystem.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
+                EventSystem.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+            }
 
             changed = false;
         }

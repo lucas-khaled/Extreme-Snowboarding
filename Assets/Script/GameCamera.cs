@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameCamera : MonoBehaviour
 {
+    [SerializeField]
+    private HudControl hud;
 
     Player player;
     Vector3 offset;
@@ -12,6 +14,9 @@ public class GameCamera : MonoBehaviour
     {
         this.player = player;
         player.playerCamera = this;
+        
+        if (player.GetPlayerState().GetType() != typeof(Dead))
+        hud.setPlayer(player);
     }
 
     // Update is called once per frame
