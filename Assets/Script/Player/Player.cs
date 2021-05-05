@@ -217,8 +217,7 @@ public class PlayerSharedValues
     private float turbo = 0;
 
     public float turboMultiplier = 1;
-
-    [ExposedProperty("Player")]
+    
     public Player player { get; set; }
 
     public int playerCode { get; set; }

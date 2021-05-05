@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4c8ad89bd7f9f45a241c3320ffe642, type: 3}
   m_Name: -VelocidadeFuck
   m_EditorClassIdentifier: 
-  attributesToChange:
+  effectsToApply:
   - timeOfChange: 3
     quantification:
       quantitity: 1
       typeOfQuantityCall: 1
     application:
       propertyName:
-        name: etherium
-      floatValue: 0
+        name: AddedVelocity
+      floatValue: 5
       stringValue: 
       boolValue: 0
       objectValue: {fileID: 0}

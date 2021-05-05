@@ -23,7 +23,8 @@ public struct Effect
     [SerializeField] private Conditioning conditioning;
     
     private Player player;
-
+    private bool wasApplied;
+    
     public int ID { get; }
 
     public void StartEffect(Player player)
@@ -45,10 +46,16 @@ public struct Effect
                 if (conditioning.IsConditioned(player))
                 {
                     application.ApplyEffect(player);
+                    wasApplied = true;
                 }
+                else
+                    wasApplied = false;
+                
                 break;
+            
             case Quantification.QuantificationCallbackType.RECUPERATON:
-                recuperation.StartRecuperation(player, application.PropertyName, application.InitialValue, application.ChangeValue, application.EffectMode);
+                if(wasApplied)
+                    recuperation.StartRecuperation(player, application.PropertyName, application.InitialValue, application.ChangeValue, application.EffectMode);
                 break;
                 
         }

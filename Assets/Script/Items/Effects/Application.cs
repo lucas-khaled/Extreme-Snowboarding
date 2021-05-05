@@ -95,7 +95,6 @@ namespace Script.Items.Effects
             set => effectMode = value;
         }
 
-        
         void OnPropertyValueChanged()
         {
             Type t = typeof(PlayerSharedValues);

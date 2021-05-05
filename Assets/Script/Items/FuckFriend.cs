@@ -11,7 +11,7 @@ public class FuckFriend : Item
     [BoxGroup("Fuck Friend Values")]
     [SerializeField] [ShowAssetPreview()] 
     GameObject projectile;
-    [SerializeField]
+    [SerializeField] [BoxGroup("Fuck Friend Values")]
     private MovementType movementType;
 
     public override void Activate (Player player)
