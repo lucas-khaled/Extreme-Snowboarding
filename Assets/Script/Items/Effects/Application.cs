@@ -1,49 +1,68 @@
 ﻿using System;
 using System.Reflection;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace Script.Items.Effects
 {
     [System.Serializable]
     public class Application
     {
-        [FormerlySerializedAs("name")] [SerializeField]
-        private string propertyName;
+        [FormerlySerializedAs("name")] [SerializeField] [OnValueChanged("OnPropertyValueChanged")]
+        private ExposedPlayerProperty propertyName;
 
-        [SerializeField]
+        [SerializeField] [ShowIf("propertyType", PropertyType.FLOAT)] [AllowNesting]
         private float floatValue;
 
-        [SerializeField]
+        [SerializeField] [ShowIf("propertyType", PropertyType.STRING)] [AllowNesting]
         private string stringValue;
 
-        [SerializeField]
+        [SerializeField] [ShowIf("propertyType", PropertyType.BOOL)] [AllowNesting]
         private bool boolValue;
 
-        [SerializeField] private object objectValue;
+        [SerializeField] [ShowIf("propertyType", PropertyType.OBJECT)] [AllowNesting]
+        private Object objectValue;
         
         [SerializeField]
         private EffectMode effectMode;
-        
-        private enum PropertyType
-        {
-            INT,
-            FLOAT,
-            STRING,
-            BOOL,
-            OTHER
-        }
 
-        private PropertyType type;
+        private PropertyType propertyType;
 
         public object InitialValue { get; private set; }
-        public object ChangeValue { get; private set; }
+
+        public object ChangeValue
+        {
+            get
+            {
+                switch (propertyType)
+                {
+                    case PropertyType.FLOAT:
+                        return floatValue;
+                        break;
+                    case PropertyType.BOOL:
+                        return boolValue;
+                        break;
+                    case PropertyType.STRING:
+                        return stringValue;
+                        break;
+                    case PropertyType.OBJECT:
+                        return objectValue;
+                        break;
+                    default:
+                        return null;
+                        break;
+                }
+            }
+        }
+        
         public object PuttedValue { get; private set; }
 
         public string PropertyName
         {
-            get => propertyName;
-            set => propertyName = value;
+            get => propertyName.name;
+            set => propertyName.name = value;
         }
 
         public float FloatValue
@@ -64,7 +83,7 @@ namespace Script.Items.Effects
             set => boolValue = value;
         }
 
-        public object ObjectValue
+        public Object ObjectValue
         {
             get => objectValue;
             set => objectValue = value;
@@ -76,20 +95,41 @@ namespace Script.Items.Effects
             set => effectMode = value;
         }
 
+        
+        void OnPropertyValueChanged()
+        {
+            Type t = typeof(PlayerSharedValues);
+            PropertyInfo p = t.GetProperty(propertyName.name);
+            
+            if (p != null)
+            {
+                if (p.PropertyType == typeof(float) || p.PropertyType == typeof(int))
+                    propertyType = PropertyType.FLOAT;
+                else if (p.PropertyType == typeof(string))
+                    propertyType = PropertyType.STRING;
+                else if (p.PropertyType == typeof(bool))
+                    propertyType = PropertyType.BOOL;
+                else
+                    propertyType = PropertyType.OBJECT;
+            }
+            else
+            {
+                propertyType = PropertyType.NULL;
+            }
+        }
+        
         /// <summary>
         /// Applies the effect and returns the initial value in the specified property
         /// </summary>
         /// <param name="player">The player that the effect must be applied</param>
         public void ApplyEffect(Player player)
         {
-            PropertyInfo property = player.SharedValues.GetType().GetProperty(propertyName);
-            SetPropertyType(property);
-            SetChangeValue();
+            PropertyInfo property = player.SharedValues.GetType().GetProperty(propertyName.name);
             InitialValue = property.GetValue(player.SharedValues);
 
             object putValue = ChangeValue;
             
-            if (type == PropertyType.INT || type == PropertyType.FLOAT)
+            if (propertyType == PropertyType.FLOAT)
             {
                 switch (effectMode)
                 {
@@ -102,49 +142,14 @@ namespace Script.Items.Effects
                 }
             }
             
-            else if(type == PropertyType.STRING && effectMode == EffectMode.ADD)
+            else if(propertyType == PropertyType.STRING && effectMode == EffectMode.ADD)
                 putValue = (string) InitialValue + (string) ChangeValue;
 
             PuttedValue = putValue;
             property.SetValue(player.SharedValues, putValue);
         }
-
-        private void SetPropertyType(PropertyInfo property)
-        {
-            Type tipo = property.PropertyType;
-            if (tipo == typeof(int))
-                type = PropertyType.INT;
-            else if (tipo == typeof(float))
-                type = PropertyType.FLOAT;
-            else if (tipo == typeof(string))
-                type = PropertyType.STRING;
-            else if (tipo == typeof(bool))
-                type = PropertyType.BOOL;
-            else
-                type = PropertyType.OTHER;
-        }
-
-        private void SetChangeValue()
-        {
-            switch (type)
-            {
-                case PropertyType.INT:
-                    ChangeValue = (int) floatValue;
-                    break;
-                case PropertyType.FLOAT:
-                    ChangeValue = floatValue;
-                    break;
-                case PropertyType.STRING:
-                    ChangeValue = stringValue;
-                    break;
-                case PropertyType.BOOL:
-                    ChangeValue = boolValue;
-                    break;
-                case PropertyType.OTHER:
-                    ChangeValue = objectValue;
-                    break;
-            }
-        }
+        
+        
     }
     
     public enum EffectMode { ADD, MULTIPLY, REPLACE }

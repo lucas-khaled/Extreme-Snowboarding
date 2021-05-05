@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Reflection;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 namespace Script.Items.Effects
@@ -11,15 +13,15 @@ namespace Script.Items.Effects
     [Serializable]
     public class Conditioning
     {
-        [SerializeField] private Object conditionObject;
-        [SerializeField] private ConditionBlock<Object> conditions;
+
+        [FormerlySerializedAs("conditions")] [SerializeField] private ConditionBlock<PlayerSharedValues> conditionBlock;
         
         public bool IsConditioned(Player player)
         {
-            if (!conditions.HasConditions())
+            if (!conditionBlock.HasConditions())
                 return true;
 
-            return conditions.GetFinalCondition();
+            return conditionBlock.GetFinalCondition(player.SharedValues);
         }
     }
 
@@ -27,74 +29,156 @@ namespace Script.Items.Effects
     public class ConditionBlock<TClass> where TClass : class
     {
         [SerializeField] private List<Condition> conditions;
-
-        private Expression<Func<bool>> finalExpression = null;
         
-        private bool isBuilt = false;
-        public bool IsBuilt => isBuilt;
 
         public bool HasConditions()
         {
             return conditions.Count > 0;
         }
 
-        public bool GetFinalCondition()
-        {
-            if(!isBuilt)
-                BuildExpression();
+        private TClass myObject;
 
-            Func<bool> func = finalExpression.Compile();
-            return func();
+        public bool GetFinalCondition(TClass myObject)
+        {
+            this.myObject = myObject;
+            return BuildExpression();
         }
         
-        void BuildExpression()
+        bool BuildExpression()
         {
-            Expression returnExpression = Expression.Constant(true);
-            var parameter = Expression.Parameter(typeof(TClass), "x");
+            bool returnExpression = true;
+            bool first = true;
             foreach (Condition condition in conditions)
             {
-                var member = Expression.Property(parameter, condition.propertyName);
-                var constant = Expression.Constant(condition.value);
+                var member = myObject.GetType().GetProperty(condition.propertyName.name);
 
-                Expression expression = null;
+                bool expression = false;
                 switch (condition.operation)
                 {
                     case Operation.EQUAL_TO:
-                        expression = Expression.Equal(member, constant);
+                        expression = (member.GetValue(myObject) == condition.Value);
                         break;
                     case Operation.LESS_THAN:
-                        expression = Expression.LessThan(member, constant);
+                        expression = ((float)member.GetValue(myObject) < (float)condition.Value);
                         break;
                     case Operation.GREATER_THAN:
-                        expression = Expression.GreaterThan(member, constant);
+                        expression =((float)member.GetValue(myObject) > (float)condition.Value);
                         break;
                     case Operation.NOT_EQUAL_TO:
-                        expression = Expression.NotEqual(member, constant);
+                        expression = (member.GetValue(myObject) != condition.Value);
                         break;
                     case Operation.LESS_THAN_OR_EQUAL_TO:
-                        expression = Expression.LessThanOrEqual(member, constant);
+                        expression = ((float)member.GetValue(myObject) <= (float)condition.Value);
                         break;
                     case Operation.GREATER_THAN_OR_EQUAL_TO:
-                        expression = Expression.GreaterThanOrEqual(member, constant);
+                        expression = ((float)member.GetValue(myObject) >= (float)condition.Value);
                         break;
                 }
 
-                returnExpression = Expression.AndAlso(finalExpression, expression);
+                Debug.Log(member.GetValue(myObject));
+                
+                if (first)
+                {
+                    returnExpression = expression;
+                    first = false;
+                }
+                else
+                {
+                    if (condition.conector == Conector.AND)
+                        returnExpression &= expression;
+                    else
+                        returnExpression |= expression;
+                }
             }
-
-            finalExpression = (Expression<Func<bool>>) returnExpression;
-            isBuilt = true;
+            return returnExpression;
         }
     }
 
     [Serializable]
-    public struct Condition
+    public class Condition
     {
-        public string propertyName;
+        [OnValueChanged("OnPropertyValueChanged")] 
+        public ExposedPlayerProperty propertyName;
         public Operation operation;
-        public float value;
+        
+        [SerializeField] [FormerlySerializedAs("value")] [ShowIf("propertyType", PropertyType.FLOAT)] [AllowNesting]
+        private float floatValue;
+        [SerializeField] [ShowIf("propertyType", PropertyType.STRING)] [AllowNesting]
+        private string stringValue;
+        [SerializeField] [ShowIf("propertyType", PropertyType.BOOL)] [AllowNesting]
+        private bool boolValue;
+        [SerializeField] [ShowIf("propertyType", PropertyType.OBJECT)] [AllowNesting]
+        private Object objectValue;
+        
+        public Conector conector;
+        
+        PropertyType propertyType = PropertyType.NULL;
+
+        public object Value
+        {
+            get
+            {
+                switch (propertyType)
+                {
+                    case PropertyType.FLOAT:
+                        return floatValue;
+                        break;
+                    case PropertyType.BOOL:
+                        return boolValue;
+                        break;
+                    case PropertyType.STRING:
+                        return stringValue;
+                        break;
+                    case PropertyType.OBJECT:
+                        return objectValue;
+                        break;
+                    default:
+                        return null;
+                        break;
+                }
+            }
+        }
+        
+        void OnPropertyValueChanged()
+        {
+            Type t = typeof(PlayerSharedValues);
+            PropertyInfo p = t.GetProperty(propertyName.name);
+            
+            if (p != null)
+            {
+                Debug.Log(p.PropertyType);
+                if (p.PropertyType == typeof(float) || p.PropertyType == typeof(int))
+                    propertyType = PropertyType.FLOAT;
+                else if (p.PropertyType == typeof(string))
+                    propertyType = PropertyType.STRING;
+                else if (p.PropertyType == typeof(bool))
+                    propertyType = PropertyType.BOOL;
+                else
+                    propertyType = PropertyType.OBJECT;
+            }
+            else
+            {
+                propertyType = PropertyType.NULL;
+            }
+            Debug.Log(propertyType.ToString());
+        }
     }
 
+    [System.Serializable]
+    public class ExposedPlayerProperty
+    {
+        public string name;
+    }
+
+    public enum PropertyType
+    {
+        FLOAT,
+        BOOL,
+        STRING,
+        OBJECT,
+        NULL
+    }
+    
     public enum Operation
     {
         EQUAL_TO,
@@ -105,4 +189,9 @@ namespace Script.Items.Effects
         LESS_THAN_OR_EQUAL_TO
     }
 
+    public enum Conector
+    {
+        AND, 
+        OR
+    }
 }

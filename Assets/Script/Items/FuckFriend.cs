@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
@@ -7,15 +8,15 @@ public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
 [CreateAssetMenu(fileName = "FuckFriend", menuName = "Itens/Fuck Friend", order = 1)]
 public class FuckFriend : Item
 {
-    [Header("Fuck Friend Values")]
-    [SerializeField]
+    [BoxGroup("Fuck Friend Values")]
+    [SerializeField] [ShowAssetPreview()] 
     GameObject projectile;
     [SerializeField]
     private MovementType movementType;
 
     public override void Activate (Player player)
     {
-        GameObject instantiatedProjectile = Instantiate(projectile, player.transform.position, Quaternion.identity /* Considerar a rotação do cenário!!!! */);
+        GameObject instantiatedProjectile = Instantiate(projectile, player.transform.position, Quaternion.identity /* Considerar a rotaï¿½ï¿½o do cenï¿½rio!!!! */);
         Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
         proj.fuckfriend = this;

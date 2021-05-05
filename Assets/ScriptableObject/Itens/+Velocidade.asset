@@ -18,10 +18,23 @@ MonoBehaviour:
       quantitity: 1
       typeOfQuantityCall: 1
     application:
-      propertyName: AddedVelocity
+      propertyName:
+        name: player
       floatValue: 5
       stringValue: 
       boolValue: 0
+      objectValue: {fileID: 0}
       effectMode: 0
     recuperation:
       haveRecuperation: 1
+    conditioning:
+      conditionBlock:
+        conditions:
+        - propertyName:
+            name: Turbo
+          operation: 1
+          floatValue: 1
+          stringValue: 
+          boolValue: 0
+          objectValue: {fileID: 0}
+          conector: 0

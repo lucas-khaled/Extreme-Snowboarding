@@ -11,7 +11,6 @@ public abstract class Item : ScriptableObject
 
     public void StartEffects(Player player)
     {
-        Debug.Log("used: " + name);
         foreach (Effect effect in attributesToChange)
         {
             effect.StartEffect(player);

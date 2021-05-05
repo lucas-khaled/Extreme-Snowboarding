@@ -32,7 +32,7 @@ public class MovimentationValuesWindow : EditorWindow
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("LoadedScene");
-        if (scene.name == "Fase1")
+        if (scene.name == "Fase1" || scene.name == "Test_Scene")
         {
             PlayerGeneralEvents.onPlayerInstantiate += PlayerInstatiated;
         }

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using NaughtyAttributes;
+using Script.Attributes;
 using Script.Items.Effects;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,15 +13,18 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
+    [BoxGroup("References")]
     public PlayerInput playerInput;
-    [SerializeField]
+    [SerializeField] [BoxGroup("References")]
     private Animator animator;
-    [SerializeField]
+    [SerializeField][BoxGroup("References")]
     private GameObject objectMesh;
-    [Header("Player Values")]
-    [SerializeField]
+    
+    [BoxGroup("Player Values")]
+    [SerializeField] 
     private PlayerSharedValues sharedValues;
-    [Header("Player VFX's")]
+    
+    [BoxGroup("Player VFX's")]
     [SerializeField]
     private PlayerVFXList playerVFXList;
 
@@ -204,7 +209,7 @@ public class PlayerSharedValues
     [SerializeField] [Min(0)]
     private float maxJumpForce = 20;
     [SerializeField] [Range(1,7)]
-    private float maxAddedVelocity = 10;
+    private float maxAddedVelocity = 5;
     [SerializeField]
     private float rotationFactor = 3;
 
@@ -213,13 +218,15 @@ public class PlayerSharedValues
 
     public float turboMultiplier = 1;
 
+    [ExposedProperty("Player")]
     public Player player { get; set; }
 
     public int playerCode { get; set; }
 
-    public bool etherium { get; set; }
+    [ExposedProperty("Etherium")]
+    public bool Etherium { get; set; }
 
-    [MovimentationValue]
+    [MovimentationValue] [ExposedProperty("Turbo")]
     public float Turbo 
     { 
         get 
@@ -239,7 +246,7 @@ public class PlayerSharedValues
         }
     }
 
-    [MovimentationValue]
+    [MovimentationValue] [ExposedProperty("Added Velocity")]
     public float AddedVelocity
     {
         get
@@ -264,6 +271,7 @@ public class PlayerSharedValues
         }
     }
     
+    [ExposedProperty("Rotation Factor")]
     public float RotationFactor
     {
         get
@@ -276,7 +284,7 @@ public class PlayerSharedValues
         }
     }
 
-    [MovimentationValue]
+    [MovimentationValue] [ExposedProperty("Jump Force")]
     public float JumpForce
     {
         get
@@ -285,6 +293,7 @@ public class PlayerSharedValues
         }
     }
     
+    [ExposedProperty("Character Height")]
     public float CharacterHeight
     {
         get
@@ -297,7 +306,7 @@ public class PlayerSharedValues
         }
     }
 
-    [MovimentationValue]
+    [MovimentationValue] [ExposedProperty("Real Velocity")]
     public float RealVelocity
     {
         get

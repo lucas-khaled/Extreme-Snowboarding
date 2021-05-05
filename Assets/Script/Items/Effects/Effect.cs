@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using NaughtyAttributes;
 using Script.EventSystem;
 using Script.Items.Effects;
 using UnityEngine;
@@ -12,9 +13,13 @@ public struct Effect
     [SerializeField]
     private float timeOfChange;
 
+    [HorizontalLine(color: EColor.Black)]
     [SerializeField] private Quantification quantification;
+    [HorizontalLine(color: EColor.Black)]
     [SerializeField] private Application application;
+    [HorizontalLine(color: EColor.Black)]
     [SerializeField] private Recuperation recuperation;
+    [HorizontalLine(color: EColor.Black)]
     [SerializeField] private Conditioning conditioning;
     
     private Player player;
@@ -37,7 +42,10 @@ public struct Effect
         switch (callback)
         {
             case Quantification.QuantificationCallbackType.APPLICATION:
-                application.ApplyEffect(player);
+                if (conditioning.IsConditioned(player))
+                {
+                    application.ApplyEffect(player);
+                }
                 break;
             case Quantification.QuantificationCallbackType.RECUPERATON:
                 recuperation.StartRecuperation(player, application.PropertyName, application.InitialValue, application.ChangeValue, application.EffectMode);
