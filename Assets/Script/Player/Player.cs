@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using NUnit.Framework;
 using Script.Attributes;
 using Script.Items.Effects;
 using UnityEngine;
@@ -197,21 +198,16 @@ public class Player : MonoBehaviour
 [System.Serializable]
 public class PlayerSharedValues
 {
-    [Header("Player Values")]
-    [SerializeField, Min(0)] 
-    private float characterHeight = 2;
+    [BoxGroup("Player Values")]
+    [SerializeField, Min(0)] private float characterHeight = 2;
 
-    [Header("Movement Values")]
-    [SerializeField]
-    private float velocity = 10f;
-    [SerializeField]
-    private float jumpFactor = 1f;
-    [SerializeField] [Min(0)]
-    private float maxJumpForce = 20;
-    [SerializeField] [Range(1,7)]
-    private float maxAddedVelocity = 5;
-    [SerializeField]
-    private float rotationFactor = 3;
+    [Header("Movement Values")] [HorizontalLine(color:EColor.Yellow)] 
+    [SerializeField] private float velocity = 10f;
+    [SerializeField] private float jumpFactor = 1f;
+    [SerializeField] [Min(0)] private float maxJumpForce = 20;
+    [SerializeField] [UnityEngine.Range(1,7)] private float maxAddedVelocity = 5;
+    [SerializeField] [UnityEngine.Range(10, 50)] private float maxVelocity = 30;
+    [SerializeField] private float rotationFactor = 3;
 
     private float addedVelocity = 0;
     private float turbo = 0;
@@ -310,7 +306,7 @@ public class PlayerSharedValues
     {
         get
         {
-            return velocity + AddedVelocity;
+            return Mathf.Clamp(velocity + AddedVelocity, 0, maxVelocity);
         }
     }
 }
