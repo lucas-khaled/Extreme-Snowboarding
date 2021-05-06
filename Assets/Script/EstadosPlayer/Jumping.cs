@@ -9,8 +9,8 @@ public class Jumping : PlayerState
     float airTime = 0;
     float howMuchRotation = 0f;
     float rotatingDirection = 0;
-    private bool isJumpingPressed;
-    private bool applyForce;
+    bool isJumpingPressed;
+    private bool canApplyForce;
 
     /*public override void InterpretateInput(GameInput input)
     {
@@ -31,10 +31,8 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
-        player.SetOnAnimator("trick", false);
         
         UnsubscribeOnInputEvents();
-
     }
 
     public override void StateStart(Player player)
@@ -43,12 +41,18 @@ public class Jumping : PlayerState
         
         SubscribeOnInputEvents();
         
+        player.SharedValues.actualState = "Jumping";
+        
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
         
-        if(applyForce)
+        if(canApplyForce)
             rb.AddForce(player.SharedValues.JumpForce * 0.8f * Vector3.up , ForceMode.Impulse);
+        else
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        }
 
         player.SetOnAnimator("jumping", true);
     }
@@ -61,7 +65,6 @@ public class Jumping : PlayerState
 
         if (isJumpingPressed)
             rotatingDirection = 1;
-
     }
 
     public override void OnCollisionEnter(Collision collision)
@@ -79,35 +82,27 @@ public class Jumping : PlayerState
 
             float angleDifference = Mathf.Abs(groundAngle - normalizedPlayerAngle);
 
-            if (angleDifference < 60f && !player.GetOnAnimator("hitByFuckFriend"))
+            //Debug.Log("player Angle: " + normalizedPlayerAngle + "\n ground angle: " + groundAngle + "\n difference: " + angleDifference);
+
+            if (angleDifference < 60f)
             {
                 int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
                 newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                 ApplyAirEffects();
             }
-            else if(!player.GetOnAnimator("hitByFuckFriend"))
+            else
             {
-                float timeFall = 3.2f;//44 frames a 30 frames por segundo fall + 69 nice levantando
-                
+                float timeFall = 3;
                 if (angleDifference > 120)
                 {
                     player.SetOnAnimator("hardFall", true);
-                    timeFall = 4.6f;//84 frames a 30 frames por segundo hardfall + 69 nice levantando
+                    timeFall = 4f;
                 }
 
                 newPlayerState = new Fallen(timeFall);
 
             }
-            // Daniboy Code starts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            else{
-                
-                float timeFall = 3.2f;//44 frames a 30 frames por segundo fall + 69 nice levantando
-                
-                newPlayerState = new Fallen(timeFall);
-
-            }
-            // Daniboy Code ends >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             player.ChangeState(newPlayerState);
         }
@@ -126,11 +121,11 @@ public class Jumping : PlayerState
         
         if (context.canceled)
         {
-            player.SetOnAnimator("trick", false);
+            // parar de tocar animação de mortal
         }
         else
         {
-            player.SetOnAnimator("trick", true);
+            // tocar animação de mortal
         }
     }
 
@@ -177,12 +172,11 @@ public class Jumping : PlayerState
         playerInput.currentActionMap.Enable();
     }
 
-    #region Constructors
+    #region CONSTRUCTORS
 
-    public Jumping(bool applyForce = true)
+    public Jumping(bool canApplyForce = true)
     {
-        this.applyForce = applyForce;
+        this.canApplyForce = canApplyForce;
     }
-
     #endregion
 }

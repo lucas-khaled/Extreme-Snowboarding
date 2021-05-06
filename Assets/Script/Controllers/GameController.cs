@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class GameController : MonoBehaviour
 
     private int numOfPlayer = 1;
 
-    [SerializeField] private bool isTest = false;
+    [Scene] [SerializeField] private string sceneToLoad = "Fase1";
 
     public PlayerData[] playerData { get; set; }
 
@@ -43,10 +44,7 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        if(isTest)
-            ChangeScene("Test_Scene");
-        else
-            ChangeScene("Fase1");
+        ChangeScene(sceneToLoad);
     }
 
     public void ChangeScene(string cena)    

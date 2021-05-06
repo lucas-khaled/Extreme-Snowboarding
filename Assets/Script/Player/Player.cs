@@ -219,6 +219,7 @@ public class PlayerSharedValues
 
     public float turboMultiplier = 1;
     
+    public string actualState { get; set; }
     public Player player { get; set; }
 
     public int playerCode { get; set; }

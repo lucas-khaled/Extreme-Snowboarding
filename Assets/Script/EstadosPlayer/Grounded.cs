@@ -39,6 +39,8 @@ public class Grounded : PlayerState
 
         SubscribeOnInputEvents();
 
+        player.SharedValues.actualState = "Grounded";
+        
         rb = player.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = false;
@@ -82,8 +84,19 @@ public class Grounded : PlayerState
             Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
             newRotation.y = newRotation.x = 0;
 
+            if (Vector3.Distance(rotationHit.point, player.transform.position) >
+                player.SharedValues.CharacterHeight)
+            {
+                player.ChangeState(new Jumping(false));
+                return;
+            }
+
             player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
             player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+        }
+        else
+        {
+            player.ChangeState(new Jumping(false));
         }
     }
 
