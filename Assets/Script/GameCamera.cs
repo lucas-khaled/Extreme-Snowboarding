@@ -1,26 +1,22 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Camera))]
 public class GameCamera : MonoBehaviour
 {
+    [SerializeField]
+    private HudControl hud;
+
     Player player;
     Vector3 offset;
-
-    public Camera MyCamera { get; private set; }
-
-    private void Awake()
-    {
-        MyCamera = GetComponent<Camera>();
-    }
 
     public void SetPlayer(Player player)
     {
         this.player = player;
         player.playerCamera = this;
+        
+        if (player.GetPlayerState().GetType() != typeof(Dead))
+        hud.setPlayer(player);
     }
 
     // Update is called once per frame
