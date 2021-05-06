@@ -14,7 +14,7 @@ public class Paralax : MonoBehaviour
     {
         thisCamera = transform.parent.transform.parent.gameObject;
         startpos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        length = this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     void Update()
