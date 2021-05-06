@@ -89,9 +89,9 @@ public class Grounded : PlayerState
 
     IEnumerator BeEtherium()
     {
-        player.SharedValues.etherium = true;
+        player.SharedValues.Etherium = true;
         yield return new WaitForSeconds(timeEtherium);
-        player.SharedValues.etherium = false;
+        player.SharedValues.Etherium = false;
     }
     
     void SubscribeOnInputEvents()

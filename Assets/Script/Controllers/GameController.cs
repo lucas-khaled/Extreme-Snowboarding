@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 
     private int numOfPlayer = 1;
 
+    [SerializeField] private bool isTest = false;
+
     public PlayerData[] playerData { get; set; }
 
     private void Awake()
@@ -41,7 +43,10 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        ChangeScene("Fase1Teste");
+        if(isTest)
+            ChangeScene("Test_Scene");
+        else
+            ChangeScene("Fase1");
     }
 
     public void ChangeScene(string cena)    
