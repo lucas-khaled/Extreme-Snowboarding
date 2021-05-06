@@ -24,8 +24,6 @@ public struct Effect
     
     private Player player;
     private bool wasApplied;
-    
-    public int ID { get; }
 
     public void StartEffect(Player player)
     {
@@ -63,27 +61,53 @@ public struct Effect
 
     #region Constructors
 
-    public Effect(string name, float floatValue, float timeOfChange, EffectMode effectMode) : this()
+    public Effect(Quantification quantification, Application application, Conditioning conditioning,
+        Recuperation recuperation, Player player, float timeOfChange)
     {
-        this.application.PropertyName = name;
-        this.application.FloatValue = floatValue;
+        this.application = application;
+        this.recuperation = recuperation;
+        this.conditioning = conditioning;
+        this.quantification = quantification;
         this.timeOfChange = timeOfChange;
-        this.application.EffectMode = effectMode;
-    }
+        this.player = player;
 
-    public Effect(string name, string stringValue, float timeOfChange) : this()
+        wasApplied = false;
+    }
+    
+    public Effect(string name, float floatValue, float timeOfChange, EffectMode effectMode, Player player)
     {
-        this.application.PropertyName = name;
-        this.application.StringValue = stringValue;
+        application = new Application() { PropertyName = name, FloatValue = floatValue, EffectMode = effectMode };
         this.timeOfChange = timeOfChange;
+        this.player = player;
         
+        wasApplied = false;
+        quantification = new Quantification();
+        conditioning = new Conditioning();
+        recuperation = new Recuperation();
     }
 
-    public Effect(string name, bool boolValue, float timeOfChange) : this()
+    public Effect(string name, string stringValue, float timeOfChange, Player player)
     {
-        this.application.PropertyName = name;
-        this.application.BoolValue = boolValue;
+        application = new Application() { PropertyName = name, StringValue = stringValue };
         this.timeOfChange = timeOfChange;
+        this.player = player;
+        
+        wasApplied = false;
+        quantification = new Quantification();
+        conditioning = new Conditioning();
+        recuperation = new Recuperation();
+    }
+
+    public Effect(string name, bool boolValue, float timeOfChange, Player player)
+    {
+        application = new Application() { PropertyName = name, BoolValue = boolValue };
+        this.timeOfChange = timeOfChange;
+        this.player = player;
+        
+        wasApplied = false;
+        quantification = new Quantification();
+        conditioning = new Conditioning();
+        recuperation = new Recuperation();
     }
 
     #endregion

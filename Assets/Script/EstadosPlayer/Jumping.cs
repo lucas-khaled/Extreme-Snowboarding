@@ -141,7 +141,7 @@ public class Jumping : PlayerState
             float amount = 1.3f * numOfMortals;
             float time = Mathf.Clamp(airTime * numOfMortals, 0, 2);
 
-            Effect mortalEffect = new Effect("AddedVelocity",amount, time, EffectMode.ADD);
+            Effect mortalEffect = new Effect("AddedVelocity",amount, time, EffectMode.ADD, player);
             mortalEffect.StartEffect(player);
         }
 

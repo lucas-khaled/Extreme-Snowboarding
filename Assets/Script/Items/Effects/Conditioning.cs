@@ -18,9 +18,6 @@ namespace Script.Items.Effects
         
         public bool IsConditioned(Player player)
         {
-            if (!conditionBlock.HasConditions())
-                return true;
-
             return conditionBlock.GetFinalCondition(player.SharedValues);
         }
     }
@@ -28,7 +25,7 @@ namespace Script.Items.Effects
     [Serializable]
     public class ConditionBlock<TClass> where TClass : class
     {
-        [SerializeField] private List<Condition> conditions;
+        [SerializeField] private List<Condition> conditions = new List<Condition>();
         
 
         public bool HasConditions()
@@ -40,6 +37,9 @@ namespace Script.Items.Effects
 
         public bool GetFinalCondition(TClass myObject)
         {
+            if (!HasConditions())
+                return true;
+            
             this.myObject = myObject;
             return BuildExpression();
         }
