@@ -121,11 +121,11 @@ public class Jumping : PlayerState
         
         if (context.canceled)
         {
-            // parar de tocar animação de mortal
+            player.SetOnAnimator("trick", false);
         }
         else
         {
-            // tocar animação de mortal
+            player.SetOnAnimator("trick", true);
         }
     }
 
