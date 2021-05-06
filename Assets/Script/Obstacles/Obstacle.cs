@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Obstacle : MonoBehaviour
 {
+    [SerializeField] private bool isHole = false;
     private Collider myCollider;
-
 
     private void Awake()
     {
@@ -19,7 +19,10 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (!player.SharedValues.Etherium)
+            if(isHole)
+                player.ChangeState(new Dead());
+            
+            else if (!player.SharedValues.Etherium)
                 player.ChangeState(new Fallen());
         }
     }

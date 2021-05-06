@@ -10,6 +10,7 @@ public class Jumping : PlayerState
     float howMuchRotation = 0f;
     float rotatingDirection = 0;
     bool isJumpingPressed;
+    private bool canApplyForce;
 
     /*public override void InterpretateInput(GameInput input)
     {
@@ -40,10 +41,18 @@ public class Jumping : PlayerState
         
         SubscribeOnInputEvents();
         
+        player.SharedValues.actualState = "Jumping";
+        
         rb = player.gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
-        rb.AddForce(player.SharedValues.JumpForce * 0.8f * Vector3.up , ForceMode.Impulse);
+        
+        if(canApplyForce)
+            rb.AddForce(player.SharedValues.JumpForce * 0.8f * Vector3.up , ForceMode.Impulse);
+        else
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        }
 
         player.SetOnAnimator("jumping", true);
     }
@@ -162,4 +171,12 @@ public class Jumping : PlayerState
         
         playerInput.currentActionMap.Enable();
     }
+
+    #region CONSTRUCTORS
+
+    public Jumping(bool canApplyForce = true)
+    {
+        this.canApplyForce = canApplyForce;
+    }
+    #endregion
 }
