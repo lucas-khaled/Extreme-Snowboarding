@@ -31,6 +31,7 @@ public class Jumping : PlayerState
 
         airTime = 0;
         player.SetOnAnimator("jumping", false);
+        player.SetOnAnimator("trick", false);
         
         UnsubscribeOnInputEvents();
     }
@@ -97,7 +98,7 @@ public class Jumping : PlayerState
                 if (angleDifference > 120)
                 {
                     player.SetOnAnimator("hardFall", true);
-                    timeFall = 4f;
+                    timeFall = 4.5f;
                 }
 
                 newPlayerState = new Fallen(timeFall);
