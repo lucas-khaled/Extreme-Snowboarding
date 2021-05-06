@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class EventSystem
+public static class PlayerGeneralEvents
 {
     public delegate void OnPlayerDeath(Player player);
     public static OnPlayerDeath onPlayerDeath;
@@ -15,4 +15,8 @@ public static class EventSystem
 
     public delegate void OnFuckFriendChange(Player player, Sprite fuckFriendSprite);
     public static OnFuckFriendChange onFuckFriendChange;
+
+    public delegate void OnPlayerInstantiate(Player player);
+
+    public static OnPlayerInstantiate onPlayerInstantiate;
 }

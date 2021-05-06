@@ -3,14 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/TestPlayers/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/TestPlayers/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/PowerUps/Relampago/1Relampago/RelampagoParticula.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/VFX/PowerUps/Relampago/1Relampago/RelampagoParticula.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Test.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Test/VoidOut.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Test/VoidOut.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,30 +38,32 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Editor/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationAttribute.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValueAttribute.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Attributes/MovimentationValueAttribute.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EventSystem/EventSystem.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EventSystem/EffectGeneralEvents.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/EffectsController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Recuperation.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Item.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/EffectsValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/GameController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Conditioning.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Controllers/RaceEnd.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />

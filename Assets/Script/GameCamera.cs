@@ -16,7 +16,7 @@ public class GameCamera : MonoBehaviour
         player.playerCamera = this;
         
         if (player.GetPlayerState().GetType() != typeof(Dead))
-        hud.setPlayer(player);
+        hud.SetPlayer(player);
     }
 
     // Update is called once per frame

@@ -35,12 +35,6 @@ public class Jumping : PlayerState
         
         UnsubscribeOnInputEvents();
 
-        // Daniboy Code starts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if(player.GetOnAnimator("hitByFuckFriend")){
-            
-        }
-        // Daniboy Code ends >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
     }
 
     public override void StateStart(Player player)

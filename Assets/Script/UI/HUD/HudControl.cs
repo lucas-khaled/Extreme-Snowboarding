@@ -23,12 +23,12 @@ public class HudControl : MonoBehaviour
 
     private void Awake()
     {
-        EventSystem.onPlayerPass += OnPlayerPass;
-        EventSystem.onTurboChange += OnTurboChange;
-        EventSystem.onFuckFriendChange += OnFuckFriendChange;
+        PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
+        PlayerGeneralEvents.onTurboChange += OnTurboChange;
+        PlayerGeneralEvents.onFuckFriendChange += OnFuckFriendChange;
     }
 
-    public void setPlayer(Player player)
+    public void SetPlayer(Player player)
     {
         this.player = player;
     }

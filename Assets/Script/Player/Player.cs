@@ -183,6 +183,11 @@ public class Player : MonoBehaviour
             animator.SetBool(variable, value);
     }
 
+    public bool GetOnAnimator(string name)
+    {
+        return animator.GetBool(name);
+    }
+    
     private void OnCollisionEnter(Collision collision)
     {
         playerState.OnCollisionEnter(collision);

@@ -44,8 +44,8 @@ public class CorridaController : MonoBehaviour
 
     private void Awake()
     {
-        EventSystem.onPlayerPass += OnPlayerPass;
-        EventSystem.onPlayerDeath += OnPlayerDeath;
+        PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
+        PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
         instance = this;
     }
 
@@ -69,7 +69,7 @@ public class CorridaController : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i] != null)
-                EventSystem.onPlayerPass.Invoke(players[i].player, i);
+                PlayerGeneralEvents.onPlayerPass.Invoke(players[i].player, i);
         }
         InvokeRepeating("CheckPlayerClassification",0,0.1f);
     }
@@ -114,12 +114,12 @@ public class CorridaController : MonoBehaviour
 
             if (changed)
             {
-                if (EventSystem.onPlayerPass != null)
+                if (PlayerGeneralEvents.onPlayerPass != null)
                 {
                     if (playerChanged != null && playerChanged2 != null)
                     {
-                        EventSystem.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
-                        EventSystem.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+                        PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
+                        PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
                     }
                 }
 
