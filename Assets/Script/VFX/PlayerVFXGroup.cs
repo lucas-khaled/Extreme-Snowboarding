@@ -147,8 +147,13 @@ namespace Script.VFX
             
             foreach(PlayerVFX vfx in VFXList)
             {
-                if (vfx.GetParticle() != null)
-                    VFXRealArray[GetHashedID(vfx.GetParticle().name)] = vfx;
+                ParticleSystem part = vfx.GetParticle();
+                if (part != null)
+                {
+                    string name = (vfx.particleName != string.Empty) ? vfx.particleName : part.name;
+                    VFXRealArray[GetHashedID(name)] = vfx;
+                }
+                    
                 
             }
 
@@ -167,8 +172,9 @@ namespace Script.VFX
     [System.Serializable]
     public class PlayerVFX
     {
-        [AllowNesting] [SerializeField] [ShowAssetPreview()]
-        private ParticleSystem particle;
+        public string particleName;
+        
+        [SerializeField] private ParticleSystem particle;
 
         private bool locked = false;
 
