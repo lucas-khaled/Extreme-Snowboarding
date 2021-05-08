@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Script.Controllers;
-using Script.Player;
+using ExtremeSnowboarding.Script.Controllers;
+using ExtremeSnowboarding.Script.Player;
 using UnityEngine;
 
-namespace Script.UI.Menu
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
     [System.Serializable]
     public class EscolhaController

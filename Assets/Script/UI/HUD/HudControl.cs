@@ -1,8 +1,8 @@
-using Script.EventSystem;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Script.UI.HUD
+namespace ExtremeSnowboarding.Script.UI.HUD
 {
     public class HudControl : MonoBehaviour
     {

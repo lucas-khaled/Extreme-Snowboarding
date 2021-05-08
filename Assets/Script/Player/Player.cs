@@ -1,19 +1,16 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Attributes;
+using ExtremeSnowboarding.Script.Controllers;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.Items;
+using ExtremeSnowboarding.Script.Items.Effects;
+using ExtremeSnowboarding.Script.VFX;
 using NaughtyAttributes;
-using NUnit.Framework;
-using Script.Attributes;
-using Script.Controllers;
-using Script.EstadosPlayer;
-using Script.Items;
-using Script.Items.Effects;
-using Script.VFX;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Script.Player
+namespace ExtremeSnowboarding.Script.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]

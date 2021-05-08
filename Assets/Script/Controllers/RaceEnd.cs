@@ -1,8 +1,8 @@
-using Script.EstadosPlayer;
-using Script.EventSystem;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 
-namespace Script.Controllers
+namespace ExtremeSnowboarding.Script.Controllers
 {
     public class RaceEnd : MonoBehaviour
     {

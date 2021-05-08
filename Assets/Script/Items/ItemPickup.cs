@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.Items
+namespace ExtremeSnowboarding.Script.Items
 {
     [RequireComponent(typeof(Collider))]
     public class ItemPickup : MonoBehaviour

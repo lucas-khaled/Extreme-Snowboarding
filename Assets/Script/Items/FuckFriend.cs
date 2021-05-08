@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Script.Items
+namespace ExtremeSnowboarding.Script.Items
 {
     public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
 

@@ -1,8 +1,8 @@
-using Script.Controllers;
-using Script.EventSystem;
+using ExtremeSnowboarding.Script.Controllers;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 
-namespace Script.EstadosPlayer
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
     public class Dead : PlayerState
     {

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ExtremeSnowboarding.Script.Attributes;
+using ExtremeSnowboarding.Script.Items.Effects;
 using NaughtyAttributes.Editor;
-using Script.Attributes;
-using Script.Items.Effects;
 using UnityEditor;
 using UnityEngine;
 
-namespace Script.Editor
+namespace ExtremeSnowboarding.Script.Editor
 {
     [CustomPropertyDrawer(typeof(ExposedPlayerProperty))]
     public class ExposedPlayerPropertyDrawer : PropertyDrawer

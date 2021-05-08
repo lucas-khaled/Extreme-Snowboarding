@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Script.Attributes;
-using Script.EventSystem;
+using ExtremeSnowboarding.Script.Attributes;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Script.Editor.Analysis
+namespace ExtremeSnowboarding.Script.Editor.Analysis
 {
     public class MovimentationValuesWindow : EditorWindow
     {

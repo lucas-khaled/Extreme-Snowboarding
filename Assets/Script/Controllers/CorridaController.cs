@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Script.EstadosPlayer;
-using Script.EventSystem;
-using Script.Player;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EventSystem;
+using ExtremeSnowboarding.Script.Player;
 using UnityEngine;
 
-namespace Script.Controllers
+namespace ExtremeSnowboarding.Script.Controllers
 {
     public class CorridaController : MonoBehaviour
     {

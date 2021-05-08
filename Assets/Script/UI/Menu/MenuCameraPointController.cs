@@ -2,7 +2,7 @@ using System.Collections;
 using Cinemachine;
 using UnityEngine;
 
-namespace Script.UI.Menu
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPointController : MonoBehaviour
     {

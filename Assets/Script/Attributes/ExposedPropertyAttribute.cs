@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Script.Attributes
+namespace ExtremeSnowboarding.Script.Attributes
 {
     public class ExposedPropertyAttribute : Attribute
     {

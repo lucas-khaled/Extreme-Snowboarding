@@ -1,8 +1,8 @@
+using ExtremeSnowboarding.Script.EventSystem;
 using NaughtyAttributes;
-using Script.EventSystem;
 using UnityEngine;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     [System.Serializable]
     public struct Effect

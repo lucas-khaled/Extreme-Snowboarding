@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Script.EstadosPlayer
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
     public abstract class PlayerState
     {

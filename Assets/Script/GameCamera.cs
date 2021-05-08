@@ -1,9 +1,9 @@
 using System.Collections;
-using Script.EstadosPlayer;
-using Script.UI.HUD;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.UI.HUD;
 using UnityEngine;
 
-namespace Script
+namespace ExtremeSnowboarding.Script
 {
     public class GameCamera : MonoBehaviour
     {

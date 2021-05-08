@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.EventSystem
+namespace ExtremeSnowboarding.Script.EventSystem
 {
     public static class PlayerGeneralEvents
     {

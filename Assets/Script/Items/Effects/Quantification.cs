@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     [System.Serializable]
     public class Quantification

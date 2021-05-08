@@ -1,8 +1,7 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using UnityEngine;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     [System.Serializable]
     public class Recuperation

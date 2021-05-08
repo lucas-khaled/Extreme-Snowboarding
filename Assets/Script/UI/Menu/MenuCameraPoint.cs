@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Script.UI.Menu
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPoint : MonoBehaviour
     {

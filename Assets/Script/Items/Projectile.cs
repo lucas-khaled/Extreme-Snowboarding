@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.Items
+namespace ExtremeSnowboarding.Script.Items
 {
     public class Projectile : MonoBehaviour
     {

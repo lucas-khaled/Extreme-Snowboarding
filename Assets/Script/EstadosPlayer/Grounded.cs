@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Script.EstadosPlayer
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
     [System.Serializable]
     public class Grounded : PlayerState

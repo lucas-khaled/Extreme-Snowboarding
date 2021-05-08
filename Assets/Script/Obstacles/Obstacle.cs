@@ -1,7 +1,7 @@
-using Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EstadosPlayer;
 using UnityEngine;
 
-namespace Script.Obstacles
+namespace ExtremeSnowboarding.Script.Obstacles
 {
     [RequireComponent(typeof(Collider))]
     public class Obstacle : MonoBehaviour

@@ -1,6 +1,6 @@
-﻿using Script.Items.Effects;
+﻿using ExtremeSnowboarding.Script.Items.Effects;
 
-namespace Script.EventSystem
+namespace ExtremeSnowboarding.Script.EventSystem
 {
     public class EffectGeneralEvents
     {

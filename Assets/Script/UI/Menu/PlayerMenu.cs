@@ -2,7 +2,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Script.UI.Menu
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class PlayerMenu : MonoBehaviour
     {

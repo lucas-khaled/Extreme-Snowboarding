@@ -1,8 +1,8 @@
-using Script.Items.Effects;
+using ExtremeSnowboarding.Script.Items.Effects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Script.Items
+namespace ExtremeSnowboarding.Script.Items
 {
     public abstract class Item : ScriptableObject
     {

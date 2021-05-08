@@ -1,9 +1,9 @@
 using System.Collections;
-using Script.Controllers;
-using Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.Controllers;
+using ExtremeSnowboarding.Script.EstadosPlayer;
 using UnityEngine;
 
-namespace Script.Catastrophe
+namespace ExtremeSnowboarding.Script.Catastrophe
 {
     public class Catastrophe : MonoBehaviour
     {

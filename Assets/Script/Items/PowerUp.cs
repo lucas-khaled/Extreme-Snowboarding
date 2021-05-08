@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.Items
+namespace ExtremeSnowboarding.Script.Items
 {
     [CreateAssetMenu(fileName = "PowerUp", menuName = "Itens/PowerUp", order = 1)]
     public class PowerUp : Item

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using ExtremeSnowboarding.Script.Player;
 using NaughtyAttributes;
-using Script.Player;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     [Serializable]
     public class Conditioning

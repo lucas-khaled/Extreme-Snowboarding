@@ -1,7 +1,7 @@
-using Script.EventSystem;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 
-namespace Script.Player
+namespace ExtremeSnowboarding.Script.Player
 {
     public class PlayerData
     {

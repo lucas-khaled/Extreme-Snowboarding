@@ -1,9 +1,9 @@
-﻿using NaughtyAttributes;
-using Script.Player;
+﻿using ExtremeSnowboarding.Script.Player;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Script.Controllers
+namespace ExtremeSnowboarding.Script.Controllers
 {
     public class GameController : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Script.VFX
+namespace ExtremeSnowboarding.Script.VFX
 {
     [CreateAssetMenu(fileName = "Player VFX Group", menuName = "Player VFX Group", order = 0)]
     public class PlayerVFXGroup : ScriptableObject

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Script.EstadosPlayer
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
     public class Fallen : PlayerState
     {

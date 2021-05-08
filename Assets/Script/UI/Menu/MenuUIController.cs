@@ -1,7 +1,7 @@
-using Script.Controllers;
+using ExtremeSnowboarding.Script.Controllers;
 using UnityEngine;
 
-namespace Script.UI.Menu
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuUIController : MonoBehaviour
     {

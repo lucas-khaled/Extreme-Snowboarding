@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     public class EffectsController : MonoBehaviour
     {

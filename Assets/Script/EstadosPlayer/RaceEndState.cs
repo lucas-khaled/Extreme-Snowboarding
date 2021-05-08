@@ -1,7 +1,7 @@
-using Script.Controllers;
+using ExtremeSnowboarding.Script.Controllers;
 using UnityEngine;
 
-namespace Script.EstadosPlayer
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
     public class RaceEndState : PlayerState
     {

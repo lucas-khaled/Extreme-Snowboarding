@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Reflection;
+using ExtremeSnowboarding.Script.Player;
 using NaughtyAttributes;
-using Script.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
-namespace Script.Items.Effects
+namespace ExtremeSnowboarding.Script.Items.Effects
 {
     [System.Serializable]
     public class Application

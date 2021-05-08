@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Script.EventSystem;
-using Script.Items.Effects;
+﻿using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Items.Effects;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Script.Editor.Analysis
+namespace ExtremeSnowboarding.Script.Editor.Analysis
 {
     public class EffectsValuesWindow : EditorWindow
     {
