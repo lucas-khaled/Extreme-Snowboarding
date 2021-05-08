@@ -1,33 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMenu : MonoBehaviour
 {
-    [SerializeField]
-    private SkinnedMeshRenderer meshRenderer;
-
-    [Header("Shader References")]
+    [BoxGroup("Shader References")]
     public Shader changeColorShader;
-    [SerializeField]
+    
+    [SerializeField] [BoxGroup("Shader References")]
     private Texture2D mask01;
-    [SerializeField]
+    [SerializeField] [BoxGroup("Shader References")]
     private Texture2D mask02;
    
 
-    [Header("Interface")]
+    [BoxGroup("Interface")]
     [SerializeField]
     private Canvas canvas;
-    [SerializeField]
+    [SerializeField] [BoxGroup("Interface")]
     private FlexibleColorPicker primaryColorPicker;
-    [SerializeField]
+    [SerializeField] [BoxGroup("Interface")]
     private FlexibleColorPicker secondaryColorPicker;
 
-    [Header("Meshs")]
-    [SerializeField]
-    private Mesh maleMesh;
-    [SerializeField]
-    private Mesh femaleMesh;
+    [FormerlySerializedAs("maleMesh")] [BoxGroup("Mesh")] [SerializeField]
+    private Mesh[] maleMeshes;
+    [FormerlySerializedAs("femaleMesh")] [SerializeField] [BoxGroup("Mesh")]
+    private Mesh[] femaleMeshes;
+    [FormerlySerializedAs("meshRendereres")] [FormerlySerializedAs("meshRenderer")] [SerializeField] [BoxGroup("Mesh")]
+    private SkinnedMeshRenderer[] meshRenderers;
+    
 
     [HideInInspector]
     public Color primaryColor = Color.red;
@@ -35,26 +37,6 @@ public class PlayerMenu : MonoBehaviour
     public Color secondaryColor = Color.white;
 
     private Material myMaterial;
-
-    private void Awake()
-    {
-        myMaterial = new Material(changeColorShader);
-        meshRenderer.material = myMaterial;
-
-        myMaterial.SetTexture("_Color1Mask", mask01);
-        myMaterial.SetTexture("_Color2Mask", mask02);
-
-        canvas.worldCamera = Camera.main;
-
-        primaryColor = Random.ColorHSV();
-        secondaryColor = Random.ColorHSV();
-
-        primaryColorPicker.color = primaryColor;
-        secondaryColorPicker.color = secondaryColor;
-
-        ChangePrimaryColor(primaryColor);
-        ChangeSecondaryColor(secondaryColor);
-    }
 
     public void ChangePrimaryColor(string colorString)
     {
@@ -66,7 +48,6 @@ public class PlayerMenu : MonoBehaviour
 
     public void ChangeSecundaryColor(string colorString)
     {
-        
         Color color;
         ColorUtility.TryParseHtmlString(colorString, out color);
         ChangeSecondaryColor(color);
@@ -92,5 +73,61 @@ public class PlayerMenu : MonoBehaviour
     public void OnSecondaryColorPickerChange()
     {
         ChangeSecondaryColor(secondaryColorPicker.color);
+    }
+
+    public void SetFemaleMesh()
+    {
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            meshRenderers[i].sharedMesh = femaleMeshes[i];
+        }
+    }
+
+    public void SetMaleMeshes()
+    {
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            meshRenderers[i].sharedMesh = maleMeshes[i];
+        }
+    }
+
+    public Mesh[] GetSelectedMeshes()
+    {
+        Mesh[] returnMeshes = new Mesh[meshRenderers.Length];
+
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            returnMeshes[i] = meshRenderers[i].sharedMesh;
+        }
+
+        return returnMeshes;
+    }
+
+    private void Awake()
+    {
+        myMaterial = new Material(changeColorShader);
+        SetMaterials();
+
+        myMaterial.SetTexture("_Color1Mask", mask01);
+        myMaterial.SetTexture("_Color2Mask", mask02);
+
+        canvas.worldCamera = Camera.main;
+
+        primaryColor = Random.ColorHSV();
+        secondaryColor = Random.ColorHSV();
+
+        primaryColorPicker.color = primaryColor;
+        secondaryColorPicker.color = secondaryColor;
+
+        ChangePrimaryColor(primaryColor);
+        ChangeSecondaryColor(secondaryColor);
+    }
+
+    private void SetMaterials()
+    {
+        foreach (var renderer in meshRenderers)
+        {
+            renderer.material = myMaterial;
+        }
     }
 }

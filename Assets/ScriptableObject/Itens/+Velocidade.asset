@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4c37023973e594cb5bf18c3f518436, type: 3}
   m_Name: +Velocidade
   m_EditorClassIdentifier: 
-  attributesToChange:
+  effectsToApply:
   - timeOfChange: 3
     quantification:
       quantitity: 1
       typeOfQuantityCall: 1
     application:
       propertyName:
-        name: player
+        name: AddedVelocity
       floatValue: 5
       stringValue: 
       boolValue: 0

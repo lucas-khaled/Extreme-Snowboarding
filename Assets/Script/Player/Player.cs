@@ -18,8 +18,10 @@ public class Player : MonoBehaviour
     public PlayerInput playerInput;
     [SerializeField] [BoxGroup("References")]
     private Animator animator;
-    [SerializeField][BoxGroup("References")]
+    [SerializeField] [BoxGroup("References")]
     private GameObject objectMesh;
+    [SerializeField] [BoxGroup("References")]
+    private SkinnedMeshRenderer[] meshRenderers;
     
     [BoxGroup("Player Values")]
     [SerializeField] 
@@ -60,9 +62,13 @@ public class Player : MonoBehaviour
         return objectMesh;
     }
 
-    public SkinnedMeshRenderer GetMeshRenderer()
+    public void SetPlayerMeshes(Material material, Mesh[] meshes)
     {
-        return objectMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+        for(int i = 0; i < meshRenderers.Length; i++)
+        {
+            meshRenderers[i].material = material;
+            meshRenderers[i].sharedMesh = meshes[i];
+        }
     }
 
     public PlayerState GetPlayerState()

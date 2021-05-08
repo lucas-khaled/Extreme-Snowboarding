@@ -4896,12 +4896,17 @@ MonoBehaviour:
   playerInput: {fileID: -2960936140915857356}
   animator: {fileID: 5664486153069908261}
   objectMesh: {fileID: 1384769323432956389}
+  meshRenderers:
+  - {fileID: 3370611366440035658}
+  - {fileID: 3388718810130812383}
+  - {fileID: 8018166466306742725}
   sharedValues:
     characterHeight: 1.62
     velocity: 12
     jumpFactor: 1
     maxJumpForce: 20
     maxAddedVelocity: 5.03
+    maxVelocity: 30
     rotationFactor: 1
     turboMultiplier: 1
   playerVFXList:
@@ -5145,6 +5150,21 @@ Transform:
 --- !u!95 &5664486153069908261 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
+  m_PrefabInstance: {fileID: 2303267459179310260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3370611366440035658 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5679029642739840514, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
+  m_PrefabInstance: {fileID: 2303267459179310260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3388718810130812383 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5696494698641661589, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
+  m_PrefabInstance: {fileID: 2303267459179310260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8018166466306742725 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8120243455003784561, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
   m_PrefabInstance: {fileID: 2303267459179310260}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3190743992645837100

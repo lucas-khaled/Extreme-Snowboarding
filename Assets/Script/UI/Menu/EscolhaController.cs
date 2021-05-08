@@ -55,7 +55,7 @@ public class EscolhaController
         int index = 0;
         foreach(PlayerMenu player in playersModels)
         {
-            playersData[index] = new PlayerData(player.primaryColor, player.secondaryColor, player.changeColorShader, index);
+            playersData[index] = new PlayerData(player.primaryColor, player.secondaryColor, player.changeColorShader, index, player.GetSelectedMeshes());
             index++;
         }
 

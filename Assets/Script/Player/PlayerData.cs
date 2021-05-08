@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerData
 {
-    private Mesh playerMesh;
+    private Mesh[] playerMeshes;
     private Color color1;
     private Color color2;
     private Shader playerShader;
@@ -12,12 +12,13 @@ public class PlayerData
     
     public Player player;
 
-    public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex)
+    public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes)
     {
         this.color1 = color1;
         this.color2 = color2;
         this.playerShader = playerShader;
-        this.index = playerIndex + 1;
+        index = playerIndex + 1;
+        playerMeshes = meshes;
     }
 
     public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
@@ -28,7 +29,8 @@ public class PlayerData
         player = playerGO.GetComponent<Player>();
 
         Material material = new Material(playerShader);
-        player.GetMeshRenderer().material = material;
+        player.SetPlayerMeshes(material, playerMeshes);
+        
         material.SetColor("_PrimaryColor", color1);
         material.SetColor("_SecondaryColor", color2);
 
@@ -39,5 +41,10 @@ public class PlayerData
         
         if(PlayerGeneralEvents.onPlayerInstantiate != null)
             PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+    }
+
+    private void SetMeshes()
+    {
+        
     }
 }
