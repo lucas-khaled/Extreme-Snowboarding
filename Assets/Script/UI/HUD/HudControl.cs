@@ -1,57 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+using Script.EventSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HudControl : MonoBehaviour
+namespace Script.UI.HUD
 {
-    [Header("References")]
-    [SerializeField]
-    private Image refClassificationImage;
-    [SerializeField]
-    private Image refTurboBar;
-    [SerializeField]
-    private Image refFuckFriendImage;
-    [SerializeField]
-    private GameObject refFire;
-
-    [Header ("Values")]
-    [SerializeField]
-    private Sprite[] classificationSprites;
-
-    Player player;
-
-    private void Awake()
+    public class HudControl : MonoBehaviour
     {
-        PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
-        PlayerGeneralEvents.onTurboChange += OnTurboChange;
-        PlayerGeneralEvents.onFuckFriendChange += OnFuckFriendChange;
-    }
+        [Header("References")]
+        [SerializeField]
+        private Image refClassificationImage;
+        [SerializeField]
+        private Image refTurboBar;
+        [SerializeField]
+        private Image refFuckFriendImage;
+        [SerializeField]
+        private GameObject refFire;
 
-    public void SetPlayer(Player player)
-    {
-        this.player = player;
-    }
+        [Header ("Values")]
+        [SerializeField]
+        private Sprite[] classificationSprites;
 
-    private void OnPlayerPass(Player player, int classification)
-    {
-        if (this.player == player)
-            refClassificationImage.sprite = classificationSprites[classification];
+        Player.Player player;
 
-    }
-    private void OnTurboChange(Player player, float turboQuantity)
-    {
-        if (this.player == player)
+        private void Awake()
         {
-            float fill = turboQuantity / 1;
-            refTurboBar.fillAmount = fill;
-            refFire.transform.localPosition = new Vector2(fill * 312, 0);
+            PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
+            PlayerGeneralEvents.onTurboChange += OnTurboChange;
+            PlayerGeneralEvents.onFuckFriendChange += OnFuckFriendChange;
         }
-    }
 
-    private void OnFuckFriendChange(Player player, Sprite fuckFriendSprite)
-    {
-        if (this.player == player)
-            refFuckFriendImage.sprite = fuckFriendSprite;
+        public void SetPlayer(Player.Player player)
+        {
+            this.player = player;
+        }
+
+        private void OnPlayerPass(Player.Player player, int classification)
+        {
+            if (this.player == player)
+                refClassificationImage.sprite = classificationSprites[classification];
+
+        }
+        private void OnTurboChange(Player.Player player, float turboQuantity)
+        {
+            if (this.player == player)
+            {
+                float fill = turboQuantity / 1;
+                refTurboBar.fillAmount = fill;
+                refFire.transform.localPosition = new Vector2(fill * 312, 0);
+            }
+        }
+
+        private void OnFuckFriendChange(Player.Player player, Sprite fuckFriendSprite)
+        {
+            if (this.player == player)
+                refFuckFriendImage.sprite = fuckFriendSprite;
+        }
     }
 }

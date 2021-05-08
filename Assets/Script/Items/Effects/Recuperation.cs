@@ -10,13 +10,13 @@ namespace Script.Items.Effects
 
         [SerializeField] private bool haveRecuperation = true;
 
-        public void StartRecuperation(Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
+        public void StartRecuperation(Player.Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
         {
             if(haveRecuperation)
                 RecuperateValues(player, propertyName, oldValue, newValue, mode);
         }
         
-        private void RecuperateValues(Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
+        private void RecuperateValues(Player.Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
         {
             object obj = player.SharedValues;
             PropertyInfo property = obj.GetType().GetProperty(propertyName);

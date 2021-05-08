@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using Script.EstadosPlayer;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class Obstacle : MonoBehaviour
+namespace Script.Obstacles
 {
-    [SerializeField] private bool isHole = false;
-    private Collider myCollider;
-
-    private void Awake()
+    [RequireComponent(typeof(Collider))]
+    public class Obstacle : MonoBehaviour
     {
-        myCollider = GetComponent<Collider>();
-        myCollider.isTrigger = true;
-    }
+        [SerializeField] private bool isHole = false;
+        private Collider myCollider;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        private void Awake()
         {
-            Player player = other.GetComponent<Player>();
-            if(isHole)
-                player.ChangeState(new Dead());
+            myCollider = GetComponent<Collider>();
+            myCollider.isTrigger = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Player.Player player = other.GetComponent<Player.Player>();
+                if(isHole)
+                    player.ChangeState(new Dead());
             
-            else if (!player.SharedValues.Etherium)
-                player.ChangeState(new Fallen());
+                else if (!player.SharedValues.Etherium)
+                    player.ChangeState(new Fallen());
+            }
         }
     }
 }
