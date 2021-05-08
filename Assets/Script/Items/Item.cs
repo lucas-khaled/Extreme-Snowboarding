@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using Script.Items.Effects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class Item : ScriptableObject
+namespace Script.Items
 {
-    [FormerlySerializedAs("attributesToChange")] [SerializeField]
-    protected Effect[] effectsToApply;
-
-    public abstract void Activate(Player player);
-
-    public void StartEffects(Player player)
+    public abstract class Item : ScriptableObject
     {
-        foreach (Effect effect in effectsToApply)
+        [FormerlySerializedAs("attributesToChange")] [SerializeField]
+        protected Effect[] effectsToApply;
+
+        public abstract void Activate(Player.Player player);
+
+        public void StartEffects(Player.Player player)
         {
-            effect.StartEffect(player);
+            foreach (Effect effect in effectsToApply)
+            {
+                effect.StartEffect(player);
+            }
         }
     }
 }

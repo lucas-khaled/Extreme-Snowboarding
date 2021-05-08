@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using NaughtyAttributes;
+using Script.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
@@ -121,7 +122,7 @@ namespace Script.Items.Effects
         /// Applies the effect and returns the initial value in the specified property
         /// </summary>
         /// <param name="player">The player that the effect must be applied</param>
-        public void ApplyEffect(Player player)
+        public void ApplyEffect(Player.Player player)
         {
             PropertyInfo property = player.SharedValues.GetType().GetProperty(propertyName.name);
             InitialValue = property.GetValue(player.SharedValues);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.EventSystem;
+using Script.Items.Effects;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -55,9 +56,9 @@ namespace Script.Editor.Analysis
     struct EffectPlayerStructure
     {
         public Effect effect;
-        public Player player;
+        public Player.Player player;
 
-        public EffectPlayerStructure(Effect effect, Player player)
+        public EffectPlayerStructure(Effect effect, Player.Player player)
         {
             this.effect = effect;
             this.player = player;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NaughtyAttributes;
+using Script.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,7 +17,7 @@ namespace Script.Items.Effects
 
         [FormerlySerializedAs("conditions")] [SerializeField] private ConditionBlock<PlayerSharedValues> conditionBlock;
         
-        public bool IsConditioned(Player player)
+        public bool IsConditioned(Player.Player player)
         {
             return conditionBlock.GetFinalCondition(player.SharedValues);
         }
