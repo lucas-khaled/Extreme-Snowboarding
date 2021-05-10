@@ -1,30 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class ItemPickup : MonoBehaviour
+namespace ExtremeSnowboarding.Script.Items
 {
-    [SerializeField] private Item[] availableItems;
-
-    private void PickRandomItem(GameObject player)
+    [RequireComponent(typeof(Collider))]
+    public class ItemPickup : MonoBehaviour
     {
-        //Talvez uma animação de randomização??
+        [SerializeField] private Item[] availableItems;
 
-        player.GetComponent<Player>().Coletavel = availableItems[Random.Range(0, availableItems.Length)];
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
+        private void PickRandomItem(GameObject player)
         {
-            if(other.GetComponent<Player>().Coletavel == null)
-            {
-                PickRandomItem(other.gameObject);
-                Destroy(gameObject);
-            }
+            //Talvez uma animaÃ§Ã£o de randomizaÃ§Ã£o??
+
+            player.GetComponent<Player.Player>().Coletavel = availableItems[Random.Range(0, availableItems.Length)];
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                if(other.GetComponent<Player.Player>().Coletavel == null)
+                {
+                    PickRandomItem(other.gameObject);
+                    Destroy(gameObject);
+                }
+            }
+
         
+        }
     }
 }

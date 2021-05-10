@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Items.Effects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public abstract class Item : ScriptableObject
+namespace ExtremeSnowboarding.Script.Items
 {
-    [SerializeField]
-    protected Effect[] attributesToChange;
-
-    public abstract void Activate(Player player);
-
-    public void StartEffects(Player player)
+    public abstract class Item : ScriptableObject
     {
-        Debug.Log("used: " + name);
-        foreach (Effect effect in attributesToChange)
+        [FormerlySerializedAs("attributesToChange")] [SerializeField]
+        protected Effect[] effectsToApply;
+
+        public abstract void Activate(Player.Player player);
+
+        public void StartEffects(Player.Player player)
         {
-            player.StartCoroutine(effect.StartEffect(player));
+            foreach (Effect effect in effectsToApply)
+            {
+                effect.StartEffect(player);
+            }
         }
     }
 }

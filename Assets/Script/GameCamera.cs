@@ -1,54 +1,58 @@
 using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.UI.HUD;
 using UnityEngine;
 
-public class GameCamera : MonoBehaviour
+namespace ExtremeSnowboarding.Script
 {
-    [SerializeField]
-    private HudControl hud;
-
-    Player player;
-    Vector3 offset;
-
-    public void SetPlayer(Player player)
+    public class GameCamera : MonoBehaviour
     {
-        this.player = player;
-        player.playerCamera = this;
-        
-        if (player.GetPlayerState().GetType() != typeof(Dead))
-        hud.setPlayer(player);
-    }
+        [SerializeField]
+        private HudControl hud;
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        if(player != null)
-            transform.parent.transform.position = player.transform.position;
-    }
+        Player.Player player;
+        Vector3 offset;
 
-    public IEnumerator CameraShake(bool deactivateCameraShake, float shakingDuration, float magnetude)
-    {
-        if (!deactivateCameraShake)
+        public void SetPlayer(Player.Player player)
         {
-            Vector3 originalPoisition = this.transform.localPosition;
+            this.player = player;
+            player.playerCamera = this;
+        
+            if (player.GetPlayerState().GetType() != typeof(Dead))
+                hud.SetPlayer(player);
+        }
 
-            float timeElapsed = 0f;
+        // Update is called once per frame
+        void LateUpdate()
+        {
+            if(player != null)
+                transform.parent.transform.position = player.transform.position;
+        }
 
-            while (timeElapsed < shakingDuration)
+        public IEnumerator CameraShake(bool deactivateCameraShake, float shakingDuration, float magnetude)
+        {
+            if (!deactivateCameraShake)
             {
-                float x = Random.Range(-1f, 1f) * magnetude;
-                float y = Random.Range(-1f, 1f) * magnetude;
+                Vector3 originalPoisition = this.transform.localPosition;
 
-                this.transform.localPosition = new Vector3(x + originalPoisition.x,
-                                                              y + originalPoisition.y,
-                                                              originalPoisition.z);
+                float timeElapsed = 0f;
 
-                timeElapsed += Time.deltaTime;
+                while (timeElapsed < shakingDuration)
+                {
+                    float x = Random.Range(-1f, 1f) * magnetude;
+                    float y = Random.Range(-1f, 1f) * magnetude;
 
-                yield return null;
+                    this.transform.localPosition = new Vector3(x + originalPoisition.x,
+                        y + originalPoisition.y,
+                        originalPoisition.z);
+
+                    timeElapsed += Time.deltaTime;
+
+                    yield return null;
+                }
+
+                this.transform.localPosition = originalPoisition;
             }
-
-            this.transform.localPosition = originalPoisition;
         }
     }
 }

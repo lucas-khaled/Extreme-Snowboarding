@@ -1,54 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Controllers;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 
-public class Dead : PlayerState
+namespace ExtremeSnowboarding.Script.EstadosPlayer
 {
-    Player playerView;
-
-    public override void InterpretateInput(GameInput input)
+    public class Dead : PlayerState
     {
-        if (GameInput.UP == input)
+        Player.Player playerView;
+
+        // public override void InterpretateInput(GameInput input)
+        // {
+        //     if (GameInput.UP == input)
+        //         ChangePlayerView();
+        // }
+
+        public override void StateEnd()
+        {
+        
+        }
+
+        public override void StateStart(Player.Player player)
+        {
+            base.StateStart(player);
+            playerView = player;
             ChangePlayerView();
-    }
 
-    public override void StateEnd()
-    {
+            if (PlayerGeneralEvents.onPlayerDeath != null)
+                PlayerGeneralEvents.onPlayerDeath.Invoke(player);
+
+            MonoBehaviour.Destroy(player.GetMeshGameObject()); 
+        }
+
+        public override void StateUpdate()
+        {
         
-    }
+        }
 
-    public override void StateStart(Player player)
-    {
-        base.StateStart(player);
-        playerView = player;
-        ChangePlayerView();
+        ///<summary> 
+        ///Change the player camera visualization to a random alive player (doesn't work if there's no players alive)
+        ///</summary>
+        public void ChangePlayerView()
+        {
+            playerView = CorridaController.instance.GetOtherPlayerThan(playerView);
+            player.playerCamera.SetPlayer(playerView);
+        }
 
-        if (EventSystem.onPlayerDeath != null)
-            EventSystem.onPlayerDeath.Invoke(player);
-
-        MonoBehaviour.Destroy(player.GetMeshGameObject()); 
-    }
-
-    public override void StateUpdate()
-    {
-        
-    }
-
-    ///<summary> 
-    ///Change the player camera visualization to a random alive player (doesn't work if there's no players alive)
-    ///</summary>
-    public void ChangePlayerView()
-    {
-        playerView = CorridaController.instance.GetOtherPlayerThan(playerView);
-        player.playerCamera.SetPlayer(playerView);
-    }
-
-    ///<summary>
-    ///Change the player camera visualization to the specified player 
-    ///</summary>
-    public void ChangePlayerView(Player player)
-    {
-        playerView = player;
-        player.playerCamera.SetPlayer(player);
+        ///<summary>
+        ///Change the player camera visualization to the specified player 
+        ///</summary>
+        public void ChangePlayerView(Player.Player player)
+        {
+            playerView = player;
+            player.playerCamera.SetPlayer(player);
+        }
     }
 }

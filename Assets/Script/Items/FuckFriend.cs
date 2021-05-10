@@ -1,30 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
-public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
-
-[CreateAssetMenu(fileName = "FuckFriend", menuName = "Itens/Fuck Friend", order = 1)]
-public class FuckFriend : Item
+namespace ExtremeSnowboarding.Script.Items
 {
-    [Header("Fuck Friend Values")]
-    [SerializeField]
-    GameObject projectile;
-    [SerializeField]
-    private MovementType movementType;
+    public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
 
-    public override void Activate (Player player)
+    [CreateAssetMenu(fileName = "FuckFriend", menuName = "Itens/Fuck Friend", order = 1)]
+    public class FuckFriend : Item
     {
-        GameObject instantiatedProjectile = Instantiate(projectile, player.transform.position, Quaternion.identity /* Considerar a rotação do cenário!!!! */);
-        Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
+        [BoxGroup("Fuck Friend Values")]
+        [SerializeField] [ShowAssetPreview()] 
+        GameObject projectile;
+        [SerializeField] [BoxGroup("Fuck Friend Values")]
+        private MovementType movementType;
 
-        proj.fuckfriend = this;
-        proj.caster = player;
+        public override void Activate (Player.Player player)
+        {
+            GameObject instantiatedProjectile = Instantiate(projectile, player.transform.position, Quaternion.identity /* Considerar a rotaï¿½ï¿½o do cenï¿½rio!!!! */);
+            Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
+
+            proj.fuckfriend = this;
+            proj.caster = player;
+
+        }
+        public MovementType GetMovementType()
+        {
+            return movementType;
+        }
 
     }
-    public MovementType GetMovementType()
-    {
-        return movementType;
-    }
-
 }
