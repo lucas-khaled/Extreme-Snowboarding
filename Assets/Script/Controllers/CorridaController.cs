@@ -1,121 +1,142 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EventSystem;
+using ExtremeSnowboarding.Script.Player;
 using UnityEngine;
 
-public class CorridaController : MonoBehaviour
+namespace ExtremeSnowboarding.Script.Controllers
 {
-    [SerializeField]
-    private Vector3 posicaoSpawnPlayers;
-    [SerializeField]
-    private Player playerPrefab;
-
-    [HideInInspector]
-    public GameCamera[] cameras;
-    [HideInInspector]
-    public PlayerData[] players;
-    [HideInInspector]
-    public List<Player> playersClassificated;
-    [HideInInspector]
-    public GameObject catastrophe;
-
-    int alivePlayers;
-
-    public static CorridaController instance { get; private set; }
-
-    ///<summary> 
-    ///Get an alive player other than the specified one 
-    ///</summary>
-    public Player GetOtherPlayerThan(Player player)
+    public class CorridaController : MonoBehaviour
     {
-        if (alivePlayers > 1)
+        [SerializeField]
+        private Vector3 posicaoSpawnPlayers;
+        [SerializeField]
+        private Player.Player playerPrefab;
+
+        [HideInInspector]
+        public GameCamera[] cameras;
+        [HideInInspector]
+        public PlayerData[] players;
+        [HideInInspector]
+        public List<Player.Player> playersClassificated;
+        [HideInInspector]
+        public GameObject catastrophe;
+
+        int alivePlayers;
+
+        public static CorridaController instance { get; private set; }
+
+        ///<summary> 
+        ///Get an alive player other than the specified one 
+        ///</summary>
+        public Player.Player GetOtherPlayerThan(Player.Player player)
         {
-            int index = Random.Range(0, players.Length);
-            Player returnPlayer = players[index].player;
-
-            if (returnPlayer == player || returnPlayer.GetPlayerState().GetType() == typeof(Dead))
-                return GetOtherPlayerThan(player);
-            else
-                return returnPlayer;
-        }
-        else
-            return player;
-    }
-
-    private void Awake()
-    {
-        PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
-        PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-        instance = this;
-    }
-
-    #region Listeners
-
-    private void OnPlayerDeath(Player player)
-    {
-        alivePlayers--;
-    }
-
-    private void OnPlayerPass(Player player)
-    {
-
-    }
-
-    #endregion
-
-    private void Start()
-    {
-        LoadPlayers();
-        InvokeRepeating("CheckPlayerClassification",0,0.5f);
-    }
-    private void InstantiatePlayers()
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1) * 2, i+1, playerPrefab.gameObject, cameras[i]);
-
-        }
-    }
-    private void LoadPlayers()
-    {
-        players = GameController.gameController.playerData;
-        alivePlayers = players.Length;
-        InstantiatePlayers();
-    }
-
-    private void CheckPlayerClassification()
-    {
-        bool changed = false;
-        PlayerData playerChanged = null;
-
-        for (int i = 0; i < players.Length - 1; i++)
-        {
-            float distanceXPlayer1 = players[i].player.transform.position.x;
-            float distanceXPlayer2 = players[i + 1].player.transform.position.x;
-
-            if (distanceXPlayer1 < distanceXPlayer2)
+            if (alivePlayers > 1)
             {
-                PlayerData changePlayerAux = players[i];
-                playerChanged = players[i];
-                players[i] = players[i + 1];
-                players[i + 1] = changePlayerAux;
-                changed = true;
+                int index = Random.Range(0, players.Length);
+                Player.Player returnPlayer = players[index].player;
+
+                if (returnPlayer == player || returnPlayer.GetPlayerState().GetType() == typeof(Dead))
+                    return GetOtherPlayerThan(player);
+                else
+                    return returnPlayer;
+            }
+            else
+                return player;
+        }
+
+        private void Awake()
+        {
+            PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
+            PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
+            instance = this;
+        }
+
+        #region Listeners
+
+        private void OnPlayerDeath(Player.Player player)
+        {
+            alivePlayers--;
+        }
+
+        private void OnPlayerPass(Player.Player player, int classification)
+        {
+
+        }
+
+        #endregion
+
+        private void Start()
+        {
+            LoadPlayers();
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i] != null)
+                    PlayerGeneralEvents.onPlayerPass.Invoke(players[i].player, i);
+            }
+            InvokeRepeating("CheckPlayerClassification",0,0.1f);
+        }
+        private void InstantiatePlayers()
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
+
             }
         }
-        if (changed)
+        private void LoadPlayers()
         {
-            if (PlayerGeneralEvents.onPlayerPass != null && playerChanged != null)
-                PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player);
-
-            changed = false;
+            players = GameController.gameController.playerData;
+            alivePlayers = players.Length;
+            InstantiatePlayers();
         }
-    }
-    public void PlayerFinishedRace(Player player)
-    {
-        playersClassificated.Add(player);
-    }
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");
+
+        private void CheckPlayerClassification()
+        {
+            bool changed = false;
+            PlayerData playerChanged = null;
+            PlayerData playerChanged2 = null;
+            int playerChangedPosition = 0;
+
+            for (int i = 0; i < players.Length - 1; i++)
+            {
+                float distanceXPlayer1 = players[i].player.transform.position.x;
+                float distanceXPlayer2 = players[i + 1].player.transform.position.x;
+
+                if (distanceXPlayer1 < distanceXPlayer2)
+                {
+                    playerChanged = players[i];
+                    playerChanged2 = players[i + 1];
+
+                    playerChanged = players[i];
+                    players[i] = players[i + 1];
+                    players[i + 1] = playerChanged;
+                    playerChangedPosition = i + 1;
+                    changed = true;
+                }
+
+                if (changed)
+                {
+                    if (PlayerGeneralEvents.onPlayerPass != null)
+                    {
+                        if (playerChanged != null && playerChanged2 != null)
+                        {
+                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
+                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+                        }
+                    }
+
+                    changed = false;
+                }
+            }
+        }
+        public void PlayerFinishedRace(Player.Player player)
+        {
+            playersClassificated.Add(player);
+        }
+        void OnDrawGizmos()
+        {
+            Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");
+        }
     }
 }

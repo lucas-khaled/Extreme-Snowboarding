@@ -12,12 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4c8ad89bd7f9f45a241c3320ffe642, type: 3}
   m_Name: -VelocidadeFuck
   m_EditorClassIdentifier: 
-  attributesToChange:
-  - name: AddedVelocity
-    floatValue: -3
-    stringValue: 
-    boolValue: 0
-    effectMode: 0
-    timeOfChange: 3
+  effectsToApply:
+  - timeOfChange: 3
+    quantification:
+      quantitity: 1
+      typeOfQuantityCall: 1
+    application:
+      propertyName:
+        name: AddedVelocity
+      floatValue: -5
+      stringValue: 
+      boolValue: 0
+      objectValue: {fileID: 0}
+      effectMode: 0
+    recuperation:
+      haveRecuperation: 1
+    conditioning:
+      conditionBlock:
+        conditions: []
   projectile: {fileID: 6386299705226804969, guid: dfb3b62a210f9ea429a2704cce347ff0, type: 3}
   movementType: 2

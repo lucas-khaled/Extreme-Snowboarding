@@ -1,141 +1,142 @@
-using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
-public class MenuCameraPointController : MonoBehaviour
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
-    [SerializeField]
-    private MenuCameraPoint[] points;
-    [SerializeField]
-    private int startIndex = 0;
-    [SerializeField]
-    private bool isCycle = true;
-    [Header("Cinemachine")]
-    [SerializeField]
-    private CinemachineVirtualCamera menuCamera;
-    [SerializeField]
-    private CinemachineSmoothPath path;
+    public class MenuCameraPointController : MonoBehaviour
+    {
+        [SerializeField]
+        private MenuCameraPoint[] points;
+        [SerializeField]
+        private int startIndex = 0;
+        [SerializeField]
+        private bool isCycle = true;
+        [Header("Cinemachine")]
+        [SerializeField]
+        private CinemachineVirtualCamera menuCamera;
+        [SerializeField]
+        private CinemachineSmoothPath path;
     
 
-    private MenuCameraPoint actualPoint;
-    private int pointIndex;
+        private MenuCameraPoint actualPoint;
+        private int pointIndex;
 
-    private CinemachineTrackedDolly trackedDolly;
+        private CinemachineTrackedDolly trackedDolly;
 
-    private void Awake()
-    {
-        SetCinemachineTrack();
-    }
-
-    void SetCinemachineTrack()
-    {
-        path.m_Looped = isCycle;
-        path.m_Waypoints = new CinemachineSmoothPath.Waypoint[points.Length];
-        int index = 0;
-
-        foreach(MenuCameraPoint point in points)
+        private void Awake()
         {
-            path.m_Waypoints[index] = new CinemachineSmoothPath.Waypoint();
-            path.m_Waypoints[index].position = point.transform.position;
-            index++;
+            SetCinemachineTrack();
         }
 
-        trackedDolly = menuCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-        trackedDolly.m_PathPosition = pointIndex = startIndex;
-    }
-
-    private void Start()
-    {
-        actualPoint = points[pointIndex];
-        actualPoint.Open();
-    }
-
-    public void NextPoint()
-    {
-        if (pointIndex == points.Length - 1)
+        void SetCinemachineTrack()
         {
-            if (isCycle)
-                pointIndex = 0;
+            path.m_Looped = isCycle;
+            path.m_Waypoints = new CinemachineSmoothPath.Waypoint[points.Length];
+            int index = 0;
+
+            foreach(MenuCameraPoint point in points)
+            {
+                path.m_Waypoints[index] = new CinemachineSmoothPath.Waypoint();
+                path.m_Waypoints[index].position = point.transform.position;
+                index++;
+            }
+
+            trackedDolly = menuCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
+            trackedDolly.m_PathPosition = pointIndex = startIndex;
+        }
+
+        private void Start()
+        {
+            actualPoint = points[pointIndex];
+            actualPoint.Open();
+        }
+
+        public void NextPoint()
+        {
+            if (pointIndex == points.Length - 1)
+            {
+                if (isCycle)
+                    pointIndex = 0;
+                else
+                    return;
+            }
             else
-                return;
+                pointIndex++;
+
+            //StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
+            //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
+            StartCoroutine(GoToPoint(actualPoint,points[pointIndex]));
+            actualPoint = points[pointIndex]; 
         }
-        else
-            pointIndex++;
 
-        //StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
-        //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
-        StartCoroutine(GoToPoint(actualPoint,points[pointIndex]));
-        actualPoint = points[pointIndex]; 
-    }
-
-    public void PreviousPoint()
-    {
-        if (pointIndex == 0)
+        public void PreviousPoint()
         {
-            if (isCycle)
-                pointIndex = points.Length-1;
+            if (pointIndex == 0)
+            {
+                if (isCycle)
+                    pointIndex = points.Length-1;
+                else
+                    return;
+            }
             else
+                pointIndex--;
+
+            // StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
+            //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
+            StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
+            actualPoint = points[pointIndex];
+        }
+
+        public void GoToPointByTag(string tag)
+        {
+            if(tag == string.Empty || tag == null)
+            {
+                NextPoint();
                 return;
+            }
+
+            int index = 0;
+            foreach(MenuCameraPoint point in points)
+            {
+                if (point.GetTag() == tag)
+                    break;
+
+                index++;
+            }
+
+            if(index >= points.Length)
+            {
+                NextPoint();
+                return;
+            }
+
+            pointIndex = index;
+            StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
+            actualPoint = points[pointIndex];
         }
-        else
-            pointIndex--;
 
-        // StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
-        //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
-        StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
-        actualPoint = points[pointIndex];
-    }
-
-    public void GoToPointByTag(string tag)
-    {
-        if(tag == string.Empty || tag == null)
+        IEnumerator GoToPoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
         {
-            NextPoint();
-            return;
+            fromPoint.StartClosing();
+            toPoint.StartOpening();
+            float actualCinePoint = trackedDolly.m_PathPosition;
+
+            float timeStep = 0.05f;
+            float step = (pointIndex - actualCinePoint) * timeStep/toPoint.transitionTime;
+
+            while(Mathf.Abs((float)pointIndex - trackedDolly.m_PathPosition) >0.1f)
+            {
+                trackedDolly.m_PathPosition += step;
+                yield return new WaitForSecondsRealtime(timeStep);
+            }
+
+            trackedDolly.m_PathPosition = pointIndex;
+            fromPoint.Close();
+            toPoint.Open();
         }
 
-        int index = 0;
-        foreach(MenuCameraPoint point in points)
-        {
-            if (point.GetTag() == tag)
-                break;
-
-            index++;
-        }
-
-        if(index >= points.Length)
-        {
-            NextPoint();
-            return;
-        }
-
-        pointIndex = index;
-        StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
-        actualPoint = points[pointIndex];
-    }
-
-    IEnumerator GoToPoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
-    {
-        fromPoint.StartClosing();
-        toPoint.StartOpening();
-        float actualCinePoint = trackedDolly.m_PathPosition;
-
-        float timeStep = 0.05f;
-        float step = (pointIndex - actualCinePoint) * timeStep/toPoint.transitionTime;
-
-        while(Mathf.Abs((float)pointIndex - trackedDolly.m_PathPosition) >0.1f)
-        {
-            trackedDolly.m_PathPosition += step;
-            yield return new WaitForSecondsRealtime(timeStep);
-        }
-
-        trackedDolly.m_PathPosition = pointIndex;
-        fromPoint.Close();
-        toPoint.Open();
-    }
-
-    /*IEnumerator ChangeRotation(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
+        /*IEnumerator ChangeRotation(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
     {
         float xDifference = (toPoint.transform.eulerAngles.x % 360) - (fromPoint.transform.eulerAngles.x % 360);
         float yDifference = (toPoint.transform.eulerAngles.y % 360) - (fromPoint.transform.eulerAngles.y % 360);
@@ -178,4 +179,5 @@ public class MenuCameraPointController : MonoBehaviour
         fromPoint.Close();
         toPoint.Open();
     }*/
+    }
 }

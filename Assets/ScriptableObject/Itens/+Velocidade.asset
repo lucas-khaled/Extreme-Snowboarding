@@ -12,9 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4c37023973e594cb5bf18c3f518436, type: 3}
   m_Name: +Velocidade
   m_EditorClassIdentifier: 
-  attributesToChange:
-  - name: AddedVelocity
-    floatValue: 10
-    stringValue: 
-    boolValue: 1
-    timeOfChange: 3
+  effectsToApply:
+  - timeOfChange: 3
+    quantification:
+      quantitity: 1
+      typeOfQuantityCall: 1
+    application:
+      propertyName:
+        name: AddedVelocity
+      floatValue: 5
+      stringValue: 
+      boolValue: 0
+      objectValue: {fileID: 0}
+      effectMode: 0
+    recuperation:
+      haveRecuperation: 1
+    conditioning:
+      conditionBlock:
+        conditions:
+        - propertyName:
+            name: Turbo
+          operation: 1
+          floatValue: 1
+          stringValue: 
+          boolValue: 0
+          objectValue: {fileID: 0}
+          conector: 0

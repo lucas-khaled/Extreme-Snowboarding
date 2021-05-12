@@ -1,35 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Controllers;
 using UnityEngine;
 
-public class MenuUIController : MonoBehaviour
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
-    [SerializeField]
-    private MenuCameraPointController menuCameraPointController;
-
-    [Header("Escolha Panel")]
-    [SerializeField]
-    private EscolhaController escolhaController;
-
-    private void Awake()
+    public class MenuUIController : MonoBehaviour
     {
-        escolhaController.SetPlayers(1);
-    }
+        [SerializeField]
+        private MenuCameraPointController menuCameraPointController;
 
-    public void PressPlay()
-    {
-        escolhaController.SendPlayerData();
-        GameController.gameController.Play();
-    }
+        [Header("Escolha Panel")]
+        [SerializeField]
+        private EscolhaController escolhaController;
 
-    public void GoNext()
-    {
-        menuCameraPointController.NextPoint();
-    }
+        private void Awake()
+        {
+            escolhaController.SetPlayers(1);
+        }
 
-    public void ChangeNumOfPlayers(int num)
-    {
-        GameController.gameController.ChangeNumOfPlayers(num);
-        escolhaController.SetPlayers(num);
+        public void PressPlay()
+        {
+            escolhaController.SendPlayerData();
+            GameController.gameController.Play();
+        }
+
+        public void GoNext()
+        {
+            menuCameraPointController.NextPoint();
+        }
+
+        public void ChangeNumOfPlayers(int num)
+        {
+            GameController.gameController.ChangeNumOfPlayers(num);
+            escolhaController.SetPlayers(num);
+        }
     }
 }

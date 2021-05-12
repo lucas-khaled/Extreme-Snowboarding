@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Script.EventSystem;
+﻿using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Items.Effects;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Script.Editor.Analysis
+namespace ExtremeSnowboarding.Script.Editor.Analysis
 {
     public class EffectsValuesWindow : EditorWindow
     {
@@ -47,35 +45,17 @@ namespace Script.Editor.Analysis
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "Fase1")
-            {
-                EffectGeneralEvents.onEffectStarted += OnEffectStarted;
-                EffectGeneralEvents.onEffectEnded += OnEffectEnded;
-            }
-            else
-            {
-                EffectGeneralEvents.onEffectStarted -= OnEffectStarted;
-                EffectGeneralEvents.onEffectEnded -= OnEffectEnded;
-            }
+           
         }
-
-        void OnEffectStarted(Effect effect, Player player)
-        {
-            activeEffects.Add(new EffectPlayerStructure(effect, player));
-        }
-
-        void OnEffectEnded(Effect effect, Player player)
-        {
-            activeEffects.Remove(activeEffects.Find((x) => x.effect.Name == effect.Name && x.effect.FloatValue == effect.FloatValue));
-        }
+        
     }
 
     struct EffectPlayerStructure
     {
         public Effect effect;
-        public Player player;
+        public Player.Player player;
 
-        public EffectPlayerStructure(Effect effect, Player player)
+        public EffectPlayerStructure(Effect effect, Player.Player player)
         {
             this.effect = effect;
             this.player = player;

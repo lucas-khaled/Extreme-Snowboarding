@@ -1,45 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
 
-public class RaceEnd : MonoBehaviour
+namespace ExtremeSnowboarding.Script.Controllers
 {
-    private int quantityOfActivePlayer;
-    private Player firstPlayer;
-
-    private void Awake()
+    public class RaceEnd : MonoBehaviour
     {
-        PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-        quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
-    }
+        private int quantityOfActivePlayer;
+        private Player.Player firstPlayer;
 
-    private void OnPlayerDeath(Player player)
-    {
-        quantityOfActivePlayer--;
-        if (quantityOfActivePlayer <= 0)
+        private void Awake()
         {
-            EndRace();
+            PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
+            quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
         }
-    }
 
-    private void EndRace()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
-        PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
+        private void OnPlayerDeath(Player.Player player)
         {
-            other.gameObject.GetComponent<Player>().ChangeState(new RaceEndState());
             quantityOfActivePlayer--;
-
-            CorridaController.instance.PlayerFinishedRace(other.gameObject.GetComponent<Player>());
-            
             if (quantityOfActivePlayer <= 0)
             {
                 EndRace();
+            }
+        }
+
+        private void EndRace()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
+            PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<Player.Player>().ChangeState(new RaceEndState());
+                quantityOfActivePlayer--;
+
+                CorridaController.instance.PlayerFinishedRace(other.gameObject.GetComponent<Player.Player>());
+            
+                if (quantityOfActivePlayer <= 0)
+                {
+                    EndRace();
+                }
             }
         }
     }
