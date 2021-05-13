@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -23,7 +24,14 @@ namespace ExtremeSnowboarding.Script.VFX
             
             for(int i = 0; i<VFXRealArray.Length;i++)
             {
-                ParticleSystem instantiatedParticle = Instantiate(VFXRealArray[i].GetParticle().gameObject, player).GetComponent<ParticleSystem>();
+                Debug.Log(i);
+                if (VFXRealArray[i].GetParticle() == null)
+                {
+                    Debug.LogError("Ó o nulo ai");
+                }
+                GameObject particleGO = Instantiate(VFXRealArray[i].GetParticle().gameObject, player);
+                ParticleSystem instantiatedParticle = particleGO.GetComponent<ParticleSystem>();
+                instantiatedParticle.name = VFXRealArray[i].ParticleName;
                 VFXRealArray[i] = new PlayerVFX(instantiatedParticle);
             }
         }
@@ -85,7 +93,7 @@ namespace ExtremeSnowboarding.Script.VFX
                 }
             }
 
-            int initialIndex = Mathf.Abs(sum) % VFXList.Count;
+            int initialIndex = Mathf.Abs(sum) % VFXRealArray.Length;
             int finalIndex = (onlySearchingName) ? GetOffset(initialIndex, name) : GetEmptyIndex(initialIndex);
 
             return finalIndex;
@@ -98,7 +106,7 @@ namespace ExtremeSnowboarding.Script.VFX
 
         private int GetOffsetRecursive(int index, int initialValue, string name)
         {
-            if (VFXRealArray[index].GetParticle().name == name)
+            if (VFXRealArray[index].ParticleName == name)
                 return index;
             else
             {
@@ -150,8 +158,8 @@ namespace ExtremeSnowboarding.Script.VFX
                 ParticleSystem part = vfx.GetParticle();
                 if (part != null)
                 {
-                    string name = (vfx.particleName != string.Empty) ? vfx.particleName : part.name;
-                    VFXRealArray[GetHashedID(name)] = vfx;
+                    string name = vfx.ParticleName;
+                    VFXRealArray[GetHashedID(name)] = new PlayerVFX(vfx);
                 }
                     
                 
@@ -172,12 +180,14 @@ namespace ExtremeSnowboarding.Script.VFX
     [System.Serializable]
     public class PlayerVFX
     {
-        public string particleName;
+        [SerializeField] private string particleName;
         
         [SerializeField] private ParticleSystem particle;
 
         private bool locked = false;
 
+        public string ParticleName => (particleName != string.Empty) ? particleName : particle.name;
+        
         public ParticleSystem GetParticle()
         {
             return particle;
@@ -234,6 +244,12 @@ namespace ExtremeSnowboarding.Script.VFX
         public PlayerVFX(ParticleSystem particle)
         {
             this.particle = particle;
+        }
+
+        public PlayerVFX(PlayerVFX vfx)
+        {
+            particleName = vfx.ParticleName;
+            particle = GetParticle();
         }
     }
 }
