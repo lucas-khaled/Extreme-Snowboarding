@@ -96,7 +96,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 }
                 else
                 {
-                    float timeFall = 3;
+                    float timeFall = 3.5f;
                     if (angleDifference > 120)
                     {
                         player.SetOnAnimator("hardFall", true);
