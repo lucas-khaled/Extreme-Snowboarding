@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15210627723245958a2745ed03603d7c, type: 3}
   m_Name: Player VFX Group
   m_EditorClassIdentifier: 
-  VFXList:
+  restartScene: 0
+  vfxList:
   - particleName: NeveEspalha
     particle: {fileID: 2637578483558100438, guid: fc9ffd13d8f4aef4f9315a53b711a809, type: 3}
   - particleName: Portal Afetado

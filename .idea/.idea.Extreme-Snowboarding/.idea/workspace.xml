@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Script/VFX/VFXManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/VFX/VFXManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fase2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fase2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effects/EffectsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effects/EffectsController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/-VelocidadeFuck.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/-VelocidadeFuck.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/VFX/Player VFX Group.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/VFX/Player VFX Group.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +53,8 @@
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Recuperation.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Item.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/EffectsValuesWindow.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/GameController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/RaceEnd.cs" />
@@ -57,9 +68,13 @@
       <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
       <option value="$PROJECT_DIR$/Assets/ScriptableObject/VFX/PlayerVFX.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFX.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/VFX/InstantiatedVFXList.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/VFX/VFXManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -134,6 +149,7 @@
       <workItem from="1620345820774" duration="4048000" />
       <workItem from="1620429349280" duration="6984000" />
       <workItem from="1620904005570" duration="1924000" />
+      <workItem from="1620999743498" duration="6430000" />
     </task>
     <servers />
   </component>

@@ -268,12 +268,12 @@ namespace ExtremeSnowboarding.Script.Player
                 if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
                 {
                     player.SetOnAnimator("highSpeed", true);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement").StartParticle();
+                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StartParticle();
                 }
                 else
                 {
                     player.SetOnAnimator("highSpeed", false);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement").StopParticle();
+                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StopParticle();
                 }          
             
             }

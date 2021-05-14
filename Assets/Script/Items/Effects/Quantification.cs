@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.Items.Effects
@@ -35,11 +36,12 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             if (quantitity > 1)
             {
                 iterationsTime = totalTime / quantitity;
-                EffectsController.instance.StartCoroutine(QuantityProccess());
+                VFX.VFXManager.instance.StartCoroutine(QuantityProccess());
+                
             }
             else
             {
-                EffectsController.instance.StartCoroutine(QuantityUnique());
+                VFX.VFXManager.instance.StartCoroutine(QuantityUnique());
             }
             
         }
