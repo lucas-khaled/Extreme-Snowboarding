@@ -41,8 +41,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         ///</summary>
         public void ChangePlayerView()
         {
-            playerView = CorridaController.instance.GetOtherPlayerThan(playerView);
-            player.playerCamera.SetPlayer(playerView);
+            playerView = CorridaController.instance.GetOtherPlayerThan(playerView); 
+            player.playerCamera.ChangeDeadPlayerCamera(playerView);
         }
 
         ///<summary>
@@ -51,7 +51,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public void ChangePlayerView(Player.Player player)
         {
             playerView = player;
-            player.playerCamera.SetPlayer(player);
+            player.playerCamera.ChangeDeadPlayerCamera(player);
         }
     }
 }

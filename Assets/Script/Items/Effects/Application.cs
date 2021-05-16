@@ -41,19 +41,19 @@ namespace ExtremeSnowboarding.Script.Items.Effects
                 {
                     case PropertyType.FLOAT:
                         return floatValue;
-                        break;
+                        //break;
                     case PropertyType.BOOL:
                         return boolValue;
-                        break;
+                        //break;
                     case PropertyType.STRING:
                         return stringValue;
-                        break;
+                        //break;
                     case PropertyType.OBJECT:
                         return objectValue;
-                        break;
+                        //break;
                     default:
                         return null;
-                        break;
+                        //break;
                 }
             }
         }

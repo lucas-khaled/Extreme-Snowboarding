@@ -62,14 +62,16 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         }
 
         #region PRIVATE METHODS
-    
+
         void MoveByRigidbody()
         {
-            if(rb == null)
+            if (rb == null)
                 return;
-            
-            if(rb.velocity.x < player.SharedValues.RealVelocity)
+
+
+            if (rb.velocity.x < player.SharedValues.RealVelocity)
                 rb.AddForce(player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+
 
             player.groundedVelocity = rb.velocity;
         }

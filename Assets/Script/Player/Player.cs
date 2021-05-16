@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.Controllers;
 using ExtremeSnowboarding.Script.EstadosPlayer;
+using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Items;
 using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
@@ -32,8 +34,6 @@ namespace ExtremeSnowboarding.Script.Player
         [SerializeField]
         private PlayerVFXGroup playerVFXList;
 
-        private UnityEngine.UI.Image turboBarRef;
-
         public PlayerSharedValues SharedValues
         {
             get
@@ -46,7 +46,6 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-
         public Item Coletavel { get; set; }
 
         public GameCamera playerCamera { get;  set; }
@@ -55,12 +54,41 @@ namespace ExtremeSnowboarding.Script.Player
 
         PlayerState playerState = new Grounded();
 
+        private Player[] playerSpectating = new Player[4];
         private Vector3 startPoint;
         private GameObject catastropheRef;
 
+
+        public void AddPlayerSpectating(Player playerSpectator)
+        {
+            for (int i = 0; i < 4; i++) 
+            {
+                if (playerSpectating[i] == null)
+                {
+                    playerSpectating[i] = playerSpectator;
+                    return;
+                }
+            }
+        }
+        public Player[] GetPlayerSpectators()
+        {
+            return playerSpectating;
+        }
+        public void RemovePlayerSpectating(Player player)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (playerSpectating[i] == player)
+                playerSpectating[i] = null;
+            }
+        }
+
         public GameObject GetMeshGameObject()
         {
+            if (meshRenderers[0] != null)
             return meshRenderers[0].transform.parent.gameObject;
+
+            return null;
         }
 
         public void SetPlayerMeshes(Material material, Mesh[] meshes)
@@ -94,8 +122,6 @@ namespace ExtremeSnowboarding.Script.Player
             playerState.StateStart(this);
             startPoint = transform.position;
             catastropheRef = null;
-            turboBarRef = playerCamera.transform.parent.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-            turboBarRef.fillAmount = 0;
         }
 
         private void FixedUpdate()
@@ -141,7 +167,7 @@ namespace ExtremeSnowboarding.Script.Player
                 //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
                 Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
-                sharedValues.Turbo = 0;
+                AddTurbo(-sharedValues.Turbo);
             }
         }
 
@@ -154,7 +180,6 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
                 AddTurbo(1 / distance);
-                turboBarRef.fillAmount = sharedValues.Turbo / 1;
             }
             else if (CorridaController.instance.catastrophe != null)
                 catastropheRef = CorridaController.instance.catastrophe;
@@ -162,8 +187,18 @@ namespace ExtremeSnowboarding.Script.Player
 
         public void AddTurbo(float turboValue)
         {
-            float turbo = turboValue * sharedValues.turboMultiplier / 100;
-            sharedValues.Turbo += turbo;
+            if (turboValue > 0)
+            {
+                float turbo = turboValue * sharedValues.turboMultiplier / 100;
+                sharedValues.Turbo += turbo;
+            }
+            else
+            {
+                sharedValues.Turbo += turboValue;
+            }
+
+            if (PlayerGeneralEvents.onTurboChange != null)
+                PlayerGeneralEvents.onTurboChange.Invoke(this, sharedValues.Turbo);
         }
 
         void Restart()
