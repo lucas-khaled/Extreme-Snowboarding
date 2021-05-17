@@ -52,7 +52,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             actualPoint.Open();
         }
 
-        public void NextPoint()
+        public void NextPoint(float delayTime = 0)
         {
             if (pointIndex == points.Length - 1)
             {
@@ -66,11 +66,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
             //StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
             //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
-            StartCoroutine(GoToPoint(actualPoint,points[pointIndex]));
+            StartCoroutine(GoToPoint(actualPoint,points[pointIndex], delayTime));
             actualPoint = points[pointIndex]; 
         }
 
-        public void PreviousPoint()
+        public void PreviousPoint(float delayTime = 0)
         {
             if (pointIndex == 0)
             {
@@ -84,7 +84,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
             // StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
             //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
-            StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
+            StartCoroutine(GoToPoint(actualPoint, points[pointIndex], delayTime));
             actualPoint = points[pointIndex];
         }
 
@@ -112,12 +112,14 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             }
 
             pointIndex = index;
-            StartCoroutine(GoToPoint(actualPoint, points[pointIndex]));
+            StartCoroutine(GoToPoint(actualPoint, points[pointIndex], 0));
             actualPoint = points[pointIndex];
         }
 
-        IEnumerator GoToPoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
+        IEnumerator GoToPoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint, float delayTime)
         {
+            yield return new WaitForSecondsRealtime(delayTime);
+
             fromPoint.StartClosing();
             toPoint.StartOpening();
             float actualCinePoint = trackedDolly.m_PathPosition;
