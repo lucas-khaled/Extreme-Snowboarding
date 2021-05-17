@@ -13,11 +13,19 @@ namespace ExtremeSnowboarding.Script
         Player.Player player;
         Vector3 offset;
 
-        public void SetPlayer(Player.Player player)
+        public void SetInitialPlayer(Player.Player player)
         {
             this.player = player;
             player.playerCamera = this;
         
+            if (player.GetPlayerState().GetType() != typeof(Dead))
+                hud.SetPlayer(player);
+        }
+
+        public void SetPlayer(Player.Player player)
+        {
+            this.player = player;
+            
             if (player.GetPlayerState().GetType() != typeof(Dead))
                 hud.SetPlayer(player);
         }
