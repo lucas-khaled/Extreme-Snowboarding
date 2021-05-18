@@ -294,7 +294,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 4
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -911,7 +911,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 2, z: 2}
+  m_Size: {x: 50, y: 10, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &318449436
 MonoBehaviour:
@@ -1693,6 +1693,42 @@ MonoBehaviour:
           m_StringArgument: gettingUp
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1076877548}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 126095656}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1755397652}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &536260826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,7 +1991,7 @@ MonoBehaviour:
         m_MethodName: set_LookAt
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3227041780976504871}
+          m_ObjectArgument: {fileID: 17776634996488343}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1964,19 +2000,7 @@ MonoBehaviour:
         m_CallState: 2
   onPointClosed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 639205335}
-        m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCamera, Cinemachine
-        m_MethodName: set_LookAt
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1845002080}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onStartOpening:
     m_PersistentCalls:
       m_Calls: []
@@ -7215,7 +7239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755397652}
   m_LocalRotation: {x: -0, y: -0.13052645, z: -0, w: 0.9914448}
-  m_LocalPosition: {x: 0.1, y: -0.162, z: 5.97}
+  m_LocalPosition: {x: -2.251, y: -0.128, z: 5.798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 595023223}
@@ -7502,7 +7526,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830145686}
   m_LocalRotation: {x: -0, y: 0.3826828, z: -0, w: 0.9238798}
-  m_LocalPosition: {x: 0, y: 0, z: -50.3}
+  m_LocalPosition: {x: 0, y: 0, z: -43.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 938176215}
@@ -7511,7 +7535,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 175, y: -99.9}
+  m_AnchoredPosition: {x: 168.5, y: -132.4}
   m_SizeDelta: {x: 109.5, y: 31.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830145688
@@ -8796,13 +8820,27 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7669122763146944260}
+  - component: {fileID: 1623773641945756775}
   m_Layer: 0
   m_Name: ALFARAIZ
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1623773641945756775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623773641945756774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01285647, y: 0.0051523754, z: 0.016029833}
+  m_Center: {x: -0.00019719807, y: -0.00017345186, z: 0.008503267}
 --- !u!1 &1666482518479605466
 GameObject:
   m_ObjectHideFlags: 0
@@ -9459,7 +9497,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3227041780976504871}
   - component: {fileID: 8802546822385961565}
-  - component: {fileID: 2847138950534040222}
   m_Layer: 0
   m_Name: RenatoTCC
   m_TagString: Player
@@ -9467,19 +9504,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2847138950534040222
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2847138950534040221}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2969087111548794846
 GameObject:
   m_ObjectHideFlags: 0
@@ -9551,8 +9575,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2847138950534040221}
-  m_LocalRotation: {x: -0, y: 0.9974781, z: -0, w: 0.07097496}
-  m_LocalPosition: {x: 0.33399996, y: -0.28400004, z: -0.015000343}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.32614622, y: -0.28400004, z: -0.029301643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4149453893270487056}
@@ -9561,7 +9585,7 @@ Transform:
   - {fileID: 3765909134352042564}
   m_Father: {fileID: 186359012955168104}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 171.86, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &3303553869275119268
 Transform:
   m_ObjectHideFlags: 0
@@ -10276,7 +10300,7 @@ GameObject:
   - component: {fileID: 17776634996488343}
   m_Layer: 0
   m_Name: BETARAIZ
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10534,7 +10558,7 @@ GameObject:
   - component: {fileID: 3765909134352042564}
   m_Layer: 0
   m_Name: VermelhoArmature
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
