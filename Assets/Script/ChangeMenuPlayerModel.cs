@@ -12,13 +12,8 @@ namespace ExtremeSnowboarding
 
         void OnTriggerEnter(Collider playerModel)
         {
-            Debug.Log("EntrouCarai");
             if(playerModel.gameObject.tag == "Player" && onTriggerEnter != null)
-            {
                 onTriggerEnter.Invoke(playerModel);
-                Debug.Log("InvokouCrarai");
-            }
-
 
         }
     }

@@ -16,7 +16,12 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             escolhaController.SetPlayers(1);
         }
-
+        //Daniiboy Code Start >>>>>>>>>>>>>>>>>>>>>>>>
+        public void PlayReturnAnimation(string trigger)
+        {
+            escolhaController.SetAnimatorTriggers(trigger);
+        }
+        //Daniiboy Code Ends >>>>>>>>>>>>>>>>>>>>>>>>
         public void PressPlay()
         {
             escolhaController.SendPlayerData();
