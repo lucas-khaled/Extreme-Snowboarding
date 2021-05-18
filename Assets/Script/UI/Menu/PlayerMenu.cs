@@ -8,6 +8,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
     {
         [BoxGroup("Shader References")]
         public Shader changeColorShader;
+        public Animator animatorRenato;
     
         [SerializeField] [BoxGroup("Shader References")]
         private Texture2D mask01;
