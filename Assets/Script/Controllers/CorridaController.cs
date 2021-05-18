@@ -13,15 +13,12 @@ namespace ExtremeSnowboarding.Script.Controllers
         [SerializeField]
         private Player.Player playerPrefab;
 
-        [HideInInspector]
-        public GameCamera[] cameras;
-        [HideInInspector]
-        public PlayerData[] players;
-        [HideInInspector]
-        public List<Player.Player> playersClassificated;
-        [HideInInspector]
-        public GameObject catastrophe;
-
+        public GameCamera[] cameras { get; private set; }
+        public GameObject catastrophe { get; set; }
+        
+        private PlayerData[] players;
+        private List<Player.Player> playersClassificated;
+        
         int alivePlayers;
 
         public static CorridaController instance { get; private set; }
@@ -43,6 +40,45 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
             else
                 return player;
+        }
+
+        /// <summary>
+        /// Get the specific player classification at the moment.
+        /// </summary>
+        /// <param name="player"> The player who you wants to know the place he is. </param>
+        /// <returns> It will return +1 the index of the player array. If is not possible to find the player, it will return -1. </returns>
+        public int GetPlayerPlace(Player.Player player)
+        {
+            int index = 1;
+            
+            foreach (PlayerData p in players)
+            {
+                if (p.player == player)
+                    return index;
+                index++;
+            }
+            
+            return -1;
+        }
+
+        /// <summary>
+        /// Get the player who is at the specified classification at the moment.
+        /// </summary>
+        /// <param name="place"> This value will be clamped between the first and the last race position. </param>
+        /// <returns> The player at this place. </returns>
+        public Player.Player GetPlayerByPlace(int place)
+        {
+            int realPlace = Mathf.Clamp(place, 1, players.Length);
+            return players[realPlace-1].player;
+        }
+        
+        /// <summary>
+        /// Set a player to finish the race
+        /// </summary>
+        /// <param name="player"> The player who finished the race </param>
+        public void PlayerFinishedRace(Player.Player player)
+        {
+            playersClassificated.Add(player);
         }
 
         private void Awake()
@@ -76,6 +112,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
             InvokeRepeating("CheckPlayerClassification",0,0.1f);
         }
+        
         private void InstantiatePlayers()
         {
             for (int i = 0; i < players.Length; i++)
@@ -130,10 +167,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 }
             }
         }
-        public void PlayerFinishedRace(Player.Player player)
-        {
-            playersClassificated.Add(player);
-        }
+        
         void OnDrawGizmos()
         {
             Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");

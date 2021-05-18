@@ -30,5 +30,9 @@ MonoBehaviour:
     conditioning:
       conditionBlock:
         conditions: []
-  projectile: {fileID: 6386299705226804969, guid: dfb3b62a210f9ea429a2704cce347ff0, type: 3}
-  movementType: 2
+  instanceType: 0
+  projectileInstance:
+    projectile: {fileID: 6386299705226804969, guid: dfb3b62a210f9ea429a2704cce347ff0, type: 3}
+  specificPlayerInstance:
+    especifiedType: 0
+    forceInstance: 1
