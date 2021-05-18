@@ -16,8 +16,10 @@ namespace ExtremeSnowboarding.Script.Controllers
         public GameCamera[] cameras { get; private set; }
         public GameObject catastrophe { get; set; }
         
+        public List<Player.Player> playersClassificated { get; private set; }
+        
         private PlayerData[] players;
-        private List<Player.Player> playersClassificated;
+        
         
         int alivePlayers;
 
