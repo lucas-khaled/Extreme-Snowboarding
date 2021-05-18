@@ -17,7 +17,10 @@ namespace ExtremeSnowboarding.Script.Items.Effects
         
         public bool IsConditioned(Player.Player player)
         {
-            return conditionBlock.GetFinalCondition(player.SharedValues);
+            if (conditionBlock != null)
+                return conditionBlock.GetFinalCondition(player.SharedValues);
+            else
+                return false;
         }
     }
 
@@ -167,6 +170,11 @@ namespace ExtremeSnowboarding.Script.Items.Effects
     public class ExposedPlayerProperty
     {
         public string name;
+
+        public ExposedPlayerProperty(string name)
+        {
+            this.name = name;
+        }
     }
 
     public enum PropertyType

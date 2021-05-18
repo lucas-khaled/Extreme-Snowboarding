@@ -73,7 +73,7 @@ namespace ExtremeSnowboarding.Script.Items.Effects
     
         public Effect(string name, float floatValue, float timeOfChange, EffectMode effectMode, Player.Player player)
         {
-            application = new Application() { PropertyName = name, FloatValue = floatValue, EffectMode = effectMode };
+            application = new Application(name, floatValue, effectMode);
             this.timeOfChange = timeOfChange;
             this.player = player;
         
@@ -85,7 +85,7 @@ namespace ExtremeSnowboarding.Script.Items.Effects
 
         public Effect(string name, string stringValue, float timeOfChange, Player.Player player)
         {
-            application = new Application() { PropertyName = name, StringValue = stringValue };
+            application = new Application(name, stringValue, EffectMode.REPLACE);
             this.timeOfChange = timeOfChange;
             this.player = player;
         
@@ -97,7 +97,7 @@ namespace ExtremeSnowboarding.Script.Items.Effects
 
         public Effect(string name, bool boolValue, float timeOfChange, Player.Player player)
         {
-            application = new Application() { PropertyName = name, BoolValue = boolValue };
+            application = new Application(name, boolValue);
             this.timeOfChange = timeOfChange;
             this.player = player;
         

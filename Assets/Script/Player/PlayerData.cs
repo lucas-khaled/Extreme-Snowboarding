@@ -36,7 +36,7 @@ namespace ExtremeSnowboarding.Script.Player
             material.SetColor("_SecondaryColor", color2);
 
             player.SharedValues.playerCode = playerCode;
-            camera.SetPlayer(player);
+            camera.SetInitialPlayer(player);
 
             player.playerInput.SwitchCurrentControlScheme("Player" + index);
         

@@ -4,22 +4,16 @@ namespace ExtremeSnowboarding.Script.Items
 {
     public class Projectile : MonoBehaviour
     {
-        public FuckFriend fuckfriend { private get; set; }
-        public Player.Player caster { private get; set; }
-
-
-        private MovementType movement;
-
         [SerializeField]
         private float speed = 5f;
-
+        [SerializeField] 
+        private MovementType movementType;
+        
+        public FuckFriend fuckfriend { private get; set; }
+        public Player.Player caster { private get; set; }
+        
         private bool alreadyCasted = false;
         private float relativeSpeed;
-
-        private void Start()
-        {
-            movement = fuckfriend.GetMovementType();
-        }
 
         private void Update()
         {
@@ -33,7 +27,7 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void Movement()
         {
-            switch (movement)
+            switch (movementType)
             {
                 case MovementType.STRAIGHT:
                     MoveStraight(1);

@@ -28,6 +28,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (PlayerGeneralEvents.onPlayerDeath != null)
                 PlayerGeneralEvents.onPlayerDeath.Invoke(player);
 
+            PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
+
             MonoBehaviour.Destroy(player.GetMeshGameObject()); 
         }
 
@@ -52,6 +54,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             playerView = player;
             player.playerCamera.ChangeDeadPlayerCamera(player);
+        }
+
+        private void OnPlayerDeath(Player.Player player)
+        {
+            if (player == playerView)
+                ChangePlayerView();
+            
         }
     }
 }

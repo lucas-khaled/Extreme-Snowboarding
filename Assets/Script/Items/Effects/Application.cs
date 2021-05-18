@@ -148,8 +148,34 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             PuttedValue = putValue;
             property.SetValue(player.SharedValues, putValue);
         }
-        
-        
+
+        public Application(string name, float floatValue, EffectMode effectMode)
+        {
+            propertyName = new ExposedPlayerProperty(name);
+            floatValue = floatValue;
+            effectMode = effectMode;
+        }
+
+        public Application(string propertyName, string stringValue, EffectMode mode)
+        {
+            this.propertyName = new ExposedPlayerProperty(propertyName);
+            this.stringValue = stringValue;
+            effectMode = (mode == EffectMode.MULTIPLY) ? EffectMode.REPLACE : mode;
+        }
+
+        public Application(string propertyName, bool boolValue)
+        {
+            this.propertyName = new ExposedPlayerProperty(propertyName);
+            this.boolValue = boolValue;
+            effectMode = EffectMode.REPLACE;
+        }
+
+        public Application(string propertyName, Object objectValue)
+        {
+            this.propertyName = new ExposedPlayerProperty(propertyName);
+            this.objectValue = objectValue;
+            effectMode = EffectMode.REPLACE;
+        }
     }
     
     public enum EffectMode { ADD, MULTIPLY, REPLACE }
