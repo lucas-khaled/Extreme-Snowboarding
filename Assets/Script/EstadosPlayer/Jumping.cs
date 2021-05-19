@@ -148,6 +148,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 mortalEffect.StartEffect(player);
             }
 
+            if (numOfMortals < 0)
+                numOfMortals *= -1;
+
             player.AddTurbo(numOfMortals * 5);
         }
 

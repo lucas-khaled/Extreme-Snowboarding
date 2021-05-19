@@ -19,8 +19,6 @@ namespace ExtremeSnowboarding.Script.Controllers
         public List<Player.Player> playersClassificated { get; private set; }
         
         private PlayerData[] players;
-        
-        
         int alivePlayers;
 
         public static CorridaController instance { get; private set; }
@@ -95,6 +93,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         private void OnPlayerDeath(Player.Player player)
         {
             alivePlayers--;
+            ChangeDeadPlayerClassification(player);
         }
 
         private void OnPlayerPass(Player.Player player, int classification)
@@ -103,6 +102,45 @@ namespace ExtremeSnowboarding.Script.Controllers
         }
 
         #endregion
+
+        private Player.PlayerData GetPlayerData(Player.Player player)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].player == player)
+                    return players[i];
+            }
+            return null;
+        }
+
+        private void ChangeDeadPlayerClassification(Player.Player deadPlayer)
+        {
+            Player.PlayerData deadPlayerData = GetPlayerData(deadPlayer);
+
+            deadPlayer.playerCamera.ChangeClassificationToDead();
+
+            //Player.PlayerData playerAux = players[players.Length - 1];
+            //Player.PlayerData playerAux2 = players[0];
+            //players[players.Length - 1] = deadPlayerData;
+
+            Player.PlayerData playerAux = deadPlayerData;
+
+
+            for (int i = 0; i < players.Length - 1; i++)
+            {
+                if (i != 0 && players[i] != deadPlayerData)
+                {
+                    playerAux = players[i];
+                    players[i] = players[i + 1];
+                    players[i + 1] = playerAux;
+
+                }
+            }
+
+            //players[0] = playerAux2;
+
+            Debug.Log(players[0].player.name + " " + players[1].player.name + " " + players[2].player.name + " " + players[3].player.name);
+        }
 
         private void Start()
         {
@@ -140,6 +178,15 @@ namespace ExtremeSnowboarding.Script.Controllers
             {
                 float distanceXPlayer1 = players[i].player.transform.position.x;
                 float distanceXPlayer2 = players[i + 1].player.transform.position.x;
+
+                if (players[i].player.GetPlayerState().GetType() == typeof(Dead))
+                {
+                    distanceXPlayer1 = 0;
+                }
+                if (players[i + 1].player.GetPlayerState().GetType() == typeof(Dead))
+                {
+                    distanceXPlayer2 = 0;
+                }
 
                 if (distanceXPlayer1 < distanceXPlayer2)
                 {

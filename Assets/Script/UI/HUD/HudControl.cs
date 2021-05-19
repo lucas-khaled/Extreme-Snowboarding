@@ -19,6 +19,8 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         [Header ("Values")]
         [SerializeField]
         private Sprite[] classificationSprites;
+        [SerializeField]
+        private Sprite deadPlayerSprite;
 
         Player.Player player;
 
@@ -36,10 +38,15 @@ namespace ExtremeSnowboarding.Script.UI.HUD
 
         private void OnPlayerPass(Player.Player player, int classification)
         {
-            if (this.player == player)
+            if (this.player == player && player.GetPlayerState().GetType() != typeof(ExtremeSnowboarding.Script.EstadosPlayer.Dead))
                 refClassificationImage.sprite = classificationSprites[classification];
-
         }
+
+        public void ChangeClassificationToDead()
+        {
+            refClassificationImage.sprite = deadPlayerSprite;
+        }
+
         private void OnTurboChange(Player.Player player, float turboQuantity)
         {
             if (this.player == player)

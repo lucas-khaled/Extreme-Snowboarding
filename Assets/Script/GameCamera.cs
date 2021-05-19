@@ -26,8 +26,8 @@ namespace ExtremeSnowboarding.Script
         {
             this.player = player;
             
-            if (player.GetPlayerState().GetType() != typeof(Dead))
-                hud.SetPlayer(player);
+            //if (player.GetPlayerState().GetType() != typeof(Dead))
+            //    hud.SetPlayer(player);
         }
 
         // Update is called once per frame
@@ -35,6 +35,11 @@ namespace ExtremeSnowboarding.Script
         {
             if(player != null)
                 transform.parent.transform.position = player.transform.position;
+        }
+
+        public void ChangeClassificationToDead()
+        {
+            hud.ChangeClassificationToDead();
         }
 
         public IEnumerator CameraShake(bool deactivateCameraShake, float shakingDuration, float magnetude)
