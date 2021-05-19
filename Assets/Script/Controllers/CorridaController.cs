@@ -25,6 +25,15 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         public static CorridaController instance { get; private set; }
 
+        /// <summary>
+        /// Return the total of player that started the game
+        /// </summary>
+        /// <returns></returns>
+        public int GetPlayersInGameCount()
+        {
+            return players.Length;
+        }
+        
         ///<summary> 
         ///Get an alive player other than the specified one 
         ///</summary>

@@ -263,7 +263,7 @@ namespace ExtremeSnowboarding.Script.Player
             }
             set
             {
-                addedVelocity = Mathf.Clamp(value, 0, maxAddedVelocity);
+                addedVelocity = Mathf.Clamp(value, -maxAddedVelocity, maxAddedVelocity);
 
                 if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
                 {

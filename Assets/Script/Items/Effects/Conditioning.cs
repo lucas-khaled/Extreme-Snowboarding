@@ -20,7 +20,7 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             if (conditionBlock != null)
                 return conditionBlock.GetFinalCondition(player.SharedValues);
             else
-                return false;
+                return true;
         }
     }
 

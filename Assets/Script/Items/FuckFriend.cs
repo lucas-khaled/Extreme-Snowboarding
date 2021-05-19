@@ -39,7 +39,7 @@ namespace ExtremeSnowboarding.Script.Items
     [System.Serializable]
     public class ProjectileInstance : IInstance
     {
-        [SerializeField] [BoxGroup("Instance Values")]
+        [SerializeField] [BoxGroup("Instance Values")] [AllowNesting]
         private GameObject projectile;
         
         public void ActivateInstance(FuckFriend fuck)
@@ -55,13 +55,13 @@ namespace ExtremeSnowboarding.Script.Items
     [System.Serializable]
     public class SpecificPlayerInstance : IInstance
     {
-        [SerializeField] [BoxGroup("Instance Values")]
+        [SerializeField] [BoxGroup("Instance Values")] [AllowNesting]
         private EspecifiedType especifiedType = EspecifiedType.BY_PLACE;
 
-        [SerializeField] [BoxGroup("Instance Values")] [MinMaxSlider(1,4)]
-        private int position;
+        [SerializeField] [BoxGroup("Instance Values")] [MinValue(1), MaxValue(4)] [AllowNesting]
+        private int position = 1;
 
-        [SerializeField] [BoxGroup("Instance Values")] [ShowIf("especifiedType", EspecifiedType.BY_PROXIMITY)]
+        [SerializeField] [BoxGroup("Instance Values")] [ShowIf("especifiedType", EspecifiedType.BY_PROXIMITY)] [AllowNesting]
         private bool forceInstance = true;
         
         public void ActivateInstance(FuckFriend fuck)
@@ -85,7 +85,34 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void InstanceByProximity(FuckFriend fuck)
         {
+            int actualPosition = CorridaController.instance.GetPlayerPlace(fuck.Player);
+            int affectedPosition = actualPosition + position;
+            int playersCount = CorridaController.instance.GetPlayersInGameCount();
             
+            if (affectedPosition >= 1 && affectedPosition <= playersCount)
+            {
+                Player.Player playerAffected = CorridaController.instance.GetPlayerByPlace(affectedPosition);
+                fuck.StartEffects(playerAffected);
+            }
+            else if (forceInstance)
+            {
+                int clampedPosition = Mathf.Clamp(affectedPosition, 1, playersCount);
+
+                if (clampedPosition == actualPosition)
+                {
+                    int sign = (int)Mathf.Sign(position);
+
+                    if (actualPosition == playersCount)
+                        sign = -1;
+                    else if (actualPosition == 1)
+                        sign = +1;
+                        
+                    clampedPosition = clampedPosition + 1 * sign;
+                }
+                
+                Player.Player playerAffected = CorridaController.instance.GetPlayerByPlace(clampedPosition);
+                fuck.StartEffects(playerAffected);
+            }
         }
         
         private enum EspecifiedType

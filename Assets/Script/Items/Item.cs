@@ -15,6 +15,7 @@ namespace ExtremeSnowboarding.Script.Items
         {
             foreach (Effect effect in effectsToApply)
             {
+                Debug.Log(player.name);
                 effect.StartEffect(player);
             }
         }
