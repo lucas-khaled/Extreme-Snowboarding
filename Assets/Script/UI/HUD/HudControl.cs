@@ -59,8 +59,13 @@ namespace ExtremeSnowboarding.Script.UI.HUD
 
         private void OnFuckFriendChange(Player.Player player, Sprite fuckFriendSprite)
         {
-            if (this.player == player)
+            if (this.player == player && fuckFriendSprite != null)
                 refFuckFriendImage.sprite = fuckFriendSprite;
+            else
+            {
+                refFuckFriendImage.sprite = null;
+                Debug.Log("Sprite nulo");
+            }
         }
     }
 }

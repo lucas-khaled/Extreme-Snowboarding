@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.Controllers;
 using ExtremeSnowboarding.Script.EstadosPlayer;
-using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Items;
 using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
@@ -156,6 +156,11 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 Coletavel.Activate(this);
                 Coletavel = null;
+
+                if (EventSystem.PlayerGeneralEvents.onFuckFriendChange != null)
+                {
+                    EventSystem.PlayerGeneralEvents.onFuckFriendChange.Invoke(this, null);
+                }
             }
         }
     
@@ -212,6 +217,11 @@ namespace ExtremeSnowboarding.Script.Player
 
             playerState = newState;
             playerState.StateStart(this);
+        }
+
+        public void GetItem(Item item)
+        {
+            Coletavel = item;
         }
 
         public void StartStateCoroutine(IEnumerator coroutine)
