@@ -7,22 +7,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     [System.Serializable]
     public class Grounded : PlayerState
     {
-        float timeEtherium;
+        private float timeEtherium;
 
-        float timeOnGround;
-        float timeToJump;
+        private float timeOnGround;
+        private float timeToJump;
 
-        Rigidbody rb;
-
-        /*public override void InterpretateInput(GameInput input)
-    {
-        Debug.Log(input.ToString());
-        if (input == GameInput.UP && timeOnGround>=timeToJump)
-        {
-            Debug.Log("VASIFUDE");
-            player.ChangeState(new Jumping()); 
-        }
-    }*/
+        private Rigidbody rb;
 
         public override void StateEnd()
         {
@@ -65,9 +55,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void MoveByRigidbody()
         {
-            if (rb == null)
+            if (rb == null || rb.velocity == null)
                 return;
-
 
             if (rb.velocity.x < player.SharedValues.RealVelocity)
                 rb.AddForce(player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
@@ -83,12 +72,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             RaycastHit rotationHit;
             if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
             {
-                if(Vector3.Distance((player.transform.position + player.SharedValues.CharacterHeight * 0.5f * Vector3.down), rotationHit.point) > 2f)
-                {
-                    player.ChangeState(new Jumping());
-                    return;
-                }
-            
                 Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
                 newRotation.y = newRotation.x = 0;
 

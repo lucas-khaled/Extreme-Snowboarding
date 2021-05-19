@@ -6,9 +6,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     public class RaceEndState : PlayerState
     {
         private Player.Player playerView;
-        private float timeToStop;
-        private float distance = 20f;
-
         private Rigidbody rb;
 
         public override void StateEnd()
@@ -19,25 +16,45 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
-            distance += player.SharedValues.RealVelocity;
-            timeToStop = distance * 2f / player.SharedValues.RealVelocity;
-
+            CorridaController.instance.PlayerFinishedRace(player);
             rb = player.GetComponent<Rigidbody>();
         }
 
         public override void StateUpdate()
         {
-            DeaccelerateByRigidbody();
-            FinishRaceAnimation();
+            ClampOnGround();
+            DeAccelerateByRigidbody();
         }
 
-        void DeaccelerateByRigidbody()
+        private void DeAccelerateByRigidbody()
         {
-            if (rb.velocity.x > 0)
-                rb.AddForce(Vector3.left * player.SharedValues.RealVelocity * Time.deltaTime, ForceMode.VelocityChange);
+            if (rb == null || rb.velocity == Vector3.zero)
+                return;
+
+            if (rb.velocity.x > 1)
+                rb.AddForce(2 * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
+            else
+            {
+                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                rb.velocity = Vector3.zero;
+                FinishRaceAnimation();
+            }
+                
         }
 
-        void FinishRaceAnimation()
+        private void ClampOnGround()
+        {
+            RaycastHit rotationHit;
+            if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
+            {
+                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
+                newRotation.y = newRotation.x = 0;
+                player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
+                player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+            }
+        }
+        
+        private void FinishRaceAnimation()
         {
             //if (CorridaController.instance.playersClassificated[0] != null)
             //{
@@ -53,7 +70,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
             //}
 
-            player.Invoke("ChangePlayerView",5);
+            //player.Invoke("ChangePlayerView",5);
         }
     
     }

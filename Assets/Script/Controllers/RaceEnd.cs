@@ -37,8 +37,6 @@ namespace ExtremeSnowboarding.Script.Controllers
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new RaceEndState());
                 quantityOfActivePlayer--;
 
-                CorridaController.instance.PlayerFinishedRace(other.gameObject.GetComponent<Player.Player>());
-            
                 if (quantityOfActivePlayer <= 0)
                 {
                     EndRace();

@@ -95,6 +95,8 @@ namespace ExtremeSnowboarding.Script.Controllers
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
             instance = this;
+
+            playersClassificated = new List<Player.Player>();
         }
 
         #region Listeners
@@ -147,8 +149,6 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
 
             //players[0] = playerAux2;
-
-            Debug.Log(players[0].player.name + " " + players[1].player.name + " " + players[2].player.name + " " + players[3].player.name);
         }
 
         private void Start()

@@ -64,7 +64,6 @@ namespace ExtremeSnowboarding.Script.UI.HUD
             else
             {
                 refFuckFriendImage.sprite = null;
-                Debug.Log("Sprite nulo");
             }
         }
     }
