@@ -7,11 +7,18 @@ namespace ExtremeSnowboarding.Script.Items
     {
         [SerializeField] private Item[] availableItems;
 
-        private void PickRandomItem(GameObject player)
+        private void PickRandomItem(Player.Player player)
         {
             //Talvez uma animação de randomização??
 
-            player.GetComponent<Player.Player>().Coletavel = availableItems[Random.Range(0, availableItems.Length)];
+            Item item = availableItems[Random.Range(0, availableItems.Length)];
+
+            player.GetItem(item);
+
+            if (EventSystem.PlayerGeneralEvents.onFuckFriendChange != null)
+            {
+                EventSystem.PlayerGeneralEvents.onFuckFriendChange.Invoke(player, item.GetSprite());
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -20,12 +27,10 @@ namespace ExtremeSnowboarding.Script.Items
             {
                 if(other.GetComponent<Player.Player>().Coletavel == null)
                 {
-                    PickRandomItem(other.gameObject);
+                    PickRandomItem(other.gameObject.GetComponent<Player.Player>());
                     Destroy(gameObject);
                 }
             }
-
-        
         }
     }
 }
