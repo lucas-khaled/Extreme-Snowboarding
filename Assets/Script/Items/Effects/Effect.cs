@@ -45,14 +45,13 @@ namespace ExtremeSnowboarding.Script.Items.Effects
                     }
                     else
                         wasApplied = false;
-                
+                    
                     break;
             
                 case Quantification.QuantificationCallbackType.RECUPERATON:
                     if(wasApplied)
                         recuperation.StartRecuperation(player, application.PropertyName, application.InitialValue, application.ChangeValue, application.EffectMode);
                     break;
-                
             }
         }
 

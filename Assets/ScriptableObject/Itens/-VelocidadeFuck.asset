@@ -19,7 +19,7 @@ MonoBehaviour:
       typeOfQuantityCall: 1
     application:
       propertyName:
-        name: Etherium
+        name: AddedVelocity
       floatValue: -5
       stringValue: 
       boolValue: 0
@@ -30,11 +30,10 @@ MonoBehaviour:
     conditioning:
       conditionBlock:
         conditions: []
-  icon: {fileID: 21300000, guid: 2f4f4065cc158234ebaa848e6dbe6e7b, type: 3}
-  instanceType: 0
+  instanceType: 1
   projectileInstance:
     projectile: {fileID: 6386299705226804969, guid: dfb3b62a210f9ea429a2704cce347ff0, type: 3}
   specificPlayerInstance:
     especifiedType: 0
-    position: 0
-    forceInstance: 1
+    position: 1
+    forceInstance: 0
