@@ -58,7 +58,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             int index = 0;
             foreach(PlayerMenu player in playersModels)
             {
-                playersData[index] = new PlayerData(player.primaryColor, player.secondaryColor, player.changeColorShader, index, player.GetSelectedMeshes());
+                playersData[index] = new PlayerData(player.primaryColor, player.secondaryColor, player.changeColorShader, index, player.GetSelectedMeshes(), player.GetTexture(1), player.GetTexture(2));
                 index++;
             }
 

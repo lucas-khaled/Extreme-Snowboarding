@@ -13,11 +13,13 @@ namespace ExtremeSnowboarding.Script.Controllers
         [SerializeField]
         private Player.Player playerPrefab;
 
-        public GameCamera[] cameras { get; private set; }
+        public GameCamera[] cameras;
         public GameObject catastrophe { get; set; }
         
+        public List<Player.Player> playersClassificated { get; private set; }
+        
         private PlayerData[] players;
-        private List<Player.Player> playersClassificated;
+        
         
         int alivePlayers;
 
@@ -118,7 +120,6 @@ namespace ExtremeSnowboarding.Script.Controllers
             for (int i = 0; i < players.Length; i++)
             {
                 players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
-
             }
         }
         private void LoadPlayers()
