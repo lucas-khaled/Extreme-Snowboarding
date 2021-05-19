@@ -19,6 +19,14 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         List<PlayerMenu> playersModels = new List<PlayerMenu>();
 
+        public void SetAnimatorTriggers(string trigger)
+        {
+            foreach(PlayerMenu playerMenus in playersModels)
+            {
+                playerMenus.animatorRenato.SetTrigger(trigger);
+            }
+        }
+
         public void SetPlayers(int numOfPlayers)
         {
             if (playersModels.Count == numOfPlayers)
