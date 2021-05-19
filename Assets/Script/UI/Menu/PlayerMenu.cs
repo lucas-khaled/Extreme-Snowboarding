@@ -38,6 +38,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         private Material myMaterial;
 
+        public Texture2D GetTexture(int index)
+        {
+            return (index <= 1) ? mask01 : mask02;
+        }
+        
         public void ChangePrimaryColor(string colorString)
         {
         
