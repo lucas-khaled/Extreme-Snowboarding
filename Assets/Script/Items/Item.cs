@@ -10,6 +10,9 @@ namespace ExtremeSnowboarding.Script.Items
         [ShowAssetPreview()] [SerializeField]
         protected Sprite icon;
         
+        [SerializeField] [BoxGroup("VFX Activation")] protected bool activateVFX;
+        [SerializeField] [BoxGroup("VFX Activation")] [ShowIf("activateVFX")] protected string[] VFXNames;
+        
         [FormerlySerializedAs("attributesToChange")] [SerializeField]
         protected Effect[] effectsToApply;
 
@@ -27,6 +30,16 @@ namespace ExtremeSnowboarding.Script.Items
         public Sprite GetSprite()
         {
             return icon;
+        }
+        
+        protected void ActivateVFX(Player.Player player, bool checker, string[] names)
+        {
+            if(!checker)
+                return;
+            foreach (var vfxName in names) 
+            { 
+                player.GetPlayerVFXList().GetVFXByName(vfxName, player.SharedValues.playerCode).StartParticle();
+            }
         }
     }
 }
