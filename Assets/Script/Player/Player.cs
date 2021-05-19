@@ -278,6 +278,9 @@ namespace ExtremeSnowboarding.Script.Player
 
         [ExposedProperty("Etherium")]
         public bool Etherium { get; set; }
+        
+        [ExposedProperty("Added Jump")]
+        public float AddedJump { get; set; }
 
         [MovimentationValue] [ExposedProperty("Turbo")]
         public float Turbo 
@@ -337,15 +340,15 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-        [MovimentationValue] [ExposedProperty("Jump Force")]
+        [MovimentationValue]
         public float JumpForce
         {
             get
             {
-                return Mathf.Clamp(jumpFactor * RealVelocity*0.75f, 1, maxJumpForce);
+                return Mathf.Clamp((AddedJump+jumpFactor) * RealVelocity*0.75f, 1, maxJumpForce);
             }
         }
-    
+
         [ExposedProperty("Character Height")]
         public float CharacterHeight
         {
