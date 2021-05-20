@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf4c37023973e594cb5bf18c3f518436, type: 3}
-  m_Name: +Velocidade
+  m_Name: GiroMaisRapidoPowerUP
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 5e7bf9ec86249338ab7f897214334c7c, type: 3}
-  activateVFX: 0
-  VFXNames: []
+  icon: {fileID: 21300000, guid: a06f7fbce7b9d2fe18d693def5eea08a, type: 3}
+  activateVFX: 1
+  VFXNames:
+  - Giro Rapido
   effectsToApply:
-  - timeOfChange: 3
+  - timeOfChange: 8
     quantification:
       quantitity: 1
       typeOfQuantityCall: 1
     application:
       propertyName:
-        name: AddedVelocity
-      floatValue: 5
+        name: RotationFactor
+      floatValue: 2
       stringValue: 
       boolValue: 0
       objectValue: {fileID: 0}
@@ -32,12 +33,4 @@ MonoBehaviour:
       haveRecuperation: 1
     conditioning:
       conditionBlock:
-        conditions:
-        - propertyName:
-            name: Turbo
-          operation: 1
-          floatValue: 1
-          stringValue: 
-          boolValue: 0
-          objectValue: {fileID: 0}
-          conector: 0
+        conditions: []
