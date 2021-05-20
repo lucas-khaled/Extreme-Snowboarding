@@ -95,7 +95,7 @@ namespace ExtremeSnowboarding.Script.Items
 
                 if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.down), out hit, 500f, LayerMask.GetMask("Track")))
                 {
-                    transform.position = hit.point+height;
+                    transform.position = hit.point+ Vector3.up * height;
 
                     transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
                 }
