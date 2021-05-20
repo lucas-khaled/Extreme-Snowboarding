@@ -276,6 +276,9 @@ namespace ExtremeSnowboarding.Script.Player
 
         public int playerCode { get; set; }
 
+        [ExposedProperty("Stun")]
+        public bool isStun { get; set; }
+
         [ExposedProperty("Etherium")]
         public bool Etherium { get; set; }
         
@@ -326,6 +329,7 @@ namespace ExtremeSnowboarding.Script.Player
             
             }
         }
+
     
         [ExposedProperty("Rotation Factor")]
         public float RotationFactor
@@ -362,7 +366,7 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-        [MovimentationValue] [ExposedProperty("Real Velocity")]
+        [MovimentationValue]
         public float RealVelocity
         {
             get
