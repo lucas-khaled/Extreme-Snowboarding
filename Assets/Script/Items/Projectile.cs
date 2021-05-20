@@ -95,7 +95,7 @@ namespace ExtremeSnowboarding.Script.Items
 
                 if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.down), out hit, 500f, LayerMask.GetMask("Track")))
                 {
-                    transform.position = hit.point;
+                    transform.position = hit.point+height;
 
                     transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
                 }
@@ -108,19 +108,23 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name);
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
                 if(playerHitted != caster)
                 {
                     fuckfriend.StartEffects(playerHitted);
+                    Destroy(gameObject);
                 }
             }
+            else
+            {
+                if(explosionParticle != null)
+                    explosionParticle.Play();
             
-            if(explosionParticle != null)
-                explosionParticle.Play();
-            
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
         }
 
         private void OnDrawGizmos()

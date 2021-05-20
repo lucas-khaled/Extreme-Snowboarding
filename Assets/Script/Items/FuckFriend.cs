@@ -48,7 +48,7 @@ namespace ExtremeSnowboarding.Script.Items
         
         public void ActivateInstance(FuckFriend fuck)
         {
-            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, Quaternion.identity /* Considerar a rota��o do cen�rio!!!! */);
+            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
             proj.fuckfriend = fuck;
