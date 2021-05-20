@@ -1,3 +1,4 @@
+using System;
 using ExtremeSnowboarding.Script.Items.Effects;
 using NaughtyAttributes;
 using UnityEngine;
@@ -40,6 +41,14 @@ namespace ExtremeSnowboarding.Script.Items
             foreach (var vfxName in names) 
             { 
                 player.GetPlayerVFXList().GetVFXByName(vfxName, player.SharedValues.playerCode).StartParticle();
+            }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var effect in effectsToApply)
+            {
+                effect.OnEnable();
             }
         }
     }
