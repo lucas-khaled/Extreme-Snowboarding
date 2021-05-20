@@ -12,6 +12,14 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField]
         private EscolhaController escolhaController;
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioSource audioEffectsRef;
+        [SerializeField]
+        private AudioClip clickAudio;
+        [SerializeField]
+        private AudioClip returnAudio;
+
         private void Awake()
         {
             escolhaController.SetPlayers(1);
@@ -22,6 +30,16 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             escolhaController.SetAnimatorTriggers(trigger);
         }
         //Daniiboy Code Ends >>>>>>>>>>>>>>>>>>>>>>>>
+
+        public void PlayerReturnAudio()
+        {
+            audioEffectsRef.PlayOneShot(returnAudio);
+        }
+        public void PlayClickAudio()
+        {
+            audioEffectsRef.PlayOneShot(clickAudio);
+        }
+
         public void PressPlay()
         {
             escolhaController.SendPlayerData();

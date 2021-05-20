@@ -13,6 +13,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         float rotatingDirection = 0;
         bool isJumpingPressed;
         private bool canApplyForce;
+        private int auxAudioFlip;
 
         /*public override void InterpretateInput(GameInput input)
     {
@@ -45,7 +46,10 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             SubscribeOnInputEvents();
         
             player.SharedValues.actualState = "Jumping";
-        
+
+            player.PlayJumpAudio();
+            auxAudioFlip = 1;
+
             rb = player.gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = true;
@@ -90,6 +94,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 if (angleDifference < 60f)
                 {
                     int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
+                    player.PlayLandingAudio();
                     newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                     ApplyAirEffects();
@@ -100,8 +105,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     if (angleDifference > 120)
                     {
                         player.SetOnAnimator("hardFall", true);
+                        player.PlayHardFallAudio();
                         timeFall = 4.5f;
                     }
+                    else
+                        player.PlayNormalFallAudio();
 
                     newPlayerState = new Fallen(timeFall);
 
@@ -129,6 +137,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             else
             {
                 player.SetOnAnimator("trick", true);
+                if (howMuchRotation > 360 * auxAudioFlip)
+                {
+                    player.PlayTrickAudio();
+                    auxAudioFlip++;
+                }
             }
         }
 
