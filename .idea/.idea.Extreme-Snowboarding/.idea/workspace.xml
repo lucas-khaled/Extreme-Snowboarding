@@ -2,7 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Level/Modelos/CaixaItensBone.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Level/Modelos/CaixaItensBone.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Banana.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Banana.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/BolaDeNeveTras.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/BolaDeNeveTras.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/EscudoAceleracao.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/EscudoAceleracao.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/FogueteFrente.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/FogueteFrente.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/FogueteTras.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/FogueteTras.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Item.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Item.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Relampago.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Itens/Relampago.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +36,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Script/VFX/InstantiatedVFXList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.2.2/Runtime/Debugging/DebugManager.Actions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -49,21 +65,21 @@
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/GameCamera.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuCameraPointController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Conditioning.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/RaceEnd.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Conditioning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Item.cs" />
     </changedPaths>
   </component>
@@ -143,7 +159,8 @@
       <workItem from="1621281973104" duration="3633000" />
       <workItem from="1621342004221" duration="6424000" />
       <workItem from="1621380069472" duration="7258000" />
-      <workItem from="1621460874269" duration="3739000" />
+      <workItem from="1621460874269" duration="5782000" />
+      <workItem from="1621467843269" duration="287000" />
     </task>
     <servers />
   </component>

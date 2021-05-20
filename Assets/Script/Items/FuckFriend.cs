@@ -19,6 +19,9 @@ namespace ExtremeSnowboarding.Script.Items
         [SerializeField] [BoxGroup("Fuck Friend Values")] [ShowIf("instanceType", InstanceType.SPECIFC_PLAYER)]
         private SpecificPlayerInstance specificPlayerInstance;
         
+        [SerializeField] [BoxGroup("VFX Activation")] private bool activateVFXOnCaster;
+        [SerializeField] [BoxGroup("VFX Activation")] [ShowIf("activateVFXOnCaster")] private string[] VFXNamesOnCaster;
+        
         private IInstance instance => (instanceType == InstanceType.PROJECTILE) ? (IInstance)projectileInstance : (IInstance)specificPlayerInstance;
 
         public Player.Player Player { get; private set; }
@@ -27,6 +30,7 @@ namespace ExtremeSnowboarding.Script.Items
         {
             Player = player;
             instance.ActivateInstance(this);
+            ActivateVFX(player, activateVFXOnCaster, VFXNamesOnCaster);
         }
     }
     
@@ -44,7 +48,7 @@ namespace ExtremeSnowboarding.Script.Items
         
         public void ActivateInstance(FuckFriend fuck)
         {
-            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, Quaternion.identity /* Considerar a rota��o do cen�rio!!!! */);
+            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
             proj.fuckfriend = fuck;

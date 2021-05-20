@@ -41,19 +41,14 @@ namespace ExtremeSnowboarding.Script.Items.Effects
                 {
                     case PropertyType.FLOAT:
                         return floatValue;
-                        //break;
                     case PropertyType.BOOL:
                         return boolValue;
-                        //break;
                     case PropertyType.STRING:
                         return stringValue;
-                        //break;
                     case PropertyType.OBJECT:
                         return objectValue;
-                        //break;
                     default:
                         return null;
-                        //break;
                 }
             }
         }
@@ -96,28 +91,6 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             set => effectMode = value;
         }
 
-        void OnPropertyValueChanged()
-        {
-            Type t = typeof(PlayerSharedValues);
-            PropertyInfo p = t.GetProperty(propertyName.name);
-            
-            if (p != null)
-            {
-                if (p.PropertyType == typeof(float) || p.PropertyType == typeof(int))
-                    propertyType = PropertyType.FLOAT;
-                else if (p.PropertyType == typeof(string))
-                    propertyType = PropertyType.STRING;
-                else if (p.PropertyType == typeof(bool))
-                    propertyType = PropertyType.BOOL;
-                else
-                    propertyType = PropertyType.OBJECT;
-            }
-            else
-            {
-                propertyType = PropertyType.NULL;
-            }
-        }
-        
         /// <summary>
         /// Applies the effect and returns the initial value in the specified property
         /// </summary>
@@ -148,7 +121,34 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             PuttedValue = putValue;
             property.SetValue(player.SharedValues, putValue);
         }
-
+        
+        public void OnEnable()
+        {
+            OnPropertyValueChanged();
+        }
+        
+        void OnPropertyValueChanged()
+        {
+            Type t = typeof(PlayerSharedValues);
+            PropertyInfo p = t.GetProperty(propertyName.name);
+            
+            if (p != null)
+            {
+                if (p.PropertyType == typeof(float) || p.PropertyType == typeof(int))
+                    propertyType = PropertyType.FLOAT;
+                else if (p.PropertyType == typeof(string))
+                    propertyType = PropertyType.STRING;
+                else if (p.PropertyType == typeof(bool))
+                    propertyType = PropertyType.BOOL;
+                else
+                    propertyType = PropertyType.OBJECT;
+            }
+            else
+            {
+                propertyType = PropertyType.NULL;
+            }
+        }
+        
         public Application(string name, float floatValue, EffectMode effectMode)
         {
             propertyName = new ExposedPlayerProperty(name);

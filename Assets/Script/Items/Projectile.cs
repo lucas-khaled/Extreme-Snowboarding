@@ -1,14 +1,17 @@
+using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Items
 {
+    [RequireComponent(typeof(Collider))]
     public class Projectile : MonoBehaviour
     {
-        [SerializeField]
-        private float speed = 5f;
-        [SerializeField] 
-        private MovementType movementType;
-        
+        [SerializeField]  private float speed = 5f;
+        [SerializeField]  private float height = 1f;
+        [SerializeField] private MovementType movementType;
+        [SerializeField] [ShowAssetPreview()] private ParticleSystem explosionParticle;
+
         public FuckFriend fuckfriend { private get; set; }
         public Player.Player caster { private get; set; }
         
@@ -66,12 +69,12 @@ namespace ExtremeSnowboarding.Script.Items
                 alreadyCasted = true;
             }
 
-            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
-            else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
+            else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
 
-            newPoint = new Vector3(newPoint.x, newPoint.y + 1, newPoint.z);
+            newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,              // Posicao inicial 
                 newPoint,                             // Posicao destino
@@ -92,7 +95,7 @@ namespace ExtremeSnowboarding.Script.Items
 
                 if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.down), out hit, 500f, LayerMask.GetMask("Track")))
                 {
-                    transform.position = hit.point;
+                    transform.position = hit.point+ Vector3.up * height;
 
                     transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
                 }
@@ -105,18 +108,29 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name);
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
                 if(playerHitted != caster)
                 {
                     fuckfriend.StartEffects(playerHitted);
-                    Destroy(this.gameObject);
+                    Destroy(gameObject);
                 }
             }
             else
-                Destroy(this.gameObject);
+            {
+                if(explosionParticle != null)
+                    explosionParticle.Play();
+            
+                Destroy(gameObject);
+            }
+        }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.down*height);
         }
     }
 }

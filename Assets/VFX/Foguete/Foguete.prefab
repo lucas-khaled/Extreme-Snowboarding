@@ -4758,7 +4758,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd0695cb275c3b04c9862cb12aaeb233, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14423,6 +14423,8 @@ GameObject:
   - component: {fileID: 5597687635035011628}
   - component: {fileID: 8791343863459788169}
   - component: {fileID: 6766051387932688707}
+  - component: {fileID: 8561537159056344441}
+  - component: {fileID: 1465486239457059090}
   m_Layer: 0
   m_Name: Foguete
   m_TagString: Untagged
@@ -14498,6 +14500,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8561537159056344441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108537265155203222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.012, y: 0.427, z: 0.0235}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1465486239457059090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108537265155203222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea34b81ff278e445881f296f501bd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  height: 0
+  movementType: 0
+  explosionParticle: {fileID: 0}
 --- !u!1 &5625460412817495246
 GameObject:
   m_ObjectHideFlags: 0

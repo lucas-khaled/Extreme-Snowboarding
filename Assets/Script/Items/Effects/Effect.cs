@@ -33,6 +33,11 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             quantification.StartQuantification(timeOfChange);
         }
 
+        public void OnEnable()
+        {
+            application.OnEnable();
+        }
+
         private void EffectIteration(Quantification.QuantificationCallbackType callback)
         {
             switch (callback)

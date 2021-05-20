@@ -1975,18 +1975,6 @@ MonoBehaviour:
   onPointOpen:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1145483236}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 639205335}
         m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCamera, Cinemachine
         m_MethodName: set_LookAt
@@ -5544,7 +5532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196273677}
   m_LocalRotation: {x: -0, y: 0.6427878, z: -0, w: 0.76604426}
-  m_LocalPosition: {x: 301.4, y: 2.4, z: -74.9}
+  m_LocalPosition: {x: 267.6, y: 10, z: -80.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1397056929}

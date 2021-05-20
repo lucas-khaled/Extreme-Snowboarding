@@ -55,16 +55,23 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void MoveByRigidbody()
         {
-            if (rb == null || rb.velocity == null)
-                return;
+            if (!player.SharedValues.isStun)
+            {
+                if (rb == null || rb.velocity == null)
+                    return;
 
-            if (rb.velocity.x < player.SharedValues.RealVelocity)
-                rb.AddForce(player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
-            else if(rb.velocity.x > player.SharedValues.RealVelocity)
-                rb.AddForce(-player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                if (rb.velocity.x < player.SharedValues.RealVelocity)
+                    rb.AddForce(player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                else if (rb.velocity.x > player.SharedValues.RealVelocity)
+                    rb.AddForce(-player.SharedValues.RealVelocity * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
 
 
-            player.groundedVelocity = rb.velocity;
+                player.groundedVelocity = rb.velocity;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+            }
         }
 
         void ClampOnGround()

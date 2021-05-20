@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4c8ad89bd7f9f45a241c3320ffe642, type: 3}
+  m_Name: FogueteTras
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 82fb8020ba3f8df4291f7396c74d57f9, type: 3}
+  activateVFX: 0
+  VFXNames: []
+  effectsToApply:
+  - timeOfChange: 3
+    quantification:
+      quantitity: 1
+      typeOfQuantityCall: 1
+    application:
+      propertyName:
+        name: isStun
+      floatValue: 0
+      stringValue: 
+      boolValue: 1
+      objectValue: {fileID: 0}
+      effectMode: 2
+    recuperation:
+      haveRecuperation: 1
+    conditioning:
+      conditionBlock:
+        conditions: []
+  instanceType: 0
+  projectileInstance:
+    projectile: {fileID: 4467211643521931719, guid: 001174df1b7c2a5428e3afbec9b0ce2b, type: 3}
+  specificPlayerInstance:
+    especifiedType: 0
+    position: 1
+    forceInstance: 1
+  activateVFXOnCaster: 0
+  VFXNamesOnCaster: []

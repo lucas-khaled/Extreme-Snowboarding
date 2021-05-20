@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4c37023973e594cb5bf18c3f518436, type: 3}
   m_Name: +Velocidade
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 5e7bf9ec86249338ab7f897214334c7c, type: 3}
+  activateVFX: 0
+  VFXNames: []
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -38,4 +41,3 @@ MonoBehaviour:
           boolValue: 0
           objectValue: {fileID: 0}
           conector: 0
-  icon: {fileID: 21300000, guid: a0fde6fcebb5b444d9f43995c4a695cc, type: 3}
