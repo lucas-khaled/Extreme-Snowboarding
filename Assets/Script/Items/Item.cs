@@ -25,6 +25,7 @@ namespace ExtremeSnowboarding.Script.Items
                 Debug.Log(player.name);
                 effect.StartEffect(player);
             }
+            ActivateVFX(player, true, VFXNames);
         }
 
         public Sprite GetSprite()
