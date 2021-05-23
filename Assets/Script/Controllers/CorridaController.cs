@@ -168,7 +168,43 @@ namespace ExtremeSnowboarding.Script.Controllers
             {
                 players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
             }
+
+            changeCameraByPlayers();
         }
+
+        private void changeCameraByPlayers()
+        {
+            if (players.Length == 1)
+            {
+                cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 1, 1);
+                cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+                cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+                cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+            }
+            else if (players.Length == 2)
+            {
+               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.5f, 1);
+               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0, 1, 1);
+               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+            }
+            else if (players.Length == 3)
+            {
+               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.3333333f, 1);
+               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.33f, 0, 0.34f, 1);
+               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0.67f, 0, 0.3333333f, 1);
+               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
+            }
+            else if (players.Length == 4)
+            {
+               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0.5f, 0.5f, 1);
+               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0.5f, 1, 1);
+               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.5f, 0.5f);
+               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0, 1, 0.5f);
+            }
+
+        }
+
         private void LoadPlayers()
         {
             players = GameController.gameController.playerData;

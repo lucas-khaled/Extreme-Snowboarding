@@ -106,6 +106,8 @@ namespace ExtremeSnowboarding.Script.Catastrophe
             {
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new Dead());
             }
+            else if (other.gameObject.CompareTag("Projectile"))
+                Destroy(other.gameObject);
         }
     }
 }
