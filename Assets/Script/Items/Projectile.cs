@@ -18,6 +18,15 @@ namespace ExtremeSnowboarding.Script.Items
         private bool alreadyCasted = false;
         private float relativeSpeed;
 
+        bool isFalling = false;
+        private float projectileFallX;
+        private float projectiveFallY;
+
+        private void Start()
+        {
+            projectiveFallY = 1;
+        }
+
         private void Update()
         {
             Movement();
@@ -36,13 +45,13 @@ namespace ExtremeSnowboarding.Script.Items
                     MoveStraight(1);
                     break;
                 case MovementType.FOWARD:
-                    MoveFollowTrack(1);
+                    MoveFollowTrack(5);
                     break;
                 case MovementType.STOPPED:
                     MoveStopped();
                     break;
                 case MovementType.BACK:
-                    MoveFollowTrack(-1);
+                    MoveFollowTrack(-5);
                     break;
                 case MovementType.STRAIGHT_BACK:
                     MoveStraight(-1);
@@ -54,6 +63,7 @@ namespace ExtremeSnowboarding.Script.Items
         void MoveStraight(int velocityFactor)
         {
             transform.position += Vector3.right * speed * Time.deltaTime * 10 * velocityFactor;
+            Destroy(this, 10f);
         }
         void MoveFollowTrack(int distanceFactor)
         {
@@ -67,18 +77,33 @@ namespace ExtremeSnowboarding.Script.Items
             {
                 relativeSpeed = speed + caster.SharedValues.RealVelocity * 2;
                 alreadyCasted = true;
+                projectileFallX = relativeSpeed;
             }
 
             if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
             else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
+            else
+            {
+                newPoint = new Vector3(this.transform.position.x + (distanceFactor * relativeSpeed), this.transform.position.y, this.transform.position.z);
+                isFalling = true;
+            }
 
-            newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
+            if (!isFalling)
+                newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
+            else
+            {
+                newPoint = new Vector3(newPoint.x, newPoint.y * projectiveFallY, newPoint.z);
+                projectileFallX -= relativeSpeed * 0.01f;
+                projectiveFallY *= 2;
+            }
+
+
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,              // Posicao inicial 
-                newPoint,                             // Posicao destino
-                relativeSpeed * Time.deltaTime);      // Velocidade movimento
+                newPoint,                                                                       // Posicao destino
+                relativeSpeed * Time.deltaTime);                                                // Velocidade movimento
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
 
@@ -108,7 +133,6 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.name);
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
@@ -118,7 +142,7 @@ namespace ExtremeSnowboarding.Script.Items
                     Destroy(gameObject);
                 }
             }
-            else
+            else if (!other.gameObject.CompareTag("Track") && (!other.gameObject.CompareTag("ItemBox")))
             {
                 if(explosionParticle != null)
                     explosionParticle.Play();
