@@ -8,9 +8,11 @@ using ExtremeSnowboarding.Script.Items;
 using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
 using NaughtyAttributes;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Player
 {
@@ -194,7 +196,7 @@ namespace ExtremeSnowboarding.Script.Player
         {
             if (turboValue > 0)
             {
-                float turbo = turboValue * sharedValues.turboMultiplier / 100;
+                float turbo = turboValue / 100;
                 sharedValues.Turbo += turbo;
             }
             else
@@ -257,19 +259,23 @@ namespace ExtremeSnowboarding.Script.Player
     {
         [BoxGroup("Player Values")]
         [SerializeField, Min(0)] private float characterHeight = 2;
-
+        [SerializeField, UnityEngine.Range(1f,3f)] private float mortalAddVelocityRate = 2; 
+        [FormerlySerializedAs("turboMultiplier")] [SerializeField] private float turboMortalMultiplier = 1;
+        
         [Header("Movement Values")] [HorizontalLine(color:EColor.Yellow)] 
-        [SerializeField] private float velocity = 10f;
+        
+        [FormerlySerializedAs("velocity")] [SerializeField] private float acceleration = 1;
         [SerializeField] private float jumpFactor = 1f;
         [SerializeField] [Min(0)] private float maxJumpForce = 20;
-        [SerializeField] [UnityEngine.Range(1,7)] private float maxAddedVelocity = 5;
-        [SerializeField] [UnityEngine.Range(10, 50)] private float maxVelocity = 30;
+        [SerializeField] [UnityEngine.Range(0f, 1f)] private float velocityOverJumpRate = 0.5f;
+        [FormerlySerializedAs("maxAddedVelocity")] [SerializeField] [UnityEngine.Range(1f,20f)] private float maxAddedAcceleration = 5;
+        [SerializeField] [UnityEngine.Range(10f, 50f)] private float maxVelocity = 30;
         [SerializeField] private float rotationFactor = 3;
 
-        private float addedVelocity = 0;
+        private float addedAcceleration = 0;
         private float turbo = 0;
 
-        public float turboMultiplier = 1;
+        
     
         public string actualState { get; set; }
         public Player player { get; set; }
@@ -284,6 +290,10 @@ namespace ExtremeSnowboarding.Script.Player
         
         [ExposedProperty("Added Jump")]
         public float AddedJump { get; set; }
+
+        public float Acceleration => acceleration;
+        public float MortalAddVelocityRate => mortalAddVelocityRate;
+        public float TurboMortalMultiplier => turboMortalMultiplier;
 
         [MovimentationValue] [ExposedProperty("Turbo")]
         public float Turbo 
@@ -305,18 +315,18 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-        [MovimentationValue] [ExposedProperty("Added Velocity")]
-        public float AddedVelocity
+        [MovimentationValue] [ExposedProperty("Added Acceleration")]
+        public float AddedAcceleration
         {
             get
             {
-                return addedVelocity;
+                return addedAcceleration;
             }
             set
             {
-                addedVelocity = Mathf.Clamp(value, -maxAddedVelocity, maxAddedVelocity);
+                addedAcceleration = Mathf.Clamp(value, -maxAddedAcceleration, maxAddedAcceleration);
 
-                if (addedVelocity > 5 && player.GetPlayerState().GetType() != typeof(Dead))
+                if (addedAcceleration > 5 && player.GetPlayerState().GetType() != typeof(Dead))
                 {
                     player.SetOnAnimator("highSpeed", true);
                     player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StartParticle();
@@ -349,7 +359,7 @@ namespace ExtremeSnowboarding.Script.Player
         {
             get
             {
-                return Mathf.Clamp((AddedJump+jumpFactor) * RealVelocity*0.75f, 1, maxJumpForce);
+                return Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate, 1, maxJumpForce);
             }
         }
 
@@ -367,11 +377,20 @@ namespace ExtremeSnowboarding.Script.Player
         }
 
         [MovimentationValue]
-        public float RealVelocity
+        public float RealAcceleration
         {
             get
             {
-                return Mathf.Clamp(velocity + AddedVelocity, 0, maxVelocity);
+                return acceleration + AddedAcceleration;
+            }
+        }
+
+        [MovimentationValue]
+        public float MaxVelocity
+        {
+            get
+            {
+                return maxVelocity + AddedAcceleration;
             }
         }
     }
