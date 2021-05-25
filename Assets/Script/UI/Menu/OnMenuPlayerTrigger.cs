@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ExtremeSnowboarding
+namespace ExtremeSnowboarding.Script.UI.Menu
 {
-    public class ChangeMenuPlayerModel : MonoBehaviour
+    public class OnMenuPlayerTrigger : MonoBehaviour
     {
 
         [SerializeField]private UnityEvent<Collider> onTriggerEnter;

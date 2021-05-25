@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,10 +8,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPoint : MonoBehaviour
     {
-        [SerializeField]
+        public CinemachineVirtualCamera virtualCamera;
+        
+        [SerializeField] [OnValueChanged("ChangedTag")]
         private string pointTag;
-        [Range(0.5f,3f)]
-        public float transitionTime = 1;
 
         [Header("Events")]
         [SerializeField]
@@ -25,8 +26,6 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField]
         private UnityEvent onStartClosing;
 
-        private CinemachineVirtualCamera virtualCamera;
-        
         public void Close()
         {
             if (onPointOpen != null)
@@ -56,28 +55,37 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             return pointTag;
         }
 
-        private void OnEnable()
+        public void CreateCamera()
         {
-            Debug.Log("aaaaaaaaaaaa");
             if (virtualCamera == null)
             {
                 GameObject go = new GameObject(name,typeof(CinemachineVirtualCamera));
                 virtualCamera = go.GetComponent<CinemachineVirtualCamera>();
+                
                 go.transform.position = transform.position;
-                go.transform.SetParent(FindObjectOfType<MenuCameraPointController>().MixingCamera.transform);
+                go.transform.SetParent(transform);
+
+                virtualCamera.Priority = 0;
             }
         }
 
-        private void OnDestroy()
+        private void Awake()
         {
-            if(virtualCamera != null)
-                Destroy(virtualCamera.gameObject);
+            CreateCamera();
         }
-
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, 1f);
+        }
+
+        private void ChangedTag()
+        {
+            name = pointTag + " Point";
+
+            if (virtualCamera != null)
+                virtualCamera.name = pointTag + " virtual camera";
         }
     }
 }

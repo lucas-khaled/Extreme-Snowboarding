@@ -1,58 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPointController : MonoBehaviour
     {
-        [SerializeField] private MenuCameraPoint[] points;
-        [SerializeField] private int startIndex = 0;
-        [SerializeField] private bool isCycle = true;
+        [SerializeField] private CinemachineBrain cinemachineBrain;
         
-        [Header("Cinemachine")]
-        [SerializeField] private CinemachineVirtualCamera menuCamera;
-        [SerializeField] private CinemachineSmoothPath path;
-        [SerializeField] private CinemachineMixingCamera mixing;
+        [BoxGroup("Points Values")]
+        [SerializeField] private int startIndex = 0;
+        [BoxGroup("Points Values")]
+        [SerializeField] private bool isCycle = true;
+        [BoxGroup("Points Values")]
+        [SerializeField] private List<MenuCameraPoint> points;
 
         private MenuCameraPoint actualPoint;
         private int pointIndex;
 
-        private CinemachineTrackedDolly trackedDolly;
-        public CinemachineMixingCamera MixingCamera => mixing;
-        
-        
-        private void Awake()
-        {
-            SetCinemachineTrack();
-        }
-
-        void SetCinemachineTrack()
-        {
-            path.m_Looped = isCycle;
-            path.m_Waypoints = new CinemachineSmoothPath.Waypoint[points.Length];
-            int index = 0;
-
-            foreach(MenuCameraPoint point in points)
-            {
-                path.m_Waypoints[index] = new CinemachineSmoothPath.Waypoint();
-                path.m_Waypoints[index].position = point.transform.position;
-                index++;
-            }
-
-            trackedDolly = menuCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-            trackedDolly.m_PathPosition = pointIndex = startIndex;
-        }
-
-        private void Start()
-        {
-            actualPoint = points[pointIndex];
-            actualPoint.Open();
-        }
-
         public void NextPoint(float delayTime = 0)
         {
-            if (pointIndex == points.Length - 1)
+            if (pointIndex == points.Count - 1)
             {
                 if (isCycle)
                     pointIndex = 0;
@@ -61,9 +32,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             }
             else
                 pointIndex++;
-
-            //StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
-            //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
+            
             StartCoroutine(GoToPoint(actualPoint,points[pointIndex], delayTime));
             actualPoint = points[pointIndex]; 
         }
@@ -73,15 +42,13 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             if (pointIndex == 0)
             {
                 if (isCycle)
-                    pointIndex = points.Length-1;
+                    pointIndex = points.Count-1;
                 else
                     return;
             }
             else
                 pointIndex--;
-
-            // StartCoroutine(ChangePoint(actualPoint, points[pointIndex]));
-            //StartCoroutine(ChangeRotation(actualPoint, points[pointIndex]));
+            
             StartCoroutine(GoToPoint(actualPoint, points[pointIndex], delayTime));
             actualPoint = points[pointIndex];
         }
@@ -103,7 +70,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
                 index++;
             }
 
-            if(index >= points.Length)
+            if(index >= points.Count)
             {
                 NextPoint();
                 return;
@@ -114,70 +81,42 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             actualPoint = points[pointIndex];
         }
 
+        [Button("Add a new Menu Camera Point")]
+        public void AddPoint()
+        {
+            GameObject go = new GameObject("Point" + (points.Count+1), typeof(MenuCameraPoint));
+            MenuCameraPoint newPoint = go.GetComponent<MenuCameraPoint>();
+            newPoint.CreateCamera();
+            
+            go.transform.SetParent(transform);
+            
+            points.Add(newPoint);
+        }
+
         IEnumerator GoToPoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint, float delayTime)
         {
-            yield return new WaitForSecondsRealtime(delayTime);
-
             fromPoint.StartClosing();
             toPoint.StartOpening();
-            float actualCinePoint = trackedDolly.m_PathPosition;
+            yield return new WaitForSecondsRealtime(delayTime);
 
-            float timeStep = 0.05f;
-            float step = (pointIndex - actualCinePoint) * timeStep/toPoint.transitionTime;
+            fromPoint.virtualCamera.Priority = 0;
+            toPoint.virtualCamera.Priority = 1;
 
-            while(Mathf.Abs((float)pointIndex - trackedDolly.m_PathPosition) >0.1f)
+            while (Vector3.Distance(cinemachineBrain.transform.position, toPoint.transform.position) > 2f)
             {
-                trackedDolly.m_PathPosition += step;
-                yield return new WaitForSecondsRealtime(timeStep);
+                yield return null;
             }
 
-            trackedDolly.m_PathPosition = pointIndex;
             fromPoint.Close();
             toPoint.Open();
         }
-
-        /*IEnumerator ChangeRotation(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
-    {
-        float xDifference = (toPoint.transform.eulerAngles.x % 360) - (fromPoint.transform.eulerAngles.x % 360);
-        float yDifference = (toPoint.transform.eulerAngles.y % 360) - (fromPoint.transform.eulerAngles.y % 360);
-        float zDifference = (toPoint.transform.eulerAngles.z % 360) - (fromPoint.transform.eulerAngles.z % 360);
-
-        float transitionTime = toPoint.transitionTime;
-        float timeStep = 0.05f;
-
-        Vector3 rotationStep = new Vector3(xDifference, yDifference , zDifference) * timeStep / transitionTime;
-
-        Debug.Log(xDifference + " - " + yDifference + " - " + zDifference + "\n Step: "+rotationStep);
         
-        while (Quaternion.Angle(menuCamera.transform.rotation, toPoint.transform.rotation) > 30)
+        private void Start()
         {
-            menuCamera.transform.rotation = Quaternion.RotateTowards(fromPoint.transform.rotation, toPoint.transform.rotation, 360*timeStep/transitionTime);
-            //menuCamera.transform.eulerAngles += rotationStep;
-            //menuCamera.transform.Rotate(rotationStep);
-
-            Debug.Log(Quaternion.Angle(menuCamera.transform.rotation, toPoint.transform.rotation));
-            yield return new WaitForSecondsRealtime(timeStep);
+            pointIndex = startIndex;
+            points[pointIndex].virtualCamera.Priority = 1;
+            actualPoint = points[pointIndex];
+            actualPoint.Open();
         }
-
-        menuCamera.transform.rotation = toPoint.transform.rotation;
-    }
-
-    IEnumerator ChangePoint(MenuCameraPoint fromPoint, MenuCameraPoint toPoint)
-    {
-        Vector3 direction = toPoint.transform.position - fromPoint.transform.position;
-        Vector3 steps = direction * toPoint.transitionTime/direction.magnitude;  
-
-        while(Vector3.Distance(menuCamera.transform.position, toPoint.transform.position) > steps.magnitude)
-        {
-            menuCamera.transform.position += steps;
-
-            yield return new WaitForSecondsRealtime(0.05f);
-        }
-
-        menuCamera.transform.position = toPoint.transform.position;
-
-        fromPoint.Close();
-        toPoint.Open();
-    }*/
     }
 }

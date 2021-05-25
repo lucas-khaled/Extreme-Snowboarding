@@ -178,7 +178,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.652027
+        functionName: CallAnimationEvent
+        data: Escolha
+        objectReferenceParameter: {fileID: 11500000, guid: eb9b56951282496884ce8d7c9578efbe, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

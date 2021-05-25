@@ -85,6 +85,8 @@ MonoBehaviour:
   - {fileID: 8018166466306742725}
   sharedValues:
     characterHeight: 1.62
+    mortalAddVelocityRate: 2
+    turboMortalMultiplier: 1.1
     acceleration: 2
     jumpFactor: 5
     maxJumpForce: 20
@@ -92,7 +94,6 @@ MonoBehaviour:
     maxAddedAcceleration: 15
     maxVelocity: 15
     rotationFactor: 1.2
-    turboMultiplier: 1.1
   playerVFXList: {fileID: 11400000, guid: f5d529e8fe8bb984fb569d7240fb7744, type: 2}
 --- !u!114 &-2960936140915857356
 MonoBehaviour:
