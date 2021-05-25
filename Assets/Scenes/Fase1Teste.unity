@@ -3238,7 +3238,7 @@ Transform:
   - {fileID: 1120230225}
   - {fileID: 27635845}
   m_Father: {fileID: 3978988811397335029}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &104166610
 PrefabInstance:
@@ -7332,7 +7332,7 @@ Transform:
   - {fileID: 1853680244}
   - {fileID: 1855573571}
   m_Father: {fileID: 5802959312258308466}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &252623295
 PrefabInstance:
@@ -17093,6 +17093,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7755536857746691891, guid: 90d1830a2fc31994a8fa155b27749d64, type: 3}
   m_PrefabInstance: {fileID: 533999846}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &539763531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539763532}
+  - component: {fileID: 539763533}
+  - component: {fileID: 539763534}
+  m_Layer: 0
+  m_Name: ColisorVoidPista0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &539763532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539763531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5802959312258308466}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &539763533
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539763531}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6947925276255095574, guid: 9f7734c07cf6c45cea4c5ea9d539690d, type: 3}
+--- !u!114 &539763534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539763531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a1b6cdb8c904a855064a17e30753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &540402979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22708,6 +22766,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8289268197614672522, guid: 5197d7cd179f52a429fe8f0e4d580cbc, type: 3}
   m_PrefabInstance: {fileID: 732220577}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &737690989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737690990}
+  - component: {fileID: 737690991}
+  - component: {fileID: 737690992}
+  m_Layer: 0
+  m_Name: ColisorVoidPista2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &737690990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737690989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8662823795016165326}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &737690991
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737690989}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4582960660117040685, guid: 9f7734c07cf6c45cea4c5ea9d539690d, type: 3}
+--- !u!114 &737690992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737690989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a1b6cdb8c904a855064a17e30753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &741069338
 GameObject:
   m_ObjectHideFlags: 0
@@ -24361,6 +24477,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2126518123819828970, guid: d859eaa229344c346861881e52d5adaf, type: 3}
   m_PrefabInstance: {fileID: 826044532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &803744057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803744058}
+  - component: {fileID: 803744059}
+  - component: {fileID: 803744060}
+  m_Layer: 0
+  m_Name: ColisorVoidPista1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803744058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803744057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3978988811397335029}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &803744059
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803744057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9107018689201079194, guid: 9f7734c07cf6c45cea4c5ea9d539690d, type: 3}
+--- !u!114 &803744060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803744057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a1b6cdb8c904a855064a17e30753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &813201441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28065,6 +28239,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6316277681710705518, guid: 1894225515ca84f4c8f41286ffd003ff, type: 3}
   m_PrefabInstance: {fileID: 968997640}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &971485944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 971485945}
+  - component: {fileID: 971485946}
+  - component: {fileID: 971485947}
+  m_Layer: 0
+  m_Name: ColisorVoidPista3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &971485945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971485944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6479102469304667592}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &971485946
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971485944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4625082877192840827, guid: 9f7734c07cf6c45cea4c5ea9d539690d, type: 3}
+--- !u!114 &971485947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971485944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a1b6cdb8c904a855064a17e30753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &976986425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2126518123819828970, guid: d859eaa229344c346861881e52d5adaf, type: 3}
@@ -29660,7 +29892,7 @@ Transform:
   - {fileID: 590100828}
   - {fileID: 1117782597}
   m_Father: {fileID: 8662823795016165326}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1033373164
 PrefabInstance:
@@ -41595,6 +41827,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8289268197614672522, guid: 5197d7cd179f52a429fe8f0e4d580cbc, type: 3}
   m_PrefabInstance: {fileID: 1491749682}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1492036847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492036848}
+  - component: {fileID: 1492036849}
+  - component: {fileID: 1492036850}
+  m_Layer: 0
+  m_Name: ColisorVoidPista4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492036848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492036847}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6219500459877222060}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1492036849
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492036847}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 253318646452083007, guid: 9f7734c07cf6c45cea4c5ea9d539690d, type: 3}
+--- !u!114 &1492036850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492036847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a1b6cdb8c904a855064a17e30753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1492742034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47460,6 +47750,7 @@ Transform:
   - {fileID: 13106683}
   - {fileID: 414031573}
   - {fileID: 1282600735}
+  - {fileID: 5783140789836475461}
   - {fileID: 20317206}
   - {fileID: 370757559}
   - {fileID: 1581954902}
@@ -47473,6 +47764,7 @@ Transform:
   - {fileID: 717143793}
   - {fileID: 243405547}
   - {fileID: 345270262}
+  - {fileID: 295511466}
   - {fileID: 292425176}
   - {fileID: 1845138094}
   - {fileID: 769269466}
@@ -47485,15 +47777,13 @@ Transform:
   - {fileID: 607778419}
   - {fileID: 443871539}
   - {fileID: 533999847}
-  - {fileID: 5783140789836475461}
   - {fileID: 1229374598}
   - {fileID: 1959602607}
   - {fileID: 1438215076}
-  - {fileID: 295511466}
+  - {fileID: 161012065}
   - {fileID: 1801745805}
   - {fileID: 1623180880}
   - {fileID: 653709959}
-  - {fileID: 161012065}
   - {fileID: 1685265457}
   - {fileID: 304597670}
   - {fileID: 676474713}
@@ -47510,36 +47800,36 @@ Transform:
   - {fileID: 68561388}
   - {fileID: 554104036}
   - {fileID: 455043011}
-  - {fileID: 763800896}
-  - {fileID: 315581395}
-  - {fileID: 1616096877}
   - {fileID: 305945232}
-  - {fileID: 1747498734}
+  - {fileID: 315581395}
   - {fileID: 977132480}
+  - {fileID: 763800896}
+  - {fileID: 1747498734}
   - {fileID: 1063946968}
   - {fileID: 283283871}
   - {fileID: 1227148920}
   - {fileID: 154089042}
   - {fileID: 1497314232}
   - {fileID: 797874391}
+  - {fileID: 302147124}
   - {fileID: 270805596}
   - {fileID: 452825553}
+  - {fileID: 462743352}
   - {fileID: 459867097}
-  - {fileID: 2056862077}
+  - {fileID: 1616096877}
+  - {fileID: 129124956}
   - {fileID: 1753320727}
   - {fileID: 435730716}
   - {fileID: 1144511113}
-  - {fileID: 129124956}
   - {fileID: 1413966865}
-  - {fileID: 1494286899}
-  - {fileID: 1776012893}
-  - {fileID: 216631657}
-  - {fileID: 462141588}
   - {fileID: 677096132}
   - {fileID: 1564620672}
-  - {fileID: 302147124}
-  - {fileID: 462743352}
+  - {fileID: 1494286899}
+  - {fileID: 216631657}
+  - {fileID: 462141588}
   - {fileID: 1926635621}
+  - {fileID: 2056862077}
+  - {fileID: 1776012893}
   - {fileID: 1053970004}
   - {fileID: 1456109009}
   - {fileID: 440527727}
@@ -47551,11 +47841,11 @@ Transform:
   - {fileID: 1114867280}
   - {fileID: 2029469886}
   - {fileID: 1255232536}
+  - {fileID: 1584482599}
   - {fileID: 543842639}
   - {fileID: 532587034}
-  - {fileID: 417790663}
-  - {fileID: 1584482599}
   - {fileID: 1654585156}
+  - {fileID: 417790663}
   - {fileID: 65755073}
   - {fileID: 133255852}
   - {fileID: 1487863092}
@@ -47573,7 +47863,7 @@ Transform:
   - {fileID: 1883223417}
   - {fileID: 966416497}
   m_Father: {fileID: 6219500459877222060}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1701008799
 PrefabInstance:
@@ -52881,7 +53171,6 @@ Transform:
   - {fileID: 1371319204}
   - {fileID: 1374697038}
   - {fileID: 1153591220}
-  - {fileID: 1352599396}
   - {fileID: 827539818}
   - {fileID: 1967341501}
   - {fileID: 1328762565}
@@ -52890,14 +53179,15 @@ Transform:
   - {fileID: 77796341}
   - {fileID: 1794601706}
   - {fileID: 2126244712}
-  - {fileID: 1463888137}
   - {fileID: 727833569}
+  - {fileID: 1352599396}
   - {fileID: 264133973}
   - {fileID: 847829007}
-  - {fileID: 731206795}
-  - {fileID: 114522489}
-  - {fileID: 87190827}
   - {fileID: 601378194}
+  - {fileID: 114522489}
+  - {fileID: 731206795}
+  - {fileID: 87190827}
+  - {fileID: 1463888137}
   - {fileID: 1747185505}
   - {fileID: 153543519}
   - {fileID: 1173787190}
@@ -52934,7 +53224,7 @@ Transform:
   - {fileID: 336360143}
   - {fileID: 397881319}
   m_Father: {fileID: 6479102469304667592}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1900030256
 PrefabInstance:
@@ -61476,6 +61766,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1500249920}
+  - {fileID: 803744058}
   - {fileID: 101157176}
   m_Father: {fileID: 7561672952426107019}
   m_RootOrder: 1
@@ -61717,7 +62008,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1698992708}
-  m_RootOrder: 218
+  m_RootOrder: 193
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 348.444}
 --- !u!4 &5802959312258308466
 Transform:
@@ -61731,6 +62022,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1716987812}
+  - {fileID: 539763532}
   - {fileID: 244629976}
   m_Father: {fileID: 7561672952426107019}
   m_RootOrder: 0
@@ -61747,6 +62039,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 741069339}
+  - {fileID: 1492036848}
   - {fileID: 1698992708}
   m_Father: {fileID: 7561672952426107019}
   m_RootOrder: 4
@@ -61768,6 +62061,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1432994427}
+  - {fileID: 971485945}
   - {fileID: 1898895188}
   m_Father: {fileID: 7561672952426107019}
   m_RootOrder: 3
@@ -62269,6 +62563,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1887168091}
+  - {fileID: 737690990}
   - {fileID: 1032037785}
   m_Father: {fileID: 7561672952426107019}
   m_RootOrder: 2

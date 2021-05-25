@@ -11,7 +11,8 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private int numOfPlayer = 1;
 
-        [Scene] [SerializeField] private string sceneToLoad = "Fase1";
+        [Scene] [SerializeField] 
+        private string[] scenesToLoad;
 
         public PlayerData[] playerData { get; set; }
 
@@ -44,6 +45,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         public void Play()
         {
+            string sceneToLoad = scenesToLoad[Random.Range(0, scenesToLoad.Length)];
             ChangeScene(sceneToLoad);
         }
 
