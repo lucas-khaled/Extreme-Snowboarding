@@ -6,24 +6,22 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPointController : MonoBehaviour
     {
-        [SerializeField]
-        private MenuCameraPoint[] points;
-        [SerializeField]
-        private int startIndex = 0;
-        [SerializeField]
-        private bool isCycle = true;
+        [SerializeField] private MenuCameraPoint[] points;
+        [SerializeField] private int startIndex = 0;
+        [SerializeField] private bool isCycle = true;
+        
         [Header("Cinemachine")]
-        [SerializeField]
-        private CinemachineVirtualCamera menuCamera;
-        [SerializeField]
-        private CinemachineSmoothPath path;
-    
+        [SerializeField] private CinemachineVirtualCamera menuCamera;
+        [SerializeField] private CinemachineSmoothPath path;
+        [SerializeField] private CinemachineMixingCamera mixing;
 
         private MenuCameraPoint actualPoint;
         private int pointIndex;
 
         private CinemachineTrackedDolly trackedDolly;
-
+        public CinemachineMixingCamera MixingCamera => mixing;
+        
+        
         private void Awake()
         {
             SetCinemachineTrack();

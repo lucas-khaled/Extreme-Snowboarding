@@ -53,7 +53,7 @@ namespace ExtremeSnowboarding.Script.Items
         #region Movement Types
         void MoveStraight(int velocityFactor)
         {
-            transform.position += Vector3.right * speed * Time.deltaTime * 10 * velocityFactor;
+            transform.position += speed * Time.deltaTime * 10 * velocityFactor * Vector3.right;
         }
         void MoveFollowTrack(int distanceFactor)
         {
