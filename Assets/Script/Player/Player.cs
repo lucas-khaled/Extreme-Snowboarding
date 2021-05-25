@@ -25,7 +25,30 @@ namespace ExtremeSnowboarding.Script.Player
         private Animator animator;
         [SerializeField] [BoxGroup("References")]
         private SkinnedMeshRenderer[] meshRenderers;
-    
+
+        #region Audio references
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip normalFallClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip hardFallClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip landingClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip jumpingClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip gotPowerUpClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip gotFuckFriendClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip skiingClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip trickClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip victoryClip;
+        [SerializeField] [BoxGroup("Audio clips")]
+        private AudioClip lostClip;
+        #endregion
+
         [BoxGroup("Player Values")]
         [SerializeField] 
         private PlayerSharedValues sharedValues;
@@ -57,7 +80,8 @@ namespace ExtremeSnowboarding.Script.Player
         private Player[] playerSpectating = new Player[4];
         private Vector3 startPoint;
         private GameObject catastropheRef;
-
+        private AudioSource audioSource;
+        private AudioSource audioSourceEffects;
 
         public void AddPlayerSpectating(Player playerSpectator)
         {
@@ -222,6 +246,10 @@ namespace ExtremeSnowboarding.Script.Player
         public void GetItem(Item item)
         {
             Coletavel = item;
+            //if ()
+            //    PlayGotPowerUpAudio();
+            //else
+            //    PlayGotFuckFriendAudio();
         }
 
         public void StartStateCoroutine(IEnumerator coroutine)
@@ -250,6 +278,73 @@ namespace ExtremeSnowboarding.Script.Player
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
         }
+
+        #region Audio
+
+        public void SetPlayerAudioSource(AudioSource audioSourceRef, AudioSource audioSourceEffectsRef)
+        {
+            audioSource = audioSourceRef;
+            audioSourceEffects = audioSourceEffectsRef;
+        }
+
+        public void PlayNormalFallAudio()
+        {
+            if (normalFallClip != null)
+            audioSourceEffects.PlayOneShot(normalFallClip);
+        }
+        public void PlayHardFallAudio()
+        {
+            if (hardFallClip != null)
+                audioSourceEffects.PlayOneShot(hardFallClip);
+        }
+        public void PlayJumpAudio()
+        {
+            if (jumpingClip != null)
+                audioSourceEffects.PlayOneShot(jumpingClip);
+        }
+        public void PlayLandingAudio()
+        {
+            if (landingClip!= null)
+                audioSourceEffects.PlayOneShot(landingClip);
+        }
+        public void PlayGotPowerUpAudio()
+        {
+            if (gotPowerUpClip != null)
+                audioSourceEffects.PlayOneShot(gotPowerUpClip);
+        }
+        public void PlayGotFuckFriendAudio()
+        {
+            if (gotFuckFriendClip != null)
+                audioSourceEffects.PlayOneShot(gotFuckFriendClip);
+        }
+        public void PlayTrickAudio()
+        {
+            if (trickClip != null)
+                audioSourceEffects.PlayOneShot(trickClip);
+        }
+        public void PlayVictoryAudio()
+        {
+            if (victoryClip != null)
+                audioSourceEffects.PlayOneShot(victoryClip);
+        }
+        public void PlayLostAudio()
+        {
+            if (lostClip != null)
+                audioSourceEffects.PlayOneShot(lostClip);
+        }
+
+        public void ChangeSkiingAudio(bool isSkiing)
+        {
+            if (skiingClip != null)
+            {
+                if (isSkiing)
+                    audioSourceEffects.Play();
+                else
+                    audioSourceEffects.Stop();
+            }
+        }
+
+        #endregion
     }
 
     [System.Serializable]

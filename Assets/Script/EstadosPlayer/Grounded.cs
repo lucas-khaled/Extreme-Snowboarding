@@ -16,12 +16,16 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
+            player.ChangeSkiingAudio(false);
+
             UnsubscribeOnInputEvents();
         
             player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StopParticle();
             player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).LockParticle(true);
             player.StopAllCoroutines();
             player = null;
+
+            
         }
 
         public override void StateStart(Player.Player player)
@@ -31,7 +35,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             SubscribeOnInputEvents();
 
             player.SharedValues.actualState = "Grounded";
-        
+
+            player.ChangeSkiingAudio(true);
+
             rb = player.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = false;

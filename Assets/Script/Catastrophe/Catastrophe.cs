@@ -48,8 +48,13 @@ namespace ExtremeSnowboarding.Script.Catastrophe
             StartCatastrophe();
         }
 
+
         void StartCatastrophe()
         {
+            //audioSource.Play();
+
+            this.GetComponent<AudioSource>().mute = false;
+
             // Animação catastrophe iniciando
             this.GetComponent<MeshRenderer>().enabled = true;
             this.GetComponent<SphereCollider>().enabled = true;
