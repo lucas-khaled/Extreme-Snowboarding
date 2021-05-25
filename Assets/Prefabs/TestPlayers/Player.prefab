@@ -90,13 +90,14 @@ MonoBehaviour:
   jumpingClip: {fileID: 8300000, guid: a8b0ceaf7e8cd9f408f1f7de1fb5a434, type: 3}
   sharedValues:
     characterHeight: 1.62
-    velocity: 12
-    jumpFactor: 1
+    acceleration: 2
+    jumpFactor: 5
     maxJumpForce: 20
-    maxAddedVelocity: 5.03
-    maxVelocity: 30
-    rotationFactor: 1
-    turboMultiplier: 1
+    velocityOverJumpRate: 0.128
+    maxAddedAcceleration: 15
+    maxVelocity: 15
+    rotationFactor: 1.2
+    turboMultiplier: 1.1
   playerVFXList: {fileID: 11400000, guid: f5d529e8fe8bb984fb569d7240fb7744, type: 2}
 --- !u!114 &-2960936140915857356
 MonoBehaviour:
