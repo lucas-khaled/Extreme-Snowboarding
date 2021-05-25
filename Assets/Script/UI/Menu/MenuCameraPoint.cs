@@ -1,3 +1,6 @@
+using System;
+using Cinemachine;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,10 +8,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuCameraPoint : MonoBehaviour
     {
-        [SerializeField]
+        public CinemachineVirtualCamera virtualCamera;
+        
+        [SerializeField] [OnValueChanged("ChangedTag")]
         private string pointTag;
-        [Range(0.5f,3f)]
-        public float transitionTime = 1;
 
         [Header("Events")]
         [SerializeField]
@@ -52,10 +55,37 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             return pointTag;
         }
 
+        public void CreateCamera()
+        {
+            if (virtualCamera == null)
+            {
+                GameObject go = new GameObject(name,typeof(CinemachineVirtualCamera));
+                virtualCamera = go.GetComponent<CinemachineVirtualCamera>();
+                
+                go.transform.position = transform.position;
+                go.transform.SetParent(transform);
+
+                virtualCamera.Priority = 0;
+            }
+        }
+
+        private void Awake()
+        {
+            CreateCamera();
+        }
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, 1f);
+        }
+
+        private void ChangedTag()
+        {
+            name = pointTag + " Point";
+
+            if (virtualCamera != null)
+                virtualCamera.name = pointTag + " virtual camera";
         }
     }
 }
