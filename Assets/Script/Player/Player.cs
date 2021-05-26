@@ -166,7 +166,7 @@ namespace ExtremeSnowboarding.Script.Player
         private void InputSubcribing()
         {
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
-            playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;
+            playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;  
             playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
         }
 
