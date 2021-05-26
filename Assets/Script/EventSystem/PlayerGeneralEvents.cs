@@ -13,8 +13,8 @@ namespace ExtremeSnowboarding.Script.EventSystem
         public delegate void OnTurboChange(Player.Player player, float turboQuantity);
         public static OnTurboChange onTurboChange;
 
-        public delegate void OnFuckFriendChange(Player.Player player, Sprite fuckFriendSprite);
-        public static OnFuckFriendChange onFuckFriendChange;
+        public delegate void OnItemUsed(Player.Player player, Sprite fuckFriendSprite);
+        public static OnItemUsed onItemUsed;
 
         public delegate void OnPlayerInstantiate(Player.Player player);
 
