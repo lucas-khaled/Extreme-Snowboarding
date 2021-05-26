@@ -105,8 +105,9 @@ namespace ExtremeSnowboarding.Script.Controllers
 
             playersClassificated = new List<Player.Player>();
             isPaused = false;
-
-            menuInput.performed += PauseInput;
+            
+            menuInput.Enable();
+            menuInput.started += PauseInput;
         }
 
         #region Listeners
@@ -128,11 +129,11 @@ namespace ExtremeSnowboarding.Script.Controllers
         private void PauseInput(InputAction.CallbackContext context)
         {
             Debug.Log("KEK");
-            if (context.performed && !isPaused)
+            if (context.started && !isPaused)
             {
                 Pause();
             }
-            else if (context.performed && isPaused)
+            else if (context.started && isPaused)
             {
                 UnPause();
             }
@@ -193,10 +194,10 @@ namespace ExtremeSnowboarding.Script.Controllers
                 players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
             }
 
-            changeCameraByPlayers();
+            ChangeCameraByPlayers();
         }
 
-        private void changeCameraByPlayers()
+        private void ChangeCameraByPlayers()
         {
             if (players.Length == 1)
             {
