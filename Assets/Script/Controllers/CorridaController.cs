@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ExtremeSnowboarding.Script.EstadosPlayer;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Player;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Controllers
@@ -12,11 +13,17 @@ namespace ExtremeSnowboarding.Script.Controllers
         private Vector3 posicaoSpawnPlayers;
         [SerializeField]
         private Player.Player playerPrefab;
+        [SerializeField]
+        private GameObject canvasPauseRef;
+    
+        public InputAction menuInput;
 
         public GameCamera[] cameras;
         public GameObject catastrophe { get; set; }
         
         public List<Player.Player> playersClassificated { get; private set; }
+
+        private  bool isPaused;
         
         private PlayerData[] players;
         int alivePlayers;
@@ -97,6 +104,10 @@ namespace ExtremeSnowboarding.Script.Controllers
             instance = this;
 
             playersClassificated = new List<Player.Player>();
+            isPaused = false;
+            
+            menuInput.Enable();
+            menuInput.started += PauseInput;
         }
 
         #region Listeners
@@ -113,6 +124,20 @@ namespace ExtremeSnowboarding.Script.Controllers
         }
 
         #endregion
+
+
+        private void PauseInput(InputAction.CallbackContext context)
+        {
+            Debug.Log("KEK");
+            if (context.started && !isPaused)
+            {
+                Pause();
+            }
+            else if (context.started && isPaused)
+            {
+                UnPause();
+            }
+        }
 
         private Player.PlayerData GetPlayerData(Player.Player player)
         {
@@ -169,10 +194,10 @@ namespace ExtremeSnowboarding.Script.Controllers
                 players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
             }
 
-            changeCameraByPlayers();
+            ChangeCameraByPlayers();
         }
 
-        private void changeCameraByPlayers()
+        private void ChangeCameraByPlayers()
         {
             if (players.Length == 1)
             {
@@ -261,6 +286,25 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
         }
         
+        public void Pause()
+        {
+            isPaused = true;
+            canvasPauseRef.SetActive(true);
+            Time.timeScale = 0;
+        }
+        public void UnPause()
+        {
+            isPaused = false;
+            canvasPauseRef.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        public void ReturnToMainMenu()
+        {
+            StopAllCoroutines();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
+        }
+
         void OnDrawGizmos()
         {
             Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");
