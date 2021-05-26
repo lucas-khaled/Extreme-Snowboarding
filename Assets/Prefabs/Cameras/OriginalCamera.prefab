@@ -2488,7 +2488,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2971,14 +2971,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
---- !u!224 &6523166923301057590 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6286413946543487566, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
-  m_PrefabInstance: {fileID: 989426239135993464}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &6523166923301057591 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6286413946543487567, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
+  m_PrefabInstance: {fileID: 989426239135993464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6523166923301057590 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6286413946543487566, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
   m_PrefabInstance: {fileID: 989426239135993464}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3258703512792628973
@@ -3086,13 +3086,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
---- !u!224 &4412777148913146612 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1154162834943222809, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
-  m_PrefabInstance: {fileID: 3258703512792628973}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &4412777148913146613 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1154162834943222808, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
+  m_PrefabInstance: {fileID: 3258703512792628973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4412777148913146612 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1154162834943222809, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
   m_PrefabInstance: {fileID: 3258703512792628973}
   m_PrefabAsset: {fileID: 0}
