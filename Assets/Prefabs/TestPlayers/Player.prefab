@@ -83,16 +83,21 @@ MonoBehaviour:
   - {fileID: 3370611366440035658}
   - {fileID: 3388718810130812383}
   - {fileID: 8018166466306742725}
-  audioSource: {fileID: 0}
   normalFallClip: {fileID: 8300000, guid: b56e2089bae2edc4ab89a46ddf8ce19f, type: 3}
   hardFallClip: {fileID: 0}
   landingClip: {fileID: 8300000, guid: b7a3368416b8f0f42a8a2af060bf4309, type: 3}
   jumpingClip: {fileID: 8300000, guid: a8b0ceaf7e8cd9f408f1f7de1fb5a434, type: 3}
+  gotPowerUpClip: {fileID: 0}
+  gotFuckFriendClip: {fileID: 0}
+  skiingClip: {fileID: 0}
+  trickClip: {fileID: 0}
+  victoryClip: {fileID: 0}
+  lostClip: {fileID: 0}
   sharedValues:
     characterHeight: 1.62
     mortalAddVelocityRate: 2
     turboMortalMultiplier: 1.1
-    acceleration: 2
+    acceleration: 3
     jumpFactor: 5
     maxJumpForce: 20
     velocityOverJumpRate: 0.128
