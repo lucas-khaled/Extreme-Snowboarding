@@ -15,17 +15,6 @@ namespace ExtremeSnowboarding.Script.Player
     
         public Player player;
 
-        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02)
-        {
-            this.color1 = color1;
-            this.color2 = color2;
-            this.playerShader = playerShader;
-            index = playerIndex + 1;
-            playerMeshes = meshes;
-            this.mask01 = mask01;
-            this.mask02 = mask02;
-        }
-
         public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
         {
             GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
@@ -49,6 +38,17 @@ namespace ExtremeSnowboarding.Script.Player
         
             if(PlayerGeneralEvents.onPlayerInstantiate != null)
                 PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+        }
+        
+        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02)
+        {
+            this.color1 = color1;
+            this.color2 = color2;
+            this.playerShader = playerShader;
+            index = playerIndex + 1;
+            playerMeshes = meshes;
+            this.mask01 = mask01;
+            this.mask02 = mask02;
         }
     }
 }

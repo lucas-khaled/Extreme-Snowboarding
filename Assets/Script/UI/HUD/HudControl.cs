@@ -32,7 +32,7 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         {
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onTurboChange += OnTurboChange;
-            PlayerGeneralEvents.onFuckFriendChange += OnFuckFriendChange;
+            PlayerGeneralEvents.onItemUsed += OnFuckFriendChange;
         }
 
         public void SetPlayer(Player.Player player)

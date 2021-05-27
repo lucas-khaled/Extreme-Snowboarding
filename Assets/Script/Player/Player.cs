@@ -59,6 +59,9 @@ namespace ExtremeSnowboarding.Script.Player
         [SerializeField]
         private PlayerVFXGroup playerVFXList;
 
+        /// <summary>
+        /// Values that meant to be shared across the player states
+        /// </summary>
         public PlayerSharedValues SharedValues
         {
             get
@@ -109,6 +112,10 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
+        /// <summary>
+        /// Get the parent object of player's mesh renderers
+        /// </summary>
+        /// <returns></returns>
         public GameObject GetMeshGameObject()
         {
             if (meshRenderers[0] != null)
@@ -117,6 +124,11 @@ namespace ExtremeSnowboarding.Script.Player
             return null;
         }
 
+        /// <summary>
+        /// Set the indicated meshes to player's renderers
+        /// </summary>
+        /// <param name="material">The material to be set into the renderers</param>
+        /// <param name="meshes">The array of meshes to be set</param>
         public void SetPlayerMeshes(Material material, Mesh[] meshes)
         {
             for(int i = 0; i < meshRenderers.Length; i++)
@@ -126,11 +138,19 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
+        /// <summary>
+        /// Return the actual state of player
+        /// </summary>
+        /// <returns></returns>
         public PlayerState GetPlayerState()
         {
             return playerState;
         }
 
+        /// <summary>
+        /// Return the actual used VFXGroup
+        /// </summary>
+        /// <returns></returns>
         public PlayerVFXGroup GetPlayerVFXList()
         {
             return playerVFXList;
@@ -138,8 +158,8 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Awake()
         {
-            sharedValues.player = this;
-            playerVFXList.StartParticles(transform);
+            sharedValues.player = this; //setting the player reference to the shared values
+            playerVFXList.StartParticles(transform); 
             InputSubcribing();
         }
 
@@ -157,12 +177,14 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Update()
         {
-            //InputInterpretation();
             CheckTurbo();
         }
 
         #region Inputs
 
+        /// <summary>
+        /// Subscribes into the inputs callbacks
+        /// </summary>
         private void InputSubcribing()
         {
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
@@ -170,12 +192,14 @@ namespace ExtremeSnowboarding.Script.Player
             playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
         }
 
+        // The CheatCode method to rise your boost to maximum, it listens to "BoostCheat" input
         private void BoostCheat(InputAction.CallbackContext context)
         {
             if(context.started)
                 AddTurbo(100);
         }
     
+        // Method that will activate the holded item, empty the item slot and invoke an delegate. It listens to "Item" input
         private void ActivateItem(InputAction.CallbackContext context)
         {
             if (context.started && Coletavel != null)
@@ -183,13 +207,14 @@ namespace ExtremeSnowboarding.Script.Player
                 Coletavel.Activate(this);
                 Coletavel = null;
 
-                if (EventSystem.PlayerGeneralEvents.onFuckFriendChange != null)
+                if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
                 {
-                    EventSystem.PlayerGeneralEvents.onFuckFriendChange.Invoke(this, null);
+                    EventSystem.PlayerGeneralEvents.onItemUsed.Invoke(this, null);
                 }
             }
         }
     
+        // Method witch will activate boost in case the boost value is complete. It listens to "Boost" input
         private void ActivateBoost(InputAction.CallbackContext context)
         {
             if (context.started && sharedValues.Turbo >= 0.95)
@@ -204,7 +229,9 @@ namespace ExtremeSnowboarding.Script.Player
 
         #endregion
     
-    
+        /// <summary>
+        /// This method will check the catastrophe distance and add it accordingly to the turbo value
+        /// </summary>   
         private void CheckTurbo()
         {
             if (catastropheRef != null)
@@ -216,6 +243,10 @@ namespace ExtremeSnowboarding.Script.Player
                 catastropheRef = CorridaController.instance.catastrophe;
         }
 
+        /// <summary>
+        /// Adds a value to turbo value. It invokes a delegate on PlayerGeneralEvents
+        /// </summary>
+        /// <param name="turboValue"> Before being added,this value will be divided by 100 in case it is greater than 0 </param>
         public void AddTurbo(float turboValue)
         {
             if (turboValue > 0)
@@ -232,11 +263,10 @@ namespace ExtremeSnowboarding.Script.Player
                 PlayerGeneralEvents.onTurboChange.Invoke(this, sharedValues.Turbo);
         }
 
-        void Restart()
-        {
-            SceneManager.LoadScene("MenuPrincipal");
-        }
-
+        /// <summary>
+        /// Changes the actual Player State. It will call "StateEnd" on the older state and "StateStart" on the new state.
+        /// </summary>
+        /// <param name="newState"> The new actual state </param>
         public void ChangeState(PlayerState newState)
         {
             playerState.StateEnd();
@@ -245,7 +275,11 @@ namespace ExtremeSnowboarding.Script.Player
             playerState.StateStart(this);
         }
 
-        public void GetItem(Item item)
+        /// <summary>
+        /// Sets the item to player's item slot.
+        /// </summary>
+        /// <param name="item">The Item to be set</param>
+        public void SetItem(Item item)
         {
             Coletavel = item;
             //if ()
@@ -254,22 +288,28 @@ namespace ExtremeSnowboarding.Script.Player
             //    PlayGotFuckFriendAudio();
         }
 
+        /// <summary>
+        /// Method to allow non MonoBehaviours scripts to start Coroutines.
+        /// </summary>
+        /// <param name="coroutine">Coroutine to be started</param>
         public void StartStateCoroutine(IEnumerator coroutine)
         {
             StartCoroutine(coroutine);
         }
 
+        /// <summary>
+        /// Method to allow other scripts to set bool values on player's animator.
+        /// </summary>
+        /// <param name="variable">The animator variable name</param>
+        /// <param name="value">Value to pass to animator variable</param>
         public void SetOnAnimator(string variable, bool value)
         {
             if(animator != null)
                 animator.SetBool(variable, value);
         }
-
-        public bool GetOnAnimator(string name)
-        {
-            return animator.GetBool(name);
-        }
+        
     
+        //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
             playerState.OnCollisionEnter(collision);
@@ -278,7 +318,7 @@ namespace ExtremeSnowboarding.Script.Player
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2));
+            Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2)); //Drawing character height gizmo
         }
 
         #region Audio
@@ -369,73 +409,78 @@ namespace ExtremeSnowboarding.Script.Player
 
         private float addedAcceleration = 0;
         private float turbo = 0;
-
         
-    
+        /// <summary>
+        /// String that contains the actual player state name.
+        /// </summary>
         public string actualState { get; set; }
+        
+        /// <summary>
+        /// The player that owns this Shared Values.
+        /// </summary>
         public Player player { get; set; }
 
+        /// <summary>
+        /// The own player code. If it is the player 1, so the value is 1. An it goes on...
+        /// </summary>
         public int playerCode { get; set; }
 
+        /// <summary>
+        /// This property is true if the player cannot move. Otherwise is false.
+        /// </summary>
         [ExposedProperty("Stun")]
         public bool isStun { get; set; }
 
+        /// <summary>
+        /// Sets if the player is etherium an can't be hitted by obstacles or FuckFriends.
+        /// </summary>
         [ExposedProperty("Etherium")]
         public bool Etherium { get; set; }
         
+        /// <summary>
+        /// The added value by Items to the final jump value.
+        /// </summary>
         [ExposedProperty("Added Jump")]
         public float AddedJump { get; set; }
 
+        /// <summary>
+        /// It returns the actual acceleration value.
+        /// </summary>
         public float Acceleration => acceleration;
+        
+        /// <summary>
+        /// It returns the rate of each mortal addition in acceleration.
+        /// </summary>
         public float MortalAddVelocityRate => mortalAddVelocityRate;
+        
+        /// <summary>
+        /// It returns the rate of each mortal addition in turbo.
+        /// </summary>
         public float TurboMortalMultiplier => turboMortalMultiplier;
+        
+        /// <summary>
+        /// It returns player's maximum velocity at movement
+        /// </summary>
+        [MovimentationValue]
+        public float MaxVelocity => maxVelocity + AddedAcceleration; // The maximum velocity will grow depending on addedAcceleration
+        
+        /// <summary>
+        /// It Returns the real acceleration to be applied at movement.
+        /// </summary>
+        [MovimentationValue]
+        public float RealAcceleration => acceleration + AddedAcceleration;
 
-        [MovimentationValue] [ExposedProperty("Turbo")]
-        public float Turbo 
-        { 
-            get 
-            {
-                return turbo;
-            }
-            set
-            {
-                if (value > 1)
-                {
-                    turbo = 1;
-                }
-                else if (value < 0)
-                    turbo = 0;
-                else
-                    turbo = value;
-            }
-        }
+        /// <summary>
+        /// Returns the final Force to be applied at jump.
+        /// </summary>
+        [MovimentationValue]
+        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate, 3, maxJumpForce);
+        // Combines the addedJump with the jump factor and adds it with the realVelocity multiplied by the rate of velocity over jump. It also clamps it between 3 and maxJumpForce.
 
-        [MovimentationValue] [ExposedProperty("Added Acceleration")]
-        public float AddedAcceleration
-        {
-            get
-            {
-                return addedAcceleration;
-            }
-            set
-            {
-                addedAcceleration = Mathf.Clamp(value, -maxAddedAcceleration, maxAddedAcceleration);
-
-                if (addedAcceleration > 5 && player.GetPlayerState().GetType() != typeof(Dead))
-                {
-                    player.SetOnAnimator("highSpeed", true);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StartParticle();
-                }
-                else
-                {
-                    player.SetOnAnimator("highSpeed", false);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StopParticle();
-                }          
-            
-            }
-        }
-
-    
+        
+        /// <summary>
+        /// Property to control the rotation Factor
+        /// </summary>
         [ExposedProperty("Rotation Factor")]
         public float RotationFactor
         {
@@ -449,15 +494,58 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-        [MovimentationValue]
-        public float JumpForce
-        {
-            get
+        /// <summary>
+        /// Property to control turbo value. It will always clamp the value between 0 and 1 inclusive.
+        /// </summary>
+        [MovimentationValue] [ExposedProperty("Turbo")]
+        public float Turbo 
+        { 
+            get 
             {
-                return Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate, 1, maxJumpForce);
+                return turbo;
+            }
+            set
+            {
+                turbo = Mathf.Clamp(value, 0f, 1f);
             }
         }
 
+        /// <summary>
+        /// Property to control the AddedAcceleration value.
+        /// </summary>
+        [MovimentationValue] [ExposedProperty("Added Acceleration")]
+        public float AddedAcceleration
+        {
+            get
+            {
+                return addedAcceleration;
+            }
+            set
+            {
+                addedAcceleration = Mathf.Clamp(value, -maxAddedAcceleration, maxAddedAcceleration); //It will clamp between -maxAddedAcceleration and maxAddedAcceleration.
+
+                if (addedAcceleration > 5 && player.GetPlayerState().GetType() != typeof(Dead))
+                {
+                    player.SetOnAnimator("highSpeed", true);
+                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StartParticle();
+                    
+                    // In case the value of addedAcceleration is grater than 5 and the player is not dead, it will play and animation and a particle to indicate high velocity
+                }
+                else
+                {
+                    player.SetOnAnimator("highSpeed", false);
+                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StopParticle();
+                    
+                    // Otherwise, they will be turned off
+                }          
+            
+            }
+        }
+        
+
+        /// <summary>
+        /// Property to control the character height value.
+        /// </summary>
         [ExposedProperty("Character Height")]
         public float CharacterHeight
         {
@@ -471,23 +559,6 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
-        [MovimentationValue]
-        public float RealAcceleration
-        {
-            get
-            {
-                return acceleration + AddedAcceleration;
-            }
-        }
-
-        [MovimentationValue]
-        public float MaxVelocity
-        {
-            get
-            {
-                return maxVelocity + AddedAcceleration;
-            }
-        }
     }
     
 }

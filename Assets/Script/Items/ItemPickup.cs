@@ -13,11 +13,11 @@ namespace ExtremeSnowboarding.Script.Items
 
             Item item = availableItems[Random.Range(0, availableItems.Length)];
 
-            player.GetItem(item);
+            player.SetItem(item);
 
-            if (EventSystem.PlayerGeneralEvents.onFuckFriendChange != null)
+            if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
             {
-                EventSystem.PlayerGeneralEvents.onFuckFriendChange.Invoke(player, item.GetSprite());
+                EventSystem.PlayerGeneralEvents.onItemUsed.Invoke(player, item.GetSprite());
             }
         }
 

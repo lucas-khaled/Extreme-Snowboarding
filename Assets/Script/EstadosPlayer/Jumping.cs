@@ -14,19 +14,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         bool isJumpingPressed;
         private bool canApplyForce;
         private int auxAudioFlip;
-
-        /*public override void InterpretateInput(GameInput input)
-    {
-        if (GameInput.UP_HOLD == input && airTime >= 0.2f)
-            RotatePlayer();
-        else if (GameInput.DOWN_HOLD == input && airTime >= 0.2f)
-            RotatePlayer(-1);
-        else if (GameInput.NO_INPUT == input)
-        {
-            Debug.Log("CARAAAAAAAAAAAAAAAAAAAAAIIII");
-        }
-
-    }*/
+        
         public override void StateEnd()
         {
             rb.velocity = Vector3.zero;
