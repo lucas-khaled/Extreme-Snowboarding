@@ -139,7 +139,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             if (Mathf.Abs(howMuchRotation) > 180)
             {
-                numOfMortals = Mathf.RoundToInt(howMuchRotation / 360);
+                numOfMortals = Mathf.RoundToInt(Mathf.Abs(howMuchRotation / 360));
                 Debug.Log("Mortal :" + numOfMortals + "x");
 
                 float amount = player.SharedValues.MortalAddVelocityRate * numOfMortals;
@@ -148,9 +148,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 Effect mortalEffect = new Effect("AddedVelocity",amount, time, EffectMode.ADD, player);
                 mortalEffect.StartEffect(player);
             }
-
-            if (numOfMortals < 0)
-                numOfMortals *= -1;
+            
 
             player.AddTurbo(numOfMortals * player.SharedValues.TurboMortalMultiplier);
         }
