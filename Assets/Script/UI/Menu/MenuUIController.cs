@@ -23,7 +23,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         private void Awake()
         {
             escolhaController.SetPlayers(1);
+            escolhaController.ChangeLevel(1);
         }
+
         //Daniiboy Code Start >>>>>>>>>>>>>>>>>>>>>>>>
         public void PlayReturnAnimation(string trigger)
         {
@@ -39,10 +41,14 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             audioEffectsRef.PlayOneShot(clickAudio);
         }
-
+        public void ChangeLevel(int level)
+        {
+            escolhaController.ChangeLevel(level);
+        }
         public void PressPlay()
         {
             escolhaController.SendPlayerData();
+            escolhaController.SendLevel();
             GameController.gameController.Play();
         }
 

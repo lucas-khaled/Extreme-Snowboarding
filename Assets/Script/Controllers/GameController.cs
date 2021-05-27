@@ -10,6 +10,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         public static GameController gameController;
 
         private int numOfPlayer = 1;
+        private string sceneToLoad;
 
         [Scene] [SerializeField] 
         private string[] scenesToLoad;
@@ -18,6 +19,8 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void Awake()
         {
+            sceneToLoad = "None";
+
             if (gameController == null)
             {
                 gameController = this;
@@ -43,9 +46,13 @@ namespace ExtremeSnowboarding.Script.Controllers
             return numOfPlayer;
         }
 
+        public void SetLevel(int level)
+        {
+            sceneToLoad = scenesToLoad[level];
+        }
+
         public void Play()
         {
-            string sceneToLoad = scenesToLoad[Random.Range(0, scenesToLoad.Length)];
             ChangeScene(sceneToLoad);
         }
 
