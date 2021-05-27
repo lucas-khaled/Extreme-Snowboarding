@@ -118,7 +118,7 @@ namespace ExtremeSnowboarding.Script.Items
                     Destroy(gameObject);
                 }
             }
-            else
+            else if(!other.gameObject.CompareTag("Track"))
             {
                 if(explosionParticle != null)
                     explosionParticle.Play();
