@@ -25,14 +25,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
+            player.SharedValues.actualState = "Fallen";
             player.StartCoroutine(CorrectPlayerPosition());
 
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             player.SetOnAnimator("fallen", true);
-
             player.SetOnAnimator("hitByFuckFriend", false);
-
             player.SetOnAnimator("highSpeed", false);
 
             player.groundedVelocity = Vector3.zero;

@@ -145,7 +145,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 float amount = player.SharedValues.MortalAddVelocityRate * numOfMortals;
                 float time = Mathf.Clamp(airTime * numOfMortals, 0, 10);
 
-                Effect mortalEffect = new Effect("AddedVelocity",amount, time, EffectMode.ADD, player);
+                Effect mortalEffect = new Effect("AddedAcceleration",amount, time, EffectMode.ADD, player);
                 mortalEffect.StartEffect(player);
             }
             

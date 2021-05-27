@@ -219,9 +219,7 @@ namespace ExtremeSnowboarding.Script.Player
         {
             if (context.started && sharedValues.Turbo >= 0.95)
             {
-                //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
-                //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
-                Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, EffectMode.ADD, this);
+                Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
                 AddTurbo(-sharedValues.Turbo);
             }
