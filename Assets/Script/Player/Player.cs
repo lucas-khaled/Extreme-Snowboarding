@@ -472,7 +472,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// Returns the final Force to be applied at jump.
         /// </summary>
         [MovimentationValue]
-        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate, 3, maxJumpForce);
+        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate*0.2f, 2, maxJumpForce);
         // Combines the addedJump with the jump factor and adds it with the realVelocity multiplied by the rate of velocity over jump. It also clamps it between 3 and maxJumpForce.
 
         
