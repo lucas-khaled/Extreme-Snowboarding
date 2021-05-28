@@ -16,6 +16,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
+            
+            player.SharedValues.actualState = "RaceEnd";
+            
             CorridaController.instance.PlayerFinishedRace(player);
             rb = player.GetComponent<Rigidbody>();
         }
@@ -35,7 +38,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 rb.AddForce(2 * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
             else
             {
-                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
                 rb.velocity = Vector3.zero;
                 FinishRaceAnimation();
             }

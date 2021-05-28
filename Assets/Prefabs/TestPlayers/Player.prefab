@@ -94,13 +94,13 @@ MonoBehaviour:
   victoryClip: {fileID: 0}
   lostClip: {fileID: 0}
   sharedValues:
-    characterHeight: 1.42
-    mortalAddVelocityRate: 2
+    characterHeight: 1.32
+    mortalAddVelocityRate: 1.63
     turboMortalMultiplier: 1.1
     acceleration: 3
     jumpFactor: 5
-    maxJumpForce: 20
-    velocityOverJumpRate: 0.102
+    maxJumpForce: 12
+    velocityOverJumpRate: 0.091
     maxAddedAcceleration: 15
     maxVelocity: 15
     rotationFactor: 1.2

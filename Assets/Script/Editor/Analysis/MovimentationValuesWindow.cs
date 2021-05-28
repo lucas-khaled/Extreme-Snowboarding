@@ -35,7 +35,7 @@ namespace ExtremeSnowboarding.Script.Editor.Analysis
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("LoadedScene");
-            if (scene.name == "Fase1" || scene.name == "Test_Scene")
+            if (scene.name == "Fase1Teste" || scene.name == "Fase2")
             {
                 PlayerGeneralEvents.onPlayerInstantiate += PlayerInstatiated;
             }

@@ -23,13 +23,15 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             base.StateStart(player);
             playerView = player;
+            
+            player.SharedValues.actualState = "Dead";
+            
             ChangePlayerView();
 
             if (PlayerGeneralEvents.onPlayerDeath != null)
                 PlayerGeneralEvents.onPlayerDeath.Invoke(player);
 
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-
             MonoBehaviour.Destroy(player.GetMeshGameObject()); 
         }
 

@@ -149,32 +149,36 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             }
         }
         
-        public Application(string name, float floatValue, EffectMode effectMode)
+        public Application(string propertyName, float floatValue, EffectMode effectMode)
         {
-            propertyName = new ExposedPlayerProperty(name);
-            floatValue = floatValue;
-            effectMode = effectMode;
+            this.propertyName = new ExposedPlayerProperty(propertyName);
+            propertyType = PropertyType.FLOAT;
+            this.floatValue = floatValue;
+            this.effectMode = effectMode;
         }
 
         public Application(string propertyName, string stringValue, EffectMode mode)
         {
             this.propertyName = new ExposedPlayerProperty(propertyName);
+            propertyType = PropertyType.STRING;
             this.stringValue = stringValue;
-            effectMode = (mode == EffectMode.MULTIPLY) ? EffectMode.REPLACE : mode;
+            this.effectMode = (mode == EffectMode.MULTIPLY) ? EffectMode.REPLACE : mode;
         }
 
         public Application(string propertyName, bool boolValue)
         {
             this.propertyName = new ExposedPlayerProperty(propertyName);
+            propertyType = PropertyType.BOOL;
             this.boolValue = boolValue;
-            effectMode = EffectMode.REPLACE;
+            this.effectMode = EffectMode.REPLACE;
         }
 
         public Application(string propertyName, Object objectValue)
         {
             this.propertyName = new ExposedPlayerProperty(propertyName);
+            propertyType = PropertyType.OBJECT;
             this.objectValue = objectValue;
-            effectMode = EffectMode.REPLACE;
+            this.effectMode = EffectMode.REPLACE;
         }
     }
     

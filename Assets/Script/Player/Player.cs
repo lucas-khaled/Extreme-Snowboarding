@@ -219,9 +219,7 @@ namespace ExtremeSnowboarding.Script.Player
         {
             if (context.started && sharedValues.Turbo >= 0.95)
             {
-                //float amount = Mathf.Clamp(turboStrengthVariation/ 2f, 0, 3);
-                //float time = Mathf.Clamp(turboTimeVariation, 0, 2);
-                Effect boostEffect = new Effect("AddedVelocity", 5f, 3f, EffectMode.ADD, this);
+                Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
                 AddTurbo(-sharedValues.Turbo);
             }
@@ -474,7 +472,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// Returns the final Force to be applied at jump.
         /// </summary>
         [MovimentationValue]
-        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate, 3, maxJumpForce);
+        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate*0.2f, 2, maxJumpForce);
         // Combines the addedJump with the jump factor and adds it with the realVelocity multiplied by the rate of velocity over jump. It also clamps it between 3 and maxJumpForce.
 
         
