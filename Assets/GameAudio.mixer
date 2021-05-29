@@ -43,7 +43,11 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 2c94beb3e6f05cd4286865fcba9a3592
+    name: Effects
+  - guid: dc8c40e9074ed3543a58405b96035a2d
+    name: SoundTrack
   m_AudioMixerGroupViews:
   - guids:
     - 68323f90c8172f946a84312b0572eca6
@@ -98,8 +102,22 @@ AudioMixerSnapshotController:
   m_SnapshotID: 23394aed3145668408ae5e503d1d5985
   m_FloatValues:
     2c94beb3e6f05cd4286865fcba9a3592: 4.5253077
-    dc8c40e9074ed3543a58405b96035a2d: -6.1337132
+    dc8c40e9074ed3543a58405b96035a2d: 5.152686
   m_TransitionOverrides: {}
+--- !u!244 &1775789137408103753
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 23b8aa1d6f6597a4b82c96320ebae298
+  m_EffectName: Receive
+  m_MixLevel: e9ce49340a70ebf44ac44c371cd4407e
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &3211045709357710244
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

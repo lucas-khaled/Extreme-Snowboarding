@@ -11,6 +11,9 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private int numOfPlayer = 1;
         private string sceneToLoad;
+        private float effectAudioLevel;
+        private float musicAudioLevel;
+
 
         [Scene] [SerializeField] 
         private string[] scenesToLoad;
@@ -31,7 +34,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 Destroy(this);
             }
         }
-    
+
         public void StartPlayerData(PlayerData[] players)
         {
             playerData = players;
@@ -49,6 +52,20 @@ namespace ExtremeSnowboarding.Script.Controllers
         public void SetLevel(int level)
         {
             sceneToLoad = scenesToLoad[level];
+        }
+
+        public void SetAudio(float effectAudioLevel, float musicAudioLevel)
+        {
+            this.effectAudioLevel = effectAudioLevel;
+            this.musicAudioLevel = musicAudioLevel;
+        }
+        public float GetEffectSlider()
+        {
+            return effectAudioLevel;
+        }
+        public float GetMusicSlider()
+        {
+            return musicAudioLevel;
         }
 
         public void Play()
