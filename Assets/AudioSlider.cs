@@ -19,6 +19,7 @@ namespace ExtremeSnowboarding
 
         private void Start()
         {
+            Debug.Log(GameController.gameController.GetEffectSlider() +"\n Music: "+GameController.gameController.GetMusicSlider());
             effectsSlider.value = GameController.gameController.GetEffectSlider();
             musicSlider.value = GameController.gameController.GetMusicSlider();
 
@@ -33,6 +34,11 @@ namespace ExtremeSnowboarding
         public void OnMusicValueChange()
         {
             gameMixer.SetFloat("SoundTrack", musicSlider.value);
+        }
+
+        public void SendAudioSettings()
+        {
+            GameController.gameController.SetAudio(effectsSlider.value, musicSlider.value);
         }
     }
 }
