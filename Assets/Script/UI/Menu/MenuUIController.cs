@@ -54,6 +54,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             }
         }
 
+        public void QuitGame()
+        {
+            GameController.gameController.QuitGame();
+        }
+
         //Daniiboy Code Start >>>>>>>>>>>>>>>>>>>>>>>>
         public void PlayReturnAnimation(string trigger)
         {

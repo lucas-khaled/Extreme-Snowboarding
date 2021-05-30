@@ -77,7 +77,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             SceneManager.LoadScene(cena);
         }
-        public void SairDoJogo()
+        public void QuitGame()
         {
             Application.Quit();
         }
