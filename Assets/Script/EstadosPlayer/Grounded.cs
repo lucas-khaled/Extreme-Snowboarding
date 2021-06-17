@@ -25,7 +25,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.StopAllCoroutines();
             player = null;
 
-            
         }
 
         public override void StateStart(Player.Player player)
@@ -47,13 +46,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StartParticle();
             player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).UnlockParticle();
 
-            rb.velocity = player.groundedVelocity;
+            rb.velocity = player.transform.right * player.groundedVelocity;
         }
 
         public override void StateUpdate()
         {
-            ClampOnGround();
             MoveByRigidbody();
+            StickPlayerOnGround();
             timeOnGround += Time.deltaTime;
         }
 
@@ -67,12 +66,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     return;
 
                 if (rb.velocity.x < player.SharedValues.MaxVelocity)
-                    rb.AddForce(player.SharedValues.Acceleration * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                    rb.AddForce(player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
                 else if (rb.velocity.x > player.SharedValues.MaxVelocity)
-                    rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                    rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
 
 
-                player.groundedVelocity = rb.velocity;
+                player.groundedVelocity = rb.velocity.magnitude;
             }
             else
             {
@@ -80,28 +79,36 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
         }
 
-        void ClampOnGround()
+        void StickPlayerOnGround()
         {
-            RaycastHit rotationHit;
-            if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
-                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
-                newRotation.y = newRotation.x = 0;
-
-                if (Vector3.Distance(rotationHit.point, player.transform.position) >
-                    player.SharedValues.CharacterHeight)
-                {
-                    player.ChangeState(new Jumping(false));
-                    return;
-                }
-
-                player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
-                player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+                ClampPlayerRotationByGround(hit);
+                ClampPlayerPositionOnGround(hit);
             }
             else
             {
                 player.ChangeState(new Jumping(false));
             }
+        }
+
+        void ClampPlayerPositionOnGround(RaycastHit hit)
+        {
+            /*Vector3 position = hit.point + hit.normal.normalized * (player.SharedValues.CharacterHeight * 0.5f);
+            player.transform.position = position;*/
+
+            float xChange = rb.velocity.x - hit.normal.normalized.x * 2f;
+            float yChange = rb.velocity.y - hit.normal.normalized.y * 2f;
+
+            rb.velocity = new Vector3(xChange, yChange, rb.velocity.z);
+        }
+
+        void ClampPlayerRotationByGround(RaycastHit hit)
+        {
+            Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, hit.normal) * player.transform.rotation;
+            newRotation.y = newRotation.x = 0;
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
         }
 
         IEnumerator BeEtherium()

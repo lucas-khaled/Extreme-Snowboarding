@@ -78,7 +78,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         public GameCamera playerCamera { get;  set; }
 
-        public Vector3 groundedVelocity { get; set; }
+        public float groundedVelocity { get; set; }
 
         PlayerState playerState = new Grounded();
 
@@ -316,7 +316,7 @@ namespace ExtremeSnowboarding.Script.Player
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(transform.position + (Vector3.up * sharedValues.CharacterHeight / 2), transform.position + (Vector3.down * sharedValues.CharacterHeight / 2)); //Drawing character height gizmo
+            Gizmos.DrawLine(transform.position + (transform.up * sharedValues.CharacterHeight / 2), transform.position + (-transform.up * sharedValues.CharacterHeight / 2)); //Drawing character height gizmo
         }
 
         #region Audio
@@ -472,7 +472,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// Returns the final Force to be applied at jump.
         /// </summary>
         [MovimentationValue]
-        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + RealAcceleration*velocityOverJumpRate*0.2f, 2, maxJumpForce);
+        public float JumpForce => Mathf.Clamp((AddedJump+jumpFactor) + (RealAcceleration*velocityOverJumpRate*0.2f), 1, maxJumpForce);
         // Combines the addedJump with the jump factor and adds it with the realVelocity multiplied by the rate of velocity over jump. It also clamps it between 3 and maxJumpForce.
 
         

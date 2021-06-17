@@ -34,7 +34,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.SetOnAnimator("hitByFuckFriend", false);
             player.SetOnAnimator("highSpeed", false);
 
-            player.groundedVelocity = Vector3.zero;
+            player.groundedVelocity = 0f;
         }
         public override void StateUpdate()
         {

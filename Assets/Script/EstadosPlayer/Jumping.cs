@@ -43,7 +43,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             rb.useGravity = true;
         
             if(canApplyForce)
-                rb.AddForce(player.SharedValues.JumpForce * 0.8f * Vector3.up , ForceMode.Impulse);
+                rb.AddForce(player.SharedValues.JumpForce * 2.5f * Vector3.up , ForceMode.Impulse);
             else
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);

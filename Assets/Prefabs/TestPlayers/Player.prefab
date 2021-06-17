@@ -47,10 +47,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &5139924703887964865
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -96,13 +96,13 @@ MonoBehaviour:
   sharedValues:
     characterHeight: 1.32
     mortalAddVelocityRate: 1.63
-    turboMortalMultiplier: 1.1
-    acceleration: 3
-    jumpFactor: 2.5
-    maxJumpForce: 12
-    velocityOverJumpRate: 0.091
-    maxAddedAcceleration: 15
-    maxVelocity: 15
+    turboMortalMultiplier: 2
+    acceleration: 2.5
+    jumpFactor: 5
+    maxJumpForce: 10
+    velocityOverJumpRate: 0.1
+    maxAddedAcceleration: 20
+    maxVelocity: 25
     rotationFactor: 1.2
   playerVFXList: {fileID: 11400000, guid: f5d529e8fe8bb984fb569d7240fb7744, type: 2}
 --- !u!114 &-2960936140915857356
