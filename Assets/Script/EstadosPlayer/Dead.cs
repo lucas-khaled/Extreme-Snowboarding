@@ -8,12 +8,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     {
         Player.Player playerView;
 
-        // public override void InterpretateInput(GameInput input)
-        // {
-        //     if (GameInput.UP == input)
-        //         ChangePlayerView();
-        // }
-
         public override void StateEnd()
         {
         

@@ -95,8 +95,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void ClampPlayerPositionOnGround(RaycastHit hit)
         {
-            /*Vector3 position = hit.point + hit.normal.normalized * (player.SharedValues.CharacterHeight * 0.5f);
-            player.transform.position = position;*/
 
             float xChange = rb.velocity.x - hit.normal.normalized.x * 2f;
             float yChange = rb.velocity.y - hit.normal.normalized.y * 2f;
@@ -140,7 +138,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void Jump(InputAction.CallbackContext context)
         {
-            if((context.started || context.performed) && timeOnGround>=timeToJump)
+            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun)
                 player.ChangeState(new Jumping()); 
         }
     

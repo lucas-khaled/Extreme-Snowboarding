@@ -102,8 +102,11 @@ namespace ExtremeSnowboarding.Script.Catastrophe
 
         private void OnTriggerEnter(Collider other)
         {
+            if(!isMoving) return;
+            
             if(other.gameObject.tag == "Player")
             {
+                Debug.Log("Cathastrophe");
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new Dead());
             }
             else if (other.gameObject.CompareTag("Projectile"))
