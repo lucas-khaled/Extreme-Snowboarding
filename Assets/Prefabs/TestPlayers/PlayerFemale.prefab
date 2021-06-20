@@ -2842,19 +2842,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9fe1eed6cf9844880062f525d31166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   animator: {fileID: 6091654889827638356}
-  objectMesh: {fileID: 6091654889827638359}
+  meshRenderers: []
+  normalFallClip: {fileID: 0}
+  hardFallClip: {fileID: 0}
+  landingClip: {fileID: 0}
+  jumpingClip: {fileID: 0}
+  gotPowerUpClip: {fileID: 0}
+  gotFuckFriendClip: {fileID: 0}
+  skiingClip: {fileID: 0}
+  trickClip: {fileID: 0}
+  victoryClip: {fileID: 0}
+  lostClip: {fileID: 0}
   sharedValues:
     characterHeight: 1.62
-    velocity: 12
-    jumpFactor: 8
+    mortalAddVelocityRate: 2
+    turboMortalMultiplier: 1
+    acceleration: 12
+    jumpFactor: 3
     maxJumpForce: 20
+    velocityOverJumpRate: 0.5
+    maxAddedAcceleration: 5
+    maxVelocity: 30
     rotationFactor: 1
-    turboMultiplier: 1
-  playerVFXList:
-    VFXList:
-    - particle: {fileID: 0}
-    - particle: {fileID: 0}
+  playerVFXList: {fileID: 0}
 --- !u!1 &6502818451923296532
 GameObject:
   m_ObjectHideFlags: 0

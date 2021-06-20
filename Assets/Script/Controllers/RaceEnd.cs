@@ -1,6 +1,7 @@
 using ExtremeSnowboarding.Script.EstadosPlayer;
 using ExtremeSnowboarding.Script.EventSystem;
 using UnityEngine;
+using System.Collections;
 
 namespace ExtremeSnowboarding.Script.Controllers
 {
@@ -20,12 +21,13 @@ namespace ExtremeSnowboarding.Script.Controllers
             quantityOfActivePlayer--;
             if (quantityOfActivePlayer <= 0)
             {
-                EndRace();
+                StartCoroutine(EndRace());
             }
         }
 
-        private void EndRace()
+        private IEnumerator EndRace()
         {
+            yield return new WaitForSeconds(10);
             UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
             PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
         }
@@ -39,7 +41,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
                 if (quantityOfActivePlayer <= 0)
                 {
-                    EndRace();
+                    StartCoroutine(EndRace());
                 }
             }
         }

@@ -7,6 +7,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     {
         private Player.Player playerView;
         private Rigidbody rb;
+        private int value;
 
         public override void StateEnd()
         {
@@ -16,6 +17,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
+
+            value = Random.Range(15,30);
             
             player.SharedValues.actualState = "RaceEnd";
             
@@ -35,7 +38,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 return;
 
             if (rb.velocity.x > 1)
-                rb.AddForce(2 * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
+                rb.AddForce(value * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
             else
             {
                 rb.velocity = Vector3.zero;
