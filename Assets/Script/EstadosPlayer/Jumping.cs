@@ -41,13 +41,14 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             rb = player.gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = true;
-        
-            if(canApplyForce)
-                rb.AddForce(player.SharedValues.JumpForce * 2.5f * Vector3.up , ForceMode.Impulse);
-            else
+
+            if (canApplyForce)
             {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                Vector3 upDirection = (player.SharedValues.LastGroundedNormal.x > 0) ? player.transform.up : Vector3.up;
+                rb.AddForce(player.SharedValues.JumpForce * 2.5f * upDirection , ForceMode.Impulse);
             }
+            else
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
             player.SetOnAnimator("jumping", true);
         }

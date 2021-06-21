@@ -408,6 +408,8 @@ namespace ExtremeSnowboarding.Script.Player
         private float addedAcceleration = 0;
         private float turbo = 0;
         
+        public Vector2 LastGroundedNormal { get; set; }
+        
         /// <summary>
         /// String that contains the actual player state name.
         /// </summary>

@@ -86,6 +86,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             {
                 ClampPlayerRotationByGround(hit);
                 ClampPlayerPositionOnGround(hit);
+                player.SharedValues.LastGroundedNormal = hit.normal.normalized;
             }
             else
             {
