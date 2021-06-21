@@ -19,7 +19,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             base.StateStart(player);
 
             value = Random.Range(15,30);
-            
+
             player.SharedValues.actualState = "RaceEnd";
             
             CorridaController.instance.PlayerFinishedRace(player);
@@ -37,11 +37,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (rb == null || rb.velocity == Vector3.zero)
                 return;
 
-            if (rb.velocity.x > 1)
+            if (rb.velocity.x > 0)
                 rb.AddForce(value * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
             else
             {
                 rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
                 FinishRaceAnimation();
             }
                 

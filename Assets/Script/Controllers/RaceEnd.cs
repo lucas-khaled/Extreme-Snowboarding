@@ -23,6 +23,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             {
                 StartCoroutine(EndRace());
             }
+            Debug.Log(quantityOfActivePlayer);
         }
 
         private IEnumerator EndRace()

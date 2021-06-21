@@ -20,7 +20,7 @@ namespace ExtremeSnowboarding.Script.Obstacles
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player player = other.GetComponent<Player.Player>();
-                if (isHole)
+                if (isHole && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
                     player.ChangeState(new Dead());
 
                 else if (!player.SharedValues.Etherium)

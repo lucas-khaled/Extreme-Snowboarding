@@ -104,9 +104,8 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         {
             if(!isMoving) return;
             
-            if(other.gameObject.tag == "Player")
+            if(other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
             {
-                Debug.Log("Cathastrophe");
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new Dead());
             }
             else if (other.gameObject.CompareTag("Projectile"))
