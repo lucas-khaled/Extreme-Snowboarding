@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/PathPlacer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/PathPlacer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/pers.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/pers.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Materials/SnowMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Materials/SnowMat.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +27,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Script/VFX/InstantiatedVFXList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Path/PathClamper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.2.2/Runtime/Debugging/DebugManager.Actions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Path/PathClampedObject.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -80,6 +82,9 @@
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/RoadMeshCreator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Path/PathClamper.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Path/PathClampedObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/PathPlacer.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -170,7 +175,10 @@
       <workItem from="1622400229860" duration="2041000" />
       <workItem from="1623879020540" duration="12388000" />
       <workItem from="1623931914988" duration="2091000" />
-      <workItem from="1624288409768" duration="5769000" />
+      <workItem from="1624288409768" duration="5773000" />
+      <workItem from="1624529669963" duration="4720000" />
+      <workItem from="1624555506036" duration="834000" />
+      <workItem from="1627903434734" duration="1434000" />
     </task>
     <servers />
   </component>

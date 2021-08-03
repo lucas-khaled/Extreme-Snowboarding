@@ -154,9 +154,13 @@ namespace PathCreation.Examples {
         }
 
         void AssignMaterials () {
-            if (roadMaterial != null && undersideMaterial != null) {
-                meshRenderer.sharedMaterials = new Material[] { roadMaterial, undersideMaterial, undersideMaterial };
-                meshRenderer.sharedMaterials[0].mainTextureScale = new Vector3 (1, textureTiling);
+            if (roadMaterial != null && undersideMaterial != null)
+            {
+                Material road = new Material(roadMaterial);
+                Material underside = new Material(undersideMaterial);
+
+                road.mainTextureScale = underside.mainTextureScale = new Vector3(1, textureTiling);
+                meshRenderer.sharedMaterials = new Material[] { road, underside, underside };
             }
         }
 

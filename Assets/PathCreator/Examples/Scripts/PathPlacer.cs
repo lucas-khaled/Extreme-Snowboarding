@@ -10,7 +10,7 @@ namespace PathCreation.Examples {
         public GameObject holder;
         public float spacing = 3;
 
-        const float minSpacing = .1f;
+        private const float MINSpacing = .1f;
 
         void Generate () {
             if (pathCreator != null && prefab != null && holder != null) {
@@ -18,7 +18,7 @@ namespace PathCreation.Examples {
 
                 VertexPath path = pathCreator.path;
 
-                spacing = Mathf.Max(minSpacing, spacing);
+                spacing = Mathf.Max(MINSpacing, spacing);
                 float dst = 0;
 
                 while (dst < path.length) {
