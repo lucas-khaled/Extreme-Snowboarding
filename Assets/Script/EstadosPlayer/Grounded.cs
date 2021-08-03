@@ -41,12 +41,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             rb.isKinematic = false;
             rb.useGravity = false;
 
+
             player.StartStateCoroutine(BeEtherium());
 
             player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StartParticle();
             player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).UnlockParticle();
 
-            rb.velocity = player.transform.right * player.groundedVelocity;
+            rb.velocity = player.groundedVelocity;
         }
 
         public override void StateUpdate()
@@ -71,7 +72,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
 
 
-                player.groundedVelocity = rb.velocity.magnitude;
+                player.groundedVelocity = rb.velocity;
             }
             else
             {

@@ -16,6 +16,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
+
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+
             playerView = player;
             
             player.SharedValues.actualState = "Dead";

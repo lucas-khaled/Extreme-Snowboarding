@@ -78,7 +78,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         public GameCamera playerCamera { get;  set; }
 
-        public float groundedVelocity { get; set; }
+        public Vector3 groundedVelocity { get; set; }
 
         PlayerState playerState = new Grounded();
 

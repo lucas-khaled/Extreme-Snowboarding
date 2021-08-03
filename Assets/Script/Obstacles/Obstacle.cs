@@ -22,6 +22,7 @@ namespace ExtremeSnowboarding.Script.Obstacles
                 Player.Player player = other.GetComponent<Player.Player>();
                 if (isHole && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
                     player.ChangeState(new Dead());
+                //player.ChangeState(new Flying());
 
                 else if (!player.SharedValues.Etherium)
                     player.ChangeState(new Fallen());

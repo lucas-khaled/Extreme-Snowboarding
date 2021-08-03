@@ -17,9 +17,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         
         public override void StateEnd()
         {
-            rb.velocity = Vector3.zero;
-            rb.useGravity = false;
-
             airTime = 0;
             player.SetOnAnimator("jumping", false);
             player.SetOnAnimator("trick", false);
