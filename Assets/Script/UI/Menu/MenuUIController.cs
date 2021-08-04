@@ -27,7 +27,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         private float EffectSliderValue;
         private float MusicSliderValue;
 
-        private void Awake()
+        private void Start()
         {
             escolhaController.SetPlayers(1);
             escolhaController.ChangeLevel(1);
@@ -37,7 +37,6 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
             if (GameController.gameController != null)
             {
-
                 GameObject.Find("SliderMusica").GetComponent<Slider>().value = musicValue;
                 GameObject.Find("SliderEfeitos").GetComponent<Slider>().value = efeitoValue;
 
