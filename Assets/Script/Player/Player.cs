@@ -168,16 +168,12 @@ namespace ExtremeSnowboarding.Script.Player
             playerState.StateStart(this);
             startPoint = transform.position;
             catastropheRef = null;
+            InvokeRepeating("CheckTurbo", 0.3f, 0.08f);
         }
 
         private void FixedUpdate()
         {
             playerState.StateUpdate();
-        }
-
-        private void Update()
-        {
-            CheckTurbo();
         }
 
         #region Inputs
@@ -221,6 +217,7 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
+                GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * 0.75f * transform.right;
                 AddTurbo(-sharedValues.Turbo);
             }
         }
@@ -232,10 +229,12 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>   
         private void CheckTurbo()
         {
-            if (catastropheRef != null)
+            if (catastropheRef != null && playerState.GetType() != typeof(Dead))
             {
                 float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
-                AddTurbo(1 / distance);
+                Debug.Log(distance);
+                float distanceModerator = Mathf.Clamp(Mathf.Sqrt(distance), 0.02f, 100f);
+                AddTurbo(1 / distanceModerator);
             }
             else if (CorridaController.instance.catastrophe != null)
                 catastropheRef = CorridaController.instance.catastrophe;
