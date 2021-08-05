@@ -16,7 +16,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
-            player.ChangeSkiingAudio(false);
+            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
 
             UnsubscribeOnInputEvents();
         
@@ -35,7 +35,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             player.SharedValues.actualState = "Grounded";
 
-            player.ChangeSkiingAudio(true);
+            player.GetMovimentationFeedbacks().skiingFeedback?.PlayFeedbacks();
 
             rb = player.GetComponent<Rigidbody>();
             rb.isKinematic = false;

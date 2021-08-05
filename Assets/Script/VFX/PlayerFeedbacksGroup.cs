@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.VFX
 {
-    [CreateAssetMenu(fileName = "Player VFX Group", menuName = "Player VFX Group", order = 0)]
+    [CreateAssetMenu(fileName = "Player VFX Feedback Group", menuName = "PlayerFeedbacks/VFX", order = 0)]
     public class PlayerFeedbacksGroup : ScriptableObject
     {
         [SerializeField] [Scene]
@@ -22,7 +22,7 @@ namespace ExtremeSnowboarding.Script.VFX
         /// <summary>
         /// This method starts hash on the list and instantiates the feedbacks. It can oly be played once.
         /// </summary>
-        public void StartParticles(Transform player)
+        public void StartFeedbacks(Transform player)
         {
             StartHash();
 

@@ -28,37 +28,17 @@ namespace ExtremeSnowboarding.Script.Player
         [SerializeField] [BoxGroup("References")]
         private SkinnedMeshRenderer[] meshRenderers;
 
-        #region Audio references
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip normalFallClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip hardFallClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip landingClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip jumpingClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip gotPowerUpClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip gotFuckFriendClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip skiingClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip trickClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip victoryClip;
-        [SerializeField] [BoxGroup("Audio clips")]
-        private AudioClip lostClip;
-        #endregion
-
         [BoxGroup("Player Values")]
         [SerializeField] 
         private PlayerSharedValues sharedValues;
     
         [FormerlySerializedAs("playerVFXList")]
-        [BoxGroup("Player VFX's")]
-        [SerializeField]
-        private PlayerFeedbacksGroup playerFeedbacksList;
+        [BoxGroup("ScriptableObjects")]
+        [SerializeField] private PlayerFeedbacksGroup playerFeedbacksList;
+
+        [FormerlySerializedAs("movimentationAudios")]
+        [BoxGroup("ScriptableObjects")]
+        [SerializeField] private PlayerMovimentationFeedbacks movimentationFeedbacks;
 
         /// <summary>
         /// Values that meant to be shared across the player states
@@ -113,6 +93,11 @@ namespace ExtremeSnowboarding.Script.Player
             }
         }
 
+        public PlayerMovimentationFeedbacks GetMovimentationFeedbacks()
+        {
+            return movimentationFeedbacks;
+        } 
+
         /// <summary>
         /// Get the parent object of player's mesh renderers
         /// </summary>
@@ -160,7 +145,8 @@ namespace ExtremeSnowboarding.Script.Player
         private void Awake()
         {
             sharedValues.player = this; //setting the player reference to the shared values
-            playerFeedbacksList.StartParticles(transform); 
+            playerFeedbacksList.StartFeedbacks(transform); 
+            movimentationFeedbacks.StartFeedbacks(transform);
             InputSubcribing();
         }
 
@@ -233,7 +219,6 @@ namespace ExtremeSnowboarding.Script.Player
             if (catastropheRef != null && playerState.GetType() != typeof(Dead))
             {
                 float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
-                Debug.Log(distance);
                 float distanceModerator = Mathf.Clamp(Mathf.Sqrt(distance), 0.02f, 100f);
                 AddTurbo(1 / distanceModerator);
             }
@@ -256,9 +241,8 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 sharedValues.Turbo += turboValue;
             }
-
-            if (PlayerGeneralEvents.onTurboChange != null)
-                PlayerGeneralEvents.onTurboChange.Invoke(this, sharedValues.Turbo);
+            
+            PlayerGeneralEvents.onTurboChange?.Invoke(this, sharedValues.Turbo);
         }
 
         /// <summary>
@@ -280,10 +264,6 @@ namespace ExtremeSnowboarding.Script.Player
         public void SetItem(Item item)
         {
             Coletavel = item;
-            //if ()
-            //    PlayGotPowerUpAudio();
-            //else
-            //    PlayGotFuckFriendAudio();
         }
 
         /// <summary>
@@ -319,72 +299,11 @@ namespace ExtremeSnowboarding.Script.Player
             Gizmos.DrawLine(transform.position + (transform.up * sharedValues.CharacterHeight / 2), transform.position + (-transform.up * sharedValues.CharacterHeight / 2)); //Drawing character height gizmo
         }
 
-        #region Audio
-
         public void SetPlayerAudioSource(AudioSource audioSourceRef, AudioSource audioSourceEffectsRef)
         {
             audioSource = audioSourceRef;
             audioSourceEffects = audioSourceEffectsRef;
         }
-
-        public void PlayNormalFallAudio()
-        {
-            if (normalFallClip != null)
-            audioSourceEffects.PlayOneShot(normalFallClip);
-        }
-        public void PlayHardFallAudio()
-        {
-            if (hardFallClip != null)
-                audioSourceEffects.PlayOneShot(hardFallClip);
-        }
-        public void PlayJumpAudio()
-        {
-            if (jumpingClip != null)
-                audioSourceEffects.PlayOneShot(jumpingClip);
-        }
-        public void PlayLandingAudio()
-        {
-            if (landingClip!= null)
-                audioSourceEffects.PlayOneShot(landingClip);
-        }
-        public void PlayGotPowerUpAudio()
-        {
-            if (gotPowerUpClip != null)
-                audioSourceEffects.PlayOneShot(gotPowerUpClip);
-        }
-        public void PlayGotFuckFriendAudio()
-        {
-            if (gotFuckFriendClip != null)
-                audioSourceEffects.PlayOneShot(gotFuckFriendClip);
-        }
-        public void PlayTrickAudio()
-        {
-            if (trickClip != null)
-                audioSourceEffects.PlayOneShot(trickClip);
-        }
-        public void PlayVictoryAudio()
-        {
-            if (victoryClip != null)
-                audioSourceEffects.PlayOneShot(victoryClip);
-        }
-        public void PlayLostAudio()
-        {
-            if (lostClip != null)
-                audioSourceEffects.PlayOneShot(lostClip);
-        }
-
-        public void ChangeSkiingAudio(bool isSkiing)
-        {
-            if (skiingClip != null)
-            {
-                if (isSkiing)
-                    audioSourceEffects.Play();
-                else
-                    audioSourceEffects.Stop();
-            }
-        }
-
-        #endregion
     }
 
     [System.Serializable]

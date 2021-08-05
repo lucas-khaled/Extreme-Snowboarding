@@ -32,7 +32,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         
             player.SharedValues.actualState = "Jumping";
 
-            player.PlayJumpAudio();
+            player.GetMovimentationFeedbacks().jumpingFeedback?.PlayFeedbacks();
             auxAudioFlip = 1;
 
             rb = player.gameObject.GetComponent<Rigidbody>();
@@ -80,7 +80,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 if (angleDifference < 60f)
                 {
                     int timeEtherium = Mathf.FloorToInt((airTime * 0.33f) % 3f);
-                    player.PlayLandingAudio();
+                    player.GetMovimentationFeedbacks().landingFeedback?.PlayFeedbacks();
                     newPlayerState = new Grounded(timeEtherium, 0.3f);
 
                     ApplyAirEffects();
@@ -91,11 +91,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     if (angleDifference > 120)
                     {
                         player.SetOnAnimator("hardFall", true);
-                        player.PlayHardFallAudio();
+                        player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
                         timeFall = 4.5f;
                     }
                     else
-                        player.PlayNormalFallAudio();
+                        player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
 
                     newPlayerState = new Fallen(timeFall);
 
@@ -125,7 +125,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 player.SetOnAnimator("trick", true);
                 if (howMuchRotation > 360 * auxAudioFlip)
                 {
-                    player.PlayTrickAudio();
+                    player.GetMovimentationFeedbacks().trickFeedback?.PlayFeedbacks();
                     auxAudioFlip++;
                 }
             }

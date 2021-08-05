@@ -70,13 +70,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             //{
             if (CorridaController.instance.playersClassificated[0] == player)
             {
-                player.PlayVictoryAudio();
+                player.GetMovimentationFeedbacks().victoryFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
                 player.SetOnAnimator("wonRace", true);
             }
             else
             {
-                player.PlayLostAudio();
+                player.GetMovimentationFeedbacks().lostFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
                 player.SetOnAnimator("lostRace", true);
             }
