@@ -8,13 +8,13 @@ namespace ExtremeSnowboarding.Script.VFX
     {
         public static VFXManager instance;
 
-        public List<InstantiatedVFXList> InstantiatedList => instantiatedList;
+        public List<InstantiatedFeedbacksList> InstantiatedList => instantiatedList;
 
-        private List<InstantiatedVFXList> instantiatedList = new List<InstantiatedVFXList>();
+        private List<InstantiatedFeedbacksList> instantiatedList = new List<InstantiatedFeedbacksList>();
 
-        public void AddToList(InstantiatedVFXList instantiatedVFXList)
+        public void AddToList(InstantiatedFeedbacksList instantiatedFeedbacksList)
         {
-            instantiatedList.Add(instantiatedVFXList);
+            instantiatedList.Add(instantiatedFeedbacksList);
         }
         
         private void Awake()

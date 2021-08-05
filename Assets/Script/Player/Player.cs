@@ -55,9 +55,10 @@ namespace ExtremeSnowboarding.Script.Player
         [SerializeField] 
         private PlayerSharedValues sharedValues;
     
+        [FormerlySerializedAs("playerVFXList")]
         [BoxGroup("Player VFX's")]
         [SerializeField]
-        private PlayerVFXGroup playerVFXList;
+        private PlayerFeedbacksGroup playerFeedbacksList;
 
         /// <summary>
         /// Values that meant to be shared across the player states
@@ -148,18 +149,18 @@ namespace ExtremeSnowboarding.Script.Player
         }
 
         /// <summary>
-        /// Return the actual used VFXGroup
+        /// Return the actual used FeedbackGroup
         /// </summary>
         /// <returns></returns>
-        public PlayerVFXGroup GetPlayerVFXList()
+        public PlayerFeedbacksGroup GetPlayerFeedbackList()
         {
-            return playerVFXList;
+            return playerFeedbacksList;
         }
 
         private void Awake()
         {
             sharedValues.player = this; //setting the player reference to the shared values
-            playerVFXList.StartParticles(transform); 
+            playerFeedbacksList.StartParticles(transform); 
             InputSubcribing();
         }
 
@@ -526,14 +527,14 @@ namespace ExtremeSnowboarding.Script.Player
                 if (addedAcceleration > 5 && player.GetPlayerState().GetType() != typeof(Dead))
                 {
                     player.SetOnAnimator("highSpeed", true);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StartParticle();
+                    player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).StartFeedback();
                     
                     // In case the value of addedAcceleration is grater than 5 and the player is not dead, it will play and animation and a particle to indicate high velocity
                 }
                 else
                 {
                     player.SetOnAnimator("highSpeed", false);
-                    player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).StopParticle();
+                    player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).StopFeedback();
                     
                     // Otherwise, they will be turned off
                 }          

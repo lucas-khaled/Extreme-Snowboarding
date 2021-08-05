@@ -20,8 +20,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             UnsubscribeOnInputEvents();
         
-            player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StopParticle();
-            player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).LockParticle(true);
+            player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StopFeedback();
+            player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).LockFeedback(true);
             player.StopAllCoroutines();
             player = null;
 
@@ -44,8 +44,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             player.StartStateCoroutine(BeEtherium());
 
-            player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StartParticle();
-            player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).UnlockParticle();
+            player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StartFeedback();
+            player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).UnlockFeedback();
 
             rb.velocity = player.groundedVelocity;
         }
