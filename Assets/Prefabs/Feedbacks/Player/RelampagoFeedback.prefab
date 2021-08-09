@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5131473417085771786}
   - component: {fileID: 7799878783495248753}
-  - component: {fileID: 7434518907533515473}
+  - component: {fileID: -5494523430417719180}
   m_Layer: 0
   m_Name: RelampagoFeedback
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
-  - {fileID: 7434518907533515473}
+  - {fileID: -5494523430417719180}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
---- !u!114 &7434518907533515473
+--- !u!114 &-5494523430417719180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,11 +87,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7787536113622921889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdfe4b9b079619143a9748eeee75e698, type: 3}
+  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Particles Instantiation
+  Label: Particles Play
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -114,16 +114,9 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   Mode: 0
-  CachedRecycle: 1
-  ParticlesPrefab: {fileID: 4127396078260572271}
-  RandomParticlePrefabs: []
-  PositionMode: 0
-  InstantiateParticlesPosition: {fileID: 0}
-  TargetWorldPosition: {x: 0, y: 0, z: 0}
-  Offset: {x: 0, y: 0, z: 0}
-  NestParticles: 1
-  ApplyRotation: 0
-  ApplyScale: 0
+  BoundParticleSystem: {fileID: 4127396078260572271}
+  MoveToPosition: 0
+  RandomParticleSystems: []
 --- !u!1001 &5223027575921592566
 PrefabInstance:
   m_ObjectHideFlags: 0
