@@ -232,7 +232,6 @@ namespace ExtremeSnowboarding.Script.Player
             if (catastropheRef != null && playerState.GetType() != typeof(Dead))
             {
                 float distance = Vector3.Distance(this.gameObject.transform.position, catastropheRef.transform.position);
-                Debug.Log(distance);
                 float distanceModerator = Mathf.Clamp(Mathf.Sqrt(distance), 0.02f, 100f);
                 AddTurbo(1 / distanceModerator);
             }
@@ -304,8 +303,58 @@ namespace ExtremeSnowboarding.Script.Player
             if(animator != null)
                 animator.SetBool(variable, value);
         }
-        
-    
+
+
+        /// <summary>
+        /// Method to allow other scripts to set triggers on player's animator.
+        /// </summary>
+        /// <param name="variable">The animator variable name</param>
+        public void SetTriggerOnAnimator(string variable)
+        {
+            if (animator != null)
+                animator.SetTrigger(variable);
+        }
+
+        /// <summary>
+        /// Method to change the player animation instantly
+        /// </summary>
+        /// <param name="possibleAnimations">State names that can be randomized</param>
+        /// <param name="crossFadeLength"> Length of the crossfade </param>
+        /// <param name="valueSetedOnAnimator">The animator variable name</param>
+        /// <param name="value">Value to pass to animator variable</param>
+        public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator, bool value, float crossFadeLength = 0.15f)
+        {
+            ChangeAnimationTo(possibleAnimations, crossFadeLength);
+            SetOnAnimator(valueSetedOnAnimator, value);
+        }
+
+        /// <summary>
+        /// Method to change the player animation instantly
+        /// </summary>
+        /// <param name="possibleAnimations">State names that can be randomized</param>
+        /// <param name="crossFadeLength"> Length of the crossfade </param>
+        public void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
+        {
+            animator.CrossFade(possibleAnimations[Random.Range(0, possibleAnimations.Length)], crossFadeLength);
+        }
+
+        /// <summary>
+        /// Method get the player state info
+        /// </summary>
+        public AnimatorStateInfo GetCurrentStateInfo()
+        {
+            return animator.GetCurrentAnimatorStateInfo(0);
+        }
+
+        /// <summary>
+        /// Method to change the player animation instantly
+        /// </summary>
+        public string GetCurrentLayerName()
+        {
+            return animator.GetLayerName(0);
+        }
+
+
         //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
