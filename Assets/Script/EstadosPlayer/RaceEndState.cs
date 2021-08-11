@@ -72,13 +72,15 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             {
                 player.PlayVictoryAudio();
                 player.SetOnAnimator("highSpeed", false);
-                player.SetOnAnimator("wonRace", true);
+                string[] animations = { "Ganhou-1", "Ganhou-2" };
+                player.ChangeAnimationTo(animations);
             }
             else
             {
                 player.PlayLostAudio();
                 player.SetOnAnimator("highSpeed", false);
-                player.SetOnAnimator("lostRace", true);
+                string[] animations = { "Perdeu-1", "Perdeu-2", "Perdeu-3" };
+                player.ChangeAnimationTo(animations);
             }
             //}
 

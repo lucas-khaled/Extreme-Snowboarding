@@ -48,6 +48,26 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).UnlockParticle();
 
             rb.velocity = player.groundedVelocity;
+
+            player.StartCoroutine(SkiingVariation());
+        }
+
+        private IEnumerator SkiingVariation()
+        {
+            yield return new WaitForSeconds(5f);
+            while (true)
+            {
+                if (Random.Range(0, 100) > 70)
+                {
+                    Debug.Log("Made variation");
+                    if (Random.Range(0, 100) < 50)
+                        player.SetTriggerOnAnimator("esquiVariation1");
+                    else
+                        player.SetTriggerOnAnimator("esquiVariation2");
+                }
+
+                yield return new WaitForSeconds(20f);
+            }
         }
 
         public override void StateUpdate()
