@@ -30,12 +30,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
-            if (player.GetCurrentLayerName() == "EsquiandoGroup")
-            {
-                string[] animation = { "Caiu-Comum" };
-                player.ChangeAnimationTo(animation);
-            }
-
+            player.SetOnAnimator("fallen", true);
             player.SetOnAnimator("hitByFuckFriend", false);
             player.SetOnAnimator("highSpeed", false);
 
