@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdf7454c6531e341a710fb7a7977ebb, type: 3}
+  m_Name: Player Movimentation Feedback Group
+  m_EditorClassIdentifier: 
+  _normalFallFeedback: {fileID: 3849889674896154441, guid: be52f3c228d77c744bd4ade42566f65f, type: 3}
+  _hardFallFeedback: {fileID: 6883475650410936822, guid: 4edb925d7af309349aa7a265a038529c, type: 3}
+  _landingFeedback: {fileID: 4455704544438292866, guid: 6900298ed3d734041846af3e3efd0957, type: 3}
+  _jumpingFeedback: {fileID: 839943497085357310, guid: c9e7f0358835df746892b20a42588000, type: 3}
+  _skiingFeedback: {fileID: 2270820262821896683, guid: 5b77233b70e73904eb55311876b6b3d6, type: 3}
+  _trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
+  _victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
+  _lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
+  normalFallFeedback: {fileID: 3849889674896154441, guid: be52f3c228d77c744bd4ade42566f65f, type: 3}
+  hardFallFeedback: {fileID: 6883475650410936822, guid: 4edb925d7af309349aa7a265a038529c, type: 3}
+  landingFeedback: {fileID: 4455704544438292866, guid: 6900298ed3d734041846af3e3efd0957, type: 3}
+  jumpingFeedback: {fileID: 839943497085357310, guid: c9e7f0358835df746892b20a42588000, type: 3}
+  skiingFeedback: {fileID: 2270820262821896683, guid: 5b77233b70e73904eb55311876b6b3d6, type: 3}
+  trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
+  victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
+  lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
