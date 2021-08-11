@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15210627723245958a2745ed03603d7c, type: 3}
+  m_Name: Player Feedback Group
+  m_EditorClassIdentifier: 
+  restartScene: 0
+  vfxList:
+  - particleName: NeveEspalha
+    feedbacks: {fileID: 3479829749546272155, guid: cb54221503a9a004995ed3d34de6d802, type: 3}
+  - particleName: Portal Afetado
+    feedbacks: {fileID: 6089799922320800064, guid: a1d1482ef8b55e74194977151021bf62, type: 3}
+  - particleName: Portal Usuario
+    feedbacks: {fileID: 3301683847454710058, guid: 6898bd0a90cd43248842324f47f03189, type: 3}
+  - particleName: Mola Power
+    feedbacks: {fileID: 3812335590645745648, guid: eb4c598537b625846b6be48e8b2cf7bb, type: 3}
+  - particleName: Mola Giro
+    feedbacks: {fileID: 6806590442258178899, guid: 570e64a40df70df4f99ec6463d62e25a, type: 3}
+  - particleName: Mola
+    feedbacks: {fileID: 979727369143127803, guid: 99c35bc92bf6f5143836f41134f9aae9, type: 3}
+  - particleName: Giro Rapido
+    feedbacks: {fileID: 8196360628026213968, guid: be0842c5bfea3dc4293941788f88d0e0, type: 3}
+  - particleName: Foguete Giro
+    feedbacks: {fileID: 3220702578720528416, guid: 1696b7c7a7159774dbdb0f871f44f66e, type: 3}
+  - particleName: Foguete
+    feedbacks: {fileID: 6424977334680130049, guid: e858a056a8cb7c946aa2c289ee9769d6, type: 3}
+  - particleName: FastMovement
+    feedbacks: {fileID: 6818527548446593587, guid: 705de61baaacffe488fccb7cf8b129b7, type: 3}
+  - particleName: Cristal
+    feedbacks: {fileID: 1891969346965856684, guid: 13ac820d0dcf7b347b0cde2f4b198554, type: 3}
+  - particleName: Relampago
+    feedbacks: {fileID: 7799878783495248753, guid: a40b3aca1d2b031408b517ca2d279bb6, type: 3}
+  - particleName: Escudo
+    feedbacks: {fileID: 4718756159799726844, guid: 68efe7b2a7866014f812edd33d35591d, type: 3}
+  - particleName: Peso
+    feedbacks: {fileID: 34888390221823278, guid: 5a81a4076ae47e84b8188399c54f00a3, type: 3}

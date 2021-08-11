@@ -19,7 +19,6 @@ namespace ExtremeSnowboarding
 
         private void Start()
         {
-            Debug.Log(GameController.gameController.GetEffectSlider() +"\n Music: "+GameController.gameController.GetMusicSlider());
             effectsSlider.value = GameController.gameController.GetEffectSlider();
             musicSlider.value = GameController.gameController.GetMusicSlider();
 
