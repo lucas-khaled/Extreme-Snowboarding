@@ -204,6 +204,7 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
+                playerFeedbacksList.GetFeedbackByName("Boost", sharedValues.playerCode).StartFeedback();
                 GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * 0.75f * transform.right;
                 AddTurbo(-sharedValues.Turbo);
             }
