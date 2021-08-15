@@ -14511,8 +14511,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012, y: 0.427, z: 0.0235}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.012, y: 0.014302461, z: 0.0235}
+  m_Center: {x: 0, y: 0.00044955738, z: 2.6589208e-18}
 --- !u!114 &1465486239457059090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14527,8 +14527,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   height: 0
+  fuel: 10
   movementType: 0
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 7212800263649030567, guid: 13769ecabd740e647b1b40015b34a27a, type: 3}
 --- !u!1 &5625460412817495246
 GameObject:
   m_ObjectHideFlags: 0

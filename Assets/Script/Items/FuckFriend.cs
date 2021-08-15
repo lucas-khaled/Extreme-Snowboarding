@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Items
 {
-    public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
+    public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK, TRACK_TARGET }
 
     [CreateAssetMenu(fileName = "FuckFriend", menuName = "Itens/Fuck Friend", order = 1)]
     public class FuckFriend : Item
