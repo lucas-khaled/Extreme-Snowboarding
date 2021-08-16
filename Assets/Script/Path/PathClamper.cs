@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace ExtremeSnowboarding
 {
+#if UNITY_EDITOR
     public class PathClamper : MonoBehaviour
     {
         [SerializeField] private PathCreator pathCreator;
@@ -65,4 +66,5 @@ namespace ExtremeSnowboarding
                 pathCreator.pathUpdated -= ClampChildrenOnPath;
         }
     }
+#endif
 }
