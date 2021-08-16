@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658637, g: 0.496422, b: 0.57482517, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657648, g: 0.49641132, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -644,7 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b52261fdd663c47be292019dbe1c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectOffset: {x: 1.06, y: 0}
 --- !u!43 &166390524
 Mesh:
   m_ObjectHideFlags: 0
@@ -1018,7 +1017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b52261fdd663c47be292019dbe1c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectOffset: {x: 0.6, y: 0}
 --- !u!1001 &968708232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1026,6 +1024,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 377083824767514366, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 428332499163122586, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 993223610749264282, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 5144771921823124864, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1097,6 +1107,10 @@ PrefabInstance:
     - target: {fileID: 5144771923200451685, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806048677732566101, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17ebac045cf1e246ab38f33467a0a0f, type: 3}
@@ -1554,7 +1568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b52261fdd663c47be292019dbe1c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectOffset: {x: 0.69, y: 0.27}
 --- !u!1001 &1382699569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1622,6 +1635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
 --- !u!4 &1382699570 stripped
@@ -1672,7 +1689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b52261fdd663c47be292019dbe1c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectOffset: {x: 1.5, y: -12.45}
 --- !u!1 &1442722528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,9 +1718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b86a5c10fd04e4d82489219342e59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 1876158152}
-  YZ_offset: {x: 0, y: 13}
-  automaticChanges: 1
 --- !u!4 &1442722530
 Transform:
   m_ObjectHideFlags: 0
