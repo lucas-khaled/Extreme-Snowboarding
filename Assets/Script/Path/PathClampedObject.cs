@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace ExtremeSnowboarding
 {
+#if UNITY_EDITOR
     public class PathClampedObject : MonoBehaviour
     {
         [SerializeField] private Vector2 objectOffset;
@@ -33,4 +34,5 @@ namespace ExtremeSnowboarding
             transform.rotation = rotation;
         }
     }
+#endif
 }
