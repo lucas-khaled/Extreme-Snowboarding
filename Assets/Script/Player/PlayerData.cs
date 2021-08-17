@@ -1,4 +1,5 @@
 using ExtremeSnowboarding.Script.EventSystem;
+using Photon.Pun;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Player
@@ -17,7 +18,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
         {
-            GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
+            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation);
             playerGO.name = "Player" + index;
         
             player = playerGO.GetComponent<Player>();
