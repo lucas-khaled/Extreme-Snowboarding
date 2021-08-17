@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4408159561946313537}
   - component: {fileID: 4408159561946313538}
   m_Layer: 0
-  m_Name: Obstaculo (4)
+  m_Name: Obstaculo4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 44.66377}
+  m_Center: {x: 0, y: 0, z: -2.508234}
 --- !u!114 &4408159561946313538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db70046955ca27c4195fe64180bb62d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 0
 --- !u!1001 &4408159561418692460
 PrefabInstance:
   m_ObjectHideFlags: 0

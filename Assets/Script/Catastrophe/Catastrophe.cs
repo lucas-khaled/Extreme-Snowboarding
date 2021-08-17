@@ -77,6 +77,10 @@ namespace ExtremeSnowboarding.Script.Catastrophe
                 this.transform.position.y, 
                 this.transform.position.z);
 
+            Debug.Log(this.transform.position);
+
+            
+
             RaycastHit hit;
 
             if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
