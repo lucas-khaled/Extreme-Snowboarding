@@ -47695,6 +47695,7 @@ Transform:
   - {fileID: 1317628591}
   - {fileID: 35169828}
   - {fileID: 1897464568}
+  - {fileID: 5783140789836475461}
   - {fileID: 1514337765}
   - {fileID: 463647844}
   - {fileID: 1440840997}
@@ -47707,7 +47708,6 @@ Transform:
   - {fileID: 1676048055}
   - {fileID: 293011325}
   - {fileID: 2040111315}
-  - {fileID: 5783140789836475461}
   - {fileID: 84777793}
   - {fileID: 906070107}
   - {fileID: 2020031602}
@@ -61055,6 +61055,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6015370667052662045, guid: 0725c55706faec544828b3434b2a0e7e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 6054323324300040972, guid: 0725c55706faec544828b3434b2a0e7e, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -61768,6 +61772,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1660373596269879562, guid: e061ffc508217574dba17d4d7e564f47, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 1990376721468317240, guid: e061ffc508217574dba17d4d7e564f47, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -62189,7 +62197,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1698992708}
-  m_RootOrder: 74
+  m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 348.444}
 --- !u!4 &5802959312258308466
 Transform:
@@ -62486,6 +62494,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6153707372978400986, guid: adaeb936f42231d4e87e120cbaee682b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 6332091902155900333, guid: adaeb936f42231d4e87e120cbaee682b, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -62678,6 +62690,10 @@ PrefabInstance:
     - target: {fileID: 5394046679430138629, guid: 74a1b91a0efddea4b893ad2bc2cd87c7, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594638263939853588, guid: 74a1b91a0efddea4b893ad2bc2cd87c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.600006
       objectReference: {fileID: 0}
     - target: {fileID: 5702231772113421923, guid: 74a1b91a0efddea4b893ad2bc2cd87c7, type: 3}
       propertyPath: m_Layer
