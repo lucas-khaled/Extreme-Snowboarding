@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Player
 {
-    public class PlayerData
+    public class PlayerData : IPunInstantiateMagicCallback
     {
         private Mesh[] playerMeshes;
         private Color color1;
@@ -18,7 +18,8 @@ namespace ExtremeSnowboarding.Script.Player
 
         public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
         {
-            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation);
+            
+            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation, (byte)playerCode, TransformToNetworkData());
             playerGO.name = "Player" + index;
         
             player = playerGO.GetComponent<Player>();
@@ -50,6 +51,31 @@ namespace ExtremeSnowboarding.Script.Player
             playerMeshes = meshes;
             this.mask01 = mask01;
             this.mask02 = mask02;
+        }
+
+        public void OnPhotonInstantiate(PhotonMessageInfo info)
+        {
+            if (info.photonView.IsMine) return;
+            
+            Material material = new Material(playerShader);
+            player.SetPlayerMeshes(material, playerMeshes);
+        
+            material.SetColor("_PrimaryColor", color1);
+            material.SetColor("_SecondaryColor", color2);
+            
+            material.SetTexture("_Color1Mask", mask01);
+            material.SetTexture("_Color2Mask", mask02);
+        }
+
+        private object[] TransformToNetworkData()
+        {
+            object[] netObject = new object[]
+            {
+                color1.r, color1.g, color1.b, // color1 = 0, 1, 2
+                color2.r, color2.g, color2.b, // color2 = 3, 4, 5
+            };
+
+            return netObject;
         }
     }
 }
