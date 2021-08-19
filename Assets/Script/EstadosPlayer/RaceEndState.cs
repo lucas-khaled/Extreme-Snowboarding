@@ -7,6 +7,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     {
         private Player.Player playerView;
         private Rigidbody rb;
+        private int value;
 
         public override void StateEnd()
         {
@@ -16,8 +17,17 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
-            CorridaController.instance.PlayerFinishedRace(player);
+
             rb = player.GetComponent<Rigidbody>();
+
+            rb.useGravity = false;
+            rb.isKinematic = false;
+            value = Random.Range(15,30);
+
+            player.SharedValues.actualState = "RaceEnd";
+            
+            CorridaController.instance.PlayerFinishedRace(player);
+
         }
 
         public override void StateUpdate()
@@ -28,15 +38,16 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         private void DeAccelerateByRigidbody()
         {
+        
             if (rb == null || rb.velocity == Vector3.zero)
                 return;
 
-            if (rb.velocity.x > 1)
-                rb.AddForce(2 * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
+            if (rb.velocity.x > 0)
+                rb.AddForce(value * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
             else
             {
-                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
                 rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
                 FinishRaceAnimation();
             }
                 
@@ -44,13 +55,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         private void ClampOnGround()
         {
-            RaycastHit rotationHit;
-            if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
-                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
-                newRotation.y = newRotation.x = 0;
-                player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
-                player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+                ClampPlayerRotationByGround(hit);
+                ClampPlayerPositionOnGround(hit);
+                player.SharedValues.LastGroundedNormal = hit.normal.normalized;
             }
         }
         
@@ -60,20 +70,36 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             //{
             if (CorridaController.instance.playersClassificated[0] == player)
             {
-                player.PlayVictoryAudio();
+                player.GetMovimentationFeedbacks().victoryFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
-                player.SetOnAnimator("wonRace", true);
+                string[] animations = { "Ganhou-1", "Ganhou-2" };
+                player.ChangeAnimationTo(animations);
             }
             else
             {
-                player.PlayLostAudio();
+                player.GetMovimentationFeedbacks().lostFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
-                player.SetOnAnimator("lostRace", true);
+                string[] animations = { "Perdeu-1", "Perdeu-2", "Perdeu-3" };
+                player.ChangeAnimationTo(animations);
             }
             //}
 
             //player.Invoke("ChangePlayerView",5);
         }
-    
+
+        void ClampPlayerRotationByGround(RaycastHit hit)
+        {
+            Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, hit.normal) * player.transform.rotation;
+            newRotation.y = newRotation.x = 0;
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+        }
+        void ClampPlayerPositionOnGround(RaycastHit hit)
+        {
+
+            float xChange = rb.velocity.x - hit.normal.normalized.x * 2f;
+            float yChange = rb.velocity.y - hit.normal.normalized.y * 2f;
+
+            rb.velocity = new Vector3(xChange, yChange, rb.velocity.z);
+        }
     }
 }

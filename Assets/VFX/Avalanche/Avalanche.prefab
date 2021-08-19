@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivateCameraShake: 0
-  velocity: 5
+  velocity: 7
   shakingDuration: 2
   magnetude: 0.2
-  tempoEspera: 0
+  tempoEspera: 5
   particles: {fileID: 6441612493800126047}
 --- !u!54 &2591059477645484037
 Rigidbody:
@@ -128,7 +128,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2591059477645484035}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.39268026

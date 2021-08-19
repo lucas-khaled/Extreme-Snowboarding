@@ -8,12 +8,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
     {
         Player.Player playerView;
 
-        // public override void InterpretateInput(GameInput input)
-        // {
-        //     if (GameInput.UP == input)
-        //         ChangePlayerView();
-        // }
-
         public override void StateEnd()
         {
         
@@ -22,14 +16,22 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateStart(Player.Player player)
         {
             base.StateStart(player);
+
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+
             playerView = player;
+            
+            player.SharedValues.actualState = "Dead";
+            
             ChangePlayerView();
 
             if (PlayerGeneralEvents.onPlayerDeath != null)
                 PlayerGeneralEvents.onPlayerDeath.Invoke(player);
 
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-
             MonoBehaviour.Destroy(player.GetMeshGameObject()); 
         }
 

@@ -5,6 +5,7 @@ using System.Reflection;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.EventSystem;
 using UnityEditor;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,7 +36,7 @@ namespace ExtremeSnowboarding.Script.Editor.Analysis
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("LoadedScene");
-            if (scene.name == "Fase1" || scene.name == "Test_Scene")
+            if (scene.name == "Fase1Teste" || scene.name == "Fase2")
             {
                 PlayerGeneralEvents.onPlayerInstantiate += PlayerInstatiated;
             }
@@ -48,7 +49,7 @@ namespace ExtremeSnowboarding.Script.Editor.Analysis
     
         private void OnGUI()
         {
-            if (instatiatedPlayers.Count > 0 && Application.isPlaying)
+            if (instatiatedPlayers.Count > 0 && EditorApplication.isPlaying)
             {
                 ShowMovimentationPropertiesAndValues();
             }
@@ -56,6 +57,12 @@ namespace ExtremeSnowboarding.Script.Editor.Analysis
             {
                 ShowMovimentationProperties();
             }
+        }
+
+        private void Update()
+        {
+            if(EditorApplication.isPlaying)
+                Repaint();
         }
 
         private void ShowMovimentationPropertiesAndValues()
@@ -69,12 +76,25 @@ namespace ExtremeSnowboarding.Script.Editor.Analysis
 
                     if (playerFoldouts[index])
                     {
+                        GUILayout.Label("Movimentation values");
                         ShowPlayerValues(player);
+                        
+                        GUILayout.Space(5f);
+                        
+                        GUILayout.Label("Component values");
+                        ShowPlayerComponentValues(player);
                     }
 
                     index++;
                 }
             }
+        }
+
+        private void ShowPlayerComponentValues(Player.Player player)
+        {
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+
+            GUILayout.Label("Rigidbody Velocity: " + rb.velocity.magnitude);
         }
 
         private void ShowPlayerValues(Player.Player player)

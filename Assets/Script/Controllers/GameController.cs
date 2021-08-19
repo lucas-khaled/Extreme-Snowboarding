@@ -10,6 +10,10 @@ namespace ExtremeSnowboarding.Script.Controllers
         public static GameController gameController;
 
         private int numOfPlayer = 1;
+        private string sceneToLoad;
+        private float effectAudioLevel;
+        private float musicAudioLevel;
+
 
         [Scene] [SerializeField] 
         private string[] scenesToLoad;
@@ -18,6 +22,8 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void Awake()
         {
+            sceneToLoad = "None";
+
             if (gameController == null)
             {
                 gameController = this;
@@ -28,7 +34,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 Destroy(this);
             }
         }
-    
+
         public void StartPlayerData(PlayerData[] players)
         {
             playerData = players;
@@ -43,9 +49,27 @@ namespace ExtremeSnowboarding.Script.Controllers
             return numOfPlayer;
         }
 
+        public void SetLevel(int level)
+        {
+            sceneToLoad = scenesToLoad[level];
+        }
+
+        public void SetAudio(float effectAudioLevel, float musicAudioLevel)
+        {
+            this.effectAudioLevel = effectAudioLevel;
+            this.musicAudioLevel = musicAudioLevel;
+        }
+        public float GetEffectSlider()
+        {
+            return effectAudioLevel;
+        }
+        public float GetMusicSlider()
+        {
+            return musicAudioLevel;
+        }
+
         public void Play()
         {
-            string sceneToLoad = scenesToLoad[Random.Range(0, scenesToLoad.Length)];
             ChangeScene(sceneToLoad);
         }
 
@@ -53,7 +77,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             SceneManager.LoadScene(cena);
         }
-        public void SairDoJogo()
+        public void QuitGame()
         {
             Application.Quit();
         }

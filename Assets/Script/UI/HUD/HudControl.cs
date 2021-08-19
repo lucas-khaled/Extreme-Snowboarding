@@ -32,7 +32,7 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         {
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onTurboChange += OnTurboChange;
-            PlayerGeneralEvents.onFuckFriendChange += OnFuckFriendChange;
+            PlayerGeneralEvents.onItemUsed += OnFuckFriendChange;
         }
 
         public void SetPlayer(Player.Player player)
@@ -65,11 +65,12 @@ namespace ExtremeSnowboarding.Script.UI.HUD
 
         private void OnFuckFriendChange(Player.Player player, Sprite fuckFriendSprite)
         {
-            if (this.player == player && fuckFriendSprite != null)
-                refFuckFriendImage.sprite = fuckFriendSprite;
-            else
+            if (this.player == player)
             {
-                refFuckFriendImage.sprite = null;
+                if (fuckFriendSprite != null)
+                    refFuckFriendImage.sprite = fuckFriendSprite;
+                else
+                    refFuckFriendImage.sprite = null;
             }
         }
     }

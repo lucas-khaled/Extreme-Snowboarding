@@ -16,16 +16,15 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
-            player.ChangeSkiingAudio(false);
+            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
 
             UnsubscribeOnInputEvents();
         
-            player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StopParticle();
-            player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).LockParticle(true);
+            player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StopFeedback();
+            player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).LockFeedback(true);
             player.StopAllCoroutines();
             player = null;
 
-            
         }
 
         public override void StateStart(Player.Player player)
@@ -36,24 +35,45 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             player.SharedValues.actualState = "Grounded";
 
-            player.ChangeSkiingAudio(true);
+            player.GetMovimentationFeedbacks().skiingFeedback?.PlayFeedbacks();
 
             rb = player.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = false;
 
+
             player.StartStateCoroutine(BeEtherium());
 
-            player.GetPlayerVFXList().GetVFXByName("NeveEspalha", player.SharedValues.playerCode).StartParticle();
-            player.GetPlayerVFXList().GetVFXByName("FastMovement", player.SharedValues.playerCode).UnlockParticle();
+            player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StartFeedback();
+            player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).UnlockFeedback();
 
             rb.velocity = player.groundedVelocity;
+
+            player.StartCoroutine(SkiingVariation());
+        }
+
+        private IEnumerator SkiingVariation()
+        {
+            yield return new WaitForSeconds(5f);
+            while (true)
+            {
+                if (Random.Range(0, 100) > 70)
+                {
+                    Debug.Log("Made variation");
+                    if (Random.Range(0, 100) < 50)
+                        player.SetTriggerOnAnimator("esquiVariation1");
+                    else
+                        player.SetTriggerOnAnimator("esquiVariation2");
+                }
+
+                yield return new WaitForSeconds(20f);
+            }
         }
 
         public override void StateUpdate()
         {
-            ClampOnGround();
             MoveByRigidbody();
+            StickPlayerOnGround();
             timeOnGround += Time.deltaTime;
         }
 
@@ -67,9 +87,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     return;
 
                 if (rb.velocity.x < player.SharedValues.MaxVelocity)
-                    rb.AddForce(player.SharedValues.Acceleration * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                    rb.AddForce(player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
                 else if (rb.velocity.x > player.SharedValues.MaxVelocity)
-                    rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * Vector3.right, ForceMode.VelocityChange);
+                    rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
 
 
                 player.groundedVelocity = rb.velocity;
@@ -80,28 +100,35 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
         }
 
-        void ClampOnGround()
+        void StickPlayerOnGround()
         {
-            RaycastHit rotationHit;
-            if (Physics.Raycast(player.transform.position, Vector3.down, out rotationHit, 10f, LayerMask.GetMask("Track")))
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
-                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, rotationHit.normal) * player.transform.rotation;
-                newRotation.y = newRotation.x = 0;
-
-                if (Vector3.Distance(rotationHit.point, player.transform.position) >
-                    player.SharedValues.CharacterHeight)
-                {
-                    player.ChangeState(new Jumping(false));
-                    return;
-                }
-
-                player.transform.position = new Vector3(player.transform.position.x, rotationHit.point.y + player.SharedValues.CharacterHeight * 0.5f, player.transform.position.z);
-                player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+                ClampPlayerRotationByGround(hit);
+                ClampPlayerPositionOnGround(hit);
+                player.SharedValues.LastGroundedNormal = hit.normal.normalized;
             }
             else
             {
                 player.ChangeState(new Jumping(false));
             }
+        }
+
+        void ClampPlayerPositionOnGround(RaycastHit hit)
+        {
+
+            float xChange = rb.velocity.x - hit.normal.normalized.x * 2f;
+            float yChange = rb.velocity.y - hit.normal.normalized.y * 2f;
+
+            rb.velocity = new Vector3(xChange, yChange, rb.velocity.z);
+        }
+
+        void ClampPlayerRotationByGround(RaycastHit hit)
+        {
+            Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, hit.normal) * player.transform.rotation;
+            newRotation.y = newRotation.x = 0;
+            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
         }
 
         IEnumerator BeEtherium()
@@ -133,7 +160,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void Jump(InputAction.CallbackContext context)
         {
-            if((context.started || context.performed) && timeOnGround>=timeToJump)
+            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun)
                 player.ChangeState(new Jumping()); 
         }
     

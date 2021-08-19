@@ -26,9 +26,8 @@ namespace ExtremeSnowboarding.Script.Items.Effects
         {
             this.player = player;
             quantification.quantificationCallback += EffectIteration;
-        
-            if(EffectGeneralEvents.onEffectStarted != null)
-                EffectGeneralEvents.onEffectStarted.Invoke(this, player);
+            
+            EffectGeneralEvents.onEffectStarted?.Invoke(this, player);
         
             quantification.StartQuantification(timeOfChange);
         }

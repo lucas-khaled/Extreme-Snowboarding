@@ -40,7 +40,7 @@ namespace ExtremeSnowboarding.Script.Items
                 return;
             foreach (var vfxName in names) 
             { 
-                player.GetPlayerVFXList().GetVFXByName(vfxName, player.SharedValues.playerCode).StartParticle();
+                player.GetPlayerFeedbackList().GetFeedbackByName(vfxName, player.SharedValues.playerCode).StartFeedback();
             }
         }
 

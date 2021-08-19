@@ -10,8 +10,6 @@ namespace ExtremeSnowboarding.Script.Controllers
     public class CorridaController : MonoBehaviour
     {
         [SerializeField]
-        private Vector3 posicaoSpawnPlayers;
-        [SerializeField]
         private Player.Player playerPrefab;
         [SerializeField]
         private GameObject canvasPauseRef;
@@ -191,7 +189,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             for (int i = 0; i < players.Length; i++)
             {
-                players[i].InstancePlayer(posicaoSpawnPlayers + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
+                players[i].InstancePlayer(transform.position + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
             }
 
             ChangeCameraByPlayers();
@@ -307,7 +305,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         void OnDrawGizmos()
         {
-            Gizmos.DrawIcon(posicaoSpawnPlayers, "snowboard_icon.png");
+            Gizmos.DrawIcon(transform.position, "snowboard_icon.png");
         }
     }
 }

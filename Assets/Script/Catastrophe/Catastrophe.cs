@@ -77,6 +77,10 @@ namespace ExtremeSnowboarding.Script.Catastrophe
                 this.transform.position.y, 
                 this.transform.position.z);
 
+            Debug.Log(this.transform.position);
+
+            
+
             RaycastHit hit;
 
             if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
@@ -102,7 +106,9 @@ namespace ExtremeSnowboarding.Script.Catastrophe
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "Player")
+            if(!isMoving) return;
+            
+            if(other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
             {
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new Dead());
             }

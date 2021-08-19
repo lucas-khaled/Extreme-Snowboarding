@@ -16,6 +16,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [Header("Organization Values")]
         [SerializeField]
         private float rowSize = 4;
+        private int level;
 
         List<PlayerMenu> playersModels = new List<PlayerMenu>();
 
@@ -55,9 +56,18 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         }
 
+        public void ChangeLevel(int level)
+        {
+            this.level = level;
+        }
+
         public void SendPlayerData()
         {
             GameController.gameController.StartPlayerData(ConstructPlayerData());
+        }
+        public void SendLevel()
+        {
+            GameController.gameController.SetLevel(level - 1);
         }
 
         private PlayerData[] ConstructPlayerData()
