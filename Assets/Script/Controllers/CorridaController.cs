@@ -13,6 +13,8 @@ namespace ExtremeSnowboarding.Script.Controllers
         private Player.Player playerPrefab;
         [SerializeField]
         private GameObject canvasPauseRef;
+        [SerializeField]
+        private DronePoint droneRef;
     
         public InputAction menuInput;
 
@@ -183,6 +185,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                     PlayerGeneralEvents.onPlayerPass.Invoke(players[i].player, i);
             }
             InvokeRepeating("CheckPlayerClassification",0,0.1f);
+            updateDrone();
         }
         
         private void InstantiatePlayers()
@@ -280,6 +283,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                     }
 
                     changed = false;
+                    updateDrone();
                 }
             }
         }
@@ -303,9 +307,17 @@ namespace ExtremeSnowboarding.Script.Controllers
             UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
         }
 
+        private void updateDrone()
+        {
+            Debug.Log("Drone updated");
+            droneRef.UpdateFirstPlayer(players[0].player);
+        }
+
         void OnDrawGizmos()
         {
             Gizmos.DrawIcon(transform.position, "snowboard_icon.png");
         }
+
+        
     }
 }

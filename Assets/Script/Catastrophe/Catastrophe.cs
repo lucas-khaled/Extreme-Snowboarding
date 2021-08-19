@@ -75,11 +75,7 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         {
             Vector3 newPoint = new Vector3(this.transform.position.x + 5f, 
                 this.transform.position.y, 
-                this.transform.position.z);
-
-            Debug.Log(this.transform.position);
-
-            
+                this.transform.position.z);            
 
             RaycastHit hit;
 
