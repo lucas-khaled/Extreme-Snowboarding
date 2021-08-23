@@ -1,48 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.EventSystem;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Player
 {
-    public class PlayerData : IPunInstantiateMagicCallback
+    public class PlayerData 
     {
         private Mesh[] playerMeshes;
         private Color color1;
         private Color color2;
-        private Shader playerShader;
+        private string playerShader;
         private int index;
         private Texture2D mask01;
-        private Texture2D mask02; 
+        private Texture2D mask02;
     
         public Player player;
+        
+        private const byte PlayerDataEventCode = 1;
 
         public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
         {
-            
-            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation, (byte)playerCode, TransformToNetworkData());
+            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation);
             playerGO.name = "Player" + index;
         
             player = playerGO.GetComponent<Player>();
-
-            Material material = new Material(playerShader);
-            player.SetPlayerMeshes(material, playerMeshes);
-        
-            material.SetColor("_PrimaryColor", color1);
-            material.SetColor("_SecondaryColor", color2);
-            
-            material.SetTexture("_Color1Mask", mask01);
-            material.SetTexture("_Color2Mask", mask02);
+            player.SetMaterials(color1, color2, playerMeshes, playerShader);
 
             player.SharedValues.playerCode = playerCode;
             camera.SetInitialPlayer(player);
 
             player.playerInput.SwitchCurrentControlScheme("Player" + index);
+
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+            PhotonNetwork.RaiseEvent(PlayerDataEventCode, TransformToNetworkData(), raiseEventOptions,
+                SendOptions.SendReliable);
         
             if(PlayerGeneralEvents.onPlayerInstantiate != null)
                 PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
         }
         
-        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02)
+        public PlayerData(Color color1, Color color2, string playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02)
         {
             this.color1 = color1;
             this.color2 = color2;
@@ -53,29 +55,28 @@ namespace ExtremeSnowboarding.Script.Player
             this.mask02 = mask02;
         }
 
-        public void OnPhotonInstantiate(PhotonMessageInfo info)
-        {
-            if (info.photonView.IsMine) return;
-            
-            Material material = new Material(playerShader);
-            player.SetPlayerMeshes(material, playerMeshes);
-        
-            material.SetColor("_PrimaryColor", color1);
-            material.SetColor("_SecondaryColor", color2);
-            
-            material.SetTexture("_Color1Mask", mask01);
-            material.SetTexture("_Color2Mask", mask02);
-        }
-
         private object[] TransformToNetworkData()
         {
-            object[] netObject = new object[]
+            IEnumerable<string> meshNames = from mesh in playerMeshes
+                                        select mesh.name;
+
+            foreach (var name in meshNames)
+            {
+                Debug.Log(name);
+            }
+            
+            List<object> netObject = new List<object>()
             {
                 color1.r, color1.g, color1.b, // color1 = 0, 1, 2
                 color2.r, color2.g, color2.b, // color2 = 3, 4, 5
+                playerShader // shaderName = 6
             };
 
-            return netObject;
+            netObject.AddRange(meshNames);
+            
+            return netObject.ToArray();
         }
+
+        
     }
 }

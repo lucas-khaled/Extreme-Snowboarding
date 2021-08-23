@@ -65,6 +65,7 @@ namespace ExtremeSnowboarding
         {
             escolhaController.SendPlayerData();
             OnJoinedRoomCallback?.Invoke(true);
+
             if (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers)
             {
                 _photonView.RPC("RPC_LoadLevel", RpcTarget.All);

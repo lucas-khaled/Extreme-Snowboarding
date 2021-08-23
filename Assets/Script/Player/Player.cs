@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.Controllers;
@@ -9,6 +11,8 @@ using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
 using NaughtyAttributes;
 using NUnit.Framework;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -19,7 +23,7 @@ namespace ExtremeSnowboarding.Script.Player
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(PlayerInput))]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IOnEventCallback
     {
         [BoxGroup("References")]
         public PlayerInput playerInput;
@@ -68,6 +72,8 @@ namespace ExtremeSnowboarding.Script.Player
         private GameObject catastropheRef;
         private AudioSource audioSource;
         private AudioSource audioSourceEffects;
+        
+        private const byte PlayerDataEventCode = 1;
 
         public void AddPlayerSpectating(Player playerSpectator)
         {
@@ -140,6 +146,47 @@ namespace ExtremeSnowboarding.Script.Player
         public PlayerFeedbacksGroup GetPlayerFeedbackList()
         {
             return playerFeedbacksList;
+        }
+        
+        public void OnEvent(EventData photonEvent)
+        {
+            Debug.Log("Event: "+photonEvent.Code);
+            if(photonEvent.Code != PlayerDataEventCode) return;
+            
+            object[] data = (object[]) photonEvent.CustomData;
+            
+            Color firstColor = new Color((int) data[0],
+                (int) data[1],
+                (int) data[2]);
+            
+            Color secondColor = new Color((int) data[3],
+                (int) data[4],
+                (int) data[5]);
+
+            string shaderName = (string) data[6];
+
+            List<Mesh> meshes = new List<Mesh>();
+            for (int i = 7; i < data.Length; i++)
+            {
+                Mesh mesh = (Mesh) Resources.Load("Meshes/" + (string) data[i]);
+                meshes.Add(mesh);
+            }
+            
+            SetMaterials(firstColor, secondColor, meshes.ToArray(), shaderName);
+        }
+        
+        public void SetMaterials(Color firstColor, Color secondColor, Mesh[] playerMeshes, string playerShader)
+        {
+            Shader shader = (Shader)Resources.Load("Shader/" + playerShader);
+            Material material = new Material(shader);
+
+            material.SetColor("_PrimaryColor", firstColor);
+            material.SetColor("_SecondaryColor", secondColor);
+
+            /*material.SetTexture("_Color1Mask", mask01);
+            material.SetTexture("_Color2Mask", mask02);*/
+            
+            SetPlayerMeshes(material, playerMeshes);
         }
 
         private void Awake()
