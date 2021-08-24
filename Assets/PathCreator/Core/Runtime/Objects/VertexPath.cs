@@ -189,6 +189,7 @@ namespace PathCreation {
         /// Gets normal vector on path based on distance travelled.
         public Vector3 GetNormalAtDistance (float dst, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop) {
             float t = dst / length;
+            Debug.Log(t);
             return GetNormal (t, endOfPathInstruction);
         }
 

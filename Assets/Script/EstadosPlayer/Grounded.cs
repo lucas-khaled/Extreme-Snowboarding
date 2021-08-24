@@ -40,7 +40,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             rb = player.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = false;
-
+            player.playerCamera.shouldFollowOnlyX = false;
 
             player.StartStateCoroutine(BeEtherium());
 

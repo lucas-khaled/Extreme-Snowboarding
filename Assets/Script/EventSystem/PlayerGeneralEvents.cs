@@ -17,7 +17,8 @@ namespace ExtremeSnowboarding.Script.EventSystem
         public static OnItemUsed onItemUsed;
 
         public delegate void OnPlayerInstantiate(Player.Player player);
-
         public static OnPlayerInstantiate onPlayerInstantiate;
+
+        
     }
 }
