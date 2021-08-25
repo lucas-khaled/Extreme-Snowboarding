@@ -46,6 +46,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
+            player.SetOnAnimator("Flying", false);
             path.shouldFollowPath = false;
             player.playerCamera.shouldFollowOnlyX = false;
             rb.velocity = Vector3.zero;
@@ -62,6 +63,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             yield return new WaitForSeconds(0.5f);
             path.shouldFollowPath = true;
+            string[] animations = { "RetornandoDoAbismo" };
+            player.ChangeAnimationTo(animations, "Flying", true);
         }
     }
 }
