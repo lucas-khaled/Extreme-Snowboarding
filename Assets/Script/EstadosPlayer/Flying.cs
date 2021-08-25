@@ -49,12 +49,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             path.shouldFollowPath = false;
             player.playerCamera.shouldFollowOnlyX = false;
             rb.velocity = Vector3.zero;
-            rb.AddForce(player.transform.right * 10, ForceMode.Impulse);
+            rb.AddForce(Vector3.right * 10, ForceMode.Impulse);
         }
 
         private void OnPathFinished(GameObject gameObject)
         {
-            Debug.Log("Terminou?");
             player.ChangeState(new Grounded());
             path.distanceTravelled = 0;
         }

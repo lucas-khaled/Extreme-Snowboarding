@@ -6,11 +6,15 @@ namespace PathCreation.Examples
     // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
     public class PathFollower : MonoBehaviour
     {
-        public bool auxOnce = false;
-        public PathCreator pathCreator;
+        [SerializeField] private float speed = 5;
+        [SerializeField] private bool lockPositionZ = false;
+        [SerializeField] private bool lockRotationXY = false;
+
+        [HideInInspector] public bool auxOnce = false;
+        [HideInInspector] public float distanceTravelled;
+        
         public EndOfPathInstruction endOfPathInstruction;
-        public float speed = 5;
-        public float distanceTravelled;
+        public PathCreator pathCreator;
         public bool shouldFollowPath = true;
 
         public delegate void OnPathFinished(GameObject gameObject);
@@ -32,10 +36,20 @@ namespace PathCreation.Examples
                 if (shouldFollowPath)
                 {
                     distanceTravelled += speed * Time.deltaTime;
-                    transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                    
+                    Vector3 posicao = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
 
-                    //Debug.Log(distanceTravelled / pathCreator.path.length);
+                    if (!lockPositionZ)
+                        transform.position = posicao;
+                    else
+                        transform.position = new Vector3(posicao.x, posicao.y, transform.position.z);
+
+                    Quaternion rotacao = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                    
+                    if (!lockRotationXY)
+                        transform.rotation = rotacao;
+                    else
+                        transform.rotation = new Quaternion(0, 0, rotacao.z, rotacao.w);
 
                     if (distanceTravelled / pathCreator.path.length >= 1 && !auxOnce)
                     {

@@ -22,7 +22,7 @@ namespace ExtremeSnowboarding.Script
 
         private Vector3 destinyPosition;
         private float maxBreakSpeed = 0.01f;
-
+        private Vector3 positionPoint;
         Vector3 targetPositionGlobalToGizmo;
 
         public void UpdateFirstPlayer(Player.Player player)
@@ -56,7 +56,7 @@ namespace ExtremeSnowboarding.Script
 
             //newPosition.y = 1.0f;
 
-            Vector3 playerPointPosition = firstPlayer.transform.position + new Vector3(3.13f, 1.9f, 3.7f);
+            Vector3 playerPointPosition = positionPoint;
 
             if (maxSpeed <= 100)
                 maxSpeed = maxSpeedConstant * Vector3.Distance(transform.position, playerPointPosition);
@@ -101,7 +101,7 @@ namespace ExtremeSnowboarding.Script
 
             float distanceToTarget = Vector3.Distance(transform.position, firstPlayer.transform.position);
 
-            Vector3 targetPosition = firstPlayer.transform.position + new Vector3(3.13f, 1.9f, 3.7f);
+            Vector3 targetPosition = positionPoint;
 
             targetPositionGlobalToGizmo = targetPosition;
 
@@ -154,19 +154,15 @@ namespace ExtremeSnowboarding.Script
                 maxBreakSpeed = currentVelocity.magnitude;
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Aula2");
-            }
-        }
-
         private void Update()
         {
-            DoBehaviour();
+            positionPoint = firstPlayer.transform.position + new Vector3(3.13f, 1.9f, 3.7f);
 
-            UpdatePosition();
+            if (Vector3.Distance(transform.position, positionPoint) >= 0.5f)
+            {
+                DoBehaviour();
+                UpdatePosition();
+            }
         }
 
         private void OnDrawGizmos()

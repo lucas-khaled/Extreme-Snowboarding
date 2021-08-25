@@ -91,6 +91,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 else if (rb.velocity.x > player.SharedValues.MaxVelocity)
                     rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
 
+                if (rb.velocity.x < 0)
+                    rb.AddForce(new Vector3(rb.velocity.x * -1, rb.velocity.y, rb.velocity.z), ForceMode.VelocityChange);
+
 
                 player.groundedVelocity = rb.velocity;
             }
