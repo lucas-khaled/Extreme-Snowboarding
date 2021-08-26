@@ -97,13 +97,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     {
                         string[] animation = { "Caiu-Afunda" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
-                        timeFall = 5;
+                        timeFall = 3.5f;
                     }
                     else
                     {
                         string[] animation = { "Caiu-Snowboard-Cabeca" };
                         player.ChangeAnimationTo(animation, "fallen", true);
-                        timeFall = 4.24f;
+                        timeFall = 4.2f;
                     }
                     
                     player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
