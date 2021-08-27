@@ -200,12 +200,14 @@ namespace ExtremeSnowboarding.Script.Player
         // Method witch will activate boost in case the boost value is complete. It listens to "Boost" input
         private void ActivateBoost(InputAction.CallbackContext context)
         {
-            if (context.started && sharedValues.Turbo >= 0.95)
+            if (context.started && sharedValues.Turbo >= 0.2f)
             {
-                Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
+                float forcaBoostRelative = 7 / (1 / sharedValues.Turbo);
+
+                Effect boostEffect = new Effect("AddedAcceleration", forcaBoostRelative, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
                 playerFeedbacksList.GetFeedbackByName("Boost", sharedValues.playerCode).StartFeedback();
-                GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * 0.75f * transform.right;
+                GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * (sharedValues.Turbo) * 0.5f * transform.right;
                 AddTurbo(-sharedValues.Turbo);
             }
         }
@@ -363,7 +365,7 @@ namespace ExtremeSnowboarding.Script.Player
         [BoxGroup("Player Values")]
         [SerializeField, Min(0)] private float characterHeight = 2;
         [SerializeField, UnityEngine.Range(1f,3f)] private float mortalAddVelocityRate = 2; 
-        [FormerlySerializedAs("turboMultiplier")] [SerializeField] private float turboMortalMultiplier = 1;
+        [FormerlySerializedAs("turboMultiplier")] [SerializeField] private float turboMortalMultiplier = 20;
         
         [Header("Movement Values")] [HorizontalLine(color:EColor.Yellow)] 
         

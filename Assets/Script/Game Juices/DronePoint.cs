@@ -10,13 +10,15 @@ namespace ExtremeSnowboarding.Script
 
         [SerializeField] private enum ENEMY_BEHAVIOUR { SEEK, PURSUIT };
         [SerializeField] private ENEMY_BEHAVIOUR behaviour = ENEMY_BEHAVIOUR.SEEK;
+
         float maxSpeed = 5.0f;
         float maxSpeedConstant = 5f;
         float newtonForce = 32.0f;
-        float distanceToTargetToReduceSpeed = 2.0f;
+        float distanceToTargetToReduceSpeed = 10f;
         float raycastDistance = 10.0f;
         float raycastAngleVariation = 25.0f;
         Vector3 currentVelocity = Vector3.zero;
+
         private Player.Player firstPlayer;
         private float minHeight = 5f;
 
@@ -71,6 +73,7 @@ namespace ExtremeSnowboarding.Script
 
             if (Vector3.Distance(this.transform.position, playerPointPosition) > 1f)
                 transform.LookAt(newPosition);
+
             transform.position = newPosition;
         }
 

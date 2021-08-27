@@ -153,10 +153,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
                 Effect mortalEffect = new Effect("AddedAcceleration",amount, time, EffectMode.ADD, player);
                 mortalEffect.StartEffect(player);
-            }
-            
 
-            player.AddTurbo(numOfMortals * player.SharedValues.TurboMortalMultiplier);
+                player.AddTurbo(numOfMortals * 10);
+            }
         }
 
         void SubscribeOnInputEvents()
