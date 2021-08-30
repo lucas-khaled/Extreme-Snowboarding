@@ -20,6 +20,10 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         private float magnetude;
         [SerializeField]
         private float tempoEspera;
+        [SerializeField]
+        private float aceleracao;
+        [SerializeField]
+        private float maxVel;
 
         [Header("References")]
         [SerializeField]
@@ -97,13 +101,9 @@ namespace ExtremeSnowboarding.Script.Catastrophe
                 this.transform.position = Vector3.MoveTowards(this.transform.position,     // Posicao inicial 
                     nextMovementPoint,           // Posicao destino
                     velocity * Time.deltaTime);  // Velocidade movimento
-<<<<<<< Updated upstream
-=======
-
 
                 if (velocity <= maxVel) 
                 velocity += (aceleracao / maxVel) * Time.deltaTime;
->>>>>>> Stashed changes
             }
         }
 
