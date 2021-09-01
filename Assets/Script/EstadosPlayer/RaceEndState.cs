@@ -20,7 +20,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             rb = player.GetComponent<Rigidbody>();
 
-            rb.useGravity = false;
+            rb.useGravity = true;
             rb.isKinematic = false;
             value = Random.Range(15,30);
 
