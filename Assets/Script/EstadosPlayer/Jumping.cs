@@ -87,13 +87,19 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 {
                     float timeFall;
 
-                    if (angleDifference > 120 && angleDifference < 150)
+                    if (angleDifference >= 60 && angleDifference <= 160)
+                    {
+                        string[] animation = { "CaiuCostas" };
+                        player.ChangeAnimationTo(animation, "fallen", true);
+                        timeFall = 3;
+                    }
+                    else if (angleDifference < 170)
                     {
                         string[] animation = { "Caiu-Rolando" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
                         timeFall = 5;
                     }
-                    else if (angleDifference > 150)
+                    else if (angleDifference >= 170)
                     {
                         string[] animation = { "Caiu-Afunda" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
@@ -105,7 +111,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 4.2f;
                     }
-                    
+
+                    Debug.Log(angleDifference);
+
                     player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
 
                     newPlayerState = new Fallen(timeFall);

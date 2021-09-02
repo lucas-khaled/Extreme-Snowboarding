@@ -73,13 +73,14 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 player.GetMovimentationFeedbacks().victoryFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
                 string[] animations = { "Ganhou-1", "Ganhou-2" };
+                //string[] animations = { "EasterEggPranchaLevada" };
                 player.ChangeAnimationTo(animations);
             }
             else
             {
                 player.GetMovimentationFeedbacks().lostFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
-                string[] animations = { "Perdeu-1", "Perdeu-2", "Perdeu-3" };
+                string[] animations = { "Perdeu-1", "Perdeu-2", "Perdeu-3", "Perdeu-5", "EasterEggPranchaLevada" };
                 player.ChangeAnimationTo(animations);
             }
             //}
