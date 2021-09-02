@@ -386,11 +386,21 @@ namespace ExtremeSnowboarding.Script.Player
         /// String that contains the actual player state name.
         /// </summary>
         public string actualState { get; set; }
+
+        /// <summary>
+        /// Bool that locks the player jump is false.
+        /// </summary>
+        public bool canJump { get; set; }
         
         /// <summary>
         /// The player that owns this Shared Values.
         /// </summary>
         public Player player { get; set; }
+
+        /// <summary>
+        /// Player classification, being 1 the first.
+        /// </summary>
+        public int qualification { get; set; }
 
         /// <summary>
         /// The own player code. If it is the player 1, so the value is 1. An it goes on...
