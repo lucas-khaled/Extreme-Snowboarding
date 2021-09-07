@@ -1,20 +1,21 @@
+using System;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class PlayerMenu : MonoBehaviour
     {
-        [BoxGroup("Shader References")]
-        public Shader changeColorShader;
+        [BoxGroup("Settings")] 
+        [SerializeField]
+        private MultiplayerInstantiationSettings instantiationSettings;
+        
+        [BoxGroup("References")]
         public Animator animatorRenato;
-    
-        [SerializeField] [BoxGroup("Shader References")]
-        private Texture2D mask01;
-        [SerializeField] [BoxGroup("Shader References")]
-        private Texture2D mask02;
-   
+
 
         [BoxGroup("Interface")]
         [SerializeField]
@@ -25,9 +26,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         private FlexibleColorPicker secondaryColorPicker;
 
         [FormerlySerializedAs("maleMesh")] [BoxGroup("Mesh")] [SerializeField]
-        private Mesh[] maleMeshes;
+        private PlayerMesh[] maleMeshes;
         [FormerlySerializedAs("femaleMesh")] [SerializeField] [BoxGroup("Mesh")]
-        private Mesh[] femaleMeshes;
+        private PlayerMesh[] femaleMeshes;
         [FormerlySerializedAs("meshRendereres")] [FormerlySerializedAs("meshRenderer")] [SerializeField] [BoxGroup("Mesh")]
         private SkinnedMeshRenderer[] meshRenderers;
     
@@ -38,12 +39,8 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         public Color secondaryColor = Color.white;
 
         private Material myMaterial;
+        private PlayerMesh[] selectedMeshes;
 
-        public Texture2D GetTexture(int index)
-        {
-            return (index <= 1) ? mask01 : mask02;
-        }
-        
         public void ChangePrimaryColor(string colorString)
         {
         
@@ -85,37 +82,34 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             for (int i = 0; i < meshRenderers.Length; i++)
             {
-                meshRenderers[i].sharedMesh = femaleMeshes[i];
+                meshRenderers[i].sharedMesh = femaleMeshes[i].mesh;
             }
+
+            selectedMeshes = femaleMeshes;
         }
 
         public void SetMaleMeshes()
         {
             for (int i = 0; i < meshRenderers.Length; i++)
             {
-                meshRenderers[i].sharedMesh = maleMeshes[i];
+                meshRenderers[i].sharedMesh = maleMeshes[i].mesh;
             }
+
+            selectedMeshes = maleMeshes;
         }
 
-        public Mesh[] GetSelectedMeshes()
+        public string[] GetSelectedMeshesNames()
         {
-            Mesh[] returnMeshes = new Mesh[meshRenderers.Length];
-
-            for (int i = 0; i < meshRenderers.Length; i++)
-            {
-                returnMeshes[i] = meshRenderers[i].sharedMesh;
-            }
-
-            return returnMeshes;
+            return (from mesh in selectedMeshes select mesh.meshName).ToArray();
         }
 
         private void Awake()
         {
-            myMaterial = new Material(changeColorShader);
+            myMaterial = new Material(instantiationSettings.playerShader);
             SetMaterials();
 
-            myMaterial.SetTexture("_Color1Mask", mask01);
-            myMaterial.SetTexture("_Color2Mask", mask02);
+            myMaterial.SetTexture("_Color1Mask", instantiationSettings.playerMask01);
+            myMaterial.SetTexture("_Color2Mask", instantiationSettings.playerMask02);
 
             canvas.worldCamera = Camera.main;
 
@@ -124,6 +118,8 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
             primaryColorPicker.color = primaryColor;
             secondaryColorPicker.color = secondaryColor;
+
+            selectedMeshes = maleMeshes;
 
             ChangePrimaryColor(primaryColor);
             ChangeSecondaryColor(secondaryColor);

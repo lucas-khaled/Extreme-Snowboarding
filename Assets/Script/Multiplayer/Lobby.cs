@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
+using ExtremeSnowboarding.Script.Player;
 using ExtremeSnowboarding.Script.UI.Menu;
 using NaughtyAttributes;
 using Photon.Pun;
@@ -29,6 +31,7 @@ namespace ExtremeSnowboarding
         private void Awake()
         {
             _photonView = GetComponent<PhotonView>();
+            PhotonPeer.RegisterType(typeof(PlayerData), 1, PlayerData.Serialize, PlayerData.Deserialize);
         }
 
         // Start is called before the first frame update
@@ -66,11 +69,17 @@ namespace ExtremeSnowboarding
             escolhaController.SendPlayerData();
             OnJoinedRoomCallback?.Invoke(true);
 
+            #if UNITY_EDITOR
+                _photonView.RPC("RPC_LoadLevel", RpcTarget.All);
+                return;
+            #else
+            
             if (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers)
             {
                 _photonView.RPC("RPC_LoadLevel", RpcTarget.All);
             }
-                
+            
+            #endif
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)

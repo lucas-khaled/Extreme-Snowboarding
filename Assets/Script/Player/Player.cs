@@ -23,7 +23,7 @@ namespace ExtremeSnowboarding.Script.Player
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(PlayerInput))]
-    public class Player : MonoBehaviour, IOnEventCallback
+    public class Player : MonoBehaviour
     {
         [BoxGroup("References")]
         public PlayerInput playerInput;
@@ -125,6 +125,11 @@ namespace ExtremeSnowboarding.Script.Player
         {
             for(int i = 0; i < meshRenderers.Length; i++)
             {
+                if (meshes.Length <= i)
+                {
+                    Debug.Log("Passed Meshes Are lower than renderers.\nRenderers size is "+meshRenderers.Length+ ", meanwhile meshes size is "+meshes.Length);
+                    break;
+                }
                 meshRenderers[i].material = material;
                 meshRenderers[i].sharedMesh = meshes[i];
             }
@@ -148,45 +153,19 @@ namespace ExtremeSnowboarding.Script.Player
             return playerFeedbacksList;
         }
         
-        public void OnEvent(EventData photonEvent)
-        {
-            Debug.Log("Event: "+photonEvent.Code);
-            if(photonEvent.Code != PlayerDataEventCode) return;
-            
-            object[] data = (object[]) photonEvent.CustomData;
-            
-            Color firstColor = new Color((int) data[0],
-                (int) data[1],
-                (int) data[2]);
-            
-            Color secondColor = new Color((int) data[3],
-                (int) data[4],
-                (int) data[5]);
-
-            string shaderName = (string) data[6];
-
-            List<Mesh> meshes = new List<Mesh>();
-            for (int i = 7; i < data.Length; i++)
-            {
-                Mesh mesh = (Mesh) Resources.Load("Meshes/" + (string) data[i]);
-                meshes.Add(mesh);
-            }
-            
-            SetMaterials(firstColor, secondColor, meshes.ToArray(), shaderName);
-        }
         
-        public void SetMaterials(Color firstColor, Color secondColor, Mesh[] playerMeshes, string playerShader)
+        public void SetMaterials(Color firstColor, Color secondColor, string[] playerMeshes, MultiplayerInstantiationSettings settings)
         {
-            Shader shader = (Shader)Resources.Load("Shader/" + playerShader);
-            Material material = new Material(shader);
+            Debug.Log("Player meshes names: "+playerMeshes[0]+" - "+playerMeshes[1]+" - "+playerMeshes[2]);
+            Material material = new Material(settings.playerShader);
 
             material.SetColor("_PrimaryColor", firstColor);
             material.SetColor("_SecondaryColor", secondColor);
 
-            /*material.SetTexture("_Color1Mask", mask01);
-            material.SetTexture("_Color2Mask", mask02);*/
+            material.SetTexture("_Color1Mask", settings.playerMask01);
+            material.SetTexture("_Color2Mask", settings.playerMask02);
             
-            SetPlayerMeshes(material, playerMeshes);
+            SetPlayerMeshes(material, settings.GetMeshesByNames(playerMeshes));
         }
 
         private void Awake()

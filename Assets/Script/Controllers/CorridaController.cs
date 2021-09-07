@@ -1,30 +1,38 @@
 using System.Collections.Generic;
+using System.Linq;
+using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.EstadosPlayer;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Player;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Controllers
 {
-    public class CorridaController : MonoBehaviour
+    [RequireComponent(typeof(PhotonView))]
+    public class CorridaController : MonoBehaviourPun
     {
+        [SerializeField] 
+        private MultiplayerInstantiationSettings instantiationSettings;
         [SerializeField]
         private Player.Player playerPrefab;
         [SerializeField]
         private GameObject canvasPauseRef;
     
         public InputAction menuInput;
-
         public GameCamera[] cameras;
         public GameObject catastrophe { get; set; }
-        
         public List<Player.Player> playersClassificated { get; private set; }
-
-        private  bool isPaused;
         
-        private PlayerData[] players;
-        int alivePlayers;
+        private List<Player.Player> _playersInGame = new List<Player.Player>();
+        private PhotonView _photonView;
+        private  bool _isPaused;
+        private PlayerData _playerData;
+        private int _alivePlayers;
+
+        private const int CustomManualInstantiationEventCode = 1;
 
         public static CorridaController instance { get; private set; }
 
@@ -34,7 +42,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         /// <returns></returns>
         public int GetPlayersInGameCount()
         {
-            return players.Length;
+            return _playersInGame.Count;
         }
         
         ///<summary> 
@@ -42,10 +50,10 @@ namespace ExtremeSnowboarding.Script.Controllers
         ///</summary>
         public Player.Player GetOtherPlayerThan(Player.Player player)
         {
-            if (alivePlayers > 1)
+            if (_alivePlayers > 1)
             {
-                int index = Random.Range(0, players.Length);
-                Player.Player returnPlayer = players[index].player;
+                int index = Random.Range(0, _playersInGame.Count);
+                Player.Player returnPlayer = _playersInGame[index];
 
                 if (returnPlayer == player || returnPlayer.GetPlayerState().GetType() == typeof(Dead))
                     return GetOtherPlayerThan(player);
@@ -65,9 +73,9 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             int index = 1;
             
-            foreach (PlayerData p in players)
+            foreach (var p in _playersInGame)
             {
-                if (p.player == player)
+                if (p == player)
                     return index;
                 index++;
             }
@@ -82,8 +90,8 @@ namespace ExtremeSnowboarding.Script.Controllers
         /// <returns> The player at this place. </returns>
         public Player.Player GetPlayerByPlace(int place)
         {
-            int realPlace = Mathf.Clamp(place, 1, players.Length);
-            return players[realPlace-1].player;
+            int realPlace = Mathf.Clamp(place, 1, _playersInGame.Count);
+            return _playersInGame[realPlace-1];
         }
         
         /// <summary>
@@ -99,10 +107,12 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
+
+            _photonView = GetComponent<PhotonView>();
             instance = this;
 
             playersClassificated = new List<Player.Player>();
-            isPaused = false;
+            _isPaused = false;
             
             menuInput.Enable();
             menuInput.started += PauseInput;
@@ -112,7 +122,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void OnPlayerDeath(Player.Player player)
         {
-            alivePlayers--;
+            _alivePlayers--;
             ChangeDeadPlayerClassification(player);
         }
 
@@ -127,47 +137,34 @@ namespace ExtremeSnowboarding.Script.Controllers
         private void PauseInput(InputAction.CallbackContext context)
         {
             Debug.Log("KEK");
-            if (context.started && !isPaused)
+            if (context.started && !_isPaused)
             {
                 Pause();
             }
-            else if (context.started && isPaused)
+            else if (context.started && _isPaused)
             {
                 UnPause();
             }
         }
 
-        private Player.PlayerData GetPlayerData(Player.Player player)
-        {
-            for (int i = 0; i < players.Length; i++)
-            {
-                if (players[i].player == player)
-                    return players[i];
-            }
-            return null;
-        }
-
         private void ChangeDeadPlayerClassification(Player.Player deadPlayer)
         {
-            Player.PlayerData deadPlayerData = GetPlayerData(deadPlayer);
-
             deadPlayer.playerCamera.ChangeClassificationToDead();
 
             //Player.PlayerData playerAux = players[players.Length - 1];
             //Player.PlayerData playerAux2 = players[0];
             //players[players.Length - 1] = deadPlayerData;
 
-            Player.PlayerData playerAux = deadPlayerData;
+            Player.Player playerAux = deadPlayer;
 
 
-            for (int i = 0; i < players.Length - 1; i++)
+            for (int i = 0; i < _playersInGame.Count - 1; i++)
             {
-                if (i != 0 && players[i] != deadPlayerData)
+                if (i != 0 && _playersInGame[i] != deadPlayer)
                 {
-                    playerAux = players[i];
-                    players[i] = players[i + 1];
-                    players[i + 1] = playerAux;
-
+                    playerAux = _playersInGame[i];
+                    _playersInGame[i] = _playersInGame[i + 1];
+                    _playersInGame[i + 1] = playerAux;
                 }
             }
 
@@ -177,48 +174,100 @@ namespace ExtremeSnowboarding.Script.Controllers
         private void Start()
         {
             LoadPlayers();
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < _playersInGame.Count; i++)
             {
-                if (players[i] != null)
-                    PlayerGeneralEvents.onPlayerPass.Invoke(players[i].player, i);
+                if (_playersInGame[i] != null)
+                    PlayerGeneralEvents.onPlayerPass.Invoke(_playersInGame[i], i);
             }
             InvokeRepeating("CheckPlayerClassification",0,0.1f);
         }
         
         private void InstantiatePlayers()
         {
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i].InstancePlayer(transform.position + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
-            }
-
+            _photonView.RPC("RPC_PlayerInstantiate", RpcTarget.All, transform.position, PlayerData.Serialize(_playerData));//InstancePlayer(transform.position + Vector3.forward * (i - 1), 1, _playerData, cameras[i]);
+            
             ChangeCameraByPlayers();
+        }
+        
+        /*public void InstancePlayer(Vector3 position, int playerCode, PlayerData playerData, GameCamera camera)
+        {
+            GameObject playerGO = 
+            playerGO.name = "Player" + playerData.index;
+        
+            Player.Player player = playerGO.GetComponent<Player.Player>();
+            player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, playerData.playerShader);
+
+            player.SharedValues.playerCode = playerCode;
+            camera.SetInitialPlayer(playerData.player);
+
+            player.playerInput.SwitchCurrentControlScheme("Player" + playerData.index);
+
+            if(PlayerGeneralEvents.onPlayerInstantiate != null)
+                PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+        }*/
+
+        [PunRPC]
+        private void RPC_PlayerInstantiate(Vector3 position, byte[] data)
+        {
+            PlayerData playerData = (PlayerData) PlayerData.Deserialize(data);
+            Player.Player player = Instantiate(playerPrefab, position, playerPrefab.transform.rotation);
+            PhotonView photonView = player.GetComponent<PhotonView>();
+            PhotonNetwork.AllocateViewID(photonView);
+
+            /*if ()
+            {
+                object[] sendData = 
+                {
+                    player.transform.position, player.transform.rotation, photonView.ViewID
+                };
+
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                {
+                    Receivers = ReceiverGroup.Others,
+                    CachingOption = EventCaching.AddToRoomCache
+                };
+
+                SendOptions sendOptions = new SendOptions
+                {
+                    Reliability = true
+                };
+
+                PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, sendData, raiseEventOptions, sendOptions);
+            }*/
+            
+            player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+
+            _playersInGame.Add(player);
+            player.name = "Player" + _playersInGame.Count;
+            
+            if(PlayerGeneralEvents.onPlayerInstantiate != null)
+                PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
         }
 
         private void ChangeCameraByPlayers()
         {
-            if (players.Length == 1)
+            if (_playersInGame.Count == 1)
             {
                 cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 1, 1);
                 cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
                 cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
                 cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
             }
-            else if (players.Length == 2)
+            else if (_playersInGame.Count == 2)
             {
                cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.5f, 1);
                cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0, 1, 1);
                cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
                cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
             }
-            else if (players.Length == 3)
+            else if (_playersInGame.Count == 3)
             {
                cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.3333333f, 1);
                cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.33f, 0, 0.34f, 1);
                cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0.67f, 0, 0.3333333f, 1);
                cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
             }
-            else if (players.Length == 4)
+            else if (_playersInGame.Count == 4)
             {
                cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0.5f, 0.5f, 1);
                cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0.5f, 1, 1);
@@ -230,40 +279,40 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void LoadPlayers()
         {
-            players = GameController.gameController.playerData;
-            alivePlayers = players.Length;
+            _playerData = GameController.gameController.playerData[0];
+            /*alivePlayers = playersDatas.Length;*/
             InstantiatePlayers();
         }
 
         private void CheckPlayerClassification()
         {
             bool changed = false;
-            PlayerData playerChanged = null;
-            PlayerData playerChanged2 = null;
+            Player.Player playerChanged = null;
+            Player.Player playerChanged2 = null;
             int playerChangedPosition = 0;
 
-            for (int i = 0; i < players.Length - 1; i++)
+            for (int i = 0; i < _playersInGame.Count - 1; i++)
             {
-                float distanceXPlayer1 = players[i].player.transform.position.x;
-                float distanceXPlayer2 = players[i + 1].player.transform.position.x;
+                float distanceXPlayer1 = _playersInGame[i].transform.position.x;
+                float distanceXPlayer2 = _playersInGame[i + 1].transform.position.x;
 
-                if (players[i].player.GetPlayerState().GetType() == typeof(Dead))
+                if (_playersInGame[i].GetPlayerState().GetType() == typeof(Dead))
                 {
                     distanceXPlayer1 = 0;
                 }
-                if (players[i + 1].player.GetPlayerState().GetType() == typeof(Dead))
+                if (_playersInGame[i + 1].GetPlayerState().GetType() == typeof(Dead))
                 {
                     distanceXPlayer2 = 0;
                 }
 
                 if (distanceXPlayer1 < distanceXPlayer2)
                 {
-                    playerChanged = players[i];
-                    playerChanged2 = players[i + 1];
+                    playerChanged = _playersInGame[i];
+                    playerChanged2 = _playersInGame[i + 1];
 
-                    playerChanged = players[i];
-                    players[i] = players[i + 1];
-                    players[i + 1] = playerChanged;
+                    playerChanged = _playersInGame[i];
+                    _playersInGame[i] = _playersInGame[i + 1];
+                    _playersInGame[i + 1] = playerChanged;
                     playerChangedPosition = i + 1;
                     changed = true;
                 }
@@ -274,8 +323,8 @@ namespace ExtremeSnowboarding.Script.Controllers
                     {
                         if (playerChanged != null && playerChanged2 != null)
                         {
-                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
-                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged, playerChangedPosition);
+                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2, playerChangedPosition - 1);
                         }
                     }
 
@@ -286,13 +335,13 @@ namespace ExtremeSnowboarding.Script.Controllers
         
         public void Pause()
         {
-            isPaused = true;
+            _isPaused = true;
             canvasPauseRef.SetActive(true);
             Time.timeScale = 0;
         }
         public void UnPause()
         {
-            isPaused = false;
+            _isPaused = false;
             canvasPauseRef.SetActive(false);
             Time.timeScale = 1;
         }

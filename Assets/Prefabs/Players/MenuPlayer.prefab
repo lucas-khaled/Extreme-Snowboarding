@@ -1334,21 +1334,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad87a986d7fed134bbcaeddf9057b8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeColorShader: {fileID: -6465566751694194690, guid: 7b6eff0ed6862174e959fa7bdd1d7f13, type: 3}
+  instantiationSettings: {fileID: 11400000, guid: 2cf5741bbdec449438efec916e7c18b7, type: 2}
   animatorRenato: {fileID: 8802546822542379709}
-  mask01: {fileID: 2800000, guid: 20fa3fb13e0e2f9418a8e0d8631a6a6d, type: 3}
-  mask02: {fileID: 2800000, guid: afc386ab2fd8c81489821406843e1861, type: 3}
   canvas: {fileID: 3407400737345184969}
   primaryColorPicker: {fileID: 3180375627819980768}
   secondaryColorPicker: {fileID: 7524216533424042823}
   maleMeshes:
-  - {fileID: -6610795073555610811, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
-  - {fileID: -5630122858890947007, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
-  - {fileID: 636614884458900837, guid: 3aabecf32c53147838d0a63a9d07438a, type: 3}
+  - mesh: {fileID: -6610795073555610811, guid: 16d58708b74e0c61d8c3a6484466f19e, type: 3}
+    meshName: CabecaH
+  - mesh: {fileID: 636614884458900837, guid: 16d58708b74e0c61d8c3a6484466f19e, type: 3}
+    meshName: CorpoH
+  - mesh: {fileID: -5630122858890947007, guid: 16d58708b74e0c61d8c3a6484466f19e, type: 3}
+    meshName: PranchaH
   femaleMeshes:
-  - {fileID: 2390586810699517554, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
-  - {fileID: -5527613299735292983, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
-  - {fileID: 5471916239793118368, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
+  - mesh: {fileID: 2390586810699517554, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
+    meshName: CabecaM
+  - mesh: {fileID: 5471916239793118368, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
+    meshName: CorpoM
+  - mesh: {fileID: -5527613299735292983, guid: 0569892cc8e0cd85c87853b8e54a2bf2, type: 3}
+    meshName: PranchaM
   meshRenderers:
   - {fileID: 1905709542741999314}
   - {fileID: 1996084587191604807}
@@ -5026,7 +5030,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3765909134564461220}
-  - component: {fileID: 87475815570608875}
   m_Layer: 0
   m_Name: VermelhoArmature
   m_TagString: Untagged
@@ -5049,19 +5052,6 @@ Transform:
   m_Father: {fileID: 3227041781021151431}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &87475815570608875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6570091543747930253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2309296082a4e391fbc92c78f48c1426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portalParticle: {fileID: 6283885828826688688}
 --- !u!1 &6572786319041067385
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,6 +6647,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2130943084915617143, guid: 4214b57e615806c448ba9d993d629531, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4214b57e615806c448ba9d993d629531, type: 3}
+--- !u!224 &3180375627819980769 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2130943084915617137, guid: 4214b57e615806c448ba9d993d629531, type: 3}
+  m_PrefabInstance: {fileID: 3580458162022349456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3180375627819980768 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2130943084915617136, guid: 4214b57e615806c448ba9d993d629531, type: 3}
@@ -6668,11 +6663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31629c56f6f83234a90f6296f902f9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &3180375627819980769 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2130943084915617137, guid: 4214b57e615806c448ba9d993d629531, type: 3}
-  m_PrefabInstance: {fileID: 3580458162022349456}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5491205858367373055
 PrefabInstance:
   m_ObjectHideFlags: 0
