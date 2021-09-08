@@ -193,6 +193,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             for (int i = 0; i < players.Length; i++)
             {
                 players[i].InstancePlayer(transform.position + Vector3.forward * (i - 1), i+1, playerPrefab.gameObject, cameras[i]);
+                players[i].player.SharedValues.qualification = i + 1;
             }
 
             ChangeCameraByPlayers();
@@ -279,6 +280,9 @@ namespace ExtremeSnowboarding.Script.Controllers
                         {
                             PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
                             PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
+
+                            playerChanged.player.SharedValues.qualification = playerChangedPosition;
+                            playerChanged2.player.SharedValues.qualification = playerChangedPosition - 1;
                         }
                     }
 

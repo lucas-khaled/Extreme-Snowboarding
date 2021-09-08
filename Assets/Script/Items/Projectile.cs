@@ -65,7 +65,7 @@ namespace ExtremeSnowboarding.Script.Items
 
             if (!alreadyCasted)
             {
-                relativeSpeed = speed + caster.SharedValues.RealAcceleration * 2;
+                relativeSpeed = speed + caster.GetComponent<Rigidbody>().velocity.x;
                 alreadyCasted = true;
             }
 

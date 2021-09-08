@@ -63,7 +63,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             yield return new WaitForSeconds(0.5f);
             path.shouldFollowPath = true;
-            string[] animations = { "RetornandoDoAbismo" };
+            string[] animations = { "RetornandoDoAbismo", "CuspidoPeloTubarao" };
             player.ChangeAnimationTo(animations, "Flying", true);
         }
     }

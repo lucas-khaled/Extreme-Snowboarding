@@ -13,6 +13,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using DG.Tweening;
+using UnityEditor;
 
 namespace ExtremeSnowboarding.Script.Player
 {
@@ -320,8 +322,21 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="crossFadeLength"> Length of the crossfade </param>
         public void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
         {
-            animator.CrossFade(possibleAnimations[Random.Range(0, possibleAnimations.Length)], crossFadeLength);
+            string animationChoosen = possibleAnimations[Random.Range(0, possibleAnimations.Length)];
+
+            animator.CrossFade(animationChoosen, crossFadeLength);
         }
+
+        public void InstantiateTubao()
+        {
+            Debug.Log("Instancia o tubao ai amigo");
+            GameObject tubao = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Juices/tube.prefab", typeof(GameObject));
+
+            var tuboInstantiate = Instantiate(this.gameObject, this.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+
+            tuboInstantiate.transform.DOScaleZ(100, 0.5f);
+        }
+
 
         /// <summary>
         /// Method get the player state info
@@ -386,11 +401,21 @@ namespace ExtremeSnowboarding.Script.Player
         /// String that contains the actual player state name.
         /// </summary>
         public string actualState { get; set; }
+
+        /// <summary>
+        /// Bool that locks the player jump is false.
+        /// </summary>
+        public bool canJump { get; set; }
         
         /// <summary>
         /// The player that owns this Shared Values.
         /// </summary>
         public Player player { get; set; }
+
+        /// <summary>
+        /// Player classification, being 1 the first.
+        /// </summary>
+        public int qualification { get; set; }
 
         /// <summary>
         /// The own player code. If it is the player 1, so the value is 1. An it goes on...

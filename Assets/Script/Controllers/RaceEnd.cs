@@ -10,6 +10,9 @@ namespace ExtremeSnowboarding.Script.Controllers
         private int quantityOfActivePlayer;
         private Player.Player firstPlayer;
 
+        [SerializeField]
+        private GameObject[] confettes;
+
         private void Awake()
         {
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
@@ -23,7 +26,6 @@ namespace ExtremeSnowboarding.Script.Controllers
             {
                 StartCoroutine(EndRace());
             }
-            Debug.Log(quantityOfActivePlayer);
         }
 
         private IEnumerator EndRace()
@@ -31,6 +33,15 @@ namespace ExtremeSnowboarding.Script.Controllers
             yield return new WaitForSeconds(10);
             UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
             PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
+        }
+
+        private IEnumerator Confette()
+        {
+            foreach(GameObject confete in confettes)
+            {
+                confete.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                yield return new WaitForSeconds(0.1f);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -43,6 +54,11 @@ namespace ExtremeSnowboarding.Script.Controllers
                 if (quantityOfActivePlayer <= 0)
                 {
                     StartCoroutine(EndRace());
+                }
+
+                if (CorridaController.instance.playersClassificated[0] == other.GetComponent<Player.Player>())
+                {
+                    StartCoroutine(Confette());
                 }
             }
         }
