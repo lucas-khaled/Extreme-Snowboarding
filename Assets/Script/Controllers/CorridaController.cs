@@ -105,8 +105,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-
-            _photonView = GetComponent<PhotonView>();
+            
             instance = this;
 
             playersClassificated = new List<Player.Player>();
