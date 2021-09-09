@@ -2,24 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Multiplayer/MultiplayerInstantiationSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Multiplayer/MultiplayerInstantiationSettings.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Multiplayer/SerializeUtilities.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Multiplayer/SerializeUtilities.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Players/MenuPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Players/MenuPlayer.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fase1Teste.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultiplayerMenu_Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MultiplayerMenu_Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Teste_Path.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Multiplayer/Lobby.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Multiplayer/Lobby.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/VFX/PlayerFeedbacksGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/VFX/PlayerFeedbacksGroup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
@@ -46,7 +41,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Recuperation.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/EffectsValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/ScriptableObject/VFX/PlayerVFX.cs" />
@@ -55,7 +49,6 @@
       <option value="$PROJECT_DIR$/Assets/Script/VFX/VFXManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Quantification.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/GameCamera.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/RaceEnd.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
@@ -77,7 +70,6 @@
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuUIController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/RoadMeshCreator.cs" />
@@ -92,11 +84,14 @@
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/MultiplayerInstantiationSettings.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/Lobby.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/SerializeUtilities.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerFeedbacksGroup.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/GameCamera.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -203,6 +198,7 @@
       <workItem from="1630929372196" duration="136000" />
       <workItem from="1631035868649" duration="369000" />
       <workItem from="1631038340471" duration="2043000" />
+      <workItem from="1631141624913" duration="6149000" />
     </task>
     <servers />
   </component>

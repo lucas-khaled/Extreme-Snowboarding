@@ -67,8 +67,8 @@ namespace ExtremeSnowboarding.Script.VFX
             int index = GetHashedID(name, true);
             if (index == -1)
                 return null;
-            else
-                return VFXManager.instance.InstantiatedList[playerCode-1].playerVfxes[index];
+
+            return VFXManager.instance.InstantiatedList[0].playerVfxes[index];
         }
 
         private PlayerFeedbacks GetFeedbackByNameNotHashed(string name, int playerCode)

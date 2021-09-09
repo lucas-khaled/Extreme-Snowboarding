@@ -35,6 +35,7 @@ namespace ExtremeSnowboarding.Script
         {
             if(player != null)
                 transform.parent.transform.position = player.transform.position;
+
         }
 
         public void ChangeClassificationToDead()

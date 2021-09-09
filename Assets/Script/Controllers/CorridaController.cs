@@ -11,8 +11,7 @@ using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Controllers
 {
-    [RequireComponent(typeof(PhotonView))]
-    public class CorridaController : MonoBehaviourPun
+    public class CorridaController : MonoBehaviourPun, IOnEventCallback
     {
         [SerializeField] 
         private MultiplayerInstantiationSettings instantiationSettings;
@@ -22,12 +21,11 @@ namespace ExtremeSnowboarding.Script.Controllers
         private GameObject canvasPauseRef;
     
         public InputAction menuInput;
-        public GameCamera[] cameras;
+        public GameCamera camera;
         public GameObject catastrophe { get; set; }
         public List<Player.Player> playersClassificated { get; private set; }
         
         private List<Player.Player> _playersInGame = new List<Player.Player>();
-        private PhotonView _photonView;
         private  bool _isPaused;
         private PlayerData _playerData;
         private int _alivePlayers;
@@ -117,6 +115,16 @@ namespace ExtremeSnowboarding.Script.Controllers
             menuInput.Enable();
             menuInput.started += PauseInput;
         }
+        
+        private void OnEnable()
+        {
+            PhotonNetwork.AddCallbackTarget(this);
+        }
+
+        private void OnDisable()
+        {
+            PhotonNetwork.RemoveCallbackTarget(this);
+        }
 
         #region Listeners
 
@@ -184,41 +192,20 @@ namespace ExtremeSnowboarding.Script.Controllers
         
         private void InstantiatePlayers()
         {
-            _photonView.RPC("RPC_PlayerInstantiate", RpcTarget.All, transform.position, PlayerData.Serialize(_playerData));//InstancePlayer(transform.position + Vector3.forward * (i - 1), 1, _playerData, cameras[i]);
-            
-            ChangeCameraByPlayers();
+            InstancePlayer(transform.position, _playerData);
         }
         
-        /*public void InstancePlayer(Vector3 position, int playerCode, PlayerData playerData, GameCamera camera)
+        public void InstancePlayer(Vector3 position, PlayerData playerData)
         {
-            GameObject playerGO = 
-            playerGO.name = "Player" + playerData.index;
-        
-            Player.Player player = playerGO.GetComponent<Player.Player>();
-            player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, playerData.playerShader);
-
-            player.SharedValues.playerCode = playerCode;
-            camera.SetInitialPlayer(playerData.player);
-
-            player.playerInput.SwitchCurrentControlScheme("Player" + playerData.index);
-
-            if(PlayerGeneralEvents.onPlayerInstantiate != null)
-                PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
-        }*/
-
-        [PunRPC]
-        private void RPC_PlayerInstantiate(Vector3 position, byte[] data)
-        {
-            PlayerData playerData = (PlayerData) PlayerData.Deserialize(data);
             Player.Player player = Instantiate(playerPrefab, position, playerPrefab.transform.rotation);
             PhotonView photonView = player.GetComponent<PhotonView>();
-            PhotonNetwork.AllocateViewID(photonView);
 
-            /*if ()
+            if (PhotonNetwork.AllocateViewID(photonView))
             {
-                object[] sendData = 
+                Debug.Log("Allocated");
+                object[] data = 
                 {
-                    player.transform.position, player.transform.rotation, photonView.ViewID
+                    player.transform.position, player.transform.rotation, photonView.ViewID, PlayerData.Serialize(playerData)
                 };
 
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions
@@ -232,49 +219,44 @@ namespace ExtremeSnowboarding.Script.Controllers
                     Reliability = true
                 };
 
-                PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, sendData, raiseEventOptions, sendOptions);
-            }*/
+                PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
+            }
+            else
+            {
+                Debug.LogError("Failed to allocate a ViewId.");
+
+                Destroy(player);
+            }
             
             player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
-
             _playersInGame.Add(player);
-            player.name = "Player" + _playersInGame.Count;
+            
+            camera.SetInitialPlayer(player);
+            player.name = "My player";
             
             if(PlayerGeneralEvents.onPlayerInstantiate != null)
                 PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
         }
-
-        private void ChangeCameraByPlayers()
+        
+        public void OnEvent(EventData photonEvent)
         {
-            if (_playersInGame.Count == 1)
+            Debug.Log("On event");
+            if (photonEvent.Code == CustomManualInstantiationEventCode)
             {
-                cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 1, 1);
-                cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-                cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-                cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-            }
-            else if (_playersInGame.Count == 2)
-            {
-               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.5f, 1);
-               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0, 1, 1);
-               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-            }
-            else if (_playersInGame.Count == 3)
-            {
-               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.3333333f, 1);
-               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.33f, 0, 0.34f, 1);
-               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0.67f, 0, 0.3333333f, 1);
-               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0, 0);
-            }
-            else if (_playersInGame.Count == 4)
-            {
-               cameras[0].gameObject.GetComponent<Camera>().rect = new Rect(0, 0.5f, 0.5f, 1);
-               cameras[1].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0.5f, 1, 1);
-               cameras[2].gameObject.GetComponent<Camera>().rect = new Rect(0, 0, 0.5f, 0.5f);
-               cameras[3].gameObject.GetComponent<Camera>().rect = new Rect(0.5f, 0, 1, 0.5f);
-            }
+                Debug.Log("Custom instantiation");
+                object[] data = (object[]) photonEvent.CustomData;
 
+                Player.Player player = Instantiate(playerPrefab, (Vector3) data[0], (Quaternion) data[1]);
+                PhotonView photonView = player.GetComponent<PhotonView>();
+                photonView.ViewID = (int) data[2];
+                PlayerData playerData = (PlayerData) PlayerData.Deserialize((byte[]) data[3]);
+                
+                player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+                _playersInGame.Add(player);
+                
+                if(PlayerGeneralEvents.onPlayerInstantiate != null)
+                    PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+            }
         }
 
         private void LoadPlayers()
