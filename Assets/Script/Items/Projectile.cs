@@ -7,34 +7,25 @@ namespace ExtremeSnowboarding.Script.Items
     [RequireComponent(typeof(Collider))]
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private float speed = 5f;
-        [SerializeField] private float height = 1f;
-        [SerializeField] private float fuel = 1000f;
+        [SerializeField]  private float speed = 5f;
+        [SerializeField]  private float height = 1f;
         [SerializeField] private MovementType movementType;
-        [SerializeField] [ShowAssetPreview()] private GameObject explosionParticle;
+        [SerializeField] [ShowAssetPreview()] private ParticleSystem explosionParticle;
 
         public FuckFriend fuckfriend { private get; set; }
         public Player.Player caster { private get; set; }
         
         private bool alreadyCasted = false;
         private float relativeSpeed;
-        private bool lockGroundColision = true;
-        private GameObject target;
-        
-        private void Start()
-        {
-            Invoke("ChangeLockGroundColision", 1f);
-        }
 
         private void Update()
         {
             Movement();
         }
 
-        public Projectile (FuckFriend fuckFriendParametro, GameObject target = null)
+        public Projectile (FuckFriend fuckFriendParametro)
         {
             this.fuckfriend = fuckFriendParametro;
-            this.target = target;
         }
 
         private void Movement()
@@ -55,9 +46,6 @@ namespace ExtremeSnowboarding.Script.Items
                     break;
                 case MovementType.STRAIGHT_BACK:
                     MoveStraight(-1);
-                    break;
-                case MovementType.TRACK_TARGET:
-                    MoveTrackingTarget(target);
                     break;
             }
         }
@@ -89,8 +77,8 @@ namespace ExtremeSnowboarding.Script.Items
             newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,              // Posicao inicial 
-                newPoint,                                                                       // Posicao destino
-                relativeSpeed * Time.deltaTime);                                                // Velocidade movimento
+                newPoint,                             // Posicao destino
+                relativeSpeed * Time.deltaTime);      // Velocidade movimento
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
 
@@ -116,72 +104,26 @@ namespace ExtremeSnowboarding.Script.Items
             }
         }
 
-        void MoveTrackingTarget(GameObject target)
-        {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            float velocity = 1500;
-            Vector3 vectorDest = Vector3.right;
-
-            if (fuel > 0)
-            {
-                transform.LookAt(target.transform);
-                vectorDest = (target.transform.position - transform.position).normalized;
-                rb.velocity = vectorDest * Time.deltaTime * velocity;
-
-                fuel -= Time.deltaTime;
-            }
-            else if (!alreadyCasted)
-            {
-                rb.velocity = Vector3.right * Time.deltaTime * velocity;
-                transform.rotation = Quaternion.LookRotation(vectorDest);
-                rb.useGravity = true;
-                alreadyCasted = true;
-            }
-
-            if (fuel <= 0 && alreadyCasted)
-                if (transform.rotation.x < 90)
-                    transform.Rotate(vectorDest * Time.deltaTime * 15);
-        }
-
         #endregion
-
-        private void ChangeLockGroundColision()
-        {
-            lockGroundColision = false;
-        }
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name);
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
-                if (playerHitted != caster)
+                if(playerHitted != caster)
                 {
-                    if (explosionParticle != null)
-                    {
-                        GameObject explosionParticleGO = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-                        explosionParticleGO.GetComponent<ParticleSystem>().Play();
-                    }
                     fuckfriend.StartEffects(playerHitted);
-                    //string[] animation = { "Caiu-Escorregou" };
-                    //playerHitted.ChangeAnimationTo(animation);
                     Destroy(gameObject);
                 }
             }
-            else if (!other.gameObject.CompareTag("ItemBox") && (!lockGroundColision && other.gameObject.CompareTag("Track")))
+            else if(!other.gameObject.CompareTag("Track"))
             {
-                if (explosionParticle != null) 
-                {
-                    GameObject explosionParticleGO = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-                    explosionParticleGO.GetComponent<ParticleSystem>().Play();
-                }
-                else
-                    Debug.Log("no explosion particle");
-
+                if(explosionParticle != null)
+                    explosionParticle.Play();
+            
                 Destroy(gameObject);
-                Debug.Log(other.gameObject.name);
-
-                Debug.Log("Lock: " + !lockGroundColision + " e "+ other.gameObject.CompareTag("Track"));
             }
         }
 
