@@ -187,7 +187,7 @@ namespace ExtremeSnowboarding.Script.Player
         // Method that will activate the holded item, empty the item slot and invoke an delegate. It listens to "Item" input
         private void ActivateItem(InputAction.CallbackContext context)
         {
-            if (context.started && Coletavel != null)
+            if (context.started && Coletavel != null && !sharedValues.inputLocked)
             {
                 Coletavel.Activate(this);
                 Coletavel = null;
@@ -202,7 +202,7 @@ namespace ExtremeSnowboarding.Script.Player
         // Method witch will activate boost in case the boost value is complete. It listens to "Boost" input
         private void ActivateBoost(InputAction.CallbackContext context)
         {
-            if (context.started && sharedValues.Turbo >= 0.2f)
+            if (context.started && !sharedValues.inputLocked)
             {
                 float forcaBoostRelative = 7 / (1 / sharedValues.Turbo);
 
@@ -327,17 +327,6 @@ namespace ExtremeSnowboarding.Script.Player
             animator.CrossFade(animationChoosen, crossFadeLength);
         }
 
-        public void InstantiateTubao()
-        {
-            Debug.Log("Instancia o tubao ai amigo");
-            GameObject tubao = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Juices/tube.prefab", typeof(GameObject));
-
-            var tuboInstantiate = Instantiate(this.gameObject, this.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
-
-            tuboInstantiate.transform.DOScaleZ(100, 0.5f);
-        }
-
-
         /// <summary>
         /// Method get the player state info
         /// </summary>
@@ -439,6 +428,12 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>
         [ExposedProperty("Added Jump")]
         public float AddedJump { get; set; }
+
+        /// <summary>
+        /// This property is true if the player can't use inputs.
+        /// </summary>
+        [ExposedProperty("Input lock")]
+        public bool inputLocked { get; set; }
 
         /// <summary>
         /// It returns the actual acceleration value.
