@@ -327,16 +327,6 @@ namespace ExtremeSnowboarding.Script.Player
             animator.CrossFade(animationChoosen, crossFadeLength);
         }
 
-        public void InstantiateTubao()
-        {
-            Debug.Log("Instancia o tubao ai amigo");
-            GameObject tubao = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Juices/tube.prefab", typeof(GameObject));
-
-            var tuboInstantiate = Instantiate(this.gameObject, this.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
-
-            tuboInstantiate.transform.DOScaleZ(100, 0.5f);
-        }
-
 
         /// <summary>
         /// Method get the player state info
