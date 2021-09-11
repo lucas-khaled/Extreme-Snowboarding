@@ -47,7 +47,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StartFeedback();
             player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).UnlockFeedback();
 
-            rb.velocity = player.groundedVelocity;
+            rb.velocity = player.transform.right * player.groundedVelocity.magnitude;
 
             player.StartCoroutine(SkiingVariation());
         }
@@ -112,7 +112,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 ClampPlayerPositionOnGround(hit);
                 player.SharedValues.LastGroundedNormal = hit.normal.normalized;
             }
-            else
+            else if (timeOnGround > timeToJump)
             {
                 player.ChangeState(new Jumping(false));
             }

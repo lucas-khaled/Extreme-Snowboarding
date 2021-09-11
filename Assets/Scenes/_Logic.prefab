@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7762838204622307548, guid: c3e62d779ea16ea45970e89c91f1a957, type: 3}
   canvasPauseRef: {fileID: 6718181607961396180}
+  droneRef: {fileID: 0}
   menuInput:
     m_Name: Menu Input
     m_Type: 0
@@ -1125,11 +1126,11 @@ PrefabInstance:
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5144771921823124879}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5144771921823124879}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -1140,11 +1141,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ReturnToMainMenu
+      value: UnPause
       objectReference: {fileID: 0}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SendAudioSettings
+      value: ReturnToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1152,7 +1153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ExtremeSnowboarding.AudioSlider, Assembly-CSharp
+      value: ExtremeSnowboarding.Script.Controllers.CorridaController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 862200281836822237, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1161,7 +1162,7 @@ PrefabInstance:
     - target: {fileID: 862200282420988331, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5144771921823124879}
     - target: {fileID: 862200282420988331, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UnPause
@@ -1277,7 +1278,7 @@ PrefabInstance:
     - target: {fileID: 1913610342601952328, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5144771922728733998}
     - target: {fileID: 1913610342601952328, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1349,7 +1350,7 @@ PrefabInstance:
     - target: {fileID: 5461854371950082195, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5144771922728733998}
     - target: {fileID: 5461854371950082195, guid: e4e4e7bbc823c4451b74063fb33df672, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
