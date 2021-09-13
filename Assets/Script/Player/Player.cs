@@ -65,7 +65,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         public Vector3 groundedVelocity { get; set; }
 
-        PlayerState playerState = new Grounded();
+        PlayerState playerState = new Stopped();
 
         private Player[] playerSpectating = new Player[4];
         private Vector3 startPoint;
@@ -152,9 +152,15 @@ namespace ExtremeSnowboarding.Script.Player
         {
             return playerFeedbacksList;
         }
-        
-        
-        public void SetMaterials(Color firstColor, Color secondColor, string[] playerMeshes, MultiplayerInstantiationSettings settings)
+
+        /// <summary>
+        /// Set the player Material and Meshes
+        /// </summary>
+        /// <param name="firstColor">The primary color</param>
+        /// <param name="secondColor">The secondary color</param>
+        /// <param name="playerMeshes">The choosed meshes names</param>
+        /// <param name="settings">The Instantiation settings</param>
+        public void SetMaterialsAndMeshes(Color firstColor, Color secondColor, string[] playerMeshes, MultiplayerInstantiationSettings settings)
         {
             Debug.Log("Player meshes names: "+playerMeshes[0]+" - "+playerMeshes[1]+" - "+playerMeshes[2]);
             Material material = new Material(settings.playerShader);

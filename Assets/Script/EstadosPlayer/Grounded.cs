@@ -154,6 +154,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (playerInput == null)
                 playerInput = player.playerInput;
         
+            
             playerInput.currentActionMap.FindAction("Jump").started -= Jump;
             playerInput.currentActionMap.Disable();
         }

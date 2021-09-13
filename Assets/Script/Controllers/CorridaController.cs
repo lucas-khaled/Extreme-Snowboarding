@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
@@ -188,12 +189,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
             InvokeRepeating("CheckPlayerClassification",0,0.1f);
         }
-        
-        private void InstantiatePlayers()
-        {
-            InstancePlayer(transform.position, _playerData);
-        }
-        
+
         public void InstancePlayer(Vector3 position, PlayerData playerData)
         {
             Player.Player player = Instantiate(playerPrefab, position, playerPrefab.transform.rotation);
@@ -204,7 +200,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 Debug.Log("Allocated");
                 object[] data = 
                 {
-                    player.transform.position, player.transform.rotation, photonView.ViewID, PlayerData.Serialize(playerData)
+                    player.transform.position, photonView.ViewID, PlayerData.Serialize(playerData)
                 };
 
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions
@@ -223,12 +219,12 @@ namespace ExtremeSnowboarding.Script.Controllers
             else
             {
                 Debug.LogError("Failed to allocate a ViewId.");
-
                 Destroy(player);
+                return;
             }
             
-            player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
-            _playersInGame.Add(player);
+            player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+            StartCoroutine(AddAPlayer(player));
             
             camera.SetInitialPlayer(player);
             player.name = "My player";
@@ -239,30 +235,44 @@ namespace ExtremeSnowboarding.Script.Controllers
         
         public void OnEvent(EventData photonEvent)
         {
-            Debug.Log("On event");
             if (photonEvent.Code == CustomManualInstantiationEventCode)
             {
-                Debug.Log("Custom instantiation");
                 object[] data = (object[]) photonEvent.CustomData;
-
-                Player.Player player = Instantiate(playerPrefab, (Vector3) data[0], (Quaternion) data[1]);
-                PhotonView photonView = player.GetComponent<PhotonView>();
-                photonView.ViewID = (int) data[2];
-                PlayerData playerData = (PlayerData) PlayerData.Deserialize((byte[]) data[3]);
                 
-                player.SetMaterials(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
-                _playersInGame.Add(player);
+                Player.Player player = Instantiate(playerPrefab, (Vector3) data[0], playerPrefab.transform.rotation);
+                PhotonView photonView = player.GetComponent<PhotonView>();
+                photonView.ViewID = (int) data[1];
+                PlayerData playerData = (PlayerData) PlayerData.Deserialize((byte[]) data[2]);
+                
+                player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+                StartCoroutine(AddAPlayer(player));
                 
                 if(PlayerGeneralEvents.onPlayerInstantiate != null)
                     PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
             }
         }
 
+        private IEnumerator AddAPlayer(Player.Player player)
+        {
+            if(!PhotonNetwork.IsMasterClient)
+                player.transform.GetChild(0).LookAt(player.transform.position+Vector3.right);
+            
+            _playersInGame.Add(player);
+
+            if (_playersInGame.Count >= PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                Time.timeScale = 1;
+                yield return new WaitForSeconds(3);
+                _alivePlayers = _playersInGame.Count;
+                foreach (var playerInGame in _playersInGame)
+                    playerInGame.ChangeState(new Grounded());
+            }
+        }
+
         private void LoadPlayers()
         {
             _playerData = GameController.gameController.playerData[0];
-            /*alivePlayers = playersDatas.Length;*/
-            InstantiatePlayers();
+            InstancePlayer(transform.position, _playerData);
         }
 
         private void CheckPlayerClassification()
