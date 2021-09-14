@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7694078, g: 0.85712993, b: 0.86846, a: 1}
+  m_IndirectSpecularColor: {r: 0.7694188, g: 0.8574334, b: 0.8687681, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -147,7 +147,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29507113}
-  m_LocalRotation: {x: 0.04644453, y: 0.53623676, z: -0.02956922, w: 0.84227}
+  m_LocalRotation: {x: 0.04165476, y: 0.63608664, z: -0.034422807, w: 0.7697232}
   m_LocalPosition: {x: 0.77, y: 0.12, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1528,7 +1528,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639205334}
-  m_LocalRotation: {x: 0.017181074, y: -0.14632471, z: 0.0025417611, w: 0.9890841}
+  m_LocalRotation: {x: 0.017181028, y: -0.14633848, z: 0.0025419986, w: 0.9890821}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1614,7 +1614,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669165943}
-  m_LocalRotation: {x: 0.017323954, y: 0.07122074, z: -0.0012371538, w: 0.9973094}
+  m_LocalRotation: {x: 0.01732396, y: 0.07120687, z: -0.0012369117, w: 0.9973104}
   m_LocalPosition: {x: 0.657, y: 1.471, z: 5.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2051,7 +2051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852885419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.181, y: 1.671, z: 7.128}
+  m_LocalPosition: {x: -5.08, y: 1.709, z: 8.457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1722899691}
@@ -2180,14 +2180,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882626681}
-  m_LocalRotation: {x: -0, y: 0.072971955, z: -0, w: 0.997334}
-  m_LocalPosition: {x: -8.035, y: 1.879, z: 5.1}
+  m_LocalRotation: {x: -0, y: -0.046889666, z: -0, w: 0.9989001}
+  m_LocalPosition: {x: -8.28, y: 1.47, z: 4.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 29507114}
   m_Father: {fileID: 1722899691}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 8.369, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -5.375, z: 0}
 --- !u!114 &882626683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,7 +2222,19 @@ MonoBehaviour:
       m_Calls: []
   onStartOpening:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669165946}
+        m_TargetAssemblyTypeName: UnityEngine.Transform, UnityEngine
+        m_MethodName: LookAt
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 852885420}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onStartClosing:
     m_PersistentCalls:
       m_Calls: []
