@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7694078, g: 0.85712993, b: 0.86846, a: 1}
+  m_IndirectSpecularColor: {r: 0.7694188, g: 0.8574334, b: 0.8687681, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1475,7 +1475,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1276684969}
   toggleTransition: 1
   graphic: {fileID: 1958629084}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1094289268}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1492,7 +1492,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &639205334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,7 +1952,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2046785184}
   toggleTransition: 1
   graphic: {fileID: 1178157035}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1094289268}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 306062032}
   toggleTransition: 1
   graphic: {fileID: 150472035}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1554682332}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2993,7 +2993,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2043423432}
   toggleTransition: 1
   graphic: {fileID: 2010673491}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1554682332}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3010,7 +3010,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1042558431
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,7 +4052,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1197937693}
   toggleTransition: 1
   graphic: {fileID: 1525023916}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1094289268}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4069,7 +4069,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1265560085
 GameObject:
   m_ObjectHideFlags: 0
@@ -4886,7 +4886,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 196586656}
   toggleTransition: 1
   graphic: {fileID: 128046811}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1554682332}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4903,7 +4903,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1525023914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6665,7 +6665,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 326858019}
   toggleTransition: 1
   graphic: {fileID: 1017690215}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1094289268}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -6682,7 +6682,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &2003746248
 GameObject:
   m_ObjectHideFlags: 0
