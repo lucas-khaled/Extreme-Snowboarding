@@ -25,7 +25,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             //rb.useGravity = true;
             //rb.isKinematic = false;
-
+            rb.velocity = Vector3.zero;
             player.StartCoroutine(changeShouldFollowByTimer());
             path = player.gameObject.GetComponent<PathFollower>();
             PathFollower.onPathFinished += OnPathFinished;
@@ -49,8 +49,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.SetOnAnimator("Flying", false);
             path.shouldFollowPath = false;
             player.playerCamera.shouldFollowOnlyX = false;
-            rb.velocity = Vector3.zero;
-            rb.AddForce(Vector3.right * 10, ForceMode.Impulse);
+            rb.AddForce(Vector3.right * 10, ForceMode.VelocityChange);
         }
 
         private void OnPathFinished(GameObject gameObject)
