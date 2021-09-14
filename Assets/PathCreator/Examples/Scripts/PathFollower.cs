@@ -11,7 +11,7 @@ namespace PathCreation.Examples
         [SerializeField] private bool lockRotationXY = false;
 
         [HideInInspector] public bool auxOnce = false;
-        [HideInInspector] public float distanceTravelled;
+        public float distanceTravelled;
         
         public EndOfPathInstruction endOfPathInstruction;
         public PathCreator pathCreator;
