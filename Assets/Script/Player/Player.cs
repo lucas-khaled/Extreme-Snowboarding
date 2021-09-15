@@ -65,15 +65,15 @@ namespace ExtremeSnowboarding.Script.Player
 
         public Vector3 groundedVelocity { get; set; }
 
-        PlayerState playerState = new Stopped();
+        PlayerState playerState = new Grounded();
 
         private Player[] playerSpectating = new Player[4];
         private Vector3 startPoint;
         private GameObject catastropheRef;
         private AudioSource audioSource;
         private AudioSource audioSourceEffects;
-        
-        private const byte PlayerDataEventCode = 1;
+
+        private PhotonView _photonView;
 
         public void AddPlayerSpectating(Player playerSpectator)
         {
@@ -176,6 +176,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Awake()
         {
+            _photonView = GetComponent<PhotonView>();
             sharedValues.player = this; //setting the player reference to the shared values
             playerFeedbacksList.StartFeedbacks(transform); 
             movimentationFeedbacks.StartFeedbacks(transform);
@@ -255,7 +256,7 @@ namespace ExtremeSnowboarding.Script.Player
                 float distanceModerator = Mathf.Clamp(Mathf.Sqrt(distance), 0.02f, 100f);
                 AddTurbo(1 / distanceModerator);
             }
-            else if (CorridaController.instance.catastrophe != null)
+            else if (CorridaController.instance != null && CorridaController.instance.catastrophe != null)
                 catastropheRef = CorridaController.instance.catastrophe;
         }
 
@@ -308,6 +309,18 @@ namespace ExtremeSnowboarding.Script.Player
             StartCoroutine(coroutine);
         }
 
+        private void CallSetOnAnimator(string variable, bool value)
+        {
+            if(animator != null)
+                animator.SetBool(variable, value);
+        }
+
+        [PunRPC]
+        private void SetOnAnimator_RPC(string variable, bool value)
+        {
+            CallSetOnAnimator(variable, value);
+        }
+
         /// <summary>
         /// Method to allow other scripts to set bool values on player's animator.
         /// </summary>
@@ -315,8 +328,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void SetOnAnimator(string variable, bool value)
         {
-            if(animator != null)
-                animator.SetBool(variable, value);
+            _photonView.RPC("SetOnAnimator_RPC", RpcTarget.All, variable, value);
         }
 
 
@@ -339,8 +351,17 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator, bool value, float crossFadeLength = 0.15f)
         {
-            ChangeAnimationTo(possibleAnimations, crossFadeLength);
-            SetOnAnimator(valueSetedOnAnimator, value);
+            _photonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
+                SerializeUtilities.StringArray2Byte(possibleAnimations), 
+                valueSetedOnAnimator, value, crossFadeLength);
+        }
+
+        [PunRPC]
+        private void ChangeAnimationTo_RPC(byte[] possibleAnimations, string valueSetedOnAnimator, bool value,
+            float crossFadeLength)
+        {
+            ChangeAnimationTo(SerializeUtilities.Byte2StringArray(possibleAnimations), crossFadeLength);
+            CallSetOnAnimator(valueSetedOnAnimator, value);
         }
 
         /// <summary>

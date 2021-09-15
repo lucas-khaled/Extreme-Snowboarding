@@ -254,9 +254,6 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private IEnumerator AddAPlayer(Player.Player player)
         {
-            if(!PhotonNetwork.IsMasterClient)
-                player.transform.GetChild(0).LookAt(player.transform.position+Vector3.right);
-            
             _playersInGame.Add(player);
 
             if (_playersInGame.Count >= PhotonNetwork.CurrentRoom.PlayerCount)

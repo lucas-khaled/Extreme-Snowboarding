@@ -13,6 +13,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         float rotatingDirection = 0;
         bool isJumpingPressed;
         private bool canApplyForce;
+        private bool tricking = false;
 
         public override void StateEnd()
         {
@@ -126,16 +127,21 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         void StartRotatePlayer(InputAction.CallbackContext context)
         {
             rotatingDirection = context.ReadValue<float>();
-        
+
             if (context.canceled)
+            {
                 player.SetOnAnimator("trick", false);
+                tricking = false;
+            }
             else
             {
-                player.SetOnAnimator("trick", true);
+                if(!tricking)
+                    player.SetOnAnimator("trick", true);
+                
+                tricking = true;
                 if (howMuchRotation > 360)
-                {
                     player.GetMovimentationFeedbacks().trickFeedback?.PlayFeedbacks();
-                }
+                
             }
         }
 

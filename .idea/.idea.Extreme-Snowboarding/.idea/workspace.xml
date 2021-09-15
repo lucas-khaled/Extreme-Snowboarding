@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Stopped.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Stopped.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/NewTechnique-RenatoAnimatorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/NewTechnique-RenatoAnimatorController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Animation_Tests_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Animation_Tests_Scene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,21 +60,18 @@
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/OnMenuPlayerAnimationEvent.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuCameraPointController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VoidReturnTrack.cs" />
       <option value="$PROJECT_DIR$/Assets/AudioSlider.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/GameController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuUIController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/RoadMeshCreator.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Path/PathClamper.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Path/PathClampedObject.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/PathPlacer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/PathClampedObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/PathClamper.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/InstantiationController.cs" />
@@ -82,9 +86,12 @@
       <option value="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/GameCamera.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Stopped.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -195,6 +202,8 @@
       <workItem from="1631195467188" duration="1876000" />
       <workItem from="1631197531038" duration="663000" />
       <workItem from="1631298830229" duration="2989000" />
+      <workItem from="1631657902231" duration="6312000" />
+      <workItem from="1631724701034" duration="1667000" />
     </task>
     <servers />
   </component>

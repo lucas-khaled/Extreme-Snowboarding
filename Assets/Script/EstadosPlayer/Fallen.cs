@@ -42,7 +42,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         }
         public override void StateUpdate()
         {
-        
             if(time <= timeToCorrect && canRotate)
             {
                 CorrectPlayerRotation();
