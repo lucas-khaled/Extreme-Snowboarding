@@ -3,20 +3,49 @@
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/NewTechnique-RenatoAnimatorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/NewTechnique-RenatoAnimatorController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUtilities/PackObject/CodeGen/Editor/Resources/TypeCatalogue.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Animation_Tests_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Animation_Tests_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Fallen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Level/Modelos/CaixaItensBone.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Level/Modelos/CaixaItensBone.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pause.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pause.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BolaDeNeve-ProjetilFront.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BolaDeNeve-ProjetilFront.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BolaDeNeve-ProjetilTras.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BolaDeNeve-ProjetilTras.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BonecoNeve.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/BonecoNeve.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/MagicProjectile.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/MagicProjectile.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/MagicProjectileBack.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/MagicProjectileBack.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/Projectile.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Projectiles/Projectile.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/VFX's/PesosObjeto.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/VFX's/PesosObjeto.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Meshes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Meshes/MariaTCC.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Meshes/MariaTCC.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Meshes/RenatoTCC(Manobras).fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Meshes/RenatoTCC(Manobras).fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Shader/PlayerShader.shadergraph" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Shader/PlayerShader.shadergraph.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultiplayerMenu_Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MultiplayerMenu_Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Teste_Path_Multyplayer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Teste_Path_Multyplayer.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/ItemPickup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/ItemPickup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/CascaBanana/Banana.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/CascaBanana/Banana.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/Foguete.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/Foguete.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/FogueteFrente.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/FogueteFrente.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/FogueteTras.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFX/Foguete/FogueteTras.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +70,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/ScriptableObject/VFX/PlayerVFX.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFX.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/InstantiatedVFXList.cs" />
@@ -50,10 +78,8 @@
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerVFXGroup.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/RaceEnd.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/HUD/HudControl.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Conditioning.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Item.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/OnMenuPlayerTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/OnMenuPlayerTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuCameraPoint.cs" />
@@ -92,6 +118,9 @@
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/ItemPickup.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -204,6 +233,7 @@
       <workItem from="1631298830229" duration="2989000" />
       <workItem from="1631657902231" duration="6312000" />
       <workItem from="1631724701034" duration="1667000" />
+      <workItem from="1631821629403" duration="3192000" />
     </task>
     <servers />
   </component>

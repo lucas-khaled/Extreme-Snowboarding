@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 5900552172954530388}
   - component: {fileID: 5647424153363872479}
   - component: {fileID: 1145511381175244263}
+  - component: {fileID: 1516309475252905484}
   m_Layer: 0
   m_Name: CaixaItensBone
   m_TagString: ItemBox
@@ -290,3 +291,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da5cf3a7677d3cdd79cd61271bd5716e, type: 2}
   - {fileID: 11400000, guid: f8ec09b8cddf30c40aa7504f046fde02, type: 2}
   - {fileID: 11400000, guid: 1b8f0aa59d050b84dbffed1c41a9868e, type: 2}
+--- !u!114 &1516309475252905484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087935714045138775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

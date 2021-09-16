@@ -9796,9 +9796,10 @@ GameObject:
   - component: {fileID: 4240278036456872462}
   - component: {fileID: 3110189069023682238}
   - component: {fileID: 5493363921479294425}
-  - component: {fileID: 1136668359678866286}
+  - component: {fileID: 6244468099865828331}
+  - component: {fileID: -3081069921394984937}
   m_Layer: 0
-  m_Name: BolaDeNeve-ProjetilTras
+  m_Name: BolaDeNeve-ProjetilFront
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9869,9 +9870,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   height: 1.7
-  movementType: 3
+  movementType: 1
   explosionParticle: {fileID: 5662659534425565658}
---- !u!54 &1136668359678866286
+--- !u!54 &6244468099865828331
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9887,6 +9888,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-3081069921394984937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454444815072795342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!198 &5662659534425565658
 ParticleSystem:
   m_ObjectHideFlags: 0

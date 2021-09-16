@@ -223,9 +223,9 @@ namespace ExtremeSnowboarding.Script.Player
                 Coletavel.Activate(this);
                 Coletavel = null;
 
-                if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
+                if (PlayerGeneralEvents.onItemUsed != null)
                 {
-                    EventSystem.PlayerGeneralEvents.onItemUsed.Invoke(this, null);
+                    PlayerGeneralEvents.onItemUsed.Invoke(this, null);
                 }
             }
         }

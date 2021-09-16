@@ -1,5 +1,7 @@
+using System.IO;
 using ExtremeSnowboarding.Script.Controllers;
 using NaughtyAttributes;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -48,7 +50,9 @@ namespace ExtremeSnowboarding.Script.Items
         
         public void ActivateInstance(FuckFriend fuck)
         {
-            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
+            string path = Path.Combine("Projectiles", projectile.name);
+            Debug.Log(path);
+            GameObject instantiatedProjectile = PhotonNetwork.Instantiate(path, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
             proj.fuckfriend = fuck;

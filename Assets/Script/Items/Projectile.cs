@@ -1,5 +1,6 @@
 using System;
 using NaughtyAttributes;
+using Photon.Pun;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Items
@@ -112,10 +113,10 @@ namespace ExtremeSnowboarding.Script.Items
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
-                if(playerHitted != caster)
+                if(playerHitted != caster && other.GetComponent<PhotonView>().IsMine)
                 {
                     fuckfriend.StartEffects(playerHitted);
-                    Destroy(gameObject);
+                    PhotonNetwork.Destroy(gameObject);
                 }
             }
             else if(!other.gameObject.CompareTag("Track"))
@@ -123,7 +124,7 @@ namespace ExtremeSnowboarding.Script.Items
                 if(explosionParticle != null)
                     explosionParticle.Play();
             
-                Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject);
             }
         }
 
