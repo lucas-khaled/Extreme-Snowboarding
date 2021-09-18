@@ -12,6 +12,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         private float timeOnGround;
         private float timeToJump;
 
+        private float timeWait = 0;
+
         private Rigidbody rb;
 
         public override void StateEnd()
@@ -72,8 +74,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateUpdate()
         {
-            MoveByRigidbody();
-            StickPlayerOnGround();
+            if (timeWait < timeOnGround) 
+            {
+                MoveByRigidbody();
+                StickPlayerOnGround();
+            }
             timeOnGround += Time.deltaTime;
         }
 
@@ -176,6 +181,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             timeEtherium = 0;
             timeToJump = 0;
         }
+
+        public Grounded(float time, bool waitForStartMovement)
+        {
+            timeWait = time;
+        }
+
 
         public Grounded(float timeEtherium)
         {
