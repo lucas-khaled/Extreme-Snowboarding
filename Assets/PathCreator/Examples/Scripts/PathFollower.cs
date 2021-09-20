@@ -6,15 +6,18 @@ namespace PathCreation.Examples
     // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
     public class PathFollower : MonoBehaviour
     {
-        [SerializeField] private float speed = 5;
         [SerializeField] private bool lockPositionZ = false;
-        [SerializeField] private bool lockRotationXY = false;
+
+        [SerializeField] private bool lockRotationY = false;
+        [SerializeField] private bool lockRotationX = false;
+        [SerializeField] private bool lockRotationZ = false;
 
         [HideInInspector] public bool auxOnce = false;
         public float distanceTravelled;
         
         public EndOfPathInstruction endOfPathInstruction;
         public PathCreator pathCreator;
+        public float speed = 5;
         public bool shouldFollowPath = true;
 
         public delegate void OnPathFinished(GameObject gameObject);
@@ -46,10 +49,15 @@ namespace PathCreation.Examples
 
                     Quaternion rotacao = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
                     
-                    if (!lockRotationXY)
-                        transform.rotation = rotacao;
-                    else
-                        transform.rotation = new Quaternion(0, 0, rotacao.z, rotacao.w);
+                                      
+                    if (lockRotationX)
+                        rotacao = new Quaternion(0, rotacao.y, rotacao.z, rotacao.w);
+                    if (lockRotationY)
+                        rotacao = new Quaternion(rotacao.x, 0, rotacao.z, rotacao.w);
+                    if (lockRotationZ)
+                        rotacao = new Quaternion(rotacao.x, rotacao.y, 0, rotacao.w);
+
+                    transform.rotation = rotacao;
 
                     if (distanceTravelled / pathCreator.path.length >= 1 && !auxOnce)
                     {

@@ -44,13 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   lockPositionZ: 0
-  lockRotationXY: 0
+  lockRotationY: 0
+  lockRotationX: 1
+  lockRotationZ: 1
   auxOnce: 0
   distanceTravelled: 0
   endOfPathInstruction: 0
   pathCreator: {fileID: 0}
+  speed: 10
   shouldFollowPath: 1
 --- !u!1001 &65823954800631278
 PrefabInstance:
