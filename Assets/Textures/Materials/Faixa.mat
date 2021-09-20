@@ -21,14 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Faixa
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 2087c83665d3cf84da5cd150f983d8dd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -73,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_cf6b62e879db4c29b631301e9e49b738_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2829460a184f60242996e6331186562a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -90,6 +93,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_0df83f13641b4a5abee0d1e653782edb: 2.5
+    - Vector1_0e1aade36f654e6fb558188b735c909f: 0
+    - Vector1_6ef8fa90a76641bfa412295e6b00a55a: 0
+    - Vector1_776eb57b2aff4e43b9e7075ee3606d2d: 0
+    - Vector1_81a103ad2aa14ce3b9a20aafe21e6f2e: 1
+    - Vector1_8db05046b93d4391931398f6828115ab: 1
+    - Vector1_a33533c23356424ab3234ac54f07b850: 0
+    - Vector1_af4f4ec0c7b2428c85a6cc8511f0d795: 7.26
+    - Vector1_ce6793956e324f81b195c2d2338f3afb: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -109,7 +121,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

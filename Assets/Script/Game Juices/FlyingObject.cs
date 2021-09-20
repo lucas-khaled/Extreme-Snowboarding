@@ -1,3 +1,4 @@
+using PathCreation.Examples;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,59 +7,34 @@ namespace ExtremeSnowboarding
 {
     public class FlyingObject : MonoBehaviour
     {
-        [SerializeField]
-        private Transform[] pontos;
-        [SerializeField]
-        private float velocidade;
-
-        private Transform desiredPoint;
+        private GameObject[] players;
 
         private void Start()
         {
-            GetNextPoint();
+            players = GameObject.FindGameObjectsWithTag("Player");
         }
 
         private void Update()
         {
-            Debug.Log(desiredPoint.position);
-            if (desiredPoint != null)
+            float media = 0;
+            media = CalculateMedia();
+
+            float speed = (media - this.transform.position.x) * 0.25f;
+            float velocidade = Mathf.Clamp(speed, 10, 40);
+
+            this.gameObject.GetComponent<PathFollower>().speed = velocidade;
+        }
+
+        private float CalculateMedia()
+        {
+            float media = 0;
+
+            foreach (GameObject player in players)
             {
-                if (Vector3.Distance(this.transform.position, desiredPoint.position) < 1f)
-                {
-                    GetNextPoint();
-                }
-                else
-                {
-                    MoveToNextPoint();
-                }
+                media += player.transform.position.x;
             }
-        }
 
-        private void GetNextPoint()
-        {
-            bool gotNextPoint = false;
-
-            do
-            {
-                Transform newPoint = pontos[Random.Range(0, pontos.Length)];
-                Vector3 direction = this.transform.position - newPoint.position;
-
-                RaycastHit hit;
-
-                if (Physics.Raycast(this.transform.position, direction, out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
-                    gotNextPoint = false;
-                else
-                {
-                    gotNextPoint = true;
-                    desiredPoint = newPoint;
-                }
-
-            } while (!gotNextPoint);
-        }
-
-        private void MoveToNextPoint()
-        {
-            Vector3.MoveTowards(this.transform.position, desiredPoint.position, velocidade);
+            return media /= players.Length;
         }
     }
 }

@@ -111,7 +111,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         void StickPlayerOnGround()
         {
             RaycastHit hit;
-            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
                 ClampPlayerRotationByGround(hit);
                 ClampPlayerPositionOnGround(hit);
