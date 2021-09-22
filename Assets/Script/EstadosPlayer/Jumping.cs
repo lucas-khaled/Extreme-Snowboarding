@@ -93,7 +93,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     {
                         string[] animation = { "CaiuCostas" };
                         player.ChangeAnimationTo(animation, "fallen", true);
-                        timeFall = 3;
+                        timeFall = 2.5f;
                     }
                     else if (angleDifference > 160)
                     {
