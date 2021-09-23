@@ -7,6 +7,7 @@ namespace ExtremeSnowboarding
     public class Mochileiro : MonoBehaviour
     {
         [SerializeField] private float velocidade;
+        [SerializeField] private int axisX = 1;
 
         private bool stop = false;
         private Rigidbody rb;
@@ -19,18 +20,18 @@ namespace ExtremeSnowboarding
         private void Update()
         {
             if (!stop)
-            Move();
+                Move();
         }
 
         void Move()
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(new Vector3(transform.position.x + 0.5f * axisX, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2, LayerMask.GetMask("Track")))
             {
                 transform.position = Vector3.MoveTowards(transform.position, hit.point, velocidade * Time.deltaTime);
             }
-            else if (Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y + 1, transform.position.z), Vector3.up, out hit, 2, LayerMask.GetMask("Track")))
+            else if (Physics.Raycast(new Vector3(transform.position.x + 0.5f * axisX, transform.position.y + 1, transform.position.z), Vector3.up, out hit, 2, LayerMask.GetMask("Track")))
             {
                 transform.position = Vector3.MoveTowards(transform.position, hit.point, velocidade * Time.deltaTime);
             }
