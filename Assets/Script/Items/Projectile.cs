@@ -63,7 +63,10 @@ namespace ExtremeSnowboarding.Script.Items
                     MoveStraight(-1);
                     break;
                 case MovementType.MOVE_TRACKING_TARGET:
-                    MoveTrackingTarget(target.gameObject);
+                    if (target != null)
+                        MoveTrackingTarget(target.gameObject);
+                    else
+                        MoveStraight(1);
                     break;
             }
         }
