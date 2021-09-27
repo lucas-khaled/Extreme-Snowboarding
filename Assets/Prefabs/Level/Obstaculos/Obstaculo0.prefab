@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &670437385353133132
 Transform:
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHole: 0
+  path: {fileID: 0}
 --- !u!1001 &670437383462647336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +117,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
       propertyPath: m_Name
       value: Snowboard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
@@ -187,6 +192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pedraGrup
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
 --- !u!4 &1064932274638045924 stripped
@@ -257,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pedraGrup (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
 --- !u!4 &1064932273634688904 stripped
@@ -318,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
       propertyPath: m_Name
       value: Snowboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2152b1b3ddbd7194baf987ee338149eb, type: 3}
