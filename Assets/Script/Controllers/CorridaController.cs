@@ -281,8 +281,8 @@ namespace ExtremeSnowboarding.Script.Controllers
                             PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged.player, playerChangedPosition);
                             PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2.player, playerChangedPosition - 1);
 
-                            playerChanged.player.SharedValues.qualification = playerChangedPosition;
-                            playerChanged2.player.SharedValues.qualification = playerChangedPosition - 1;
+                            playerChanged.player.SharedValues.qualification = playerChangedPosition + 1;
+                            playerChanged2.player.SharedValues.qualification = playerChangedPosition;
                         }
                     }
 
