@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Items.Effects
@@ -6,13 +7,13 @@ namespace ExtremeSnowboarding.Script.Items.Effects
     [System.Serializable]
     public class Recuperation
     {
-
         [SerializeField] private bool haveRecuperation = true;
 
         public void StartRecuperation(Player.Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
         {
-            if(haveRecuperation)
+            if (haveRecuperation)
                 RecuperateValues(player, propertyName, oldValue, newValue, mode);
+
         }
         
         private void RecuperateValues(Player.Player player, string propertyName, object oldValue, object newValue, EffectMode mode)
@@ -46,6 +47,11 @@ namespace ExtremeSnowboarding.Script.Items.Effects
             }
 
             property.SetValue(obj, returnValue);
+        }
+
+        internal void StartCoroutine(object p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -168,7 +168,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void Jump(InputAction.CallbackContext context)
         {
-            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun)
+            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun && !player.SharedValues.inputLocked)
                 player.ChangeState(new Jumping()); 
         }
     
