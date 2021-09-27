@@ -13,7 +13,10 @@ namespace ExtremeSnowboarding.Script.Items
         
         [SerializeField] [BoxGroup("VFX Activation")] protected bool activateVFX;
         [SerializeField] [BoxGroup("VFX Activation")] [ShowIf("activateVFX")] protected string[] VFXNames;
-        
+
+        [SerializeField] [BoxGroup("Animation")] private bool activateAnimation;
+        [SerializeField] [BoxGroup("Animation")] [ShowIf("activateAnimation")] private string animation;
+
         [FormerlySerializedAs("attributesToChange")] [SerializeField]
         protected Effect[] effectsToApply;
 
@@ -26,6 +29,8 @@ namespace ExtremeSnowboarding.Script.Items
                 Debug.Log(player.name);
                 effect.StartEffect(player);
             }
+
+            ActivateAnimation(player, activateAnimation, animation, false);
             ActivateVFX(player, true, VFXNames);
         }
 
@@ -42,6 +47,17 @@ namespace ExtremeSnowboarding.Script.Items
             { 
                 player.GetPlayerFeedbackList().GetFeedbackByName(vfxName, player.SharedValues.playerCode).StartFeedback();
             }
+        }
+
+        protected void ActivateAnimation(Player.Player player, bool checker, string name, bool caster)
+        {
+            if (!checker)
+                return;
+
+            string[] animations = { name };
+
+            if (!caster)
+                player.ChangeAnimationTo(animations);
         }
 
         private void OnEnable()
