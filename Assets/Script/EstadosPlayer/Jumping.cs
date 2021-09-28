@@ -94,7 +94,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     {
                         string[] animation = { "CaiuCostas" };
                         player.ChangeAnimationTo(animation, "fallen", true);
-                        timeFall = 3;
+                        timeFall = 2.5f;
                     }
                     else if (angleDifference <= 160)
                     {
@@ -128,11 +128,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void StartRotatePlayer(InputAction.CallbackContext context)
         {
-            rotatingDirection = context.ReadValue<float>();
-        
+            if (!player.SharedValues.inputLocked)
+                rotatingDirection = context.ReadValue<float>();
+
             if (context.canceled)
                 player.SetOnAnimator("trick", false);
-            else
+            else if (!player.SharedValues.inputLocked)
             {
                 player.SetOnAnimator("trick", true);
                 if (howMuchRotation > 360)
