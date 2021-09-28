@@ -17,7 +17,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         public override void StateEnd()
         {
             airTime = 0;
-            player.SetOnAnimator("jumping", false);
+            string[] animations = { "SaindoPulo", "AterrisagemVariacao1" };
+            player.ChangeAnimationTo(animations,"jumping", false);
             player.SetOnAnimator("trick", false);
         
             UnsubscribeOnInputEvents();
@@ -89,13 +90,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     
                     float timeFall;
 
-                    if (angleDifference >= 60 && angleDifference <= 160)
+                    if (angleDifference >= 60 && angleDifference <= 100)
                     {
                         string[] animation = { "CaiuCostas" };
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 3;
                     }
-                    else if (angleDifference > 160)
+                    else if (angleDifference <= 160)
                     {
                         string[] animation = { "Caiu-Afunda" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
