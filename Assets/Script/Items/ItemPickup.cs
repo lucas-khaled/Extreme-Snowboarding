@@ -29,9 +29,18 @@ namespace ExtremeSnowboarding.Script.Items
                 if(!other.GetComponent<PhotonView>().IsMine || other.GetComponent<Player.Player>().Coletavel != null) return;
                 
                 PickRandomItem(other.gameObject.GetComponent<Player.Player>());
-                PhotonNetwork.Destroy(gameObject);
                 
+                if(PhotonNetwork.LocalPlayer.IsMasterClient)
+                    PhotonNetwork.Destroy(gameObject);
+                else
+                    GetComponent<PhotonView>().RPC("TellMasterToDestroy_RPC", RpcTarget.MasterClient);
             }
+        }
+
+        [PunRPC]
+        private void TellMasterToDestroy_RPC()
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

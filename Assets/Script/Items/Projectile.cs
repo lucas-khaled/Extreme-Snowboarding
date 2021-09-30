@@ -109,9 +109,11 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.name);
+            
             if (other.gameObject.CompareTag("Player"))
             {
+                if(!other.GetComponent<PhotonView>().IsMine) return;
+                
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
                 if(playerHitted != caster && other.GetComponent<PhotonView>().IsMine)
                 {

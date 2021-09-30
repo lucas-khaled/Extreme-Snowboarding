@@ -192,37 +192,28 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         public void InstancePlayer(Vector3 position, PlayerData playerData)
         {
-            Player.Player player = Instantiate(playerPrefab, position, playerPrefab.transform.rotation);
+            GameObject playerGO = PhotonNetwork.Instantiate("Player", position, playerPrefab.transform.rotation);
+            Player.Player player = playerGO.GetComponent<Player.Player>();
             PhotonView photonView = player.GetComponent<PhotonView>();
-
-            if (PhotonNetwork.AllocateViewID(photonView))
-            {
-                Debug.Log("Allocated");
-                object[] data = 
-                {
-                    player.transform.position, photonView.ViewID, PlayerData.Serialize(playerData)
-                };
-
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-                {
-                    Receivers = ReceiverGroup.Others,
-                    CachingOption = EventCaching.AddToRoomCache
-                };
-
-                SendOptions sendOptions = new SendOptions
-                {
-                    Reliability = true
-                };
-
-                PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
-            }
-            else
-            {
-                Debug.LogError("Failed to allocate a ViewId.");
-                Destroy(player);
-                return;
-            }
             
+            object[] data = 
+            {
+                player.transform.position, photonView.ViewID, PlayerData.Serialize(playerData)
+            };
+
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                Receivers = ReceiverGroup.Others,
+                CachingOption = EventCaching.AddToRoomCache
+            };
+
+            SendOptions sendOptions = new SendOptions
+            {
+                Reliability = true
+            };
+
+            PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
+
             player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
             StartCoroutine(AddAPlayer(player));
             
@@ -232,16 +223,14 @@ namespace ExtremeSnowboarding.Script.Controllers
             if(PlayerGeneralEvents.onPlayerInstantiate != null)
                 PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
         }
-        
+
         public void OnEvent(EventData photonEvent)
         {
             if (photonEvent.Code == CustomManualInstantiationEventCode)
             {
                 object[] data = (object[]) photonEvent.CustomData;
-                
-                Player.Player player = Instantiate(playerPrefab, (Vector3) data[0], playerPrefab.transform.rotation);
-                PhotonView photonView = player.GetComponent<PhotonView>();
-                photonView.ViewID = (int) data[1];
+
+                Player.Player player = PhotonView.Find((int)data[1]).GetComponent<Player.Player>();
                 PlayerData playerData = (PlayerData) PlayerData.Deserialize((byte[]) data[2]);
                 
                 player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);

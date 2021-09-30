@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.Controllers;
@@ -10,12 +7,9 @@ using ExtremeSnowboarding.Script.Items;
 using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
 using NaughtyAttributes;
-using NUnit.Framework;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Player
@@ -185,6 +179,8 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Start()
         {
+            if(!_photonView.IsMine) return;
+            
             playerState.StateStart(this);
             startPoint = transform.position;
             catastropheRef = null;
@@ -193,6 +189,8 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void FixedUpdate()
         {
+            if(!_photonView.IsMine) return;
+            
             playerState.StateUpdate();
         }
 
@@ -203,6 +201,8 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>
         private void InputSubcribing()
         {
+            if(!_photonView.IsMine) return;
+            
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
             playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;  
             playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
@@ -394,7 +394,13 @@ namespace ExtremeSnowboarding.Script.Player
         //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
-            playerState.OnCollisionEnter(collision);
+            if (_photonView.IsMine)
+            {
+                playerState.OnCollisionEnter(collision);
+                Debug.Log("mine");
+            }
+            else
+                Debug.Log("not mine");
         }
 
         private void OnDrawGizmos()
