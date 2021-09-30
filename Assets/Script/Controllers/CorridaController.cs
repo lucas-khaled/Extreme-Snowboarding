@@ -128,7 +128,6 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void PauseInput(InputAction.CallbackContext context)
         {
-            Debug.Log("KEK");
             if (context.started && !isPaused)
             {
                 Pause();
@@ -313,7 +312,6 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void updateDrone()
         {
-            Debug.Log("Drone updated");
             droneRef.UpdateFirstPlayer(players[0].player);
         }
 
