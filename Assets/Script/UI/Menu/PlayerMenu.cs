@@ -6,9 +6,13 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class PlayerMenu : MonoBehaviour
     {
+        [BoxGroup("Aniamtor references")]
+        public Animator animatorRenato;
+        public AnimatorOverrideController overrider;
+        [HideInInspector] public AnimatorOverrider controllerToOverride;
+
         [BoxGroup("Shader References")]
         public Shader changeColorShader;
-        public Animator animatorRenato;
     
         [SerializeField] [BoxGroup("Shader References")]
         private Texture2D mask01;

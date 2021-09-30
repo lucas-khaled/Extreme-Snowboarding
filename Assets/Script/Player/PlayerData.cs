@@ -5,6 +5,7 @@ namespace ExtremeSnowboarding.Script.Player
 {
     public class PlayerData
     {
+        private AnimatorOverrideController overrider;
         private Mesh[] playerMeshes;
         private Color color1;
         private Color color2;
@@ -19,8 +20,10 @@ namespace ExtremeSnowboarding.Script.Player
         {
             GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
             playerGO.name = "Player" + index;
-        
+
             player = playerGO.GetComponent<Player>();
+
+            AnimatorOverrider controllerToOverride = playerGO.transform.GetChild(0).GetComponent<AnimatorOverrider>();
 
             Material material = new Material(playerShader);
             player.SetPlayerMeshes(material, playerMeshes);
@@ -35,12 +38,14 @@ namespace ExtremeSnowboarding.Script.Player
             camera.SetInitialPlayer(player);
 
             player.playerInput.SwitchCurrentControlScheme("Player" + index);
-        
-            if(PlayerGeneralEvents.onPlayerInstantiate != null)
+
+            controllerToOverride.SetAnimations(overrider);
+
+            if (PlayerGeneralEvents.onPlayerInstantiate != null)
                 PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
         }
         
-        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02)
+        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02, AnimatorOverrideController overrider = null)
         {
             this.color1 = color1;
             this.color2 = color2;
@@ -49,6 +54,7 @@ namespace ExtremeSnowboarding.Script.Player
             playerMeshes = meshes;
             this.mask01 = mask01;
             this.mask02 = mask02;
+            this.overrider = overrider;
         }
     }
 }

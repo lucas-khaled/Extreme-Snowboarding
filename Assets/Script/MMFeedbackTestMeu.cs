@@ -16,6 +16,7 @@ namespace ExtremeSnowboarding
         [SerializeField] private Mesh[] meshes;
         [SerializeField] private Texture2D mask1;
         [SerializeField] private Texture2D mask2;
+        [SerializeField] private AnimatorOverrider AnimatorToOverride;
 
         void Start()
         {

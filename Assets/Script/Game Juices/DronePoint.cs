@@ -21,8 +21,6 @@ namespace ExtremeSnowboarding.Script
             float velocityDrone = Vector3.Distance(transform.position, positionPoint) * 0.5f;
             float rotacaoZ = velocityDrone;
 
-            Debug.Log(rotacaoZ * Mathf.Deg2Rad * 300);
-
             transform.rotation = Quaternion.Lerp(Quaternion.identity, Quaternion.Euler(0,0,rotacaoZ * Mathf.Deg2Rad * 300), Time.deltaTime);
             transform.position = Vector3.Lerp(this.transform.position, positionPoint, Time.deltaTime * velocityDrone);
         }
