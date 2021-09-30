@@ -7171,7 +7171,8 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 8635755107155265441}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 801336582577577529, guid: 683b950245cf35644bee7fa80b92b09c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 683b950245cf35644bee7fa80b92b09c, type: 3}
 --- !u!1 &1173578126
 GameObject:
@@ -23062,8 +23063,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -25.113022, y: 17.764484, z: -52.631374}
-      - {x: -26.933167, y: 17.354612, z: -53.167156}
+      - {x: -32.537346, y: 17.780607, z: -50.918835}
+      - {x: -33.969376, y: 16.828453, z: -68.504715}
       - {x: -29.236591, y: 18.12838, z: -87.07812}
       - {x: -23.106537, y: 12.810988, z: -101.18676}
       - {x: -19.505608, y: 9.687435, z: -109.47449}
@@ -23091,7 +23092,7 @@ MonoBehaviour:
       - {x: 49.45244, y: 30.662426, z: 28.85208}
       - {x: 30.444763, y: 26.020767, z: 26.716852}
       - {x: -32.09298, y: 10.749098, z: 19.691675}
-      - {x: 34.688896, y: 31.231094, z: -35.02796}
+      - {x: -29.877028, y: 19.549448, z: -18.2491}
       isClosed: 1
       space: 0
       controlMode: 0
