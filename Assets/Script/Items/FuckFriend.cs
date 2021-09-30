@@ -51,12 +51,13 @@ namespace ExtremeSnowboarding.Script.Items
         public void ActivateInstance(FuckFriend fuck)
         {
             string path = Path.Combine("Projectiles", projectile.name);
-            Debug.Log(path);
-            GameObject instantiatedProjectile = PhotonNetwork.Instantiate(path, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
+            GameObject instantiatedProjectile = PhotonNetwork.Instantiate(path, fuck.Player.transform.position, projectile.transform.rotation); 
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
             proj.fuckfriend = fuck;
             proj.caster = fuck.Player;
+            
+            NetInstantiationInfo.Instance?.FuckFriendInstantiationInfo(fuck, proj);
         }
     }
 

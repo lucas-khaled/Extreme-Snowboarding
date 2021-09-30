@@ -18,10 +18,16 @@ namespace ExtremeSnowboarding.Script.Items
         
         private bool alreadyCasted = false;
         private float relativeSpeed;
+        private PhotonView _photonView;
 
         private void Update()
         {
             Movement();
+        }
+
+        private void Awake()
+        {
+            _photonView = GetComponent<PhotonView>();
         }
 
         public Projectile (FuckFriend fuckFriendParametro)
@@ -40,7 +46,7 @@ namespace ExtremeSnowboarding.Script.Items
                     MoveFollowTrack(1);
                     break;
                 case MovementType.STOPPED:
-                    MoveStopped();
+                    Place();
                     break;
                 case MovementType.BACK:
                     MoveFollowTrack(-1);
@@ -84,7 +90,7 @@ namespace ExtremeSnowboarding.Script.Items
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
 
         }
-        void MoveStopped()
+        void Place()
         {
             if (!alreadyCasted)
             {
@@ -115,10 +121,13 @@ namespace ExtremeSnowboarding.Script.Items
                 if(!other.GetComponent<PhotonView>().IsMine) return;
                 
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
-                if(playerHitted != caster && other.GetComponent<PhotonView>().IsMine)
+                if(playerHitted != caster)
                 {
+                    if (fuckfriend == null)
+                        Debug.Log("FF Null");
+                
                     fuckfriend.StartEffects(playerHitted);
-                    PhotonNetwork.Destroy(gameObject);
+                    _photonView.RPC("TellMasterToDestroy_RPC", RpcTarget.MasterClient);
                 }
             }
             else if(!other.gameObject.CompareTag("Track"))
@@ -128,6 +137,12 @@ namespace ExtremeSnowboarding.Script.Items
             
                 PhotonNetwork.Destroy(gameObject);
             }
+        }
+        
+        [PunRPC]
+        private void TellMasterToDestroy_RPC()
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
 
         private void OnDrawGizmos()

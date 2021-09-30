@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -39,8 +42,10 @@ namespace ExtremeSnowboarding.Script.VFX
                 GameObject particleGO = Instantiate(hashedArray[i].GetFeedback().gameObject, player);
                 MMFeedbacks instantiatedParticle = particleGO.GetComponent<MMFeedbacks>();
                 instantiatedParticle.name = hashedArray[i].ParticleName;
-                
-                instantiated.playerVfxes.Add(new PlayerFeedbacks(instantiatedParticle));
+
+                PlayerFeedbacks feedbacks = new PlayerFeedbacks(instantiatedParticle);
+                //feedbacks.Init();
+                instantiated.playerVfxes.Add(feedbacks);
             }
             
             instantiated.playerCode = VFXManager.instance.InstantiatedList.Count + 1;
@@ -186,19 +191,25 @@ namespace ExtremeSnowboarding.Script.VFX
     }
     
     [System.Serializable]
-    public class PlayerFeedbacks
+    public class PlayerFeedbacks : IOnEventCallback
     {
         [SerializeField] private string particleName;
         
         [SerializeField] private MMFeedbacks feedbacks;
 
         private bool locked = false;
+        private const byte FeedbackEventCode = 3;
 
         public string ParticleName => (particleName != string.Empty) ? particleName : feedbacks.name;
         
         public MMFeedbacks GetFeedback()
         {
             return feedbacks;
+        }
+
+        public void Init()
+        {
+            PhotonNetwork.AddCallbackTarget(this);
         }
 
         /// <summary>
@@ -226,7 +237,7 @@ namespace ExtremeSnowboarding.Script.VFX
             locked = false;
         }
 
-        public void StartFeedback()
+        public void StartFeedback(bool netCall = true)
         {
             if (locked)
                 return;
@@ -235,10 +246,30 @@ namespace ExtremeSnowboarding.Script.VFX
             {
                 feedbacks.gameObject.SetActive(true);
                 feedbacks.PlayFeedbacks();
+
+                if (netCall)
+                {
+                    object[] data = 
+                    {
+                        particleName, true
+                    };
+
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                    {
+                        Receivers = ReceiverGroup.Others,
+                    };
+
+                    SendOptions sendOptions = new SendOptions
+                    {
+                        Reliability = true
+                    };
+
+                    PhotonNetwork.RaiseEvent(FeedbackEventCode, data, raiseEventOptions, sendOptions);
+                }
             }
         }
 
-        public void StopFeedback(bool deActivate = false)
+        public void StopFeedback(bool deActivate = false, bool netCall = true)
         {
             if (locked)
                 return;
@@ -246,12 +277,54 @@ namespace ExtremeSnowboarding.Script.VFX
             {
                 feedbacks.gameObject.SetActive(!deActivate);
                 feedbacks.StopFeedbacks();
+                
+                if (netCall)
+                {
+                    object[] data = 
+                    {
+                        particleName, false, deActivate
+                    };
+
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+                    {
+                        Receivers = ReceiverGroup.Others,
+                    };
+
+                    SendOptions sendOptions = new SendOptions
+                    {
+                        Reliability = true
+                    };
+
+                    PhotonNetwork.RaiseEvent(FeedbackEventCode, data, raiseEventOptions, sendOptions);
+                }
             }
         }
 
         public PlayerFeedbacks(MMFeedbacks feedbacks)
         {
             this.feedbacks = feedbacks;
+        }
+
+        public void OnEvent(EventData photonEvent)
+        {
+            if(photonEvent.Code != FeedbackEventCode) return;
+            object[] data = (object[]) photonEvent.CustomData;
+
+            string partName = data[0] as string;
+
+            if(partName != particleName) return;
+
+            bool isStart = (bool) data[1];
+            
+            if (isStart)
+                StartFeedback(false);
+            else
+            {
+                bool deActivate = (bool) data[2];
+                StopFeedback(deActivate, false);
+            }
+            
+            
         }
     }
 }
