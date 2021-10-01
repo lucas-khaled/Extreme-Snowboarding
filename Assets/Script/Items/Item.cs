@@ -30,7 +30,7 @@ namespace ExtremeSnowboarding.Script.Items
                 effect.StartEffect(player);
             }
 
-            ActivateAnimation(player, activateAnimation, animation, false);
+            ActivateAnimation(player, activateAnimation, animation);
             ActivateVFX(player, true, VFXNames);
         }
 
@@ -49,15 +49,15 @@ namespace ExtremeSnowboarding.Script.Items
             }
         }
 
-        protected void ActivateAnimation(Player.Player player, bool checker, string name, bool caster)
+        protected void ActivateAnimation(Player.Player player, bool checker, string name)
         {
             if (!checker)
                 return;
 
             string[] animations = { name };
 
-            if (!caster)
-                player.ChangeAnimationTo(animations);
+            player.ChangeAnimationTo(animations);
+
         }
 
         private void OnEnable()
