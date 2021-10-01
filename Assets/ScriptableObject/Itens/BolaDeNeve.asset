@@ -17,7 +17,7 @@ MonoBehaviour:
   VFXNames:
   - Cristal
   activateAnimation: 1
-  animation: LancarProjetil
+  animation: AtingidoPorFF
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -48,4 +48,4 @@ MonoBehaviour:
   activateVFXOnCaster: 0
   VFXNamesOnCaster: []
   activateAnimationOnCaster: 1
-  animationOnCaster: AtingidoPorFF
+  animationOnCaster: LancarProjetil
