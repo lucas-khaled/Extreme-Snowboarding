@@ -172,7 +172,7 @@ namespace ExtremeSnowboarding.Script.Player
         {
             _photonView = GetComponent<PhotonView>();
             sharedValues.player = this; //setting the player reference to the shared values
-            playerFeedbacksList.StartFeedbacks(transform); 
+            playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
             movimentationFeedbacks.StartFeedbacks(transform);
             InputSubcribing();
         }
@@ -452,7 +452,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <summary>
         /// The own player code. If it is the player 1, so the value is 1. An it goes on...
         /// </summary>
-        public int playerCode { get; set; }
+        public int playerCode => PhotonNetwork.LocalPlayer.ActorNumber;
 
         /// <summary>
         /// This property is true if the player cannot move. Otherwise is false.
