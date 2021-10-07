@@ -1681,7 +1681,7 @@ PrefabInstance:
     - target: {fileID: 1145511381175244263, guid: 13246b263b1897345b1dda7004d050ff, type: 3}
       propertyPath: availableItems.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 959454f1cf205d14ea1f676b43eef62b, type: 2}
+      objectReference: {fileID: 11400000, guid: ad5f02245dbdcbd4d97bb7ee74f16559, type: 2}
     - target: {fileID: 1145511381175244263, guid: 13246b263b1897345b1dda7004d050ff, type: 3}
       propertyPath: availableItems.Array.data[1]
       value: 
@@ -2849,6 +2849,7 @@ GameObject:
   - component: {fileID: 1014913448427840472}
   - component: {fileID: 1014913448427840476}
   - component: {fileID: 7608485783764663509}
+  - component: {fileID: 1014913448427840475}
   m_Layer: 0
   m_Name: Camera1
   m_TagString: Untagged
@@ -2899,6 +2900,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &1014913448427840475
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014913448427840473}
+  m_Enabled: 1
 --- !u!114 &1014913448427840476
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -172,9 +172,14 @@ namespace ExtremeSnowboarding.Script.Player
         {
             _photonView = GetComponent<PhotonView>();
             sharedValues.player = this; //setting the player reference to the shared values
-            playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
-            movimentationFeedbacks.StartFeedbacks(transform);
-            InputSubcribing();
+
+            if (_photonView.IsMine)
+            {
+                playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
+                movimentationFeedbacks.StartFeedbacks(transform);
+                InputSubcribing();
+            }
+            
         }
 
         private void Start()
