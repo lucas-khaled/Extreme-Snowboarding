@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ExtremeSnowboarding.Script.Items
 {
@@ -180,7 +181,7 @@ namespace ExtremeSnowboarding.Script.Items
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
                 if(playerHitted != caster)
                 {
-                    InstantiateParticle();
+                    InstantiateParticle(playerHitted.gameObject.transform);
 
                     fuckfriend.StartEffects(playerHitted);
                     Destroy(gameObject);
@@ -188,7 +189,7 @@ namespace ExtremeSnowboarding.Script.Items
             }
             else if(!other.gameObject.CompareTag("Track") && !other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
             {
-                InstantiateParticle();
+                InstantiateParticle(gameObject.transform.parent);
 
                 Destroy(gameObject);
 
@@ -196,11 +197,11 @@ namespace ExtremeSnowboarding.Script.Items
             }
         }
 
-        private void InstantiateParticle()
+        private void InstantiateParticle(Transform parentForParticle)
         {
             if (explosionParticle != null)
             {
-                GameObject explosionParticleGO = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+                GameObject explosionParticleGO = Instantiate(explosionParticle, transform.position, Quaternion.identity, parentForParticle);
                 explosionParticleGO.GetComponent<ParticleSystem>().Play();
             }
         }
