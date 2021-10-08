@@ -16,7 +16,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
-            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
+            player.GetMovimentationFeedbacks()?.skiingFeedback?.StopFeedbacks();
 
             UnsubscribeOnInputEvents();
         

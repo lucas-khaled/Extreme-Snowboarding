@@ -32,6 +32,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         private int _alivePlayers;
 
         private const int CustomManualInstantiationEventCode = 1;
+        private List<Player.Player> _playersFinished = new List<Player.Player>();
 
         public static CorridaController instance { get; private set; }
 
@@ -270,6 +271,9 @@ namespace ExtremeSnowboarding.Script.Controllers
 
             for (int i = 0; i < _playersInGame.Count - 1; i++)
             {
+                if(playersClassificated.Exists(x => x == _playersInGame[i+1]) || playersClassificated.Exists(x => x == _playersInGame[i]))
+                    return;
+                
                 float distanceXPlayer1 = _playersInGame[i].transform.position.x;
                 float distanceXPlayer2 = _playersInGame[i + 1].transform.position.x;
 
@@ -309,7 +313,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 }
             }
         }
-        
+
         public void Pause()
         {
             _isPaused = true;

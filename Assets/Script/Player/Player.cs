@@ -354,7 +354,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="crossFadeLength"> Length of the crossfade </param>
         /// <param name="valueSetedOnAnimator">The animator variable name</param>
         /// <param name="value">Value to pass to animator variable</param>
-        public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator, bool value, float crossFadeLength = 0.15f)
+        public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator = null, bool value = true, float crossFadeLength = 0.15f)
         {
             _photonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
                 SerializeUtilities.StringArray2Byte(possibleAnimations), 
@@ -366,15 +366,17 @@ namespace ExtremeSnowboarding.Script.Player
             float crossFadeLength)
         {
             ChangeAnimationTo(SerializeUtilities.Byte2StringArray(possibleAnimations), crossFadeLength);
-            CallSetOnAnimator(valueSetedOnAnimator, value);
+            if(valueSetedOnAnimator != null)
+                CallSetOnAnimator(valueSetedOnAnimator, value);
         }
+        
 
         /// <summary>
         /// Method to change the player animation instantly
         /// </summary>
         /// <param name="possibleAnimations">State names that can be randomized</param>
         /// <param name="crossFadeLength"> Length of the crossfade </param>
-        public void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
+        private void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
         {
             animator.CrossFade(possibleAnimations[Random.Range(0, possibleAnimations.Length)], crossFadeLength);
         }
