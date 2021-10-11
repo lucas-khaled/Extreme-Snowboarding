@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Items
 {
-    public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK }
+    public enum MovementType { STRAIGHT, FOWARD, STOPPED, BACK, STRAIGHT_BACK, MOVE_TRACKING_TARGET }
 
     [CreateAssetMenu(fileName = "FuckFriend", menuName = "Itens/Fuck Friend", order = 1)]
     public class FuckFriend : Item
@@ -20,10 +20,16 @@ namespace ExtremeSnowboarding.Script.Items
 
         [SerializeField] [BoxGroup("Fuck Friend Values")] [ShowIf("instanceType", InstanceType.SPECIFC_PLAYER)]
         private SpecificPlayerInstance specificPlayerInstance;
-        
+
+        [SerializeField] [BoxGroup("Fuck Friend Values")] [ShowIf("instanceType", InstanceType.AREA_EFFECT)]
+        private AreaEffectInstance areaEffectInstance;
+
         [SerializeField] [BoxGroup("VFX Activation")] private bool activateVFXOnCaster;
         [SerializeField] [BoxGroup("VFX Activation")] [ShowIf("activateVFXOnCaster")] private string[] VFXNamesOnCaster;
-        
+
+        [SerializeField] [BoxGroup("Animation")] private bool activateAnimationOnCaster;
+        [SerializeField] [BoxGroup("Animation")] [ShowIf("activateAnimationOnCaster")] private string animationOnCaster;
+
         private IInstance instance => (instanceType == InstanceType.PROJECTILE) ? (IInstance)projectileInstance : (IInstance)specificPlayerInstance;
 
         public Player.Player Player { get; private set; }
@@ -33,6 +39,7 @@ namespace ExtremeSnowboarding.Script.Items
             Player = player;
             instance.ActivateInstance(this);
             ActivateVFX(player, activateVFXOnCaster, VFXNamesOnCaster);
+            ActivateAnimation(player, activateAnimationOnCaster, animationOnCaster);
         }
     }
     
@@ -54,10 +61,31 @@ namespace ExtremeSnowboarding.Script.Items
             GameObject instantiatedProjectile = PhotonNetwork.Instantiate(path, fuck.Player.transform.position, projectile.transform.rotation); 
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
+            Player.Player target = CorridaController.instance.GetPlayerByPlace(fuck.Player.SharedValues.qualification - 1);
+
             proj.fuckfriend = fuck;
+            proj.target = target;
             proj.caster = fuck.Player;
             
             NetInstantiationInfo.Instance?.FuckFriendInstantiationInfo(fuck, proj);
+        }
+    }
+
+    [System.Serializable]
+    public class AreaEffectInstance : IInstance
+    {
+        [SerializeField] [BoxGroup("Instance Values")] [AllowNesting]
+        private float radius = 5f;
+
+        public void ActivateInstance(FuckFriend fuck)
+        {
+            Collider[] playersHitted = Physics.OverlapBox(fuck.Player.gameObject.transform.position, new Vector3(7.5f, 7.5f, 7.5f), Quaternion.identity, LayerMask.GetMask("Player"));
+
+            foreach (var player in playersHitted)
+            {
+                fuck.StartEffects(player.GetComponent<Player.Player>());
+            }
+
         }
     }
 
@@ -135,6 +163,7 @@ namespace ExtremeSnowboarding.Script.Items
     public enum InstanceType
     {
         PROJECTILE,
-        SPECIFC_PLAYER
+        SPECIFC_PLAYER,
+        AREA_EFFECT
     }
 }

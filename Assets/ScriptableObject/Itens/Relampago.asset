@@ -16,6 +16,8 @@ MonoBehaviour:
   activateVFX: 1
   VFXNames:
   - Relampago
+  activateAnimation: 1
+  animation: AtingidoPorFF
   effectsToApply:
   - timeOfChange: 4
     quantification:
@@ -41,5 +43,9 @@ MonoBehaviour:
     especifiedType: 0
     position: 1
     forceInstance: 1
+  areaEffectInstance:
+    radius: 5
   activateVFXOnCaster: 0
   VFXNamesOnCaster: []
+  activateAnimationOnCaster: 1
+  animationOnCaster: InvocandoRelampago

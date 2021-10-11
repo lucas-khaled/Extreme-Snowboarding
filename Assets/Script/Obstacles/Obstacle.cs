@@ -1,5 +1,7 @@
 using ExtremeSnowboarding.Script.EstadosPlayer;
 using UnityEngine;
+using PathCreation.Examples;
+using PathCreation;
 
 namespace ExtremeSnowboarding.Script.Obstacles
 {
@@ -8,6 +10,9 @@ namespace ExtremeSnowboarding.Script.Obstacles
     {
         [SerializeField] private bool isHole = false;
         private Collider myCollider;
+
+        [SerializeField]
+        private PathCreator path;
 
         private void Awake()
         {
@@ -20,12 +25,20 @@ namespace ExtremeSnowboarding.Script.Obstacles
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player player = other.GetComponent<Player.Player>();
-                if (isHole && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
-                    player.ChangeState(new Dead());
-                //player.ChangeState(new Flying());
+                string state = other.gameObject.GetComponent<Player.Player>().SharedValues.actualState;
+                if (isHole)
+                {
+                    if (state != "Dead" && state != "Flying")
+                    {
+                        Debug.Log("Colisão buraco");
+                        //player.ChangeState(new Dead());
+                        player.ChangeState(new Flying());
+                        player.gameObject.GetComponent<PathFollower>().pathCreator = path;
+                    }
+                }
 
                 else if (!player.SharedValues.Etherium)
-                    player.ChangeState(new Fallen());
+                    player.ChangeState(new Fallen(true));
             }
             else if (other.gameObject.CompareTag("Projectile"))
                 Destroy(other.gameObject);

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1103552109861844437}
   - component: {fileID: 855967555265546174}
   - component: {fileID: 9069735774745281773}
-  - component: {fileID: -8068089370608055087}
   m_Layer: 0
   m_Name: BonecoNeve
   m_TagString: Untagged
@@ -29,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463782837573194752}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 120.009995, y: 120.009995, z: 120.009995}
   m_Children:
   - {fileID: 8803607126795316615}
@@ -112,30 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   height: 0
+  fuel: 0
   movementType: 2
-  explosionParticle: {fileID: 4014129155689209164}
---- !u!114 &-8068089370608055087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463782837573194752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  explosionParticle: {fileID: 8803607126795316612}
 --- !u!198 &4014129155689209164
 ParticleSystem:
   m_ObjectHideFlags: 0

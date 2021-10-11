@@ -6,16 +6,29 @@ namespace PathCreation.Examples
     // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
     public class PathFollower : MonoBehaviour
     {
-        public PathCreator pathCreator;
+        [SerializeField] private bool lockPositionZ = false;
+
+        [SerializeField] private bool lockRotationY = false;
+        [SerializeField] private bool lockRotationX = false;
+        [SerializeField] private bool lockRotationZ = false;
+
+        [HideInInspector] public bool auxOnce = false;
+        public float distanceTravelled;
+        
         public EndOfPathInstruction endOfPathInstruction;
+        public PathCreator pathCreator;
         public float speed = 5;
-        float distanceTravelled;
+        public bool shouldFollowPath = true;
+
+        public delegate void OnPathFinished(GameObject gameObject);
+        public static OnPathFinished onPathFinished;
 
         void Start() {
             if (pathCreator != null)
             {
                 // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
                 pathCreator.pathUpdated += OnPathChanged;
+                onPathFinished += OnPathFinishedTest;
             }
         }
 
@@ -23,9 +36,36 @@ namespace PathCreation.Examples
         {
             if (pathCreator != null)
             {
-                distanceTravelled += speed * Time.deltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                if (shouldFollowPath)
+                {
+                    distanceTravelled += speed * Time.deltaTime;
+                    
+                    Vector3 posicao = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+
+                    if (!lockPositionZ)
+                        transform.position = posicao;
+                    else
+                        transform.position = new Vector3(posicao.x, posicao.y, transform.position.z);
+
+                    Quaternion rotacao = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                    
+                                      
+                    if (lockRotationX)
+                        rotacao = new Quaternion(0, rotacao.y, rotacao.z, rotacao.w);
+                    if (lockRotationY)
+                        rotacao = new Quaternion(rotacao.x, 0, rotacao.z, rotacao.w);
+                    if (lockRotationZ)
+                        rotacao = new Quaternion(rotacao.x, rotacao.y, 0, rotacao.w);
+
+                    transform.rotation = rotacao;
+
+                    if (distanceTravelled / pathCreator.path.length >= 1 && !auxOnce)
+                    {
+                        if (onPathFinished != null)
+                            onPathFinished.Invoke(this.gameObject);
+                        auxOnce = true;
+                    }
+                }
             }
         }
 
@@ -33,6 +73,11 @@ namespace PathCreation.Examples
         // is as close as possible to its position on the old path
         void OnPathChanged() {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+        }
+
+        private void OnPathFinishedTest(GameObject gameObject)
+        {
+            Debug.Log("Path finished " + gameObject.name);
         }
     }
 }

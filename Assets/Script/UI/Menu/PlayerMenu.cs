@@ -16,6 +16,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [BoxGroup("References")]
         public Animator animatorRenato;
 
+        [BoxGroup("Aniamtor references")]
+        public Animator animatorRenato;
+        public AnimatorOverrideController overrider;
+        [HideInInspector] public AnimatorOverrider controllerToOverride;
+
 
         [BoxGroup("Interface")]
         [SerializeField]

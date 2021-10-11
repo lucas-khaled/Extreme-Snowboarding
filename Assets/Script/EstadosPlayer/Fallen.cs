@@ -13,6 +13,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         Quaternion newRotation = Quaternion.identity;
         bool canRotate = false;
         float rotationDifference = 0;
+        private float tempoQueda;
+        private bool isObstacle = false;
+        private bool shouldDeaccelerateByRigidBody = false;
+
+        private Rigidbody rb;
 
         public override void StateEnd()
         {
@@ -26,32 +31,95 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             base.StateStart(player);
             player.SharedValues.actualState = "Fallen";
-            player.StartCoroutine(CorrectPlayerPosition());
 
-            Rigidbody rb = player.GetComponent<Rigidbody>();
+            rb = player.GetComponent<Rigidbody>();
 
             player.SetOnAnimator("fallen", true);
             player.SetOnAnimator("hitByFuckFriend", false);
             player.SetOnAnimator("highSpeed", false);
 
-            rb.isKinematic = false;
-            rb.useGravity = false;
-            rb.velocity = Vector3.zero;
+            if (!isObstacle)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = false;
+                rb.velocity = Vector3.zero;
+                player.groundedVelocity = Vector3.zero;
+                player.StartCoroutine(CorrectPlayerPosition());
+            }
+            else 
+            {
+                tempoQueda = rb.velocity.x;
+                if (tempoQueda >= 10f)
+                {
+                    shouldDeaccelerateByRigidBody = true;
+                    string[] animation = { "Caiu-Rolando" };
+                    player.ChangeAnimationTo(animation, 0.05f);
+                }
+                else
+                {
+                    shouldDeaccelerateByRigidBody = false;
+                    rb.velocity = Vector3.zero;
+                    player.groundedVelocity = Vector3.zero;
+                    string[] animation = { "Caiu-Comum" };
+                    player.ChangeAnimationTo(animation);
+                }
+            }
 
             player.groundedVelocity = Vector3.zero;
+
         }
         public override void StateUpdate()
         {
-            if(time <= timeToCorrect && canRotate)
+            if (shouldDeaccelerateByRigidBody)
             {
-                CorrectPlayerRotation();
-            }      
-            if (time >= timeFall)
-            {
-                player.ChangeState(new Grounded(1f));
+                DeAccelerateByRigidbody(); 
+                ClampOnGround();
             }
 
+            if (time <= timeToCorrect && canRotate)
+                CorrectPlayerRotation();    
+            if (time >= timeFall && !shouldDeaccelerateByRigidBody)
+                player.ChangeState(new Grounded(1f));
+
             time += Time.deltaTime;
+        }
+
+        private void DeAccelerateByRigidbody()
+        {
+
+            if (rb == null || rb.velocity == Vector3.zero)
+                return;
+
+            if (rb.velocity.x > 0)
+            {
+                Vector3 playerGV = player.groundedVelocity;
+                rb.AddForce(tempoQueda * 0.5f * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
+                player.groundedVelocity = new Vector3(rb.velocity.x, playerGV.y, playerGV.z);
+            }
+            else
+            {
+                Debug.Log(rb.velocity.x);
+                rb.velocity = Vector3.zero;
+                player.groundedVelocity = Vector3.zero;
+                player.SetOnAnimator("fallen", false);
+                player.ChangeState(new Grounded(1.2f,true));
+            }
+
+        }
+        private void ClampOnGround()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
+            {
+                float xChange = rb.velocity.x - hit.normal.normalized.x * 2f;
+                float yChange = rb.velocity.y - hit.normal.normalized.y * 2f;
+
+                Quaternion newRotation = Quaternion.FromToRotation(player.transform.up, hit.normal) * player.transform.rotation;
+                newRotation.y = newRotation.x = 0;
+                player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, newRotation, 100 * Time.deltaTime);
+
+                rb.velocity = new Vector3(xChange, yChange, rb.velocity.z);
+            }
         }
 
         void CorrectPlayerRotation()
@@ -90,8 +158,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             this.timeFall = timeFall;
         }
 
-        public Fallen()
+        public Fallen(bool isObstacle = false)
         {
+            this.isObstacle = isObstacle;
         }
     }
 }

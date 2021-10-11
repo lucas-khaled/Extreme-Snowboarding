@@ -4815,7 +4815,6 @@ GameObject:
   - component: {fileID: 1848207981418190481}
   - component: {fileID: 3929785404192283087}
   - component: {fileID: 4346264811810540628}
-  - component: {fileID: -6893752262643553273}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -4866,30 +4865,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   height: 0
+  fuel: 0
   movementType: 0
-  explosionParticle: {fileID: 0}
---- !u!114 &-6893752262643553273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6386299705226804969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  explosionParticle: {fileID: 4133865163814166805}
 --- !u!1 &7094156559213008749
 GameObject:
   m_ObjectHideFlags: 0

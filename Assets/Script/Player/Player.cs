@@ -11,6 +11,8 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using DG.Tweening;
+using UnityEditor;
 
 namespace ExtremeSnowboarding.Script.Player
 {
@@ -223,7 +225,7 @@ namespace ExtremeSnowboarding.Script.Player
         // Method that will activate the holded item, empty the item slot and invoke an delegate. It listens to "Item" input
         private void ActivateItem(InputAction.CallbackContext context)
         {
-            if (context.started && Coletavel != null)
+            if (context.started && Coletavel != null && !sharedValues.inputLocked)
             {
                 Coletavel.Activate(this);
                 Coletavel = null;
@@ -238,12 +240,14 @@ namespace ExtremeSnowboarding.Script.Player
         // Method witch will activate boost in case the boost value is complete. It listens to "Boost" input
         private void ActivateBoost(InputAction.CallbackContext context)
         {
-            if (context.started && sharedValues.Turbo >= 0.95)
+            if (context.started && !sharedValues.inputLocked)
             {
-                Effect boostEffect = new Effect("AddedAcceleration", 7f, 10f, EffectMode.ADD, this);
+                float forcaBoostRelative = 7 / (1 / sharedValues.Turbo);
+
+                Effect boostEffect = new Effect("AddedAcceleration", forcaBoostRelative, 10f, EffectMode.ADD, this);
                 boostEffect.StartEffect(this);
                 playerFeedbacksList.GetFeedbackByName("Boost", sharedValues.playerCode).StartFeedback();
-                GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * 0.75f * transform.right;
+                GetComponent<Rigidbody>().velocity += sharedValues.MaxVelocity * (sharedValues.Turbo) * 0.5f * transform.right;
                 AddTurbo(-sharedValues.Turbo);
             }
         }
@@ -378,7 +382,9 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="crossFadeLength"> Length of the crossfade </param>
         private void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
         {
-            animator.CrossFade(possibleAnimations[Random.Range(0, possibleAnimations.Length)], crossFadeLength);
+            string animationChoosen = possibleAnimations[Random.Range(0, possibleAnimations.Length)];
+
+            animator.CrossFade(animationChoosen, crossFadeLength);
         }
 
         /// <summary>
@@ -429,7 +435,7 @@ namespace ExtremeSnowboarding.Script.Player
         [BoxGroup("Player Values")]
         [SerializeField, Min(0)] private float characterHeight = 2;
         [SerializeField, UnityEngine.Range(1f,3f)] private float mortalAddVelocityRate = 2; 
-        [FormerlySerializedAs("turboMultiplier")] [SerializeField] private float turboMortalMultiplier = 1;
+        [FormerlySerializedAs("turboMultiplier")] [SerializeField] private float turboMortalMultiplier = 20;
         
         [Header("Movement Values")] [HorizontalLine(color:EColor.Yellow)] 
         
@@ -450,11 +456,21 @@ namespace ExtremeSnowboarding.Script.Player
         /// String that contains the actual player state name.
         /// </summary>
         public string actualState { get; set; }
+
+        /// <summary>
+        /// Bool that locks the player jump is false.
+        /// </summary>
+        public bool canJump { get; set; }
         
         /// <summary>
         /// The player that owns this Shared Values.
         /// </summary>
         public Player player { get; set; }
+
+        /// <summary>
+        /// Player classification, being 1 the first.
+        /// </summary>
+        public int qualification { get; set; }
 
         /// <summary>
         /// The own player code. If it is the player 1, so the value is 1. An it goes on...
@@ -478,6 +494,12 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>
         [ExposedProperty("Added Jump")]
         public float AddedJump { get; set; }
+
+        /// <summary>
+        /// This property is true if the player can't use inputs.
+        /// </summary>
+        [ExposedProperty("Input lock")]
+        public bool inputLocked { get; set; }
 
         /// <summary>
         /// It returns the actual acceleration value.

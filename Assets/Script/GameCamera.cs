@@ -13,6 +13,11 @@ namespace ExtremeSnowboarding.Script
         Player.Player player;
         Vector3 offset;
 
+        public bool shouldFollowOnlyX = false;
+
+        private float auxY;
+        private float auxX;
+
         public void SetInitialPlayer(Player.Player player)
         {
             this.player = player;
@@ -33,9 +38,36 @@ namespace ExtremeSnowboarding.Script
         // Update is called once per frame
         void LateUpdate()
         {
-            if(player != null)
-                transform.parent.transform.position = player.transform.position;
+            if (player != null)
+            {
+                Vector3 destiny = Vector3.zero;
 
+                if (!shouldFollowOnlyX)
+                {
+                    destiny = player.transform.position;
+                    auxY = player.transform.position.y;
+                    auxX = player.transform.position.x;
+                }
+                else
+                {
+                    if (auxX <= player.transform.position.x)
+                        destiny.x = player.transform.position.x;
+                    else
+                        destiny.x = auxX;
+
+                    if (auxY <= player.transform.position.y)
+                        destiny.y = player.transform.position.y;
+                    else
+                        destiny.y = auxY;
+                }
+
+                /*else if (auxX <= player.transform.position.x && auxY <= player.transform.position.y)
+                    destiny = new Vector3(auxX, auxY, player.transform.position.z);
+                else
+                    destiny = transform.parent.position;
+                */
+                transform.parent.transform.position = Vector3.Lerp(transform.parent.transform.position, destiny, 0.8f);
+            }
         }
 
         public void ChangeClassificationToDead()

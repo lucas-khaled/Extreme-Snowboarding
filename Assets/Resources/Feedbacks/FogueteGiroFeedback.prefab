@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1314046961012009940}
   - component: {fileID: 3220702578720528416}
   - component: {fileID: 544016151971426014}
-  - component: {fileID: -7466232459203917924}
+  - component: {fileID: 6202761985035968858}
+  - component: {fileID: 5107929212317268687}
   m_Layer: 0
   m_Name: FogueteGiroFeedback
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314046961012009943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.429, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 312574126384655842}
@@ -48,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 544016151971426014}
+  - {fileID: 6202761985035968858}
+  - {fileID: 5107929212317268687}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -118,7 +121,7 @@ MonoBehaviour:
   BoundParticleSystem: {fileID: 1769123467965869967}
   MoveToPosition: 0
   RandomParticleSystems: []
---- !u!114 &-7466232459203917924
+--- !u!114 &6202761985035968858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,19 +130,201 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314046961012009943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 50b723ef43c645c42998408748e4170f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  Active: 1
+  Label: Field of View
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Channel: 0
+  Duration: 3.8
+  ResetShakerValuesAfterShake: 1
+  ResetTargetValuesAfterShake: 1
+  RelativeFieldOfView: 0
+  ShakeFieldOfView:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19283904
+      value: 0.3773242
+      inSlope: 3.601826
+      outSlope: 3.601826
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11334237
+      outWeight: 0.54322684
+    - serializedVersion: 3
+      time: 0.26343447
+      value: 0.5626254
+      inSlope: 0.7119106
+      outSlope: 0.7119106
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29226315
+      value: 0.5781648
+      inSlope: -0.018253326
+      outSlope: -0.018253326
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.55319935
+    - serializedVersion: 3
+      time: 0.35854962
+      value: 0.5637041
+      inSlope: -0.44556132
+      outSlope: -0.44556132
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.7617356
+    - serializedVersion: 3
+      time: 0.533766
+      value: 0.42005804
+      inSlope: -1.047188
+      outSlope: -1.047188
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3952354
+      outWeight: 0.19567108
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapFieldOfViewZero: 60
+  RemapFieldOfViewOne: 120
+--- !u!114 &5107929212317268687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314046961012009943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60aaa89675f08fe46a3472284d415de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Motion Blur URP
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Channel: 0
+  Duration: 0.2
+  ResetShakerValuesAfterShake: 1
+  ResetTargetValuesAfterShake: 1
+  Intensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.26501682
+      value: 0.7667063
+      inSlope: 1.5576792
+      outSlope: 1.5576792
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.35417175
+      value: 0.81115425
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.50448287
+      value: 0.5392228
+      inSlope: -1.9032685
+      outSlope: -1.9032685
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapIntensityZero: 0
+  RemapIntensityOne: 1
+  RelativeIntensity: 0
 --- !u!1001 &5500052691076546601
 PrefabInstance:
   m_ObjectHideFlags: 0

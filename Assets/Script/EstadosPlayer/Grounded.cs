@@ -12,6 +12,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         private float timeOnGround;
         private float timeToJump;
 
+        private float timeWait = 0;
+
         private Rigidbody rb;
 
         public override void StateEnd()
@@ -40,14 +42,14 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             rb = player.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = false;
-
+            player.playerCamera.shouldFollowOnlyX = false;
 
             player.StartStateCoroutine(BeEtherium());
 
             player.GetPlayerFeedbackList().GetFeedbackByName("NeveEspalha", player.SharedValues.playerCode).StartFeedback();
             player.GetPlayerFeedbackList().GetFeedbackByName("FastMovement", player.SharedValues.playerCode).UnlockFeedback();
 
-            rb.velocity = player.groundedVelocity;
+            rb.velocity = player.transform.right * player.groundedVelocity.magnitude;
 
             player.StartCoroutine(SkiingVariation());
         }
@@ -72,8 +74,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateUpdate()
         {
-            MoveByRigidbody();
-            StickPlayerOnGround();
+            if (timeWait < timeOnGround) 
+            {
+                MoveByRigidbody();
+                StickPlayerOnGround();
+            }
             timeOnGround += Time.deltaTime;
         }
 
@@ -91,6 +96,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 else if (rb.velocity.x > player.SharedValues.MaxVelocity)
                     rb.AddForce(-player.SharedValues.Acceleration * Time.deltaTime * player.transform.right, ForceMode.VelocityChange);
 
+                if (rb.velocity.x < 0)
+                    rb.AddForce(new Vector3(rb.velocity.x * -1, rb.velocity.y, rb.velocity.z), ForceMode.VelocityChange);
+
 
                 player.groundedVelocity = rb.velocity;
             }
@@ -103,13 +111,13 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         void StickPlayerOnGround()
         {
             RaycastHit hit;
-            if (Physics.Raycast(player.transform.position, -player.transform.up, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
                 ClampPlayerRotationByGround(hit);
                 ClampPlayerPositionOnGround(hit);
                 player.SharedValues.LastGroundedNormal = hit.normal.normalized;
             }
-            else
+            else if (timeOnGround > timeToJump)
             {
                 player.ChangeState(new Jumping(false));
             }
@@ -161,7 +169,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void Jump(InputAction.CallbackContext context)
         {
-            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun)
+            if((context.started || context.performed) && timeOnGround>=timeToJump && !player.SharedValues.isStun && !player.SharedValues.inputLocked)
                 player.ChangeState(new Jumping()); 
         }
     
@@ -174,6 +182,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             timeEtherium = 0;
             timeToJump = 0;
         }
+
+        public Grounded(float time, bool waitForStartMovement)
+        {
+            timeWait = time;
+        }
+
 
         public Grounded(float timeEtherium)
         {

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7626326418494604083}
   - component: {fileID: 7264342101728338438}
   m_Layer: 0
-  m_Name: Obstaculo (15)
+  m_Name: Obstaculo7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2175562499205512305
 Transform:
@@ -79,8 +79,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 33.55068}
+  m_Center: {x: 0, y: 0, z: 1.5675254}
 --- !u!114 &7264342101728338438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db70046955ca27c4195fe64180bb62d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 0
+  path: {fileID: 0}
 --- !u!1001 &2175562497074371328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,6 +167,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
@@ -662,6 +668,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -785,6 +795,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
@@ -983,6 +997,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
@@ -1298,6 +1316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -1422,6 +1444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -1491,6 +1517,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
@@ -1930,6 +1960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -1992,6 +2026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -2053,6 +2091,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder

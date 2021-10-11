@@ -13,12 +13,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         float rotatingDirection = 0;
         bool isJumpingPressed;
         private bool canApplyForce;
-        private bool tricking = false;
 
         public override void StateEnd()
         {
             airTime = 0;
-            player.SetOnAnimator("jumping", false);
+            string[] animations = { "SaindoPulo", "AterrisagemVariacao1" };
+            player.ChangeAnimationTo(animations,"jumping", false);
             player.SetOnAnimator("trick", false);
         
             UnsubscribeOnInputEvents();
@@ -86,27 +86,29 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 }
                 else
                 {
+                    newPlayerState = new Fallen(true);
+                    
                     float timeFall;
 
-                    if (angleDifference > 120 && angleDifference < 150)
+                    if (angleDifference >= 60 && angleDifference <= 100)
                     {
-                        string[] animation = { "Caiu-Rolando" };
-                        player.ChangeAnimationTo(animation, "hardFall", true);
-                        timeFall = 5;
+                        string[] animation = { "CaiuCostas" };
+                        player.ChangeAnimationTo(animation, "fallen", true);
+                        timeFall = 2.5f;
                     }
-                    else if (angleDifference > 150)
+                    else if (angleDifference <= 160)
                     {
                         string[] animation = { "Caiu-Afunda" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
-                        timeFall = 5;
+                        timeFall = 3.5f;
                     }
                     else
                     {
                         string[] animation = { "Caiu-Snowboard-Cabeca" };
                         player.ChangeAnimationTo(animation, "fallen", true);
-                        timeFall = 4.24f;
+                        timeFall = 4.2f;
                     }
-                    
+
                     player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
 
                     newPlayerState = new Fallen(timeFall);
@@ -126,22 +128,18 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         void StartRotatePlayer(InputAction.CallbackContext context)
         {
-            rotatingDirection = context.ReadValue<float>();
+            if (!player.SharedValues.inputLocked)
+                rotatingDirection = context.ReadValue<float>();
 
             if (context.canceled)
-            {
                 player.SetOnAnimator("trick", false);
-                tricking = false;
-            }
-            else
+            else if (!player.SharedValues.inputLocked)
             {
-                if(!tricking)
-                    player.SetOnAnimator("trick", true);
-                
-                tricking = true;
+                player.SetOnAnimator("trick", true);
                 if (howMuchRotation > 360)
+                {
                     player.GetMovimentationFeedbacks().trickFeedback?.PlayFeedbacks();
-                
+                }
             }
         }
 
@@ -159,10 +157,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
                 Effect mortalEffect = new Effect("AddedAcceleration",amount, time, EffectMode.ADD, player);
                 mortalEffect.StartEffect(player);
-            }
-            
 
-            player.AddTurbo(numOfMortals * player.SharedValues.TurboMortalMultiplier);
+                player.AddTurbo(numOfMortals * 10);
+            }
         }
 
         void SubscribeOnInputEvents()

@@ -11,8 +11,18 @@ namespace ExtremeSnowboarding.Script.Items
         private void PickRandomItem(Player.Player player)
         {
             //Talvez uma animação de randomização??
+            Item item = null;
+            bool available = true;
+            do
+            {
+                available = true;
 
-            Item item = availableItems[Random.Range(0, availableItems.Length)];
+                item = availableItems[Random.Range(0, availableItems.Length)];
+
+                if (item.name == "Relampago" && player.SharedValues.qualification == 1)
+                    available = false;
+
+            } while (!available);
 
             player.SetItem(item);
 

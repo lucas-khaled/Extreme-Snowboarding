@@ -18,6 +18,8 @@ MonoBehaviour:
   - Magia
   - Faisca
   - ShockWave
+  activateAnimation: 1
+  animation: AtingidoPorFF
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -43,5 +45,9 @@ MonoBehaviour:
     especifiedType: 0
     position: 1
     forceInstance: 1
+  areaEffectInstance:
+    radius: 5
   activateVFXOnCaster: 0
   VFXNamesOnCaster: []
+  activateAnimationOnCaster: 0
+  animationOnCaster: 

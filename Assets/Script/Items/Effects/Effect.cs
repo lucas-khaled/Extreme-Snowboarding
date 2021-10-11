@@ -1,6 +1,7 @@
 using ExtremeSnowboarding.Script.EventSystem;
 using NaughtyAttributes;
 using UnityEngine;
+using System.Collections;
 
 namespace ExtremeSnowboarding.Script.Items.Effects
 {
@@ -49,11 +50,10 @@ namespace ExtremeSnowboarding.Script.Items.Effects
                     }
                     else
                         wasApplied = false;
-                    
                     break;
             
                 case Quantification.QuantificationCallbackType.RECUPERATON:
-                    if(wasApplied)
+                    if (wasApplied)
                         recuperation.StartRecuperation(player, application.PropertyName, application.InitialValue, application.ChangeValue, application.EffectMode);
                     break;
             }

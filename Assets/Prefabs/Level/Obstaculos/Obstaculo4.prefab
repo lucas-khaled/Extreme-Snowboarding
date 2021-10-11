@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4408159561946313537}
   - component: {fileID: 4408159561946313538}
   m_Layer: 0
-  m_Name: Obstaculo (4)
+  m_Name: Obstaculo4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4408159561946313539
 Transform:
@@ -52,8 +52,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 44.66377}
+  m_Center: {x: 0, y: 0, z: -2.508234}
 --- !u!114 &4408159561946313538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db70046955ca27c4195fe64180bb62d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 0
+  path: {fileID: 0}
 --- !u!1001 &4408159561418692460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArvoreSeca (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
 --- !u!4 &4226158455979192455 stripped
@@ -154,6 +160,10 @@ PrefabInstance:
     - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_Name
       value: Tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962298964263458843, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5734894532341138081, guid: 1c95e45bdd2c03d42ba71cc6ef0dd73b, type: 3}
       propertyPath: m_RootOrder
@@ -277,6 +287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArvoreSeca
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
 --- !u!4 &4226158455918186530 stripped
@@ -355,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArvoreSeca (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
 --- !u!4 &4226158455858427136 stripped
@@ -420,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
       propertyPath: m_Name
       value: Tronco (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
@@ -499,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pedraGrup3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ad59cae9bcadfa4db72332b91142bbf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad59cae9bcadfa4db72332b91142bbf, type: 3}
 --- !u!4 &4226158454445177791 stripped
@@ -564,6 +590,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
       propertyPath: m_Name
       value: pedraGrup
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0178ef2f22d17e469e2f4bb9d9e2193, type: 3}
@@ -643,6 +673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArvoreSeca (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1251fd1bc42bf614a92874f0909ac1b3, type: 3}
 --- !u!4 &4226158454401345176 stripped
@@ -708,6 +742,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
       propertyPath: m_Name
       value: Tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028a88a45ca5f114cb611fa28b8e9074, type: 3}

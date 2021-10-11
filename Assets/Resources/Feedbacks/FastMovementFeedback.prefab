@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 6818527548446593587}
   - component: {fileID: 455217029453314300}
   - component: {fileID: 444704110930722285}
-  - component: {fileID: 6241765887139756053}
-  - component: {fileID: -562993601611692926}
+  - component: {fileID: 8196771579888500199}
   m_Layer: 0
   m_Name: FastMovementFeedback
   m_TagString: Untagged
@@ -51,7 +50,7 @@ MonoBehaviour:
   Feedbacks:
   - {fileID: 455217029453314300}
   - {fileID: 444704110930722285}
-  - {fileID: 6241765887139756053}
+  - {fileID: 8196771579888500199}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -197,7 +196,7 @@ MonoBehaviour:
   RemapIntensityZero: 0
   RemapIntensityOne: 1
   RelativeIntensity: 0
---- !u!114 &6241765887139756053
+--- !u!114 &8196771579888500199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,7 +232,7 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   Channel: 0
-  Duration: 4
+  Duration: 3.8
   ResetShakerValuesAfterShake: 1
   ResetTargetValuesAfterShake: 1
   RelativeFieldOfView: 0
@@ -250,14 +249,50 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.19283904
+      value: 0.3773242
+      inSlope: 3.601826
+      outSlope: 3.601826
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.11334237
+      outWeight: 0.54322684
+    - serializedVersion: 3
+      time: 0.26343447
+      value: 0.5626254
+      inSlope: 0.7119106
+      outSlope: 0.7119106
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29226315
+      value: 0.5781648
+      inSlope: -0.018253326
+      outSlope: -0.018253326
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.55319935
+    - serializedVersion: 3
+      time: 0.35854962
+      value: 0.5637041
+      inSlope: -0.44556132
+      outSlope: -0.44556132
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.7617356
+    - serializedVersion: 3
+      time: 0.533766
+      value: 0.42005804
+      inSlope: -1.047188
+      outSlope: -1.047188
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3952354
+      outWeight: 0.19567108
     - serializedVersion: 3
       time: 1
       value: 0
@@ -272,28 +307,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   RemapFieldOfViewZero: 60
   RemapFieldOfViewOne: 120
---- !u!114 &-562993601611692926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014271039017156244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &4082555610272310653
 PrefabInstance:
   m_ObjectHideFlags: 0
