@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1697991171031503701}
   - component: {fileID: 4520566186329524593}
   - component: {fileID: 3292655861501834152}
+  - component: {fileID: -6043909367676543722}
   m_Layer: 0
   m_Name: CristalFeedback
   m_TagString: Untagged
@@ -264,6 +265,28 @@ MonoBehaviour:
   ZoomTransitionDuration: 2
   ZoomDuration: 2.5
   RelativeFieldOfView: 0
+--- !u!114 &-6043909367676543722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245771718950134133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &4236776228738038685
 PrefabInstance:
   m_ObjectHideFlags: 0

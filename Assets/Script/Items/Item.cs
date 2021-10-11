@@ -1,6 +1,9 @@
 using System;
+using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.Items.Effects;
 using NaughtyAttributes;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -19,6 +22,8 @@ namespace ExtremeSnowboarding.Script.Items
 
         [FormerlySerializedAs("attributesToChange")] [SerializeField]
         protected Effect[] effectsToApply;
+        
+        private const byte startEffectEventCode = 2;
 
         public abstract void Activate(Player.Player player);
 
@@ -32,6 +37,17 @@ namespace ExtremeSnowboarding.Script.Items
 
             ActivateAnimation(player, activateAnimation, animation);
             ActivateVFX(player, true, VFXNames);
+        }
+        
+        public void StartEffects(PhotonView view, Photon.Realtime.Player photonPlayer)
+        {
+            object[] passObject = { view.ViewID, name };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                Receivers = ReceiverGroup.Others,
+            };
+
+            PhotonNetwork.RaiseEvent(startEffectEventCode, passObject, raiseEventOptions, SendOptions.SendReliable);
         }
 
         public Sprite GetSprite()
@@ -66,6 +82,29 @@ namespace ExtremeSnowboarding.Script.Items
             {
                 effect.OnEnable();
             }
+            
+            if(PhotonNetwork.IsConnected)
+                PhotonNetwork.AddCallbackTarget(this);
+        }
+
+        private void OnDisable()
+        {
+            if(PhotonNetwork.IsConnected)
+                PhotonNetwork.RemoveCallbackTarget(this);
+        }
+
+        public void OnEvent(EventData photonEvent)
+        {
+            if(photonEvent.Code != startEffectEventCode) return;
+            
+            object[] data = (object[])photonEvent.CustomData;
+            if((string)data[1] != name) return;
+            
+            PhotonView pv = PhotonView.Find((int) data[0]);
+            if (!pv.IsMine)
+                return;
+
+            StartEffects(pv.GetComponent<Player.Player>());
         }
     }
 }

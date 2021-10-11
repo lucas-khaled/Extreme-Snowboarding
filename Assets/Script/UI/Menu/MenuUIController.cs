@@ -14,6 +14,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField]
         private EscolhaController escolhaController;
 
+        [Header("Lobby")] 
+        [SerializeField] private Lobby lobby;
+
         [Header("Audio")]
         [SerializeField]
         private AudioMixer gameMixer;
@@ -94,7 +97,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             escolhaController.SendPlayerData();
             escolhaController.SendLevel();
             GameController.gameController.SetAudio(EffectSliderValue, MusicSliderValue);
-            GameController.gameController.Play();
+            lobby.JoinOrCreateRoom(GameController.gameController.sceneToLoad);
         }
 
         public void GoNext()

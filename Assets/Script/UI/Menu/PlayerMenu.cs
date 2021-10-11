@@ -12,9 +12,6 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [BoxGroup("Settings")] 
         [SerializeField]
         private MultiplayerInstantiationSettings instantiationSettings;
-        
-        [BoxGroup("References")]
-        public Animator animatorRenato;
 
         [BoxGroup("Aniamtor references")]
         public Animator animatorRenato;

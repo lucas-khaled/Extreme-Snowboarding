@@ -147,7 +147,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29507113}
-  m_LocalRotation: {x: -0.019147484, y: -0.14829119, z: -0.0028716973, w: 0.9887542}
+  m_LocalRotation: {x: -0.019147484, y: -0.14829122, z: -0.002871698, w: 0.9887542}
   m_LocalPosition: {x: 0.77, y: 0.12, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1892,7 +1892,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456526763}
-  m_LocalRotation: {x: 0.014096546, y: -0.7053744, z: 0.014033253, w: 0.70855576}
+  m_LocalRotation: {x: 0.014096546, y: -0.7053744, z: 0.014033254, w: 0.70855576}
   m_LocalPosition: {x: 0.48, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1945,6 +1945,8 @@ GameObject:
   m_Component:
   - component: {fileID: 469403338}
   - component: {fileID: 469403337}
+  - component: {fileID: 469403340}
+  - component: {fileID: 469403339}
   m_Layer: 0
   m_Name: MenuUIController
   m_TagString: Untagged
@@ -1969,6 +1971,7 @@ MonoBehaviour:
     escolhaPanel: {fileID: 1755397653}
     playerChoose: {fileID: 1794024596988744071, guid: 6f5f83b900933fd4aa9bc3a218eab2c4, type: 3}
     rowSize: 8
+  lobby: {fileID: 469403339}
   gameMixer: {fileID: 24100000, guid: 252f9c1ee3bc1b240a2edc4e1b87ef90, type: 2}
   audioEffectsRef: {fileID: 2122893864}
   clickAudio: {fileID: 8300000, guid: 625d697d3a7afe949a493226e39e67d4, type: 3}
@@ -1987,6 +1990,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469403339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469403336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b03917470b120458bf8bcf927fd313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayersOnRoom: 4
+  minPlayers: 2
+--- !u!114 &469403340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469403336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &485909970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,7 +2920,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639205334}
-  m_LocalRotation: {x: -0.016842192, y: -0.14626634, z: -0.0024905964, w: 0.9890988}
+  m_LocalRotation: {x: -0.01684851, y: -0.14373347, z: -0.0024474668, w: 0.98947}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3144,7 +3183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669165943}
-  m_LocalRotation: {x: -0.016982026, y: 0.07128089, z: 0.0012137577, w: 0.997311}
+  m_LocalRotation: {x: -0.01697886, y: 0.07383407, z: 0.0012572325, w: 0.9971252}
   m_LocalPosition: {x: 0.657, y: 1.471, z: 5.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8283,7 +8322,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580973839}
-  m_LocalRotation: {x: -0.010357388, y: 0.5999366, z: 0.007767777, w: 0.7999428}
+  m_LocalRotation: {x: -0.0103686005, y: 0.5987804, z: 0.007752806, w: 0.8008086}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

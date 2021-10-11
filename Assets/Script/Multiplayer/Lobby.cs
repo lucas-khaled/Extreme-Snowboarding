@@ -16,10 +16,10 @@ namespace ExtremeSnowboarding
     {
         [SerializeField] [Range(1, 8)] private int maxPlayersOnRoom = 4;
         [SerializeField] [Min(2)] private int minPlayers = 2;
-        [SerializeField] [Scene] private int sceneToLoad;
+        //[SerializeField] [Scene] private int sceneToLoad;
 
-        [Header("Escolha Controller")] [SerializeField]
-        private EscolhaController escolhaController;
+        /*[Header("Escolha Controller")] [SerializeField]
+        private EscolhaController escolhaController;*/
         
         public Action<bool> OnConnectedToMasterCallback { get; set; }
         public Action<bool> OnJoinedRoomCallback { get; set; }
@@ -27,6 +27,7 @@ namespace ExtremeSnowboarding
         public Action<DisconnectCause> OnDisconnectionCallback { get; set; }
 
         private PhotonView _photonView;
+        private string sceneToLoad;
 
         private void Awake()
         {
@@ -38,14 +39,15 @@ namespace ExtremeSnowboarding
         void Start()
         {
             ConnectToPhoton();
-            escolhaController.SetPlayers(1);
-            escolhaController.ChangeLevel(sceneToLoad);
+           /* escolhaController.SetPlayers(1);
+            escolhaController.ChangeLevel(sceneToLoad);*/
         }
 
-        public void JoinOrCreateRoom()
+        public void JoinOrCreateRoom(string scene)
         {
             if (PhotonNetwork.IsConnected)
             {
+                sceneToLoad = scene;
                 RoomOptions roomOptions = new RoomOptions();
                 roomOptions.MaxPlayers = (byte)maxPlayersOnRoom;
                 TypedLobby typedLobby = new TypedLobby("Test_Room", LobbyType.Default);
@@ -59,24 +61,24 @@ namespace ExtremeSnowboarding
         }
 
         [PunRPC]
-        private void RPC_LoadLevel()
+        private void RPC_LoadLevel(string sceneToLoad)
         {
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
         
         public override void OnJoinedRoom()
         {
-            escolhaController.SendPlayerData();
+            /*escolhaController.SendPlayerData();*/
             OnJoinedRoomCallback?.Invoke(true);
 
             #if UNITY_EDITOR
-                _photonView.RPC("RPC_LoadLevel", RpcTarget.All);
+                _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
                 return;
             #else
             
             if (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers)
             {
-                _photonView.RPC("RPC_LoadLevel", RpcTarget.All);
+                _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
             }
             
             #endif
