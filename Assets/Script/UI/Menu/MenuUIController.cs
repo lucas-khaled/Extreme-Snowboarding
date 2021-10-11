@@ -26,6 +26,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         private float EffectSliderValue;
         private float MusicSliderValue;
+        
+        [SerializeField]
+        private AnimatorOverrideController[] overrideTricks;
 
         private void Start()
         {
@@ -106,6 +109,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             GameController.gameController.ChangeNumOfPlayers(num);
             escolhaController.SetPlayers(num);
+        }
+        public void ChangeTricks(AnimatorOverrideController overriders){
+        	
         }
     }
 }
