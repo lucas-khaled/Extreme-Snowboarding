@@ -113,6 +113,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             return returnMeshes;
         }
 
+        public void ChangeOverrider(AnimatorOverrideController overriderRef)
+        {
+            overrider = overriderRef;
+        }
+
         private void Awake()
         {
             myMaterial = new Material(changeColorShader);

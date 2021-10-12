@@ -37,7 +37,7 @@ namespace ExtremeSnowboarding.Script.Items
             Player = player;
             instance.ActivateInstance(this);
             ActivateVFX(player, activateVFXOnCaster, VFXNamesOnCaster);
-            ActivateAnimation(player, activateAnimationOnCaster, animationOnCaster, true);
+            ActivateAnimation(player, activateAnimationOnCaster, animationOnCaster);
         }
     }
     

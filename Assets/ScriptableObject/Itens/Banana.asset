@@ -15,8 +15,8 @@ MonoBehaviour:
   icon: {fileID: 449118660652190612, guid: a325379a591a687479ab580d00d47137, type: 3}
   activateVFX: 0
   VFXNames: []
-  activateAnimation: 0
-  animation: 
+  activateAnimation: 1
+  animation: CaiuBanana
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -46,5 +46,5 @@ MonoBehaviour:
     radius: 5
   activateVFXOnCaster: 0
   VFXNamesOnCaster: []
-  activateAnimationOnCaster: 0
-  animationOnCaster: 
+  activateAnimationOnCaster: 1
+  animationOnCaster: ColocandoMina
