@@ -1641,6 +1641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHole: 0
+  path: {fileID: 0}
 --- !u!65 &1382699573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1681,7 +1682,7 @@ PrefabInstance:
     - target: {fileID: 1145511381175244263, guid: 13246b263b1897345b1dda7004d050ff, type: 3}
       propertyPath: availableItems.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: ad5f02245dbdcbd4d97bb7ee74f16559, type: 2}
+      objectReference: {fileID: 11400000, guid: 1b8f0aa59d050b84dbffed1c41a9868e, type: 2}
     - target: {fileID: 1145511381175244263, guid: 13246b263b1897345b1dda7004d050ff, type: 3}
       propertyPath: availableItems.Array.data[1]
       value: 
@@ -2921,6 +2922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 9017018833079494311}
+  shouldFollowOnlyX: 0
 --- !u!4 &1014913448427840477
 Transform:
   m_ObjectHideFlags: 0

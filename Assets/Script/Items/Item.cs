@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Items
 {
-    public abstract class Item : ScriptableObject
+    public abstract class Item : ScriptableObject, IOnEventCallback
     {
         [ShowAssetPreview()] [SerializeField]
         protected Sprite icon;
@@ -39,7 +39,7 @@ namespace ExtremeSnowboarding.Script.Items
             ActivateVFX(player, true, VFXNames);
         }
         
-        public void StartEffects(PhotonView view, Photon.Realtime.Player photonPlayer)
+        public void StartEffects(PhotonView view)
         {
             object[] passObject = { view.ViewID, name };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions
@@ -83,14 +83,12 @@ namespace ExtremeSnowboarding.Script.Items
                 effect.OnEnable();
             }
             
-            if(PhotonNetwork.IsConnected)
-                PhotonNetwork.AddCallbackTarget(this);
+            PhotonNetwork.AddCallbackTarget(this);
         }
 
         private void OnDisable()
         {
-            if(PhotonNetwork.IsConnected)
-                PhotonNetwork.RemoveCallbackTarget(this);
+            PhotonNetwork.RemoveCallbackTarget(this);
         }
 
         public void OnEvent(EventData photonEvent)

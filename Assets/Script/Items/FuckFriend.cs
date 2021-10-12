@@ -83,7 +83,8 @@ namespace ExtremeSnowboarding.Script.Items
 
             foreach (var player in playersHitted)
             {
-                fuck.StartEffects(player.GetComponent<Player.Player>());
+                PhotonView view = player.GetComponent<PhotonView>();
+                fuck.StartEffects(view);
             }
 
         }
@@ -118,7 +119,7 @@ namespace ExtremeSnowboarding.Script.Items
         {
             PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(position).GetComponent<PhotonView>();
             Debug.Log("Player on Instance call: "+playerAffectedView.name);
-            fuck.StartEffects(playerAffectedView, playerAffectedView.Controller);
+            fuck.StartEffects(playerAffectedView);
         }
 
         private void InstanceByProximity(FuckFriend fuck)
@@ -149,7 +150,7 @@ namespace ExtremeSnowboarding.Script.Items
                 }
                 
                 PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(clampedPosition).GetComponent<PhotonView>();
-                fuck.StartEffects(playerAffectedView, playerAffectedView.Controller);
+                fuck.StartEffects(playerAffectedView);
             }
         }
         
