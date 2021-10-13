@@ -58,7 +58,7 @@ namespace ExtremeSnowboarding.Script.Items
                     MoveStopped();
                     break;
                 case MovementType.BACK:
-                    MoveFollowTrack(-1);
+                    MoveFollowTrack(1);
                     break;
                 case MovementType.STRAIGHT_BACK:
                     MoveStraight(-1);
@@ -77,9 +77,12 @@ namespace ExtremeSnowboarding.Script.Items
         {
             transform.position += speed * Time.deltaTime * 10 * velocityFactor * Vector3.right;
         }
+
+        Vector3 newPoint;
+
         void MoveFollowTrack(int distanceFactor)
         {
-            Vector3 newPoint = new Vector3(this.transform.position.x + distanceFactor,
+            newPoint = new Vector3(this.transform.position.x + distanceFactor,
                 this.transform.position.y,
                 this.transform.position.z);
 
@@ -91,16 +94,17 @@ namespace ExtremeSnowboarding.Script.Items
                 alreadyCasted = true;
             }
 
-            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(newPoint, Vector3.up, out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
-            else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
+            else if (Physics.Raycast(newPoint, -Vector3.up, out hit, Mathf.Infinity, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
+
 
             newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
 
             this.transform.position = Vector3.MoveTowards(this.transform.position,              // Posicao inicial 
-                newPoint,                             // Posicao destino
-                relativeSpeed * Time.deltaTime);      // Velocidade movimento
+                newPoint,                                                                       // Posicao destino
+                relativeSpeed * Time.deltaTime);                                                // Velocidade movimento
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
 
@@ -132,7 +136,7 @@ namespace ExtremeSnowboarding.Script.Items
                 }
                 transform.LookAt(pointDes);
 
-                rb.velocity = vectorDest * Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f);
+                rb.velocity = vectorDest * Time.deltaTime * velocity;
 
                 fuel -= Time.deltaTime;
             }
@@ -182,18 +186,20 @@ namespace ExtremeSnowboarding.Script.Items
                 if(playerHitted != caster)
                 {
                     InstantiateParticle(playerHitted.gameObject.transform);
+                    Destroy(gameObject);
 
                     fuckfriend.StartEffects(playerHitted);
-                    Destroy(gameObject);
                 }
             }
             else if(!other.gameObject.CompareTag("Track") && !other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
             {
                 InstantiateParticle(gameObject.transform.parent);
-
                 Destroy(gameObject);
-
-                Debug.Log(other.gameObject.tag);
+            }
+            if (this.gameObject.CompareTag("Foguete"))
+            {
+                InstantiateParticle(gameObject.transform.parent);
+                Destroy(gameObject);
             }
         }
 
@@ -209,7 +215,10 @@ namespace ExtremeSnowboarding.Script.Items
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.down*height);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.down * height);
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(new Vector3(newPoint.x, newPoint.y - height, newPoint.z),0.1f);
         }
     }
 }

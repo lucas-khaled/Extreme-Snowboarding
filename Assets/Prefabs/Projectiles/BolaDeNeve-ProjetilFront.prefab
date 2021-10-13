@@ -9867,8 +9867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea34b81ff278e445881f296f501bd25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  height: 1.7
+  speed: 15
+  height: 1
   fuel: 0
   movementType: 1
   explosionParticle: {fileID: 9046263992744792459}
@@ -9883,10 +9883,10 @@ Rigidbody:
   m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!198 &5662659534425565658
 ParticleSystem:
