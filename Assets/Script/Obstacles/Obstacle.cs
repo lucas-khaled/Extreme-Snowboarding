@@ -37,7 +37,7 @@ namespace ExtremeSnowboarding.Script.Obstacles
                     }
                 }
 
-                else if (!player.SharedValues.Etherium)
+                else if (!player.SharedValues.Etherium && player.SharedValues.actualState != "Jumping")
                     player.ChangeState(new Fallen(true));
             }
             else if (other.gameObject.CompareTag("Projectile"))
