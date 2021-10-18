@@ -17,6 +17,14 @@ namespace ExtremeSnowboarding.Multiplayer
 
         private List<RoomVisualizationUI> roomObjects = new List<RoomVisualizationUI>();
         private string selectedRoom;
+
+        private Lobby lobby;
+        
+        public void InitRoomJoining()
+        {
+            lobby = GameObject.FindObjectOfType<Lobby>();
+            lobby.OnRoomListUpdateCallback += LoadRooms;
+        }
         
         public void LoadRooms(List<RoomInfo> roomList)
         {
@@ -47,7 +55,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public void JoinRoom()
         {
-            Lobby lobby = GameObject.FindObjectOfType<Lobby>();
+            
             lobby.JoinRoom(selectedRoom);
         }
     }

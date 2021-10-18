@@ -88,6 +88,7 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnCreatedRoom()
         {
             base.OnCreatedRoom();
+            Debug.Log("Criei salinha bixo");
             OnCreatedRoomCallback?.Invoke(true);
         }
 
@@ -95,17 +96,17 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             OnJoinedRoomCallback?.Invoke(true);
 
-            #if UNITY_EDITOR
+            /*#if UNITY_EDITOR
                 _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
                 return;
-            #else
+            #else*/
             
-            if (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
             }
             
-            #endif
+            //#endif
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
@@ -138,7 +139,7 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             base.OnRoomListUpdate(roomList);
-            
+            OnRoomListUpdateCallback?.Invoke(roomList);
         }
 
         private void ConnectToPhoton()
