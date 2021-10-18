@@ -95,6 +95,8 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnJoinedRoom()
         {
             OnJoinedRoomCallback?.Invoke(true);
+            
+            Debug.Log("Joined Room: "+PhotonNetwork.CurrentRoom.Name);
 
             /*#if UNITY_EDITOR
                 _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
