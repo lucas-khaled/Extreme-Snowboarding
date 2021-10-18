@@ -18,6 +18,8 @@ namespace ExtremeSnowboarding.Script.UI.General
             base.Awake();
             foreach (var toggle in m_Toggles)
             {
+                Debug.Log(name+" - Toggle: "+toggle
+                    .name);
                 toggle.onValueChanged.AddListener(delegate(bool arg0) { if(toggle.isOn) OnToggleChanged?.Invoke(toggle.name); });
             }
         }

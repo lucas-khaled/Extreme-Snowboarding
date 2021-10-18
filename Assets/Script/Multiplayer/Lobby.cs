@@ -63,11 +63,10 @@ namespace ExtremeSnowboarding.Multiplayer
             
         }
 
-        public void JoinOrCreateRoom(string scene)
+        public void JoinOrCreateRoom()
         {
             if (PhotonNetwork.IsConnected)
             {
-                sceneToLoad = scene;
                 RoomOptions roomOptions = new RoomOptions();
                 TypedLobby typedLobby = new TypedLobby("Test_Room", LobbyType.Default);
 
@@ -82,6 +81,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [PunRPC]
         private void RPC_LoadLevel(string sceneToLoad)
         {
+            Debug.Log("Fuck: "+sceneToLoad);
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
@@ -127,6 +127,12 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             OnConnectedToMasterCallback?.Invoke(true);
             PhotonNetwork.JoinLobby();
+        }
+
+        public override void OnJoinedLobby()
+        {
+            base.OnJoinedLobby();
+            Debug.Log("Conected and joined");
         }
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)

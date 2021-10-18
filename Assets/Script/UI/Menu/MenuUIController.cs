@@ -105,7 +105,17 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             escolhaController.SendPlayerData();
             escolhaController.SendLevel();
             GameController.gameController.SetAudio(EffectSliderValue, MusicSliderValue);
-            lobby.JoinOrCreateRoom(GameController.gameController.sceneToLoad);
+            //lobby.JoinOrCreateRoom(GameController.gameController.sceneToLoad);
+        }
+
+        public void CreateRoom()
+        {
+            roomCreationUI.CreateRoom();
+        }
+
+        public void JoinRoom()
+        {
+            roomJoiningUI.JoinRoom();
         }
 
         public void GoNext()

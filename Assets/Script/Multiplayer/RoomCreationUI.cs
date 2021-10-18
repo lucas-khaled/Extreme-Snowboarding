@@ -13,14 +13,15 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField] private ExtremeToggleGroup sceneToggleGroup;
         [SerializeField] private Toggle isPrivateToggle;
         [SerializeField] private TMP_InputField nameInput;
-        [SerializeField] private TMP_InputField numOfPlayersInput;
+        [SerializeField] private ExtremeToggleGroup numOfPlayersToggle;
 
-        private string roomScene;
+        private string roomScene = "Fase1";
+        private int qntPlayer;
 
         public void CreateRoom()
         {
             Lobby lobby = GameObject.FindObjectOfType<Lobby>();
-            int numOfPlayers = int.Parse(numOfPlayersInput.text);
+            int numOfPlayers = qntPlayer;
             string sceneName = nameInput.text;
             
             lobby.CreateRoom(roomScene, numOfPlayers, isPrivateToggle.isOn, sceneName);
@@ -29,11 +30,18 @@ namespace ExtremeSnowboarding.Multiplayer
         public void StarRoomCreation()
         {
             sceneToggleGroup.OnToggleChanged.AddListener(SetRoomScene);
+            numOfPlayersToggle.OnToggleChanged.AddListener(SetQuantityOfPlayers);
         }
 
         private void SetRoomScene(string scene)
         {
+            Debug.Log("Scene NAme: "+scene);
             roomScene = scene;
+        }
+
+        private void SetQuantityOfPlayers(string qntPlayers)
+        {
+            this.qntPlayer = int.Parse(qntPlayers);
         }
     }
 }
