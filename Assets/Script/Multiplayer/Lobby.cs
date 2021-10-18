@@ -8,6 +8,7 @@ using NaughtyAttributes;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using Random = System.Random;
 
 namespace ExtremeSnowboarding.Multiplayer
 {
@@ -62,16 +63,13 @@ namespace ExtremeSnowboarding.Multiplayer
             }
             
         }
+        
+        
 
         public void JoinOrCreateRoom()
         {
             if (PhotonNetwork.IsConnected)
-            {
-                RoomOptions roomOptions = new RoomOptions();
-                TypedLobby typedLobby = new TypedLobby("Geral", LobbyType.Default);
-
-                PhotonNetwork.JoinOrCreateRoom("Test_Room", roomOptions, typedLobby);
-            }
+                PhotonNetwork.JoinRandomRoom();
             else
             {
                 // unconnected 
@@ -114,6 +112,11 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
             OnJoinedRoomCallback?.Invoke(false);
+        }
+
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            CreateRoom("Fase1", 4, false, ("Sala: "+(PhotonNetwork.CountOfRooms + 1)));
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
