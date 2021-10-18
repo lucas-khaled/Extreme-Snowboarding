@@ -42,6 +42,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             escolhaController.ChangeLevel(1);
             roomCreationUI.StarRoomCreation();
+            roomJoiningUI.InitRoomJoining();
 
             float efeitoValue = GameController.gameController.GetEffectSlider();
             float musicValue = GameController.gameController.GetMusicSlider();

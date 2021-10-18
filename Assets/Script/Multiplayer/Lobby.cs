@@ -139,6 +139,7 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             base.OnRoomListUpdate(roomList);
+            Debug.Log("Room Updated");
             OnRoomListUpdateCallback?.Invoke(roomList);
         }
 
