@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
+using ExtremeSnowboarding.Multiplayer;
 using ExtremeSnowboarding.Script.EstadosPlayer;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Player;
@@ -258,7 +259,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void LoadPlayers()
         {
-            _playerData = GameController.gameController.playerData[0];
+            _playerData = GameController.gameController.playerData;
             InstancePlayer(transform.position, _playerData);
         }
 

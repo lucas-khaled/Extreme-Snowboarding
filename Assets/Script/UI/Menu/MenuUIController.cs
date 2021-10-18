@@ -1,4 +1,6 @@
+using ExtremeSnowboarding.Multiplayer;
 using ExtremeSnowboarding.Script.Controllers;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -10,6 +12,12 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField]
         private MenuCameraPointController menuCameraPointController;
 
+        [BoxGroup("Multiplayer")] [SerializeField]
+        private RoomCreationUI roomCreationUI;
+
+        [BoxGroup("Multiplayer")] [SerializeField]
+        private RoomJoiningUI roomJoiningUI;
+        
         [Header("Escolha Panel")]
         [SerializeField]
         private EscolhaController escolhaController;
@@ -32,8 +40,8 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         private void Start()
         {
-            escolhaController.SetPlayers(1);
             escolhaController.ChangeLevel(1);
+            roomCreationUI.StarRoomCreation();
 
             float efeitoValue = GameController.gameController.GetEffectSlider();
             float musicValue = GameController.gameController.GetMusicSlider();
@@ -105,10 +113,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             menuCameraPointController.NextPoint();
         }
 
-        public void ChangeNumOfPlayers(int num)
+        /*public void ChangeNumOfPlayers(int num)
         {
             GameController.gameController.ChangeNumOfPlayers(num);
             escolhaController.SetPlayers(num);
-        }
+        }*/
     }
 }

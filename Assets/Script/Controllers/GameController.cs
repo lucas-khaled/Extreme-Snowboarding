@@ -18,7 +18,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         [Scene] [SerializeField] 
         private string[] scenesToLoad;
 
-        public PlayerData[] playerData { get; set; }
+        public PlayerData playerData { get; set; }
 
         private void Awake()
         {
@@ -35,7 +35,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             }
         }
 
-        public void StartPlayerData(PlayerData[] players)
+        public void StartPlayerData(PlayerData players)
         {
             playerData = players;
         }

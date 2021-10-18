@@ -9,18 +9,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace ExtremeSnowboarding
+namespace ExtremeSnowboarding.Multiplayer
 {
     [RequireComponent(typeof(PhotonView))]
     public class Lobby : MonoBehaviourPunCallbacks
     {
-        [SerializeField] [Range(1, 8)] private int maxPlayersOnRoom = 4;
         [SerializeField] [Min(2)] private int minPlayers = 2;
-        //[SerializeField] [Scene] private int sceneToLoad;
 
-        /*[Header("Escolha Controller")] [SerializeField]
-        private EscolhaController escolhaController;*/
-        
+        public Action<List<RoomInfo>> OnRoomListUpdateCallback { get; set; }
         public Action<bool> OnConnectedToMasterCallback { get; set; }
         public Action<bool> OnJoinedRoomCallback { get; set; }
         public Action<bool> OnCreatedRoomCallback { get; set; }
@@ -43,13 +39,36 @@ namespace ExtremeSnowboarding
             escolhaController.ChangeLevel(sceneToLoad);*/
         }
 
+        public void JoinRoom(string roomName)
+        {
+            if(PhotonNetwork.IsConnected)
+                PhotonNetwork.JoinRoom(roomName);
+        }
+
+        public void CreateRoom(string scene, int maxPlayers, bool isPrivate, string roomName)
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                RoomOptions roomOptions = new RoomOptions()
+                {
+                    MaxPlayers = (byte) maxPlayers,
+                    IsVisible = !isPrivate
+                };
+
+                sceneToLoad = scene;
+                
+                TypedLobby typedLobby = new TypedLobby(roomName, LobbyType.Default);
+                PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, typedLobby);
+            }
+            
+        }
+
         public void JoinOrCreateRoom(string scene)
         {
             if (PhotonNetwork.IsConnected)
             {
                 sceneToLoad = scene;
                 RoomOptions roomOptions = new RoomOptions();
-                roomOptions.MaxPlayers = (byte)maxPlayersOnRoom;
                 TypedLobby typedLobby = new TypedLobby("Test_Room", LobbyType.Default);
 
                 PhotonNetwork.JoinOrCreateRoom("Test_Room", roomOptions, typedLobby);
@@ -65,10 +84,15 @@ namespace ExtremeSnowboarding
         {
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
-        
+
+        public override void OnCreatedRoom()
+        {
+            base.OnCreatedRoom();
+            OnCreatedRoomCallback?.Invoke(true);
+        }
+
         public override void OnJoinedRoom()
         {
-            /*escolhaController.SendPlayerData();*/
             OnJoinedRoomCallback?.Invoke(true);
 
             #if UNITY_EDITOR
@@ -102,8 +126,15 @@ namespace ExtremeSnowboarding
         public override void OnConnectedToMaster()
         {
             OnConnectedToMasterCallback?.Invoke(true);
+            PhotonNetwork.JoinLobby();
         }
-        
+
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            base.OnRoomListUpdate(roomList);
+            
+        }
+
         private void ConnectToPhoton()
         {
             PhotonNetwork.ConnectUsingSettings();

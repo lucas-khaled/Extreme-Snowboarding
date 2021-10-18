@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using DG.Tweening;
+using ExtremeSnowboarding.Multiplayer;
 using UnityEditor;
 
 namespace ExtremeSnowboarding.Script.Player

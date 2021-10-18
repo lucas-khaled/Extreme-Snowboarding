@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using ExtremeSnowboarding.Multiplayer;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;

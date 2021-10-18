@@ -7,7 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace ExtremeSnowboarding
+namespace ExtremeSnowboarding.Multiplayer
 {
     public class NetInstantiationInfo : MonoBehaviour, IOnEventCallback
     {

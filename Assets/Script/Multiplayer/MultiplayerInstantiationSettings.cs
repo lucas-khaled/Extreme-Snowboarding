@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace ExtremeSnowboarding
+namespace ExtremeSnowboarding.Multiplayer
 {
     [CreateAssetMenu(fileName = "Instatiation Settings", menuName = "Multyplayer Settings/Instantiation Settings", order = 0)]
     public class MultiplayerInstantiationSettings : ScriptableObject
