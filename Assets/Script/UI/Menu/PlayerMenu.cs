@@ -105,6 +105,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             return (from mesh in selectedMeshes select mesh.meshName).ToArray();
         }
 
+        public void ChangeOverrider(AnimatorOverrideController overriderRef)
+        {
+            overrider = overriderRef;
+        }
+
         private void Awake()
         {
             myMaterial = new Material(instantiationSettings.playerShader);

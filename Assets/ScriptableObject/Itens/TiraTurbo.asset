@@ -15,11 +15,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: d0850e0765749792cab293d6bc9a760e, type: 3}
   activateVFX: 1
   VFXNames:
-  - Magia
-  - Faisca
-  - ShockWave
-  activateAnimation: 1
-  animation: AtingidoPorFF
+  - Extintor
+  activateAnimation: 0
+  animation: 
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -40,7 +38,7 @@ MonoBehaviour:
         conditions: []
   instanceType: 0
   projectileInstance:
-    projectile: {fileID: 4289294465096889333, guid: 5b571a5dc369e5cd685ea5b5bc7ae688, type: 3}
+    projectile: {fileID: 3594882743568015332, guid: 18846a1e732598a4988efa49b68b6678, type: 3}
   specificPlayerInstance:
     especifiedType: 0
     position: 1
