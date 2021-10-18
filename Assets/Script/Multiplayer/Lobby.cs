@@ -58,7 +58,7 @@ namespace ExtremeSnowboarding.Multiplayer
                 sceneToLoad = scene;
                 
                 TypedLobby typedLobby = new TypedLobby(roomName, LobbyType.Default);
-                PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, typedLobby);
+                PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
             }
             
         }
@@ -68,7 +68,7 @@ namespace ExtremeSnowboarding.Multiplayer
             if (PhotonNetwork.IsConnected)
             {
                 RoomOptions roomOptions = new RoomOptions();
-                TypedLobby typedLobby = new TypedLobby("Test_Room", LobbyType.Default);
+                TypedLobby typedLobby = new TypedLobby("Geral", LobbyType.Default);
 
                 PhotonNetwork.JoinOrCreateRoom("Test_Room", roomOptions, typedLobby);
             }
@@ -127,19 +127,19 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnConnectedToMaster()
         {
             OnConnectedToMasterCallback?.Invoke(true);
-            PhotonNetwork.JoinLobby();
+            PhotonNetwork.JoinLobby( new TypedLobby("Geral", LobbyType.Default));
         }
 
         public override void OnJoinedLobby()
         {
             base.OnJoinedLobby();
-            Debug.Log("Conected and joined");
+            Debug.Log("Conected and joined "+PhotonNetwork.CurrentLobby.Name);
         }
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            base.OnRoomListUpdate(roomList);
             Debug.Log("Room Updated");
+            base.OnRoomListUpdate(roomList);
             OnRoomListUpdateCallback?.Invoke(roomList);
         }
 
@@ -147,6 +147,16 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.AutomaticallySyncScene = true;
+        }
+
+        public override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        public override void OnDisable()
+        {
+            base.OnDisable();
         }
     }
 }
