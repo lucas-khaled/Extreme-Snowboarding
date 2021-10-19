@@ -58,7 +58,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
                 sceneToLoad = scene;
                 
-                TypedLobby typedLobby = new TypedLobby(roomName, LobbyType.Default);
+                TypedLobby typedLobby = new TypedLobby("Geral", LobbyType.Default);
                 PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
             }
             
@@ -143,7 +143,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            Debug.Log("Room Updated");
+            Debug.Log("Room Updated: "+PhotonNetwork.CurrentLobby.Name);
             base.OnRoomListUpdate(roomList);
             OnRoomListUpdateCallback?.Invoke(roomList);
         }
