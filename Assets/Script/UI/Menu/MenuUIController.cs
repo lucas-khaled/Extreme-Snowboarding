@@ -11,6 +11,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuUIController : MonoBehaviour
     {
+        [Header("Camera Controller")]
         [SerializeField]
         private MenuCameraPointController menuCameraPointController;
 
@@ -22,8 +23,15 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         [BoxGroup("Multiplayer")] [SerializeField]
         private RoomWaitingUI roomWaitingUI;
+
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject saguaoPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject criacaoPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject encontrarSalaPanel;
         
-        [Header("Escolha Panel")]
+        [Header("Escolha Controller")]
         [SerializeField]
         private EscolhaController escolhaController;
 
@@ -117,11 +125,15 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         public void CreateRoom()
         {
             roomCreationUI.CreateRoom();
+            criacaoPanel.gameObject.SetActive(false);
+            saguaoPanel.SetActive(true);
         }
 
         public void JoinRoom()
         {
             roomJoiningUI.JoinRoom();
+            encontrarSalaPanel.gameObject.SetActive(false);
+            saguaoPanel.SetActive(true);
         }
 
         public void GoNext()

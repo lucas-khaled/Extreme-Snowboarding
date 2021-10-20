@@ -16,7 +16,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField] private Button selectRoomButton;
 
         private List<RoomVisualizationUI> roomObjects = new List<RoomVisualizationUI>();
-        private string selectedRoom;
+        private RoomVisualizationUI selectedRoom = null;
 
         private Lobby lobby;
         
@@ -30,6 +30,7 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             Debug.Log("CAllback room update: "+ roomList.Count);
             ClearRooms();
+            
             
             foreach (var roomInfo in roomList)
             {
@@ -48,15 +49,18 @@ namespace ExtremeSnowboarding.Multiplayer
             selectRoomButton.interactable = false;
         }
 
-        public void OnRoomSelected(string roomName)
+        public void OnRoomSelected(RoomVisualizationUI visualization)
         {
-            this.selectedRoom = roomName;
+            if(selectedRoom != null)
+                selectedRoom.OnDeselected();
+            
+            selectedRoom = visualization;
             selectRoomButton.interactable = true;
         }
 
         public void JoinRoom()
         {
-            lobby.JoinRoom(selectedRoom);
+            lobby.JoinRoom(selectedRoom.roomName.text);
         }
     }
 }

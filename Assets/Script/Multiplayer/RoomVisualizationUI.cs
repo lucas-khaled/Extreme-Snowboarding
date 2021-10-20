@@ -13,13 +13,14 @@ namespace ExtremeSnowboarding.Script.Multiplayer
         public TMP_Text roomName;
         [SerializeField] private TMP_Text capacity;
         [SerializeField] private TMP_Text ping;
+        [SerializeField] private GameObject iconSelected;
 
         public RoomInfo roomInfo { get; private set; }
 
-        private Action<string> onRoomSelected;
+        private Action<RoomVisualizationUI> onRoomSelected;
         private Button roomButton;
 
-        public void SetRoom(RoomInfo info, Action<string> roomSelected)
+        public void SetRoom(RoomInfo info, Action<RoomVisualizationUI> roomSelected)
         {
             roomInfo = info;
             
@@ -33,9 +34,15 @@ namespace ExtremeSnowboarding.Script.Multiplayer
             roomButton.onClick.AddListener(delegate { OnRoomButtonClicked(); });
         }
 
+        public void OnDeselected()
+        {
+            iconSelected.SetActive(false);
+        }
+
         private void OnRoomButtonClicked()
         {
-            onRoomSelected.Invoke(roomName.text);
+            iconSelected.SetActive(true);
+            onRoomSelected.Invoke(this);
         }
     }
 }

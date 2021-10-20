@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4066800449558356578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -349,6 +349,7 @@ MonoBehaviour:
   roomName: {fileID: 4066800450419196759}
   capacity: {fileID: 4066800448357904005}
   ping: {fileID: 4066800450368688668}
+  iconSelected: {fileID: 4066800449558356589}
 --- !u!1 &4066800450368688670
 GameObject:
   m_ObjectHideFlags: 0

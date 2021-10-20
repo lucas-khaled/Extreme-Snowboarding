@@ -2923,6 +2923,9 @@ MonoBehaviour:
     - {fileID: 662650593}
     changeNickInput: {fileID: 1334781211}
     startGameButton: {fileID: 0}
+  saguaoPanel: {fileID: 549624837}
+  criacaoPanel: {fileID: 1003611222}
+  encontrarSalaPanel: {fileID: 1847319091}
   escolhaController:
     playerChoose: {fileID: 1976077154908434121}
   lobby: {fileID: 469403339}
@@ -4063,7 +4066,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639205334}
-  m_LocalRotation: {x: 0.017181292, y: -0.14623637, z: 0.0025402256, w: 0.9890972}
+  m_LocalRotation: {x: 0.017181115, y: -0.14631802, z: 0.0025416485, w: 0.9890852}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4314,7 +4317,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669165943}
-  m_LocalRotation: {x: 0.017323831, y: 0.07130979, z: -0.0012386997, w: 0.997303}
+  m_LocalRotation: {x: 0.017323967, y: 0.071227506, z: -0.0012372725, w: 0.9973089}
   m_LocalPosition: {x: 0.657, y: 1.471, z: 5.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5887,8 +5890,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 15
-  m_SpotAngle: 76.05982
-  m_InnerSpotAngle: 67
+  m_SpotAngle: 75.21459
+  m_InnerSpotAngle: 66.15478
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -13275,15 +13278,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 469403337}
+    - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JoinRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ExtremeSnowboarding.Script.UI.Menu.MenuUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217434741537592228, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4567953206320581085, guid: f32ffc7b846f3f0e9b3b72b9a2ea1716, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
