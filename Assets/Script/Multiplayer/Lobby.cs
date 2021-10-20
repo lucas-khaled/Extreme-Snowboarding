@@ -8,6 +8,7 @@ using NaughtyAttributes;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using Player = Photon.Realtime.Player;
 using Random = System.Random;
 
 namespace ExtremeSnowboarding.Multiplayer
@@ -22,6 +23,8 @@ namespace ExtremeSnowboarding.Multiplayer
         public Action<bool> OnJoinedRoomCallback { get; set; }
         public Action<bool> OnCreatedRoomCallback { get; set; }
         public Action<DisconnectCause> OnDisconnectionCallback { get; set; }
+        public Action OnPlayersInRoomUpdateCallback { get; set; }
+        public Action OnLeftRoomCallback { get; set; }
 
         private PhotonView _photonView;
         private string sceneToLoad;
@@ -81,6 +84,24 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             Debug.Log("Fuck: "+sceneToLoad);
             PhotonNetwork.LoadLevel(sceneToLoad);
+        }
+
+        public override void OnLeftRoom()
+        {
+            base.OnLeftRoom();
+            OnLeftRoomCallback?.Invoke();
+        }
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+            OnPlayersInRoomUpdateCallback?.Invoke();
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            base.OnPlayerLeftRoom(otherPlayer);
+            OnPlayersInRoomUpdateCallback?.Invoke();
         }
 
         public override void OnCreatedRoom()

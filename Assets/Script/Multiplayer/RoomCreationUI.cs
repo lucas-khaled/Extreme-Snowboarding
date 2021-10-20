@@ -27,7 +27,7 @@ namespace ExtremeSnowboarding.Multiplayer
             lobby.CreateRoom(roomScene, numOfPlayers, isPrivateToggle.isOn, sceneName);
         }
         
-        public void StarRoomCreation()
+        public void Init()
         {
             sceneToggleGroup.OnToggleChanged.AddListener(SetRoomScene);
             numOfPlayersToggle.OnToggleChanged.AddListener(SetQuantityOfPlayers);
