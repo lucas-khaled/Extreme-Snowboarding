@@ -33,8 +33,8 @@ namespace ExtremeSnowboarding.Multiplayer
             if(!joined) return;
             
             started = true;
-            /*startGameButton.gameObject.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
-            startGameButton.interactable = false;*/
+            startGameButton.gameObject.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
+            startGameButton.interactable = false;
             
             roomNameText.SetText(PhotonNetwork.CurrentRoom.Name);
             changeNickInput.SetTextWithoutNotify(PhotonNetwork.LocalPlayer.NickName);
@@ -56,7 +56,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
             if (index > 1 && PhotonNetwork.LocalPlayer.IsMasterClient)
             {
-                //startGameButton.interactable = false;
+                startGameButton.interactable = false;
             }
 
             if (index < playersInRoomTexts.Length-1)
@@ -69,7 +69,7 @@ namespace ExtremeSnowboarding.Multiplayer
         private void Quit()
         {
             started = false;
-            //startGameButton.interactable = false;
+            startGameButton.interactable = false;
             
             roomNameText.SetText(string.Empty);
         }

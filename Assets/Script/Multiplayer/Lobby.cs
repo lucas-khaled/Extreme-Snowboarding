@@ -85,6 +85,11 @@ namespace ExtremeSnowboarding.Multiplayer
             }
         }
 
+        public void StartGame()
+        {
+            _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
+        }
+
         [PunRPC]
         private void RPC_LoadLevel(string sceneToLoad)
         {
@@ -121,19 +126,10 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             OnJoinedRoomCallback?.Invoke(true);
             
-            Debug.Log("Joined Room: "+PhotonNetwork.CurrentRoom.Name);
-
-            /*#if UNITY_EDITOR
-                _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
-                return;
-            #else*/
-            
             if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
-                _photonView.RPC("RPC_LoadLevel", RpcTarget.All, sceneToLoad);
+               StartGame();
             }
-            
-            //#endif
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
