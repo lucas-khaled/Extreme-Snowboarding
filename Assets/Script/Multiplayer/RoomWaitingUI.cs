@@ -56,7 +56,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
             if (index > 1 && PhotonNetwork.LocalPlayer.IsMasterClient)
             {
-                startGameButton.interactable = false;
+                startGameButton.interactable = true;
             }
 
             if (index < playersInRoomTexts.Length-1)

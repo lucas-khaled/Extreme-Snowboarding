@@ -93,7 +93,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [PunRPC]
         private void RPC_LoadLevel(string sceneToLoad)
         {
-            Debug.Log("Fuck: "+sceneToLoad);
+            GetComponent<MenuUIController>().PressPlay();
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
