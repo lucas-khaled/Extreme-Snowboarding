@@ -302,7 +302,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29507113}
-  m_LocalRotation: {x: 0.027298357, y: 0.3604902, z: -0.010555347, w: 0.9323038}
+  m_LocalRotation: {x: 0.027298357, y: 0.36049026, z: -0.010555347, w: 0.9323037}
   m_LocalPosition: {x: 0.77, y: 0.12, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2921,7 +2921,7 @@ MonoBehaviour:
     - {fileID: 320153073}
     - {fileID: 1511797600}
     - {fileID: 662650593}
-    roomCodeText: {fileID: 0}
+    changeNickInput: {fileID: 1334781211}
     startGameButton: {fileID: 0}
   escolhaController:
     playerChoose: {fileID: 1976077154908434121}
@@ -3114,7 +3114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3126,7 +3126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
@@ -3143,7 +3143,7 @@ PrefabInstance:
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 8802546822385961565}
+      objectReference: {fileID: 469403339}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -3174,7 +3174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetTrigger
+      value: LeaveRoom
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
@@ -3190,7 +3190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
+      value: ExtremeSnowboarding.Multiplayer.Lobby, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
@@ -3210,7 +3210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
-      value: returnToMainMenu
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
@@ -3231,6 +3231,38 @@ PrefabInstance:
     - target: {fileID: 8030709701933402655, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 469403337}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeNickName
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ExtremeSnowboarding.Script.UI.Menu.MenuUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1334781211}
+    - target: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TMPro.TMP_InputField, Unity.TextMeshPro
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
@@ -9297,6 +9329,17 @@ Transform:
   m_Father: {fileID: 1422004529}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334781211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8030709702157299042, guid: 9bd6d41643a500591a7367b0b9ac3540, type: 3}
+  m_PrefabInstance: {fileID: 549624835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1354948473
 GameObject:
   m_ObjectHideFlags: 0

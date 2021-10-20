@@ -71,7 +71,7 @@ namespace ExtremeSnowboarding.Multiplayer
             started = false;
             //startGameButton.interactable = false;
             
-            roomNameText.SetText(PhotonNetwork.CurrentRoom.Name);
+            roomNameText.SetText(string.Empty);
         }
     }
 }

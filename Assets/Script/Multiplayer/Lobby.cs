@@ -66,8 +66,14 @@ namespace ExtremeSnowboarding.Multiplayer
             }
             
         }
-        
-        
+
+        public void LeaveRoom()
+        {
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+            {
+                PhotonNetwork.LeaveRoom();
+            }
+        }
 
         public void JoinOrCreateRoom()
         {
