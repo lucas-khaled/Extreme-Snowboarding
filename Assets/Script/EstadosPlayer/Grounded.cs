@@ -115,10 +115,12 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             {
                 if (hit.normal.x >= 0.95)
                     player.ChangeState(new Jumping(false));
-
-                ClampPlayerRotationByGround(hit);
-                ClampPlayerPositionOnGround(hit);
-                player.SharedValues.LastGroundedNormal = hit.normal.normalized;
+                else
+                {
+                    ClampPlayerRotationByGround(hit);
+                    ClampPlayerPositionOnGround(hit);
+                    player.SharedValues.LastGroundedNormal = hit.normal.normalized;
+                }
             }
             else if (timeOnGround > timeToJump)
             {
