@@ -144,7 +144,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         public void ChangeNickName(TMP_InputField input)
         {
             PhotonNetwork.LocalPlayer.NickName = input.text;
-            //PlayerPrefs.SetString("Nickname", input.text);
+            PlayerPrefs.SetString("Nickname", input.text);
         }
     }
 }

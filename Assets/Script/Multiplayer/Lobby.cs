@@ -176,15 +176,5 @@ namespace ExtremeSnowboarding.Multiplayer
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.AutomaticallySyncScene = true;
         }
-
-        public override void OnEnable()
-        {
-            base.OnEnable();
-        }
-
-        public override void OnDisable()
-        {
-            base.OnDisable();
-        }
     }
 }

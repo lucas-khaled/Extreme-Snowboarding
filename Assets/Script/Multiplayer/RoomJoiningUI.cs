@@ -28,9 +28,8 @@ namespace ExtremeSnowboarding.Multiplayer
         
         public void LoadRooms(List<RoomInfo> roomList)
         {
-            Debug.Log("CAllback room update: "+ roomList.Count);
+            Debug.Log("Callback room update: "+ roomList.Count);
             ClearRooms();
-            
             
             foreach (var roomInfo in roomList)
             {

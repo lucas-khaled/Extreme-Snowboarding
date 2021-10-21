@@ -44,31 +44,56 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         private Material myMaterial;
         private PlayerMesh[] selectedMeshes;
 
-        public void ChangePrimaryColor(string colorString)
+        public void ChangePrimaryColor(string colorString, bool setOnPicker = true)
         {
-        
             Color color;
+            if (!colorString.Contains("#"))
+                colorString = "#" + colorString;
+            
             if (ColorUtility.TryParseHtmlString(colorString, out color))
+            {
                 ChangePrimaryColor(color);
+                if(setOnPicker)
+                    primaryColorPicker.color = color;
+            }
         }
 
-        public void ChangeSecundaryColor(string colorString)
+        public void ChangeSecondaryColor(string colorString, bool setOnPicker = true)
         {
             Color color;
-            ColorUtility.TryParseHtmlString(colorString, out color);
-            ChangeSecondaryColor(color);
+            if (!colorString.Contains("#"))
+                colorString = "#" + colorString;
+            
+            if (ColorUtility.TryParseHtmlString(colorString, out color))
+            {
+                ChangeSecondaryColor(color);
+                if(setOnPicker)
+                    secondaryColorPicker.color = color;
+            }
         }
 
-        public void ChangePrimaryColor(Color color)
+        public void ChangePrimaryColor(Color color, bool saveOnPrefs = true)
         {
+            Debug.Log("Primary color set: "+ColorUtility.ToHtmlStringRGB(color));
             myMaterial.SetColor("_PrimaryColor", color);
             primaryColor = color;
+            if (saveOnPrefs)
+            {
+                Debug.Log("Saving Primary Color: " + ColorUtility.ToHtmlStringRGB(color));
+                PlayerPrefs.SetString("PrimaryColor", ColorUtility.ToHtmlStringRGB(color));
+            }
         }
 
-        public void ChangeSecondaryColor(Color color)
+        public void ChangeSecondaryColor(Color color, bool saveOnPrefs = true)
         {
+            Debug.Log("Secondary color set: "+ColorUtility.ToHtmlStringRGB(color));
             myMaterial.SetColor("_SecondaryColor", color);
             secondaryColor = color;
+            if (saveOnPrefs)
+            {
+                Debug.Log("Saving Secondary Color: " + ColorUtility.ToHtmlStringRGB(color));
+                PlayerPrefs.SetString("SecondaryColor", ColorUtility.ToHtmlStringRGB(color));
+            }
         }
 
         public void OnPrimaryColorPickerChange()
@@ -81,7 +106,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             ChangeSecondaryColor(secondaryColorPicker.color);
         }
 
-        public void SetFemaleMesh()
+        public void SetFemaleMeshes()
         {
             for (int i = 0; i < meshRenderers.Length; i++)
             {
@@ -89,6 +114,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             }
 
             selectedMeshes = femaleMeshes;
+            PlayerPrefs.SetString("Mesh", "Female");
         }
 
         public void SetMaleMeshes()
@@ -99,6 +125,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             }
 
             selectedMeshes = maleMeshes;
+            PlayerPrefs.SetString("Mesh", "Male");
         }
 
         public string[] GetSelectedMeshesNames()
@@ -111,6 +138,20 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             overrider = overriderRef;
         }
 
+        public void RandomizePrimaryColor()
+        {
+            primaryColor = Random.ColorHSV();
+            primaryColorPicker.color = primaryColor;
+            ChangePrimaryColor(primaryColor, false);
+        }
+        
+        public void RandomizeSecondaryColor()
+        {
+            secondaryColor = Random.ColorHSV();
+            secondaryColorPicker.color = secondaryColor;
+            ChangeSecondaryColor(secondaryColor, false);
+        }
+
         private void Awake()
         {
             myMaterial = new Material(instantiationSettings.playerShader);
@@ -120,17 +161,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             myMaterial.SetTexture("_Color2Mask", instantiationSettings.playerMask02);
 
             canvas.worldCamera = Camera.main;
-
-            primaryColor = Random.ColorHSV();
-            secondaryColor = Random.ColorHSV();
-
-            primaryColorPicker.color = primaryColor;
-            secondaryColorPicker.color = secondaryColor;
-
             selectedMeshes = maleMeshes;
-
-            ChangePrimaryColor(primaryColor);
-            ChangeSecondaryColor(secondaryColor);
         }
 
         private void SetMaterials()
