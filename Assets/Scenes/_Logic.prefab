@@ -507,6 +507,14 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 255
       objectReference: {fileID: 0}
+    - target: {fileID: 224230626416232986, guid: 0725c55706faec544828b3434b2a0e7e, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224230626416232986, guid: 0725c55706faec544828b3434b2a0e7e, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224230627647239816, guid: 0725c55706faec544828b3434b2a0e7e, type: 3}
       propertyPath: m_Name
       value: CameraFollow1
