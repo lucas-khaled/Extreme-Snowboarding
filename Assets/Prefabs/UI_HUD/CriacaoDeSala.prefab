@@ -1471,15 +1471,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1971,7 +1971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -246.41, y: 150.5}
+  m_AnchoredPosition: {x: -248, y: 138}
   m_SizeDelta: {x: 251.8, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927285730838460
@@ -2093,7 +2093,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 165.89, y: 84.96}
-  m_SizeDelta: {x: 191.78, y: 59.91}
+  m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927285796252039
 CanvasRenderer:
@@ -2683,15 +2683,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2779,8 +2779,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.099976, y: -3.3}
-  m_SizeDelta: {x: -28, y: 5.41}
+  m_AnchoredPosition: {x: 53.15, y: -3.3}
+  m_SizeDelta: {x: 26.1, y: 5.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927285939449955
 CanvasRenderer:
@@ -2916,15 +2916,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3239,8 +3239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -70}
-  m_SizeDelta: {x: 550, y: 35}
+  m_AnchoredPosition: {x: 364.1, y: -78.8}
+  m_SizeDelta: {x: 578.3, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927286106061873
 CanvasRenderer:
@@ -5075,8 +5075,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -232.00003, y: 199.99998}
-  m_SizeDelta: {x: 300, y: 30}
+  m_AnchoredPosition: {x: -258, y: 199}
+  m_SizeDelta: {x: 344.4, y: 47.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927286891059874
 CanvasRenderer:
@@ -5547,8 +5547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.099976, y: -2.705}
-  m_SizeDelta: {x: -28, y: 5.41}
+  m_AnchoredPosition: {x: 57.74, y: -2.705}
+  m_SizeDelta: {x: 35.27, y: 5.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927287027176473
 CanvasRenderer:
@@ -5704,8 +5704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.1, y: -2}
-  m_SizeDelta: {x: -28, y: 5.41}
+  m_AnchoredPosition: {x: 72.41, y: -2}
+  m_SizeDelta: {x: 64.62, y: 5.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8984927287132871679
 CanvasRenderer:
@@ -5748,7 +5748,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Escolha De Fase Aleatoria
+  m_Text: Escolha de fase aleatoria
 --- !u!1 &8984927287330064772
 GameObject:
   m_ObjectHideFlags: 0
@@ -5841,15 +5841,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
