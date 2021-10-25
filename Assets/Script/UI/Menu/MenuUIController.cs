@@ -1,4 +1,8 @@
+using ExtremeSnowboarding.Multiplayer;
 using ExtremeSnowboarding.Script.Controllers;
+using NaughtyAttributes;
+using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -7,12 +11,32 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 {
     public class MenuUIController : MonoBehaviour
     {
+        [Header("Camera Controller")]
         [SerializeField]
         private MenuCameraPointController menuCameraPointController;
 
-        [Header("Escolha Panel")]
+        [BoxGroup("Multiplayer")] [SerializeField]
+        private RoomCreationUI roomCreationUI;
+
+        [BoxGroup("Multiplayer")] [SerializeField]
+        private RoomJoiningUI roomJoiningUI;
+
+        [BoxGroup("Multiplayer")] [SerializeField]
+        private RoomWaitingUI roomWaitingUI;
+
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject saguaoPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject criacaoPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject encontrarSalaPanel;
+        
+        [Header("Escolha Controller")]
         [SerializeField]
         private EscolhaController escolhaController;
+
+        [Header("Lobby")] 
+        [SerializeField] private Lobby lobby;
 
         [Header("Audio")]
         [SerializeField]
@@ -29,8 +53,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         private void Start()
         {
-            escolhaController.SetPlayers(1);
             escolhaController.ChangeLevel(1);
+            roomCreationUI.Init();
+            roomJoiningUI.Init();
+            roomWaitingUI.Init();
 
             float efeitoValue = GameController.gameController.GetEffectSlider();
             float musicValue = GameController.gameController.GetMusicSlider();
@@ -94,7 +120,20 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             escolhaController.SendPlayerData();
             escolhaController.SendLevel();
             GameController.gameController.SetAudio(EffectSliderValue, MusicSliderValue);
-            GameController.gameController.Play();
+        }
+
+        public void CreateRoom()
+        {
+            roomCreationUI.CreateRoom();
+            criacaoPanel.gameObject.SetActive(false);
+            saguaoPanel.SetActive(true);
+        }
+
+        public void JoinRoom()
+        {
+            roomJoiningUI.JoinRoom();
+            encontrarSalaPanel.gameObject.SetActive(false);
+            saguaoPanel.SetActive(true);
         }
 
         public void GoNext()
@@ -102,10 +141,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             menuCameraPointController.NextPoint();
         }
 
-        public void ChangeNumOfPlayers(int num)
+        public void ChangeNickName(TMP_InputField input)
         {
-            GameController.gameController.ChangeNumOfPlayers(num);
-            escolhaController.SetPlayers(num);
+            PhotonNetwork.LocalPlayer.NickName = input.text;
+            PlayerPrefs.SetString("Nickname", input.text);
         }
     }
 }

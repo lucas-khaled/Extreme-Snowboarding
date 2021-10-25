@@ -29,7 +29,7 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         [SerializeField]
         private ParticleSystem particles;
 
-        private GameCamera[] cameraScript;
+        private GameCamera cameraScript;
         private Vector3 nextMovementPoint;
         private bool isMoving;
 
@@ -37,7 +37,7 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         {
             isMoving = false;
             StartCoroutine(CatastropheStartTimer());
-            cameraScript = GameObject.FindGameObjectWithTag("CorridaController").GetComponent<CorridaController>().cameras;
+            cameraScript = GameObject.FindGameObjectWithTag("CorridaController").GetComponent<CorridaController>().camera;
         }
 
         void Update()
@@ -64,10 +64,7 @@ namespace ExtremeSnowboarding.Script.Catastrophe
             this.GetComponent<SphereCollider>().enabled = true;
             particles.Play();
 
-            cameraScript[0].StartCoroutine(cameraScript[0].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
-            cameraScript[1].StartCoroutine(cameraScript[1].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
-            cameraScript[2].StartCoroutine(cameraScript[2].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
-            cameraScript[3].StartCoroutine(cameraScript[3].CameraShake(deactivateCameraShake, shakingDuration, magnetude));
+            cameraScript.StartCoroutine(cameraScript.CameraShake(deactivateCameraShake, shakingDuration, magnetude));
 
             CorridaController.instance.catastrophe = this.gameObject;
             // Aviso?

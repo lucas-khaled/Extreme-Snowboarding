@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtremeSnowboarding.Script.Controllers;
 using UnityEngine;
 using ExtremeSnowboarding.Script.Player;
 
@@ -9,14 +10,11 @@ namespace ExtremeSnowboarding.Script
     {
         private Player.Player firstPlayer;
         private Vector3 positionPoint;
-
-        public void UpdateFirstPlayer(Player.Player player)
-        {
-            firstPlayer = player;
-        }
+        
 
         private void Update()
         {
+            firstPlayer = CorridaController.instance.GetPlayerByPlace(1);
             positionPoint = firstPlayer.transform.position + new Vector3(5f, 1.9f, 3.7f);
             float velocityDrone = Vector3.Distance(transform.position, positionPoint) * 0.5f;
             float rotacaoZ = velocityDrone;

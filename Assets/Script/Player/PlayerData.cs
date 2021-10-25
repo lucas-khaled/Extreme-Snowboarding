@@ -1,60 +1,51 @@
-using ExtremeSnowboarding.Script.EventSystem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Player
 {
-    public class PlayerData
+    public class PlayerData 
     {
-        private AnimatorOverrideController overrider;
-        private Mesh[] playerMeshes;
-        private Color color1;
-        private Color color2;
-        private Shader playerShader;
-        private int index;
-        private Texture2D mask01;
-        private Texture2D mask02; 
-    
-        public Player player;
-
-        public void InstancePlayer(Vector3 position, int playerCode, GameObject playerPrefab, GameCamera camera)
-        {
-            GameObject playerGO = MonoBehaviour.Instantiate(playerPrefab, position, Quaternion.identity);
-            playerGO.name = "Player" + index;
-
-            player = playerGO.GetComponent<Player>();
-
-            AnimatorOverrider controllerToOverride = playerGO.transform.GetChild(0).GetComponent<AnimatorOverrider>();
-
-            Material material = new Material(playerShader);
-            player.SetPlayerMeshes(material, playerMeshes);
+        public string[] playerMeshes;
+        public Color color1;
+        public Color color2;
         
-            material.SetColor("_PrimaryColor", color1);
-            material.SetColor("_SecondaryColor", color2);
-            
-            material.SetTexture("_Color1Mask", mask01);
-            material.SetTexture("_Color2Mask", mask02);
+        private const int COLOR2BYTE_SIZE = 12;
+        private const int STRING2BYTE_SIZE = 1;
 
-            player.SharedValues.playerCode = playerCode;
-            camera.SetInitialPlayer(player);
-
-            player.playerInput.SwitchCurrentControlScheme("Player" + index);
-
-            controllerToOverride.SetAnimations(overrider);
-
-            if (PlayerGeneralEvents.onPlayerInstantiate != null)
-                PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
-        }
-        
-        public PlayerData(Color color1, Color color2, Shader playerShader, int playerIndex, Mesh[] meshes, Texture2D mask01, Texture2D mask02, AnimatorOverrideController overrider = null)
+        public PlayerData(Color color1, Color color2, string[] meshes)
         {
             this.color1 = color1;
             this.color2 = color2;
-            this.playerShader = playerShader;
-            index = playerIndex + 1;
             playerMeshes = meshes;
-            this.mask01 = mask01;
-            this.mask02 = mask02;
-            this.overrider = overrider;
         }
+        
+        public static object Deserialize(byte[] data)
+        {
+            List<byte> bytesList = new List<byte>(data);
+            
+            Color color1 = SerializeUtilities.Byte2Color(bytesList.Take(COLOR2BYTE_SIZE).ToArray());
+            bytesList.RemoveRange(0,COLOR2BYTE_SIZE);
+
+            Color color2 = SerializeUtilities.Byte2Color(bytesList.Take(COLOR2BYTE_SIZE).ToArray());
+            bytesList.RemoveRange(0,COLOR2BYTE_SIZE);
+
+            string[] names = SerializeUtilities.Byte2StringArray(bytesList.ToArray());
+            
+            var result = new PlayerData(color1, color2, names);
+            return result;
+        }
+
+        public static byte[] Serialize(object customType)
+        {
+            var c = (PlayerData)customType;
+            byte[] color1Byte = SerializeUtilities.Color2Byte(c.color1);
+            byte[] color2Byte = SerializeUtilities.Color2Byte(c.color2);
+            byte[] meshesByte = SerializeUtilities.StringArray2Byte(c.playerMeshes);
+
+            return SerializeUtilities.Combine(color1Byte, color2Byte, meshesByte);
+        }
+        
     }
 }

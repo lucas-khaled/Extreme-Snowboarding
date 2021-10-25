@@ -18,7 +18,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
-            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
+            player.GetMovimentationFeedbacks()?.skiingFeedback?.StopFeedbacks();
 
             UnsubscribeOnInputEvents();
         
@@ -181,6 +181,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (playerInput == null)
                 playerInput = player.playerInput;
         
+            
             playerInput.currentActionMap.FindAction("Jump").started -= Jump;
             playerInput.currentActionMap.Disable();
         }

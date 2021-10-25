@@ -1,5 +1,8 @@
+using System.IO;
+using ExtremeSnowboarding.Multiplayer;
 using ExtremeSnowboarding.Script.Controllers;
 using NaughtyAttributes;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -55,7 +58,8 @@ namespace ExtremeSnowboarding.Script.Items
         
         public void ActivateInstance(FuckFriend fuck)
         {
-            GameObject instantiatedProjectile = MonoBehaviour.Instantiate(projectile, fuck.Player.transform.position, projectile.transform.rotation); /* Considerar a rota��o do cen�rio!!!! */
+            string path = Path.Combine("Projectiles", projectile.name);
+            GameObject instantiatedProjectile = PhotonNetwork.Instantiate(path, fuck.Player.transform.position, projectile.transform.rotation); 
             Projectile proj = instantiatedProjectile.GetComponent<Projectile>();
 
             Player.Player target = CorridaController.instance.GetPlayerByPlace(fuck.Player.SharedValues.qualification - 1);
@@ -63,6 +67,8 @@ namespace ExtremeSnowboarding.Script.Items
             proj.fuckfriend = fuck;
             proj.target = target;
             proj.caster = fuck.Player;
+            
+            NetInstantiationInfo.Instance?.FuckFriendInstantiationInfo(fuck, proj);
         }
     }
 
@@ -78,7 +84,8 @@ namespace ExtremeSnowboarding.Script.Items
 
             foreach (var player in playersHitted)
             {
-                fuck.StartEffects(player.GetComponent<Player.Player>());
+                PhotonView view = player.GetComponent<PhotonView>();
+                fuck.StartEffects(view);
             }
 
         }
@@ -111,8 +118,9 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void InstanceByPlace(FuckFriend fuck)
         {
-            Player.Player playerAffected = CorridaController.instance.GetPlayerByPlace(position);
-            fuck.StartEffects(playerAffected);
+            PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(position).GetComponent<PhotonView>();
+            Debug.Log("Player on Instance call: "+playerAffectedView.name);
+            fuck.StartEffects(playerAffectedView);
         }
 
         private void InstanceByProximity(FuckFriend fuck)
@@ -142,8 +150,8 @@ namespace ExtremeSnowboarding.Script.Items
                     clampedPosition = clampedPosition + 1 * sign;
                 }
                 
-                Player.Player playerAffected = CorridaController.instance.GetPlayerByPlace(clampedPosition);
-                fuck.StartEffects(playerAffected);
+                PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(clampedPosition).GetComponent<PhotonView>();
+                fuck.StartEffects(playerAffectedView);
             }
         }
         

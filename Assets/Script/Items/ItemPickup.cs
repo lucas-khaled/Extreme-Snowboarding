@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Items
@@ -35,12 +36,21 @@ namespace ExtremeSnowboarding.Script.Items
         {
             if (other.gameObject.tag == "Player")
             {
-                if(other.GetComponent<Player.Player>().Coletavel == null)
-                {
-                    PickRandomItem(other.gameObject.GetComponent<Player.Player>());
-                    Destroy(gameObject);
-                }
+                if(!other.GetComponent<PhotonView>().IsMine || other.GetComponent<Player.Player>().Coletavel != null) return;
+                
+                PickRandomItem(other.gameObject.GetComponent<Player.Player>());
+                
+                if(PhotonNetwork.LocalPlayer.IsMasterClient)
+                    PhotonNetwork.Destroy(gameObject);
+                else
+                    GetComponent<PhotonView>().RPC("TellMasterToDestroy_RPC", RpcTarget.MasterClient);
             }
+        }
+
+        [PunRPC]
+        private void TellMasterToDestroy_RPC()
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
