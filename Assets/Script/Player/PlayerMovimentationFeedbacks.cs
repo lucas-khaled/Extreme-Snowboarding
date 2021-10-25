@@ -28,7 +28,9 @@ namespace ExtremeSnowboarding.Script.Player
         private MMFeedbacks _victoryFeedback;
         [SerializeField]
         private MMFeedbacks _lostFeedback;
-        
+        [SerializeField]
+        private MMFeedbacks _getBoxFeedback;
+
         [HideInInspector]
         public MMFeedbacks normalFallFeedback;
         [HideInInspector]
@@ -45,6 +47,8 @@ namespace ExtremeSnowboarding.Script.Player
         public MMFeedbacks victoryFeedback;
         [HideInInspector]
         public MMFeedbacks lostFeedback;
+        [HideInInspector]
+        public MMFeedbacks getBoxFeedback;
 
         public void StartFeedbacks(Transform player)
         {

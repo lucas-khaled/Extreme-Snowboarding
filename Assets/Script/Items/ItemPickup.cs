@@ -25,6 +25,7 @@ namespace ExtremeSnowboarding.Script.Items
             } while (!available);
 
             player.SetItem(item);
+            player.GetMovimentationFeedbacks().getBoxFeedback?.PlayFeedbacks();
 
             if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
             {

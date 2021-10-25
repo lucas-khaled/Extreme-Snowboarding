@@ -100,7 +100,7 @@ MonoBehaviour:
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 1
-    DelayBetweenRepeats: 1
+    DelayBetweenRepeats: 7.557
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Sfx: {fileID: 0}
+  Sfx: {fileID: 8300000, guid: 23e134f564eeda04b8c377603292d905, type: 3}
   RandomSfx: []
   TestButton: 0
   TestStopButton: 0
@@ -120,6 +120,6 @@ MonoBehaviour:
   PoolSize: 10
   MinVolume: 1
   MaxVolume: 1
-  MinPitch: 1
-  MaxPitch: 1
+  MinPitch: 0.9
+  MaxPitch: 1.1
   SfxAudioMixerGroup: {fileID: 3211045709357710244, guid: 252f9c1ee3bc1b240a2edc4e1b87ef90, type: 2}

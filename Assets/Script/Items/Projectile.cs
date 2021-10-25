@@ -130,9 +130,17 @@ namespace ExtremeSnowboarding.Script.Items
                     pointDes = pointDesUp;
                     vectorDest = (pointDesUp - transform.position).normalized;
                 }
-                transform.LookAt(pointDes);
 
-                rb.velocity = vectorDest * Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f);
+                if (target != caster)
+                {
+                    transform.LookAt(pointDes);
+                    rb.velocity = vectorDest * Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f);
+                }
+                else
+                {
+                    transform.LookAt(Vector3.right);
+                    rb.velocity = Vector3.right * Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f);
+                }
 
                 fuel -= Time.deltaTime;
             }

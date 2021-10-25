@@ -33,6 +33,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             player.SharedValues.actualState = "Jumping";
             
             player.GetMovimentationFeedbacks().jumpingFeedback?.PlayFeedbacks();
+            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
 
             rb = player.gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = false;
@@ -109,7 +110,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                         timeFall = 4.2f;
                     }
 
-                    player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
 
                     newPlayerState = new Fallen(timeFall);
 

@@ -113,7 +113,9 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   Sfx: {fileID: 8300000, guid: a8b0ceaf7e8cd9f408f1f7de1fb5a434, type: 3}
-  RandomSfx: []
+  RandomSfx:
+  - {fileID: 8300000, guid: e94b78383cc868f47ba105223cffe487, type: 3}
+  - {fileID: 8300000, guid: d362deb9383429f41ab331b0669d933a, type: 3}
   TestButton: 0
   TestStopButton: 0
   PlayMethod: 2

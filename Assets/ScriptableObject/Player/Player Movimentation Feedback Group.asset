@@ -20,11 +20,13 @@ MonoBehaviour:
   _trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
   _victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
   _lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
-  normalFallFeedback: {fileID: 3849889674896154441, guid: be52f3c228d77c744bd4ade42566f65f, type: 3}
-  hardFallFeedback: {fileID: 6883475650410936822, guid: 4edb925d7af309349aa7a265a038529c, type: 3}
-  landingFeedback: {fileID: 4455704544438292866, guid: 6900298ed3d734041846af3e3efd0957, type: 3}
-  jumpingFeedback: {fileID: 839943497085357310, guid: c9e7f0358835df746892b20a42588000, type: 3}
-  skiingFeedback: {fileID: 2270820262821896683, guid: 5b77233b70e73904eb55311876b6b3d6, type: 3}
-  trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
-  victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
-  lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
+  _getBoxFeedback: {fileID: 5763604794512533324, guid: bd8a68c3e1da7be46becf36bbfdea87e, type: 3}
+  normalFallFeedback: {fileID: 0}
+  hardFallFeedback: {fileID: 0}
+  landingFeedback: {fileID: 0}
+  jumpingFeedback: {fileID: 0}
+  skiingFeedback: {fileID: 0}
+  trickFeedback: {fileID: 0}
+  victoryFeedback: {fileID: 0}
+  lostFeedback: {fileID: 0}
+  getBoxFeedback: {fileID: 0}

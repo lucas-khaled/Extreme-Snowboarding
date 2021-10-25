@@ -5554,9 +5554,12 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 11449706, guid: fe764102aa5aa431795da15fa2dec0e2, type: 3}
+  - {fileID: 11400010, guid: fe764102aa5aa431795da15fa2dec0e2, type: 3}
+  - {fileID: 11413802, guid: fe764102aa5aa431795da15fa2dec0e2, type: 3}
   viewIdField: 0
-  InstantiationId: 0
+  InstantiationId: 1
   isRuntimeInstantiated: 0
 --- !u!1 &8739470358343734447
 GameObject:

@@ -45,6 +45,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 rb.velocity = Vector3.zero;
                 player.groundedVelocity = Vector3.zero;
                 player.StartCoroutine(CorrectPlayerPosition());
+                player.GetMovimentationFeedbacks().normalFallFeedback?.PlayFeedbacks();
             }
             else 
             {
@@ -54,6 +55,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     shouldDeaccelerateByRigidBody = true;
                     string[] animation = { "Caiu-Rolando" };
                     player.ChangeAnimationTo(animation, null, true, 0.05f);
+                    player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
                 }
                 else
                 {
@@ -62,6 +64,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     player.groundedVelocity = Vector3.zero;
                     string[] animation = { "Caiu-Comum" };
                     player.ChangeAnimationTo(animation);
+                    player.GetMovimentationFeedbacks().normalFallFeedback?.PlayFeedbacks();
                 }
             }
 
