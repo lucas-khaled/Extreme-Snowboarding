@@ -10,6 +10,9 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField]
         private List<PlayerMesh> playerMeshes;
 
+        [SerializeField] 
+        private List<PlayerAnimatorOverrider> playerAnimatorOverriders;
+
         public Shader playerShader;
         public Texture playerMask01;
         public Texture playerMask02;
@@ -25,7 +28,17 @@ namespace ExtremeSnowboarding.Multiplayer
                 where names.Any(x => x == playerMesh.meshName)
                     select playerMesh.mesh).ToArray();
         }
-        
+
+        public AnimatorOverrideController GetOverriderByName(string name)
+        {
+            return playerAnimatorOverriders.Find(x => x.name == name).animatorOverriderController;
+        }
+
+        public string GetNameByAnimator(AnimatorOverrideController animatorOverrideController)
+        {
+            return playerAnimatorOverriders.Find(x => x.animatorOverriderController == animatorOverrideController).name;
+        }
+
     }
 
     [System.Serializable]
@@ -33,5 +46,12 @@ namespace ExtremeSnowboarding.Multiplayer
     {
         public Mesh mesh;
         public string meshName;
+    }
+
+    [System.Serializable]
+    public struct PlayerAnimatorOverrider
+    {
+        public AnimatorOverrideController animatorOverriderController;
+        public string name;
     }
 }
