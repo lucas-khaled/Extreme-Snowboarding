@@ -216,7 +216,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
             PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
 
-            player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+            player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, playerData.overriderControllerName, instantiationSettings);
             StartCoroutine(AddAPlayer(player));
             
             camera.SetInitialPlayer(player);
@@ -235,7 +235,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 Player.Player player = PhotonView.Find((int)data[1]).GetComponent<Player.Player>();
                 PlayerData playerData = (PlayerData) PlayerData.Deserialize((byte[]) data[2]);
                 
-                player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, instantiationSettings);
+                player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, playerData.overriderControllerName, instantiationSettings);
                 StartCoroutine(AddAPlayer(player));
                 
                 if(PlayerGeneralEvents.onPlayerInstantiate != null)
@@ -319,13 +319,11 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             _isPaused = true;
             canvasPauseRef.SetActive(true);
-            Time.timeScale = 0;
         }
         public void UnPause()
         {
             _isPaused = false;
             canvasPauseRef.SetActive(false);
-            Time.timeScale = 1;
         }
 
         public void ReturnToMainMenu()

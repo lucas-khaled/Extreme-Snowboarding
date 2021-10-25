@@ -15,6 +15,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField]
         private MenuCameraPointController menuCameraPointController;
 
+        [Header("Instantiation settings")]
+        [SerializeField]
+        private MultiplayerInstantiationSettings instantiationSettings;
+
         [BoxGroup("Multiplayer")] [SerializeField]
         private RoomCreationUI roomCreationUI;
 
@@ -54,6 +58,7 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         private void Start()
         {
             escolhaController.ChangeLevel(1);
+            escolhaController.ChangeOverrider(instantiationSettings.GetOverriderByName("Base"));
             roomCreationUI.Init();
             roomJoiningUI.Init();
             roomWaitingUI.Init();
@@ -99,6 +104,12 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             audioEffectsRef.PlayOneShot(clickAudio);
         }
+
+        public void ChangeOverrider(AnimatorOverrideController overrider)
+        {
+            escolhaController.ChangeOverrider(overrider);
+        }
+        
         public void ChangeLevel(int level)
         {
             escolhaController.ChangeLevel(level);
