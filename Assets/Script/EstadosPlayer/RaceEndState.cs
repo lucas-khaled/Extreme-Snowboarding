@@ -38,7 +38,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         private void DeAccelerateByRigidbody()
         {
-        
             if (rb == null || rb.velocity == Vector3.zero)
                 return;
 

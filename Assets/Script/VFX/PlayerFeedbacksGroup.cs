@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using ExitGames.Client.Photon;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,7 +26,7 @@ namespace ExtremeSnowboarding.Script.VFX
         /// <summary>
         /// This method starts hash on the list and instantiates the feedbacks. It can oly be played once.
         /// </summary>
-        public void StartFeedbacks(Transform player)
+        public void StartFeedbacks(Transform player, int ID)
         {
             StartHash();
 
@@ -35,15 +39,19 @@ namespace ExtremeSnowboarding.Script.VFX
                     instantiated.playerVfxes.Add(new PlayerFeedbacks(null));
                     continue;
                 }
-                
-                GameObject particleGO = Instantiate(hashedArray[i].GetFeedback().gameObject, player);
-                MMFeedbacks instantiatedParticle = particleGO.GetComponent<MMFeedbacks>();
-                instantiatedParticle.name = hashedArray[i].ParticleName;
-                
-                instantiated.playerVfxes.Add(new PlayerFeedbacks(instantiatedParticle));
+
+                GameObject hashedObj = hashedArray[i].GetFeedback().gameObject;
+                GameObject particleGO = PhotonNetwork.Instantiate(Path.Combine("Feedbacks",hashedObj.name), hashedObj.transform.position, hashedObj.transform.rotation);
+
+                MMFeedbacks instantiatedFeedback = particleGO.GetComponent<MMFeedbacks>();
+                instantiatedFeedback.name = hashedArray[i].ParticleName;
+                instantiatedFeedback.SetPlayerParent(player);
+
+                PlayerFeedbacks feedbacks = new PlayerFeedbacks(instantiatedFeedback);
+                instantiated.playerVfxes.Add(feedbacks);
             }
             
-            instantiated.playerCode = VFXManager.instance.InstantiatedList.Count + 1;
+            instantiated.playerCode = ID;
             VFXManager.instance.AddToList(instantiated);
         }
         
@@ -67,18 +75,14 @@ namespace ExtremeSnowboarding.Script.VFX
             int index = GetHashedID(name, true);
             if (index == -1)
                 return null;
-            else
-                return VFXManager.instance.InstantiatedList[playerCode-1].playerVfxes[index];
+
+            return VFXManager.instance.InstantiatedList.Find(x => x.playerCode == playerCode).playerVfxes[index];
         }
 
         private PlayerFeedbacks GetFeedbackByNameNotHashed(string name, int playerCode)
         {
-            foreach(PlayerFeedbacks vfx in VFXManager.instance.InstantiatedList[playerCode - 1].playerVfxes)
-            {
-                if (vfx.GetFeedback().name == name)
-                    return vfx;
-            }
-            return null;
+            return VFXManager.instance.InstantiatedList.Find(x => x.playerCode == playerCode).playerVfxes
+                .Find(x => x.ParticleName == name);
         }
 
         #endregion
@@ -120,15 +124,13 @@ namespace ExtremeSnowboarding.Script.VFX
         {
             if (hashedArray[index].ParticleName == name)
                 return index;
-            else
-            {
+            
                 if (index + 1 == initialValue)
                     return index;
                 if (index == hashedArray.Length - 1)
                     return GetOffsetRecursive(0, initialValue, name);
-                else
+                
                     return GetOffsetRecursive(index + 1, initialValue, name);
-            }
         }
 
 
@@ -171,7 +173,7 @@ namespace ExtremeSnowboarding.Script.VFX
                 
                 string name = (!string.IsNullOrEmpty(vfx.ParticleName)) ? vfx.ParticleName : vfx.GetFeedback().name;
                 hashedArray[GetHashedID(name)] = vfx;
-                }
+            }
 
             isHashed = true;
             
@@ -189,12 +191,11 @@ namespace ExtremeSnowboarding.Script.VFX
     public class PlayerFeedbacks
     {
         [SerializeField] private string particleName;
-        
         [SerializeField] private MMFeedbacks feedbacks;
-
+        
         private bool locked = false;
 
-        public string ParticleName => (particleName != string.Empty) ? particleName : feedbacks.name;
+        public string ParticleName => ( string.IsNullOrEmpty(particleName)) ? feedbacks.name : particleName;
         
         public MMFeedbacks GetFeedback()
         {
@@ -226,7 +227,7 @@ namespace ExtremeSnowboarding.Script.VFX
             locked = false;
         }
 
-        public void StartFeedback()
+        public void StartFeedback(bool netCall = true)
         {
             if (locked)
                 return;
@@ -235,10 +236,11 @@ namespace ExtremeSnowboarding.Script.VFX
             {
                 feedbacks.gameObject.SetActive(true);
                 feedbacks.PlayFeedbacks();
+                
             }
         }
 
-        public void StopFeedback(bool deActivate = false)
+        public void StopFeedback(bool deActivate = false, bool netCall = true)
         {
             if (locked)
                 return;
@@ -252,6 +254,7 @@ namespace ExtremeSnowboarding.Script.VFX
         public PlayerFeedbacks(MMFeedbacks feedbacks)
         {
             this.feedbacks = feedbacks;
+            particleName = feedbacks.name;
         }
     }
 }

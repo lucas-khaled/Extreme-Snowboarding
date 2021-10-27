@@ -53,7 +53,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 {
                     shouldDeaccelerateByRigidBody = true;
                     string[] animation = { "Caiu-Rolando" };
-                    player.ChangeAnimationTo(animation, 0.05f);
+                    player.ChangeAnimationTo(animation, null, true, 0.05f);
                 }
                 else
                 {

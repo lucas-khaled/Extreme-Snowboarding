@@ -18,7 +18,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateEnd()
         {
-            player.GetMovimentationFeedbacks().skiingFeedback?.StopFeedbacks();
+            player.GetMovimentationFeedbacks()?.skiingFeedback?.StopFeedbacks();
 
             UnsubscribeOnInputEvents();
         
@@ -61,7 +61,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             {
                 if (Random.Range(0, 100) > 70)
                 {
-                    Debug.Log("Made variation");
                     if (Random.Range(0, 100) < 50)
                         player.SetTriggerOnAnimator("esquiVariation1");
                     else
@@ -111,7 +110,26 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         void StickPlayerOnGround()
         {
             RaycastHit hit;
-            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
+
+            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight * 2, LayerMask.GetMask("Track")))
+            {
+                if (hit.normal.x >= 0.95)
+                    player.ChangeState(new Jumping(false));
+                else
+                {
+                    ClampPlayerRotationByGround(hit);
+                    ClampPlayerPositionOnGround(hit);
+                    player.SharedValues.LastGroundedNormal = hit.normal.normalized;
+                }
+            }
+            else if (timeOnGround > timeToJump)
+            {
+                Debug.Log("TimeToJump");
+                player.ChangeState(new Jumping(false));
+            }
+            
+
+            /*if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track")))
             {
                 ClampPlayerRotationByGround(hit);
                 ClampPlayerPositionOnGround(hit);
@@ -119,8 +137,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
             else if (timeOnGround > timeToJump)
             {
+                Debug.Log("TimeToJump");
                 player.ChangeState(new Jumping(false));
-            }
+            }*/
         }
 
         void ClampPlayerPositionOnGround(RaycastHit hit)
@@ -162,6 +181,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (playerInput == null)
                 playerInput = player.playerInput;
         
+            
             playerInput.currentActionMap.FindAction("Jump").started -= Jump;
             playerInput.currentActionMap.Disable();
         }

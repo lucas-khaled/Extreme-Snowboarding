@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.VFX
@@ -16,7 +17,7 @@ namespace ExtremeSnowboarding.Script.VFX
         {
             instantiatedList.Add(instantiatedFeedbacksList);
         }
-        
+
         private void Awake()
         {
             if (instance != null)

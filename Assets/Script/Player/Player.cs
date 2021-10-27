@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using ExtremeSnowboarding.Script.EventSystem;
 using ExtremeSnowboarding.Script.Attributes;
 using ExtremeSnowboarding.Script.Controllers;
@@ -8,12 +7,12 @@ using ExtremeSnowboarding.Script.Items;
 using ExtremeSnowboarding.Script.Items.Effects;
 using ExtremeSnowboarding.Script.VFX;
 using NaughtyAttributes;
-using NUnit.Framework;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using DG.Tweening;
+using ExtremeSnowboarding.Multiplayer;
 using UnityEditor;
 
 namespace ExtremeSnowboarding.Script.Player
@@ -71,6 +70,8 @@ namespace ExtremeSnowboarding.Script.Player
         private AudioSource audioSource;
         private AudioSource audioSourceEffects;
 
+        private PhotonView _photonView;
+
         public void AddPlayerSpectating(Player playerSpectator)
         {
             for (int i = 0; i < 4; i++) 
@@ -121,6 +122,11 @@ namespace ExtremeSnowboarding.Script.Player
         {
             for(int i = 0; i < meshRenderers.Length; i++)
             {
+                if (meshes.Length <= i)
+                {
+                    Debug.Log("Passed Meshes Are lower than renderers.\nRenderers size is "+meshRenderers.Length+ ", meanwhile meshes size is "+meshes.Length);
+                    break;
+                }
                 meshRenderers[i].material = material;
                 meshRenderers[i].sharedMesh = meshes[i];
             }
@@ -144,16 +150,53 @@ namespace ExtremeSnowboarding.Script.Player
             return playerFeedbacksList;
         }
 
+        /// <summary>
+        /// Set the player Material and Meshes
+        /// </summary>
+        /// <param name="firstColor">The primary color</param>
+        /// <param name="secondColor">The secondary color</param>
+        /// <param name="playerMeshes">The choosed meshes names</param>
+        /// <param name="settings">The Instantiation settings</param>
+        public void SetMaterialsAndMeshes(Color firstColor, Color secondColor, string[] playerMeshes, string playerOverrideName, MultiplayerInstantiationSettings settings)
+        {
+            Debug.Log("Player meshes names: "+playerMeshes[0]+" - "+playerMeshes[1]+" - "+playerMeshes[2]);
+            Material material = new Material(settings.playerShader);
+
+            material.SetColor("_PrimaryColor", firstColor);
+            material.SetColor("_SecondaryColor", secondColor);
+
+            material.SetTexture("_Color1Mask", settings.playerMask01);
+            material.SetTexture("_Color2Mask", settings.playerMask02);
+            
+            SetPlayerMeshes(material, settings.GetMeshesByNames(playerMeshes));
+            SetOverrideController(settings.GetOverriderByName(playerOverrideName));
+        }
+
+        public void SetOverrideController(AnimatorOverrideController animatorOverriderController)
+        {
+            AnimatorOverrider animOverrider = animator.GetComponent<AnimatorOverrider>();
+            animOverrider.SetAnimations(animatorOverriderController);
+        }
+        
+
         private void Awake()
         {
+            _photonView = GetComponent<PhotonView>();
             sharedValues.player = this; //setting the player reference to the shared values
-            playerFeedbacksList.StartFeedbacks(transform); 
-            movimentationFeedbacks.StartFeedbacks(transform);
-            InputSubcribing();
+
+            if (_photonView.IsMine)
+            {
+                playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
+                movimentationFeedbacks.StartFeedbacks(transform);
+                InputSubcribing();
+            }
+            
         }
 
         private void Start()
         {
+            if(!_photonView.IsMine) return;
+            
             playerState.StateStart(this);
             startPoint = transform.position;
             catastropheRef = null;
@@ -162,6 +205,8 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void FixedUpdate()
         {
+            if(!_photonView.IsMine) return;
+            
             playerState.StateUpdate();
         }
 
@@ -172,6 +217,8 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>
         private void InputSubcribing()
         {
+            if(!_photonView.IsMine) return;
+            
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
             playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;  
             playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
@@ -192,9 +239,9 @@ namespace ExtremeSnowboarding.Script.Player
                 Coletavel.Activate(this);
                 Coletavel = null;
 
-                if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
+                if (PlayerGeneralEvents.onItemUsed != null)
                 {
-                    EventSystem.PlayerGeneralEvents.onItemUsed.Invoke(this, null);
+                    PlayerGeneralEvents.onItemUsed.Invoke(this, null);
                 }
             }
         }
@@ -227,7 +274,7 @@ namespace ExtremeSnowboarding.Script.Player
                 float distanceModerator = Mathf.Clamp(Mathf.Sqrt(distance), 0.02f, 100f);
                 AddTurbo(1 / distanceModerator);
             }
-            else if (CorridaController.instance.catastrophe != null)
+            else if (CorridaController.instance != null && CorridaController.instance.catastrophe != null)
                 catastropheRef = CorridaController.instance.catastrophe;
         }
 
@@ -280,6 +327,18 @@ namespace ExtremeSnowboarding.Script.Player
             StartCoroutine(coroutine);
         }
 
+        private void CallSetOnAnimator(string variable, bool value)
+        {
+            if(animator != null)
+                animator.SetBool(variable, value);
+        }
+
+        [PunRPC]
+        private void SetOnAnimator_RPC(string variable, bool value)
+        {
+            CallSetOnAnimator(variable, value);
+        }
+
         /// <summary>
         /// Method to allow other scripts to set bool values on player's animator.
         /// </summary>
@@ -287,8 +346,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void SetOnAnimator(string variable, bool value)
         {
-            if(animator != null)
-                animator.SetBool(variable, value);
+            _photonView.RPC("SetOnAnimator_RPC", RpcTarget.All, variable, value);
         }
 
 
@@ -309,18 +367,29 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="crossFadeLength"> Length of the crossfade </param>
         /// <param name="valueSetedOnAnimator">The animator variable name</param>
         /// <param name="value">Value to pass to animator variable</param>
-        public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator, bool value, float crossFadeLength = 0.15f)
+        public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator = null, bool value = true, float crossFadeLength = 0.15f)
         {
-            ChangeAnimationTo(possibleAnimations, crossFadeLength);
-            SetOnAnimator(valueSetedOnAnimator, value);
+            _photonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
+                SerializeUtilities.StringArray2Byte(possibleAnimations), 
+                valueSetedOnAnimator, value, crossFadeLength);
         }
+
+        [PunRPC]
+        private void ChangeAnimationTo_RPC(byte[] possibleAnimations, string valueSetedOnAnimator, bool value,
+            float crossFadeLength)
+        {
+            ChangeAnimationTo(SerializeUtilities.Byte2StringArray(possibleAnimations), crossFadeLength);
+            if(valueSetedOnAnimator != null)
+                CallSetOnAnimator(valueSetedOnAnimator, value);
+        }
+        
 
         /// <summary>
         /// Method to change the player animation instantly
         /// </summary>
         /// <param name="possibleAnimations">State names that can be randomized</param>
         /// <param name="crossFadeLength"> Length of the crossfade </param>
-        public void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
+        private void ChangeAnimationTo(string[] possibleAnimations, float crossFadeLength = 0.15f)
         {
             string animationChoosen = possibleAnimations[Random.Range(0, possibleAnimations.Length)];
 
@@ -347,7 +416,13 @@ namespace ExtremeSnowboarding.Script.Player
         //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
-            playerState.OnCollisionEnter(collision);
+            if (_photonView.IsMine)
+            {
+                playerState.OnCollisionEnter(collision);
+                Debug.Log("mine");
+            }
+            else
+                Debug.Log("not mine");
         }
 
         private void OnDrawGizmos()
@@ -409,7 +484,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <summary>
         /// The own player code. If it is the player 1, so the value is 1. An it goes on...
         /// </summary>
-        public int playerCode { get; set; }
+        public int playerCode => PhotonNetwork.LocalPlayer.ActorNumber;
 
         /// <summary>
         /// This property is true if the player cannot move. Otherwise is false.

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using System.Linq;
+using Photon.Pun;
 using UnityEditor.Experimental;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -124,6 +125,8 @@ namespace MoreMountains.Feedbacks
         protected float _startTime = 0f;
         protected float _holdingMax = 0f;
         protected float _lastStartAt = 0f;
+
+        private PhotonView photonView => GetComponent<PhotonView>();
         
         /// <summary>
         /// On Awake we initialize our feedbacks if we're in auto mode
@@ -219,6 +222,16 @@ namespace MoreMountains.Feedbacks
         /// </summary>
         public virtual void PlayFeedbacks()
         {
+            if (photonView == null)
+                StartCoroutine(PlayFeedbacksInternal(this.transform.position, FeedbacksIntensity));
+
+            else
+                photonView.RPC("RPC_PlayFeedbacks", RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RPC_PlayFeedbacks()
+        {
             StartCoroutine(PlayFeedbacksInternal(this.transform.position, FeedbacksIntensity));
         }
 
@@ -256,6 +269,23 @@ namespace MoreMountains.Feedbacks
                 PlayFeedbacks();
             }
         }
+
+        public void SetPlayerParent(Transform player)
+        {
+            transform.SetParent(player, false);
+
+            if(photonView != null)
+                photonView.RPC("RPC_SetPlayerParent", RpcTarget.OthersBuffered, player.GetComponent<PhotonView>().ViewID);
+        }
+
+        [PunRPC]
+        private void RPC_SetPlayerParent(int ID)
+        {
+            Transform player = PhotonView.Find(ID).transform;
+            Debug.Log("Player name: "+player.name + " - ID: "+ID);
+            transform.SetParent(player, false);
+        }
+        
         
         /// <summary>
         /// Plays all feedbacks in the sequence, but only if this MMFeedbacks is playing in normal order

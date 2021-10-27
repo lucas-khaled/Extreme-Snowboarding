@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 2890158464921329962
     second: PosteMenuPrincipal
+  - first:
+      213: -6174839419196137682
+    second: BotaoDesativado
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,10 +133,10 @@ TextureImporter:
       name: BotaoNormal
       rect:
         serializedVersion: 2
-        x: 44
-        y: 1746
-        width: 560
-        height: 207
+        x: 26
+        y: 1771
+        width: 574
+        height: 218
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +154,10 @@ TextureImporter:
       name: BarraPreenchida
       rect:
         serializedVersion: 2
-        x: 685
-        y: 1815
-        width: 773
-        height: 79
+        x: 1211
+        y: 1854
+        width: 779
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +175,10 @@ TextureImporter:
       name: AlcaBarra
       rect:
         serializedVersion: 2
-        x: 1524
-        y: 1769
-        width: 139
-        height: 130
+        x: 1381
+        y: 954
+        width: 148
+        height: 138
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +196,8 @@ TextureImporter:
       name: BarraLateral
       rect:
         serializedVersion: 2
-        x: 1718
-        y: 1546
+        x: 1425
+        y: 448
         width: 66
         height: 408
       alignment: 0
@@ -214,10 +217,10 @@ TextureImporter:
       name: FundoBarraLateral
       rect:
         serializedVersion: 2
-        x: 1847
-        y: 1115
-        width: 65
-        height: 834
+        x: 1515
+        y: 60
+        width: 66
+        height: 835
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,10 +238,10 @@ TextureImporter:
       name: BarraVazia
       rect:
         serializedVersion: 2
-        x: 682
-        y: 1711
-        width: 767
-        height: 71
+        x: 1212
+        y: 1753
+        width: 769
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,10 +259,10 @@ TextureImporter:
       name: BotaoSelecionado
       rect:
         serializedVersion: 2
-        x: 44
-        y: 1502
-        width: 560
-        height: 207
+        x: 27
+        y: 1556
+        width: 570
+        height: 213
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,10 +280,10 @@ TextureImporter:
       name: TituloMenu
       rect:
         serializedVersion: 2
-        x: 657
-        y: 1182
-        width: 896
-        height: 427
+        x: 1082
+        y: 1225
+        width: 902
+        height: 429
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,10 +301,10 @@ TextureImporter:
       name: BotaoPressionado
       rect:
         serializedVersion: 2
-        x: 44
-        y: 1240
-        width: 560
-        height: 207
+        x: 26
+        y: 1336
+        width: 574
+        height: 215
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,9 +322,9 @@ TextureImporter:
       name: FundoMenu
       rect:
         serializedVersion: 2
-        x: 42
-        y: 39
-        width: 1360
+        x: 45
+        y: 42
+        width: 1335
         height: 1142
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -374,6 +377,27 @@ TextureImporter:
       bones: []
       spriteID: a216936afc7eb1820800000000000000
       internalID: 2890158464921329962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BotaoDesativado
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1758
+        width: 570
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f1cb193409e4aa0800000000000000
+      internalID: -6174839419196137682
       vertices: []
       indices: 
       edges: []
