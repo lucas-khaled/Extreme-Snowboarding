@@ -133,6 +133,11 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             return (from mesh in selectedMeshes select mesh.meshName).ToArray();
         }
 
+        public string GetOverriderName(AnimatorOverrideController animatorOverrideController)
+        {
+            return instantiationSettings.GetNameByAnimator(animatorOverrideController);
+        }
+
         public void ChangeOverrider(AnimatorOverrideController overriderRef)
         {
             overrider = overriderRef;

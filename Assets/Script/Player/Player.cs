@@ -157,7 +157,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="secondColor">The secondary color</param>
         /// <param name="playerMeshes">The choosed meshes names</param>
         /// <param name="settings">The Instantiation settings</param>
-        public void SetMaterialsAndMeshes(Color firstColor, Color secondColor, string[] playerMeshes, MultiplayerInstantiationSettings settings)
+        public void SetMaterialsAndMeshes(Color firstColor, Color secondColor, string[] playerMeshes, string playerOverrideName, MultiplayerInstantiationSettings settings)
         {
             Debug.Log("Player meshes names: "+playerMeshes[0]+" - "+playerMeshes[1]+" - "+playerMeshes[2]);
             Material material = new Material(settings.playerShader);
@@ -169,7 +169,15 @@ namespace ExtremeSnowboarding.Script.Player
             material.SetTexture("_Color2Mask", settings.playerMask02);
             
             SetPlayerMeshes(material, settings.GetMeshesByNames(playerMeshes));
+            SetOverrideController(settings.GetOverriderByName(playerOverrideName));
         }
+
+        public void SetOverrideController(AnimatorOverrideController animatorOverriderController)
+        {
+            AnimatorOverrider animOverrider = animator.GetComponent<AnimatorOverrider>();
+            animOverrider.SetAnimations(animatorOverriderController);
+        }
+        
 
         private void Awake()
         {
