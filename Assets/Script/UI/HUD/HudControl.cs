@@ -38,7 +38,6 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         public void SetPlayer(Player.Player player)
         {
             this.player = player;
-            this.player.SetPlayerAudioSource(audioSource, audioSourceEffects);
             audioSource.Play();
         }
 

@@ -111,9 +111,9 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight * 2, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(player.transform.position, Vector3.down, out hit, player.SharedValues.CharacterHeight * 4, LayerMask.GetMask("Track")))
             {
-                if (hit.normal.x >= 0.95)
+                if (hit.normal.x >= 0.97)
                     player.ChangeState(new Jumping(false));
                 else
                 {
@@ -124,7 +124,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
             else if (timeOnGround > timeToJump)
             {
-                Debug.Log("TimeToJump");
                 player.ChangeState(new Jumping(false));
             }
             

@@ -62,39 +62,11 @@ namespace ExtremeSnowboarding.Script.Player
 
         public Vector3 groundedVelocity { get; set; }
 
-        PlayerState playerState = new Grounded();
-
-        private Player[] playerSpectating = new Player[4];
-        private Vector3 startPoint;
+        PlayerState playerState = new Stopped();
+        
         private GameObject catastropheRef;
-        private AudioSource audioSource;
-        private AudioSource audioSourceEffects;
 
         private PhotonView _photonView;
-
-        public void AddPlayerSpectating(Player playerSpectator)
-        {
-            for (int i = 0; i < 4; i++) 
-            {
-                if (playerSpectating[i] == null)
-                {
-                    playerSpectating[i] = playerSpectator;
-                    return;
-                }
-            }
-        }
-        public Player[] GetPlayerSpectators()
-        {
-            return playerSpectating;
-        }
-        public void RemovePlayerSpectating(Player player)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                if (playerSpectating[i] == player)
-                playerSpectating[i] = null;
-            }
-        }
 
         public PlayerMovimentationFeedbacks GetMovimentationFeedbacks()
         {
@@ -198,7 +170,6 @@ namespace ExtremeSnowboarding.Script.Player
             if(!_photonView.IsMine) return;
             
             playerState.StateStart(this);
-            startPoint = transform.position;
             catastropheRef = null;
             InvokeRepeating("CheckTurbo", 0.3f, 0.08f);
         }
@@ -303,6 +274,8 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="newState"> The new actual state </param>
         public void ChangeState(PlayerState newState)
         {
+            if(!_photonView.IsMine) return;
+            
             playerState.StateEnd();
 
             playerState = newState;
@@ -396,23 +369,6 @@ namespace ExtremeSnowboarding.Script.Player
             animator.CrossFade(animationChoosen, crossFadeLength);
         }
 
-        /// <summary>
-        /// Method get the player state info
-        /// </summary>
-        public AnimatorStateInfo GetCurrentStateInfo()
-        {
-            return animator.GetCurrentAnimatorStateInfo(0);
-        }
-
-        /// <summary>
-        /// Method to change the player animation instantly
-        /// </summary>
-        public string GetCurrentLayerName()
-        {
-            return animator.GetLayerName(0);
-        }
-
-
         //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
@@ -429,12 +385,6 @@ namespace ExtremeSnowboarding.Script.Player
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(transform.position + (transform.up * sharedValues.CharacterHeight / 2), transform.position + (-transform.up * sharedValues.CharacterHeight / 2)); //Drawing character height gizmo
-        }
-
-        public void SetPlayerAudioSource(AudioSource audioSourceRef, AudioSource audioSourceEffectsRef)
-        {
-            audioSource = audioSourceRef;
-            audioSourceEffects = audioSourceEffectsRef;
         }
     }
 

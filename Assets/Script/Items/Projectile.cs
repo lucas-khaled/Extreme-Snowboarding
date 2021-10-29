@@ -1,5 +1,6 @@
 using System;
 using NaughtyAttributes;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -183,7 +184,7 @@ namespace ExtremeSnowboarding.Script.Items
                 {
                     InstantiateParticle(playerHitted.gameObject.transform);
 
-                    fuckfriend.StartEffects(playerHitted);
+                    fuckfriend.StartEffects(playerHitted.GetComponent<PhotonView>());
                     Destroy(gameObject);
                 }
             }

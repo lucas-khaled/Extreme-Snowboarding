@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.Controllers
 {
@@ -26,7 +28,9 @@ namespace ExtremeSnowboarding.Script.Controllers
         public GameCamera camera;
         public GameObject catastrophe { get; set; }
         public List<Player.Player> playersClassificated { get; private set; }
-        
+
+        public Action onGameStarted { get; set; }
+
         private List<Player.Player> _playersInGame = new List<Player.Player>();
         private  bool _isPaused;
         private PlayerData _playerData;
@@ -254,6 +258,8 @@ namespace ExtremeSnowboarding.Script.Controllers
                 _alivePlayers = _playersInGame.Count;
                 foreach (var playerInGame in _playersInGame)
                     playerInGame.ChangeState(new Grounded());
+                
+                onGameStarted?.Invoke();
             }
         }
 

@@ -36,13 +36,20 @@ namespace ExtremeSnowboarding.Script.Catastrophe
         void Start()
         {
             isMoving = false;
-            StartCoroutine(CatastropheStartTimer());
             cameraScript = GameObject.FindGameObjectWithTag("CorridaController").GetComponent<CorridaController>().camera;
+
+            CorridaController.instance.onGameStarted += OnGameStarted;
         }
 
         void Update()
         {
             Movement();
+        }
+
+        private void OnGameStarted()
+        {
+            Debug.Log("GameStarted");
+            StartCoroutine(CatastropheStartTimer());
         }
 
         IEnumerator CatastropheStartTimer()
