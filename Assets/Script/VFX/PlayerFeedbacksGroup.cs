@@ -176,8 +176,6 @@ namespace ExtremeSnowboarding.Script.VFX
             }
 
             isHashed = true;
-            
-            Debug.Log("hashed");
         }
 
         private void OnListChanged()

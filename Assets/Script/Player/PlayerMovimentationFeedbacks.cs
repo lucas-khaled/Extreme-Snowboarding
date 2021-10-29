@@ -50,7 +50,6 @@ namespace ExtremeSnowboarding.Script.Player
         {
             foreach (var field in typeof(PlayerMovimentationFeedbacks).GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                Debug.Log(field.Name);
                 if(field.Name[0] != '_') continue;
 
                 MMFeedbacks feedbacks = (MMFeedbacks) field.GetValue(this);

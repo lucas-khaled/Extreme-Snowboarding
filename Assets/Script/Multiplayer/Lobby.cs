@@ -118,7 +118,6 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnCreatedRoom()
         {
             base.OnCreatedRoom();
-            Debug.Log("Criei salinha bixo");
             OnCreatedRoomCallback?.Invoke(true);
         }
 
