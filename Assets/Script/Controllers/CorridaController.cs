@@ -335,7 +335,8 @@ namespace ExtremeSnowboarding.Script.Controllers
         public void ReturnToMainMenu()
         {
             StopAllCoroutines();
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LoadLevel("MenuPrincipal");
         }
 
         void OnDrawGizmos()

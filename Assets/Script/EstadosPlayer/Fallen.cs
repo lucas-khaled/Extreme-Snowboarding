@@ -93,12 +93,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             if (rb.velocity.x > 0)
             {
                 Vector3 playerGV = player.groundedVelocity;
-                rb.AddForce(tempoQueda * 0.5f * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
+                rb.AddForce(tempoQueda * Time.deltaTime * Vector3.left, ForceMode.VelocityChange);
                 player.groundedVelocity = new Vector3(rb.velocity.x, playerGV.y, playerGV.z);
             }
             else
             {
-                Debug.Log(rb.velocity.x);
                 rb.velocity = Vector3.zero;
                 player.groundedVelocity = Vector3.zero;
                 player.SetOnAnimator("fallen", false);

@@ -16,7 +16,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         private void Awake()
         {
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
-            quantityOfActivePlayer = GameController.gameController.GetNumberOfPlayers();
+            quantityOfActivePlayer = PhotonNetwork.CurrentRoom.PlayerCount;
             _photonView = GetComponent<PhotonView>();
         }
 
@@ -42,7 +42,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         private IEnumerator EndRace()
         {
             yield return new WaitForSeconds(10);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
+            CorridaController.instance.ReturnToMainMenu();
             PlayerGeneralEvents.onPlayerDeath -= OnPlayerDeath;
         }
 

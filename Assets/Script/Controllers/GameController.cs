@@ -8,8 +8,7 @@ namespace ExtremeSnowboarding.Script.Controllers
     public class GameController : MonoBehaviour
     {
         public static GameController gameController;
-
-        private int numOfPlayer = 1;
+        
         public string sceneToLoad { get; private set; }
         private float effectAudioLevel;
         private float musicAudioLevel;
@@ -38,15 +37,6 @@ namespace ExtremeSnowboarding.Script.Controllers
         public void StartPlayerData(PlayerData players)
         {
             playerData = players;
-        }
-
-        public void ChangeNumOfPlayers(int num)
-        {
-            numOfPlayer = num;
-        }
-        public int GetNumberOfPlayers()
-        {
-            return numOfPlayer;
         }
 
         public void SetLevel(int level)
