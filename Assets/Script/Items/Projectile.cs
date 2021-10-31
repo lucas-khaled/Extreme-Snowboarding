@@ -92,9 +92,9 @@ namespace ExtremeSnowboarding.Script.Items
                 alreadyCasted = true;
             }
 
-            if (Physics.Raycast(newPoint, transform.TransformDirection(Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
+            if (Physics.Raycast(newPoint, Vector3.up, out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
-            else if (Physics.Raycast(newPoint, transform.TransformDirection(-Vector3.up), out hit, 100f, LayerMask.GetMask("Track")))
+            else if (Physics.Raycast(newPoint, -Vector3.up, out hit, 100f, LayerMask.GetMask("Track")))
                 newPoint = hit.point;
 
             newPoint = new Vector3(newPoint.x, newPoint.y + height, newPoint.z);
