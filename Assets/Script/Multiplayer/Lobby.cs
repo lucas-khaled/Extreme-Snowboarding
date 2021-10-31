@@ -16,8 +16,6 @@ namespace ExtremeSnowboarding.Multiplayer
     [RequireComponent(typeof(PhotonView))]
     public class Lobby : MonoBehaviourPunCallbacks
     {
-        [SerializeField] [Min(2)] private int minPlayers = 2;
-
         public Action<List<RoomInfo>> OnRoomListUpdateCallback { get; set; }
         public Action<bool> OnConnectedToMasterCallback { get; set; }
         public Action<bool> OnJoinedRoomCallback { get; set; }

@@ -34,6 +34,10 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         [SerializeField] private GameObject criacaoPanel;
         [BoxGroup("Paineis")]
         [SerializeField] private GameObject encontrarSalaPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject conectandoPanel;
+        [BoxGroup("Paineis")]
+        [SerializeField] private GameObject inicioPanel;
         
         [Header("Escolha Controller")]
         [SerializeField]
@@ -59,6 +63,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
         {
             escolhaController.ChangeLevel(1);
             escolhaController.ChangeOverrider(instantiationSettings.GetOverriderByName("Base"));
+
+            lobby.OnConnectedToMasterCallback += OnConnected;
+            
             roomCreationUI.Init();
             roomJoiningUI.Init();
             roomWaitingUI.Init();
@@ -81,6 +88,15 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
                 gameMixer.SetFloat("Effects", 0);
                 gameMixer.SetFloat("SoundTrack", 0);
+            }
+        }
+
+        private void OnConnected(bool connected)
+        {
+            if (connected)
+            {
+                conectandoPanel.SetActive(false);
+                inicioPanel.SetActive(true);
             }
         }
 
