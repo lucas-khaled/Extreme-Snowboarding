@@ -23,8 +23,6 @@ namespace ExtremeSnowboarding.Script.Controllers
         private Player.Player playerPrefab;
         [SerializeField]
         private GameObject canvasPauseRef;
-        [SerializeField] 
-        private int initialWaitingTime = 3;
     
         public InputAction menuInput;
         public GameCamera camera;
@@ -32,7 +30,6 @@ namespace ExtremeSnowboarding.Script.Controllers
         public List<Player.Player> playersClassificated { get; private set; }
 
         public Action onGameStarted { get; set; }
-        public Action<int> onGameCountdown { get; set; }
 
         private List<Player.Player> _playersInGame = new List<Player.Player>();
         private  bool _isPaused;
@@ -257,14 +254,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             if (_playersInGame.Count >= PhotonNetwork.CurrentRoom.PlayerCount)
             {
                 Time.timeScale = 1;
-
-                onGameCountdown?.Invoke(initialWaitingTime);
-                for (int i = initialWaitingTime; i >= 0; i--)
-                {
-                    yield return new WaitForSeconds(1);
-                    onGameCountdown?.Invoke(i);
-                }
-                
+                yield return new WaitForSeconds(3);
                 _alivePlayers = _playersInGame.Count;
                 foreach (var playerInGame in _playersInGame)
                     playerInGame.ChangeState(new Grounded());
