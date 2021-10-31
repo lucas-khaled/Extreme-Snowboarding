@@ -1,4 +1,9 @@
+using System;
+using ExtremeSnowboarding.Script.Controllers;
 using ExtremeSnowboarding.Script.EventSystem;
+using MoreMountains.Feedbacks;
+using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +11,20 @@ namespace ExtremeSnowboarding.Script.UI.HUD
 {
     public class HudControl : MonoBehaviour
     {
-        [Header("References")]
+        [BoxGroup("Waiting")]
+        [SerializeField]
+        private TMP_Text countDownText;
+        [BoxGroup("Waiting")]
+        [SerializeField] 
+        private TMP_Text waitingText;
+        [BoxGroup("Waiting")]
+        [SerializeField] 
+        private MMFeedbacks countdownFeedbacks;
+        [BoxGroup("Waiting")] 
+        [SerializeField] 
+        private GameObject waitingPanel;
+        
+        [Header("References")] 
         [SerializeField]
         private Image refClassificationImage;
         [SerializeField]
@@ -33,6 +51,28 @@ namespace ExtremeSnowboarding.Script.UI.HUD
             PlayerGeneralEvents.onPlayerPass += OnPlayerPass;
             PlayerGeneralEvents.onTurboChange += OnTurboChange;
             PlayerGeneralEvents.onItemUsed += OnFuckFriendChange;
+        }
+
+        private void Start()
+        {
+            CorridaController.instance.onGameCountdown += GameCount;
+            CorridaController.instance.onGameStarted += GameStarted;
+        }
+
+        private void GameStarted()
+        {
+            waitingPanel.SetActive(false);
+        }
+
+        private void GameCount(int time)
+        {
+            waitingText.gameObject.SetActive(false);
+            countDownText.gameObject.SetActive(true);
+
+            string countText = (time > 0) ? time.ToString() : "Vai!";
+            countDownText.SetText(countText);
+            
+            countdownFeedbacks.PlayFeedbacks();
         }
 
         public void SetPlayer(Player.Player player)
