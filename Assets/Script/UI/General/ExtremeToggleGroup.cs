@@ -13,9 +13,9 @@ namespace ExtremeSnowboarding.Script.UI.General
             return m_Toggles.Find(x => x.isOn);
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             foreach (var toggle in m_Toggles)
             {
                 Debug.Log(name+" - Toggle: "+toggle

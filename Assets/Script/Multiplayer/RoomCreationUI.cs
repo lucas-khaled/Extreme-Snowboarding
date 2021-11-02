@@ -11,12 +11,11 @@ namespace ExtremeSnowboarding.Multiplayer
     public class RoomCreationUI
     {
         [SerializeField] private ExtremeToggleGroup sceneToggleGroup;
-        [SerializeField] private Toggle isPrivateToggle;
         [SerializeField] private TMP_InputField nameInput;
         [SerializeField] private ExtremeToggleGroup numOfPlayersToggle;
 
         private string roomScene = "Fase1";
-        private int qntPlayer;
+        private int qntPlayer = 2;
 
         public void CreateRoom()
         {
@@ -24,7 +23,7 @@ namespace ExtremeSnowboarding.Multiplayer
             int numOfPlayers = qntPlayer;
             string sceneName = nameInput.text;
             
-            lobby.CreateRoom(roomScene, numOfPlayers, isPrivateToggle.isOn, sceneName);
+            lobby.CreateRoom(roomScene, numOfPlayers, false, sceneName);
         }
         
         public void Init()
@@ -41,6 +40,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
         private void SetQuantityOfPlayers(string qntPlayers)
         {
+            Debug.Log("Toggle qnt of players: "+qntPlayers);
             this.qntPlayer = int.Parse(qntPlayers);
         }
     }
