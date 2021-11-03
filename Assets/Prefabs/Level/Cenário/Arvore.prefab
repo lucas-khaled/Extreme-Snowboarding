@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4308733394294100747}
   - component: {fileID: 892954782456372398}
   - component: {fileID: 3134680082113407076}
-  - component: {fileID: -7927589994139656454}
   m_Layer: 0
   m_Name: Arvore
   m_TagString: Untagged
@@ -82,17 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-7927589994139656454
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3494901737766193585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2123691343515589935, guid: abf20b7a23e51044aae0b9bb22cd409e, type: 3}
