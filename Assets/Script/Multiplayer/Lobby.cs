@@ -24,6 +24,8 @@ namespace ExtremeSnowboarding.Multiplayer
         public Action OnPlayersInRoomUpdateCallback { get; set; }
         public Action OnLeftRoomCallback { get; set; }
 
+        public Action OnMasterClientSwitchedCallback { get; set; }
+
         private PhotonView _photonView;
         private string sceneToLoad;
 
@@ -93,6 +95,12 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             GetComponent<MenuUIController>().PressPlay();
             PhotonNetwork.LoadLevel(sceneToLoad);
+        }
+
+        public override void OnMasterClientSwitched(Player newMasterClient)
+        {
+            base.OnMasterClientSwitched(newMasterClient);
+            OnMasterClientSwitchedCallback?.Invoke();
         }
 
         public override void OnLeftRoom()

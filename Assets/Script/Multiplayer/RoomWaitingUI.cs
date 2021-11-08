@@ -26,7 +26,9 @@ namespace ExtremeSnowboarding.Multiplayer
             lobby.OnJoinedRoomCallback += Start;
             lobby.OnPlayersInRoomUpdateCallback += UpdatePlayerList;
             lobby.OnLeftRoomCallback += Quit;
+            lobby.OnMasterClientSwitchedCallback += SwitchMaster;
         }
+        
 
         public void Start(bool joined)
         {
@@ -64,6 +66,12 @@ namespace ExtremeSnowboarding.Multiplayer
                 for (int i = index; i < playersInRoomTexts.Length; i++)
                     playersInRoomTexts[i].SetText(" - ");
             }
+        }
+
+        private void SwitchMaster()
+        {
+            startGameButton.gameObject.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
+            startGameButton.interactable = PhotonNetwork.CurrentRoom.PlayerCount > 1 && PhotonNetwork.LocalPlayer.IsMasterClient;
         }
         
         private void Quit()
