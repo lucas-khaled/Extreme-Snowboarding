@@ -42,7 +42,7 @@ namespace ExtremeSnowboarding.Multiplayer
         public void ClearRooms()
         {
             foreach (var room in roomObjects)
-                MonoBehaviour.Destroy(room);
+                MonoBehaviour.Destroy(room.gameObject);
             
             roomObjects.Clear();
             selectRoomButton.interactable = false;
@@ -50,6 +50,12 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public void OnRoomSelected(RoomVisualizationUI visualization)
         {
+            if (selectedRoom == visualization)
+            {
+                Debug.Log("Igual");
+                return;
+            }
+            
             if(selectedRoom != null)
                 selectedRoom.OnDeselected();
             
