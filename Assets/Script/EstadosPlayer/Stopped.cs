@@ -29,7 +29,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         private bool CheckOnGround()
         {
-            return Physics.Raycast(player.transform.position, Vector3.down, player.SharedValues.CharacterHeight);
+            return Physics.Raycast(player.transform.position, Vector3.down, player.SharedValues.CharacterHeight, LayerMask.GetMask("Track"));
         }
     }
 }

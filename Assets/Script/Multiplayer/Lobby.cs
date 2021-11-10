@@ -94,6 +94,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [PunRPC]
         private void RPC_LoadLevel(string sceneToLoad)
         {
+            Debug.Log("Carregando: "+sceneToLoad);
             GetComponent<MenuUIController>().PressPlay();
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
@@ -131,11 +132,6 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnJoinedRoom()
         {
             OnJoinedRoomCallback?.Invoke(true);
-            
-            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
-            {
-               StartGame();
-            }
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
