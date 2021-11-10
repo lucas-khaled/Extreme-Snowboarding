@@ -13,6 +13,8 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField] private ExtremeToggleGroup sceneToggleGroup;
         [SerializeField] private TMP_InputField nameInput;
         [SerializeField] private ExtremeToggleGroup numOfPlayersToggle;
+        [SerializeField] private Toggle randomRoomToggle;
+        [SerializeField] private GameObject randomChoicePanel;
 
         private string roomScene = "Fase1";
         private int qntPlayer = 2;
@@ -22,6 +24,9 @@ namespace ExtremeSnowboarding.Multiplayer
             Lobby lobby = GameObject.FindObjectOfType<Lobby>();
             int numOfPlayers = qntPlayer;
             string sceneName = nameInput.text;
+
+            if (randomRoomToggle.isOn)
+                roomScene = lobby.gameScenes.GetRandomScene();
             
             lobby.CreateRoom(roomScene, numOfPlayers, false, sceneName);
         }
@@ -30,6 +35,11 @@ namespace ExtremeSnowboarding.Multiplayer
         {
             sceneToggleGroup.OnToggleChanged.AddListener(SetRoomScene);
             numOfPlayersToggle.OnToggleChanged.AddListener(SetQuantityOfPlayers);
+        }
+
+        public void SetRamdomChoice()
+        {
+            randomChoicePanel.SetActive(randomRoomToggle.isOn);
         }
 
         private void SetRoomScene(string scene)

@@ -105,20 +105,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             GameController.gameController.QuitGame();
         }
 
-        //Daniiboy Code Start >>>>>>>>>>>>>>>>>>>>>>>>
-        public void PlayReturnAnimation(string trigger)
+        public void SetRandomRoomChoice()
         {
-            escolhaController.SetAnimatorTriggers(trigger);
-        }
-        //Daniiboy Code Ends >>>>>>>>>>>>>>>>>>>>>>>>
-
-        public void PlayerReturnAudio()
-        {
-            audioEffectsRef.PlayOneShot(returnAudio);
-        }
-        public void PlayClickAudio()
-        {
-            audioEffectsRef.PlayOneShot(clickAudio);
+            roomCreationUI.SetRamdomChoice();
         }
 
         public void ChangeOverrider(AnimatorOverrideController overrider)
@@ -161,11 +150,6 @@ namespace ExtremeSnowboarding.Script.UI.Menu
             roomJoiningUI.JoinRoom();
             encontrarSalaPanel.gameObject.SetActive(false);
             saguaoPanel.SetActive(true);
-        }
-
-        public void GoNext()
-        {
-            menuCameraPointController.NextPoint();
         }
 
         public void ChangeNickName(TMP_InputField input)

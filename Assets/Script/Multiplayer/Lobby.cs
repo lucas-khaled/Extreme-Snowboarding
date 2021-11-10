@@ -16,6 +16,7 @@ namespace ExtremeSnowboarding.Multiplayer
     [RequireComponent(typeof(PhotonView))]
     public class Lobby : MonoBehaviourPunCallbacks
     {
+        public GameScenes gameScenes;
         public Action<List<RoomInfo>> OnRoomListUpdateCallback { get; set; }
         public Action<bool> OnConnectedToMasterCallback { get; set; }
         public Action<bool> OnJoinedRoomCallback { get; set; }
@@ -144,7 +145,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            CreateRoom("Fase1", 4, false, ("Sala: "+(PhotonNetwork.CountOfRooms + 1)));
+            CreateRoom(gameScenes.GetRandomScene(), 4, false, ("Sala: "+(PhotonNetwork.CountOfRooms + 1)));
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
