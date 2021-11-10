@@ -15,6 +15,8 @@ MonoBehaviour:
   icon: {fileID: 5894903144067719344, guid: a325379a591a687479ab580d00d47137, type: 3}
   activateVFX: 0
   VFXNames: []
+  activateAnimation: 0
+  animation: 
   effectsToApply:
   - timeOfChange: 3
     quantification:
@@ -32,7 +34,15 @@ MonoBehaviour:
       haveRecuperation: 1
     conditioning:
       conditionBlock:
-        conditions: []
+        conditions:
+        - propertyName:
+            name: Etherium
+          operation: 0
+          floatValue: 0
+          stringValue: 
+          boolValue: 0
+          objectValue: {fileID: 0}
+          conector: 0
   instanceType: 0
   projectileInstance:
     projectile: {fileID: 4467211643521931719, guid: 001174df1b7c2a5428e3afbec9b0ce2b, type: 3}
@@ -40,5 +50,9 @@ MonoBehaviour:
     especifiedType: 0
     position: 1
     forceInstance: 1
+  areaEffectInstance:
+    radius: 5
   activateVFXOnCaster: 0
   VFXNamesOnCaster: []
+  activateAnimationOnCaster: 0
+  animationOnCaster: 

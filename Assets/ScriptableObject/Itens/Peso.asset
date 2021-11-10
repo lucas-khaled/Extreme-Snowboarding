@@ -35,7 +35,15 @@ MonoBehaviour:
       haveRecuperation: 1
     conditioning:
       conditionBlock:
-        conditions: []
+        conditions:
+        - propertyName:
+            name: Etherium
+          operation: 0
+          floatValue: 0
+          stringValue: 
+          boolValue: 0
+          objectValue: {fileID: 0}
+          conector: 0
   instanceType: 0
   projectileInstance:
     projectile: {fileID: 1008460217343403188, guid: cd0cef45beb72f04cb5881ebabf6dde6, type: 3}

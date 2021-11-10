@@ -19,7 +19,17 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         public override void StateUpdate()
         {
-            
+            if (CheckOnGround())
+            {
+                _rb.isKinematic = true;
+                _rb.velocity = Vector3.zero;
+            }
+                
+        }
+
+        private bool CheckOnGround()
+        {
+            return Physics.Raycast(player.transform.position, Vector3.down, player.SharedValues.CharacterHeight);
         }
     }
 }
