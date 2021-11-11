@@ -18,6 +18,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField] private Button startGameButton;
 
         private bool started = false;
+        private bool startWhenFull;
         private Lobby lobby;
 
         public void Init()
@@ -30,9 +31,11 @@ namespace ExtremeSnowboarding.Multiplayer
         }
         
 
-        public void Start(bool joined)
+        public void Start(bool joined, bool startWhenFull = false)
         {
             if(!joined) return;
+
+            this.startWhenFull = startWhenFull;
             
             started = true;
             startGameButton.gameObject.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
@@ -56,16 +59,22 @@ namespace ExtremeSnowboarding.Multiplayer
                 index++;
             }
 
-            if (index > 1 && PhotonNetwork.LocalPlayer.IsMasterClient)
-            {
-                startGameButton.interactable = true;
-            }
-
             if (index < playersInRoomTexts.Length-1)
             {
                 for (int i = index; i < playersInRoomTexts.Length; i++)
                     playersInRoomTexts[i].SetText(" - ");
             }
+
+            if (startWhenFull && PhotonNetwork.CurrentRoom.PlayerCount >= PhotonNetwork.CurrentRoom.MaxPlayers)
+            {
+                lobby.StartGame();
+            } 
+            
+            if (index > 1 && PhotonNetwork.LocalPlayer.IsMasterClient)
+            {
+                startGameButton.interactable = true;
+            }
+
         }
 
         private void SwitchMaster()

@@ -17,9 +17,11 @@ namespace ExtremeSnowboarding.Multiplayer
     public class Lobby : MonoBehaviourPunCallbacks
     {
         public GameScenes gameScenes;
+        
+        public bool StartWhenFull { get; set; }
         public Action<List<RoomInfo>> OnRoomListUpdateCallback { get; set; }
         public Action<bool> OnConnectedToMasterCallback { get; set; }
-        public Action<bool> OnJoinedRoomCallback { get; set; }
+        public Action<bool, bool> OnJoinedRoomCallback { get; set; }
         public Action<bool> OnCreatedRoomCallback { get; set; }
         public Action<DisconnectCause> OnDisconnectionCallback { get; set; }
         public Action OnPlayersInRoomUpdateCallback { get; set; }
@@ -131,12 +133,12 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public override void OnJoinedRoom()
         {
-            OnJoinedRoomCallback?.Invoke(true);
+            OnJoinedRoomCallback?.Invoke(true, StartWhenFull);
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
-            OnJoinedRoomCallback?.Invoke(false);
+            OnJoinedRoomCallback?.Invoke(false, false);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -146,7 +148,7 @@ namespace ExtremeSnowboarding.Multiplayer
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
-            OnJoinedRoomCallback?.Invoke(false);
+            OnJoinedRoomCallback?.Invoke(false, false);
         }
 
         public override void OnDisconnected(DisconnectCause cause)

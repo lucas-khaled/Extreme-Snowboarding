@@ -14,6 +14,7 @@ namespace ExtremeSnowboarding.Multiplayer
         [SerializeField] private TMP_InputField nameInput;
         [SerializeField] private ExtremeToggleGroup numOfPlayersToggle;
         [SerializeField] private Toggle randomRoomToggle;
+        [SerializeField] private Toggle startWhenFullToggle;
         [SerializeField] private GameObject randomChoicePanel;
 
         private string roomScene = "Fase1";
@@ -27,7 +28,8 @@ namespace ExtremeSnowboarding.Multiplayer
 
             if (randomRoomToggle.isOn)
                 roomScene = lobby.gameScenes.GetRandomScene();
-            
+
+            lobby.StartWhenFull = startWhenFullToggle.isOn;
             lobby.CreateRoom(roomScene, numOfPlayers, false, sceneName);
         }
         
