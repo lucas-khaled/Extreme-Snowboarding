@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ExitGames.Client.Photon;
 using ExtremeSnowboarding.Script.Items.Effects;
 using NaughtyAttributes;
@@ -30,13 +31,13 @@ namespace ExtremeSnowboarding.Script.Items
         public void StartEffects(Player.Player player)
         {
             foreach (Effect effect in effectsToApply)
-            {
-                Debug.Log(player.name);
                 effect.StartEffect(player);
-            }
 
-            ActivateAnimation(player, activateAnimation, animation);
-            ActivateVFX(player, true, VFXNames);
+            if (effectsToApply.Any(x => x.wasApplied))
+            {
+                ActivateAnimation(player, activateAnimation, animation);
+                ActivateVFX(player, true, VFXNames);
+            }
         }
         
         public void StartEffects(PhotonView view)

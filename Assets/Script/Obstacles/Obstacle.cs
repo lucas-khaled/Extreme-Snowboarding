@@ -30,7 +30,7 @@ namespace ExtremeSnowboarding.Script.Obstacles
                 {
                     if (state != "Dead" && state != "Flying")
                     {
-                        Debug.Log("Colis„o buraco");
+                        Debug.Log("Colis√£o buraco");
                         //player.ChangeState(new Dead());
                         player.ChangeState(new Flying());
                         player.gameObject.GetComponent<PathFollower>().pathCreator = path;
@@ -40,8 +40,6 @@ namespace ExtremeSnowboarding.Script.Obstacles
                 else if (!player.SharedValues.Etherium)
                     player.ChangeState(new Fallen(true));
             }
-            else if (other.gameObject.CompareTag("Projectile"))
-                Destroy(other.gameObject);
         }
     }
 }

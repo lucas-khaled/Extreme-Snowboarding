@@ -23,9 +23,11 @@ namespace ExtremeSnowboarding.Script.Items
         private float relativeSpeed;
         private bool isUp = false;
         private Vector3 pointDesUp;
+        private PhotonView _photonView;
 
         private void Start()
         {
+            _photonView = GetComponent<PhotonView>();
             switch (movementType)
             {
                 case MovementType.MOVE_TRACKING_TARGET:
@@ -133,16 +135,15 @@ namespace ExtremeSnowboarding.Script.Items
                 }
                 transform.LookAt(pointDes);
 
-                rb.velocity = vectorDest * Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f);
+                rb.velocity = vectorDest * (Time.deltaTime * ((velocity + caster.GetComponent<Rigidbody>().velocity.x) / 1.2f));
 
                 fuel -= Time.deltaTime;
             }
             else if (!alreadyCasted)
             {
-                rb.velocity = Vector3.right * Time.deltaTime * velocity;
+                rb.velocity = Vector3.right * (Time.deltaTime * velocity);
                 transform.rotation = Quaternion.LookRotation(vectorDest);
                 transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
-                Destroy(this, 100f);
                 rb.useGravity = true;
                 alreadyCasted = true;
             }
@@ -185,16 +186,15 @@ namespace ExtremeSnowboarding.Script.Items
                     InstantiateParticle(playerHitted.gameObject.transform);
 
                     fuckfriend.StartEffects(playerHitted.GetComponent<PhotonView>());
-                    Destroy(gameObject);
+                    _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
                 }
             }
             else if(!other.gameObject.CompareTag("Track") && !other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
             {
                 InstantiateParticle(gameObject.transform.parent);
 
-                Destroy(gameObject);
+                _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
 
-                Debug.Log(other.gameObject.tag);
             }
         }
 
@@ -211,6 +211,13 @@ namespace ExtremeSnowboarding.Script.Items
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(transform.position, transform.position + Vector3.down*height);
+        }
+
+        [PunRPC]
+        private void TellMasterToDestroy()
+        {
+            if(PhotonNetwork.IsMasterClient)
+                PhotonNetwork.Destroy(gameObject);
         }
     }
 }

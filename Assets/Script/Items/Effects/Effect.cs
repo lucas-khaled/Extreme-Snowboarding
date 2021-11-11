@@ -21,7 +21,7 @@ namespace ExtremeSnowboarding.Script.Items.Effects
         [SerializeField] private Conditioning conditioning;
     
         private Player.Player player;
-        private bool wasApplied;
+        public bool wasApplied { get; private set; }
 
         public void StartEffect(Player.Player player)
         {
