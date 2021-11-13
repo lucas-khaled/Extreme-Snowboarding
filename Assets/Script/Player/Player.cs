@@ -61,12 +61,14 @@ namespace ExtremeSnowboarding.Script.Player
         public GameCamera playerCamera { get;  set; }
 
         public Vector3 groundedVelocity { get; set; }
+        
+        public PhotonView PhotonView { get; private set; }
 
         PlayerState playerState = new Stopped();
         
         private GameObject catastropheRef;
 
-        private PhotonView _photonView;
+        
 
         public PlayerMovimentationFeedbacks GetMovimentationFeedbacks()
         {
@@ -153,10 +155,10 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Awake()
         {
-            _photonView = GetComponent<PhotonView>();
+            PhotonView = GetComponent<PhotonView>();
             sharedValues.player = this; //setting the player reference to the shared values
 
-            if (_photonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
                 movimentationFeedbacks.StartFeedbacks(transform);
@@ -167,7 +169,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void Start()
         {
-            if(!_photonView.IsMine) return;
+            if(!PhotonView.IsMine) return;
             
             playerState.StateStart(this);
             catastropheRef = null;
@@ -176,7 +178,7 @@ namespace ExtremeSnowboarding.Script.Player
 
         private void FixedUpdate()
         {
-            if(!_photonView.IsMine) return;
+            if(!PhotonView.IsMine) return;
             
             playerState.StateUpdate();
         }
@@ -188,7 +190,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// </summary>
         private void InputSubcribing()
         {
-            if(!_photonView.IsMine) return;
+            if(!PhotonView.IsMine) return;
             
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
             playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;  
@@ -274,7 +276,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="newState"> The new actual state </param>
         public void ChangeState(PlayerState newState)
         {
-            if(!_photonView.IsMine) return;
+            if(!PhotonView.IsMine) return;
             
             playerState.StateEnd();
 
@@ -319,7 +321,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void SetOnAnimator(string variable, bool value)
         {
-            _photonView.RPC("SetOnAnimator_RPC", RpcTarget.All, variable, value);
+            PhotonView.RPC("SetOnAnimator_RPC", RpcTarget.All, variable, value);
         }
 
 
@@ -342,7 +344,7 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator = null, bool value = true, float crossFadeLength = 0.15f)
         {
-            _photonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
+            PhotonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
                 SerializeUtilities.StringArray2Byte(possibleAnimations), 
                 valueSetedOnAnimator, value, crossFadeLength);
         }
@@ -372,7 +374,7 @@ namespace ExtremeSnowboarding.Script.Player
         //Detects player's collision and pass it to the actual state
         private void OnCollisionEnter(Collision collision)
         {
-            if (_photonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 playerState.OnCollisionEnter(collision);
                 Debug.Log("mine");

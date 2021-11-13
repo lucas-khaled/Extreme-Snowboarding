@@ -128,6 +128,7 @@ namespace ExtremeSnowboarding.Multiplayer
         public override void OnCreatedRoom()
         {
             base.OnCreatedRoom();
+            Debug.Log("Max Players: "+PhotonNetwork.CurrentRoom.MaxPlayers);
             OnCreatedRoomCallback?.Invoke(true);
         }
 

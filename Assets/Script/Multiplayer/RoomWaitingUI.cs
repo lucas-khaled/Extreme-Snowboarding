@@ -70,7 +70,7 @@ namespace ExtremeSnowboarding.Multiplayer
                 lobby.StartGame();
             } 
             
-            if (index > 1 && PhotonNetwork.LocalPlayer.IsMasterClient)
+            if (index > 1 && PhotonNetwork.IsMasterClient)
             {
                 startGameButton.interactable = true;
             }
@@ -79,8 +79,8 @@ namespace ExtremeSnowboarding.Multiplayer
 
         private void SwitchMaster()
         {
-            startGameButton.gameObject.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
-            startGameButton.interactable = PhotonNetwork.CurrentRoom.PlayerCount > 1 && PhotonNetwork.LocalPlayer.IsMasterClient;
+            startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+            startGameButton.interactable = PhotonNetwork.CurrentRoom.PlayerCount > 1 && PhotonNetwork.IsMasterClient;
         }
         
         private void Quit()

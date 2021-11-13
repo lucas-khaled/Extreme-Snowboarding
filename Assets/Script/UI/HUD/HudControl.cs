@@ -83,7 +83,7 @@ namespace ExtremeSnowboarding.Script.UI.HUD
 
         private void OnPlayerPass(Player.Player player, int classification)
         {
-            if (this.player == player && player.GetPlayerState().GetType() != typeof(ExtremeSnowboarding.Script.EstadosPlayer.Dead))
+            if (this.player == player && player.GetPlayerState().GetType() != typeof(EstadosPlayer.Dead))
                 refClassificationImage.sprite = classificationSprites[classification];
         }
 

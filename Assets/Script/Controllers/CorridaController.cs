@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.Controllers
 {
-    public class CorridaController : MonoBehaviourPun, IOnEventCallback
+    public class CorridaController : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         [SerializeField] 
         private MultiplayerInstantiationSettings instantiationSettings;
@@ -40,6 +40,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         private int _alivePlayers;
 
         private const int CustomManualInstantiationEventCode = 1;
+        private const int PlayerPassEventCode = 3;
         private List<Player.Player> _playersFinished = new List<Player.Player>();
 
         public static CorridaController instance { get; private set; }
@@ -145,6 +146,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void OnPlayerPass(Player.Player player, int classification)
         {
+            
 
         }
 
@@ -193,10 +195,12 @@ namespace ExtremeSnowboarding.Script.Controllers
             LoadPlayers();
             for (int i = 0; i < _playersInGame.Count; i++)
             {
-                if (_playersInGame[i] != null)
-                    PlayerGeneralEvents.onPlayerPass.Invoke(_playersInGame[i], i);
+                PlayerGeneralEvents.onPlayerPass?.Invoke(_playersInGame[i], i);
+                PlayerPassRaiseEvent(_playersInGame[i].PhotonView, i);
             }
-            InvokeRepeating("CheckPlayerClassification",0,0.1f);
+            
+            if(PhotonNetwork.IsMasterClient)
+                InvokeRepeating("CheckPlayerClassification",0,0.1f);
         }
 
         public void InstancePlayer(Vector3 position, PlayerData playerData)
@@ -229,8 +233,28 @@ namespace ExtremeSnowboarding.Script.Controllers
             camera.SetInitialPlayer(player);
             player.name = "My player";
             
-            if(PlayerGeneralEvents.onPlayerInstantiate != null)
-                PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+            PlayerGeneralEvents.onPlayerInstantiate?.Invoke(player);
+        }
+
+        private void PlayerPassRaiseEvent(PhotonView p1, int p1Classification)
+        {
+            object[] data = 
+            {
+                p1.ViewID, p1Classification
+            };
+
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                Receivers = ReceiverGroup.Others,
+                CachingOption = EventCaching.AddToRoomCache
+            };
+
+            SendOptions sendOptions = new SendOptions
+            {
+                Reliability = true
+            };
+
+            PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
         }
 
         public void OnEvent(EventData photonEvent)
@@ -244,9 +268,16 @@ namespace ExtremeSnowboarding.Script.Controllers
                 
                 player.SetMaterialsAndMeshes(playerData.color1, playerData.color2, playerData.playerMeshes, playerData.overriderControllerName, instantiationSettings);
                 StartCoroutine(AddAPlayer(player));
-                
-                if(PlayerGeneralEvents.onPlayerInstantiate != null)
-                    PlayerGeneralEvents.onPlayerInstantiate.Invoke(player);
+
+                PlayerGeneralEvents.onPlayerInstantiate?.Invoke(player);
+            }
+
+            else if(photonEvent.Code == PlayerPassEventCode)
+            {
+                object[] data = (object[]) photonEvent.CustomData;
+                Player.Player player = PhotonView.Find((int) data[0]).GetComponent<Player.Player>();
+
+                PlayerGeneralEvents.onPlayerPass?.Invoke(player, (int)data[1]);
             }
         }
 
@@ -317,18 +348,25 @@ namespace ExtremeSnowboarding.Script.Controllers
 
                 if (changed)
                 {
-                    if (PlayerGeneralEvents.onPlayerPass != null)
-                    {
-                        if (playerChanged != null && playerChanged2 != null)
+                    if (playerChanged != null && playerChanged2 != null)
                         {
-                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged, playerChangedPosition);
-                            PlayerGeneralEvents.onPlayerPass.Invoke(playerChanged2, playerChangedPosition - 1);
+                            PlayerGeneralEvents.onPlayerPass?.Invoke(playerChanged, playerChangedPosition);
+                            PlayerGeneralEvents.onPlayerPass?.Invoke(playerChanged2, playerChangedPosition - 1);
+                            
+                            PlayerPassRaiseEvent(playerChanged.PhotonView, playerChangedPosition);
+                            PlayerPassRaiseEvent(_playersInGame[i].PhotonView, playerChangedPosition - 1);
                         }
-                    }
 
                     changed = false;
                 }
             }
+        }
+
+        public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+        {
+            base.OnMasterClientSwitched(newMasterClient);
+            if(PhotonNetwork.IsMasterClient)
+                InvokeRepeating("CheckPlayerClassification",0,0.1f);
         }
 
         public void Pause()
