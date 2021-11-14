@@ -246,7 +246,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions
             {
                 Receivers = ReceiverGroup.Others,
-                CachingOption = EventCaching.AddToRoomCache
+                CachingOption = EventCaching.DoNotCache
             };
 
             SendOptions sendOptions = new SendOptions
@@ -254,11 +254,12 @@ namespace ExtremeSnowboarding.Script.Controllers
                 Reliability = true
             };
 
-            PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
+            PhotonNetwork.RaiseEvent(PlayerPassEventCode, data, raiseEventOptions, sendOptions);
         }
 
         public void OnEvent(EventData photonEvent)
         {
+            Debug.Log("Event Recieved: "+photonEvent.Code);
             if (photonEvent.Code == CustomManualInstantiationEventCode)
             {
                 object[] data = (object[]) photonEvent.CustomData;
@@ -274,6 +275,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
             else if(photonEvent.Code == PlayerPassEventCode)
             {
+                Debug.Log("Recieved Player pass Callback");
                 object[] data = (object[]) photonEvent.CustomData;
                 Player.Player player = PhotonView.Find((int) data[0]).GetComponent<Player.Player>();
 
@@ -320,7 +322,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             for (int i = 0; i < _playersInGame.Count - 1; i++)
             {
                 if(playersClassificated.Exists(x => x == _playersInGame[i+1]) || playersClassificated.Exists(x => x == _playersInGame[i]))
-                    return;
+                    continue;
                 
                 float distanceXPlayer1 = _playersInGame[i].transform.position.x;
                 float distanceXPlayer2 = _playersInGame[i + 1].transform.position.x;
@@ -360,6 +362,19 @@ namespace ExtremeSnowboarding.Script.Controllers
                     changed = false;
                 }
             }
+            
+            DebugPlayersInGame();
+        }
+
+        private void DebugPlayersInGame()
+        {
+            string debugString = "Player list: ";
+            foreach (var player in _playersInGame)
+            {
+                debugString += "\n" + player.name;
+            }
+            
+            Debug.Log(debugString);
         }
 
         public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
