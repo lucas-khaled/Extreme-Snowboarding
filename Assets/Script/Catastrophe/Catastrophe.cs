@@ -1,6 +1,7 @@
 using System.Collections;
 using ExtremeSnowboarding.Script.Controllers;
 using ExtremeSnowboarding.Script.EstadosPlayer;
+using Photon.Pun;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.Catastrophe
@@ -81,9 +82,10 @@ namespace ExtremeSnowboarding.Script.Catastrophe
 
         Vector3 GetNextMovementPoint()
         {
-            Vector3 newPoint = new Vector3(this.transform.position.x + 5f, 
-                this.transform.position.y, 
-                this.transform.position.z);            
+            var position = this.transform.position;
+            Vector3 newPoint = new Vector3(position.x + 5f, 
+                position.y, 
+                position.z);            
 
             RaycastHit hit;
 
@@ -107,20 +109,21 @@ namespace ExtremeSnowboarding.Script.Catastrophe
                     velocity * Time.deltaTime);  // Velocidade movimento
 
                 if (velocity <= maxVel) 
-                velocity += (aceleracao / maxVel) * Time.deltaTime;
+                    velocity += (aceleracao / maxVel) * Time.deltaTime;
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if(!isMoving) return;
+
+            Player.Player player = other.gameObject.GetComponent<Player.Player>();
+            if(player == null) return;
             
-            if(other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player.Player>().SharedValues.actualState != "Dead")
+            if(player.gameObject.CompareTag("Player") && player.SharedValues.actualState != "Dead" && player.GetComponent<PhotonView>().IsMine)
             {
-                other.gameObject.GetComponent<Player.Player>().ChangeState(new Dead());
+                player.ChangeState(new Dead());
             }
-            else if (other.gameObject.CompareTag("Projectile"))
-                Destroy(other.gameObject);
         }
     }
 }
