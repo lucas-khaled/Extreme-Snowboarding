@@ -2,6 +2,7 @@ using ExtremeSnowboarding.Script.EstadosPlayer;
 using UnityEngine;
 using PathCreation.Examples;
 using PathCreation;
+using Photon.Pun;
 
 namespace ExtremeSnowboarding.Script.Obstacles
 {
@@ -24,8 +25,10 @@ namespace ExtremeSnowboarding.Script.Obstacles
         {
             if (other.gameObject.CompareTag("Player"))
             {
+                if(!other.GetComponent<PhotonView>().IsMine) return;
+                
                 Player.Player player = other.GetComponent<Player.Player>();
-                string state = other.gameObject.GetComponent<Player.Player>().SharedValues.actualState;
+                string state = player.SharedValues.actualState;
                 if (isHole)
                 {
                     if (state != "Dead" && state != "Flying")
