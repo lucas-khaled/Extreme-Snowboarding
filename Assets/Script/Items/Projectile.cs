@@ -178,14 +178,17 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
+            PhotonView view = other.GetComponent<PhotonView>();
+            if(view == null || !view.IsMine) return;
+            
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
-                if(playerHitted != caster)
+                
+                if(playerHitted != caster && view != null)
                 {
                     InstantiateParticle(playerHitted.gameObject.transform);
-
-                    fuckfriend.StartEffects(playerHitted.GetComponent<PhotonView>());
+                    fuckfriend.StartEffects(view);
                     _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
                 }
             }

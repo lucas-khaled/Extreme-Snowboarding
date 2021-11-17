@@ -30,14 +30,15 @@ namespace ExtremeSnowboarding.Script.Items
 
         public void StartEffects(Player.Player player)
         {
-            foreach (Effect effect in effectsToApply)
-                effect.StartEffect(player);
-
-            if (effectsToApply.Any(x => x.wasApplied))
+            if (player.PhotonView.IsMine)
             {
-                ActivateAnimation(player, activateAnimation, animation);
-                ActivateVFX(player, true, VFXNames);
+                foreach (Effect effect in effectsToApply)
+                    effect.StartEffect(player);
             }
+            
+            ActivateAnimation(player, activateAnimation, animation);
+            ActivateVFX(player, true, VFXNames);
+            
         }
         
         public void StartEffects(PhotonView view)
@@ -60,8 +61,11 @@ namespace ExtremeSnowboarding.Script.Items
         {
             if(!checker)
                 return;
+            
+            Debug.Log("VFX vai");
             foreach (var vfxName in names) 
             { 
+                Debug.Log("VFX NAME: "+vfxName);
                 player.GetPlayerFeedbackList().GetFeedbackByName(vfxName, player.SharedValues.playerCode).StartFeedback();
             }
         }

@@ -118,7 +118,7 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void InstanceByPlace(FuckFriend fuck)
         {
-            PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(position).GetComponent<PhotonView>();
+            PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(position).PhotonView;
             Debug.Log("Player on Instance call: "+playerAffectedView.name);
             fuck.StartEffects(playerAffectedView);
         }
@@ -132,7 +132,7 @@ namespace ExtremeSnowboarding.Script.Items
             if (affectedPosition >= 1 && affectedPosition <= playersCount)
             {
                 Player.Player playerAffected = CorridaController.instance.GetPlayerByPlace(affectedPosition);
-                fuck.StartEffects(playerAffected);
+                fuck.StartEffects(playerAffected.PhotonView);
             }
             else if (forceInstance)
             {
@@ -150,7 +150,7 @@ namespace ExtremeSnowboarding.Script.Items
                     clampedPosition = clampedPosition + 1 * sign;
                 }
                 
-                PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(clampedPosition).GetComponent<PhotonView>();
+                PhotonView playerAffectedView = CorridaController.instance.GetPlayerByPlace(clampedPosition).PhotonView;
                 fuck.StartEffects(playerAffectedView);
             }
         }
