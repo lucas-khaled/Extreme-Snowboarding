@@ -35,12 +35,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1465486239457059090, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
       propertyPath: movementType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1465486239457059090, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
       propertyPath: explosionParticle
       value: 
       objectReference: {fileID: 6416634274432692672, guid: 13769ecabd740e647b1b40015b34a27a, type: 3}
+    - target: {fileID: 1465486239457059090, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
+      propertyPath: explosionFeedbacks
+      value: 
+      objectReference: {fileID: 7321688048244906296}
     - target: {fileID: 5108537265155203222, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
       propertyPath: m_Name
       value: FogueteTras
@@ -120,3 +124,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5108537265155203222, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
   m_PrefabInstance: {fileID: 8870845252420172113}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7321688048244906296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2197843192754905193, guid: 172150b955b6c884eb38331357fde6e2, type: 3}
+  m_PrefabInstance: {fileID: 8870845252420172113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

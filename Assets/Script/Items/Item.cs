@@ -62,7 +62,6 @@ namespace ExtremeSnowboarding.Script.Items
             if(!checker)
                 return;
             
-            Debug.Log("VFX vai");
             foreach (var vfxName in names) 
             { 
                 Debug.Log("VFX NAME: "+vfxName);

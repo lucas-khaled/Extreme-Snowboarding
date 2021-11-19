@@ -67,7 +67,6 @@ namespace ExtremeSnowboarding.Script.Player
         PlayerState playerState = new Stopped();
         
         private GameObject catastropheRef;
-
         
 
         public PlayerMovimentationFeedbacks GetMovimentationFeedbacks()
@@ -163,6 +162,10 @@ namespace ExtremeSnowboarding.Script.Player
                 playerFeedbacksList.StartFeedbacks(transform, sharedValues.playerCode); 
                 movimentationFeedbacks.StartFeedbacks(transform);
                 InputSubcribing();
+            }
+            else
+            {
+                Destroy(GetComponent<AudioListener>());
             }
             
         }

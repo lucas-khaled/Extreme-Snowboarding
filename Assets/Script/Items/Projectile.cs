@@ -1,8 +1,10 @@
 using System;
+using MoreMountains.Feedbacks;
 using NaughtyAttributes;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace ExtremeSnowboarding.Script.Items
 {
@@ -13,7 +15,7 @@ namespace ExtremeSnowboarding.Script.Items
         [SerializeField] private float height = 1f;
         [SerializeField] private float fuel = 20; 
         [SerializeField] private MovementType movementType;
-        [SerializeField] [ShowAssetPreview()] private GameObject explosionParticle;
+        [FormerlySerializedAs("explosionParticle")] [SerializeField] [ShowAssetPreview()] private MMFeedbacks explosionFeedbacks;
 
         public FuckFriend fuckfriend { private get; set; }
         public Player.Player target { private get; set; }
@@ -178,35 +180,34 @@ namespace ExtremeSnowboarding.Script.Items
 
         private void OnTriggerEnter(Collider other)
         {
-            PhotonView view = other.GetComponent<PhotonView>();
-            if(view == null || !view.IsMine) return;
+            if(!_photonView.IsMine) return;
             
             if (other.gameObject.CompareTag("Player"))
             {
                 Player.Player playerHitted = other.GetComponent<Player.Player>();
+                PhotonView view = other.GetComponent<PhotonView>();
                 
                 if(playerHitted != caster && view != null)
                 {
-                    InstantiateParticle(playerHitted.gameObject.transform);
+                    InstantiateParticle();
                     fuckfriend.StartEffects(view);
                     _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
                 }
             }
-            else if(!other.gameObject.CompareTag("Track") && !other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
+            else if(!other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
             {
-                InstantiateParticle(gameObject.transform.parent);
+                InstantiateParticle();
 
                 _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
 
             }
         }
 
-        private void InstantiateParticle(Transform parentForParticle)
+        private void InstantiateParticle()
         {
-            if (explosionParticle != null)
+            if (explosionFeedbacks != null)
             {
-                GameObject explosionParticleGO = Instantiate(explosionParticle, transform.position, Quaternion.identity, parentForParticle);
-                explosionParticleGO.GetComponent<ParticleSystem>().Play();
+                explosionFeedbacks.PlayFeedbacks();
             }
         }
 

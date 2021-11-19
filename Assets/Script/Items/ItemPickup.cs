@@ -1,5 +1,8 @@
+using System;
+using ExtremeSnowboarding.Script.Controllers;
 using Photon.Pun;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.Items
 {
@@ -7,6 +10,8 @@ namespace ExtremeSnowboarding.Script.Items
     public class ItemPickup : MonoBehaviour
     {
         [SerializeField] private Item[] availableItems;
+        [SerializeField] private AudioClip audioClip;
+        
 
         private void PickRandomItem(Player.Player player)
         {
@@ -39,6 +44,10 @@ namespace ExtremeSnowboarding.Script.Items
                 if(!other.GetComponent<PhotonView>().IsMine || other.GetComponent<Player.Player>().Coletavel != null) return;
                 
                 PickRandomItem(other.gameObject.GetComponent<Player.Player>());
+
+                if(SceneAudioSource.Instance != null)
+                    SceneAudioSource.Instance.PlayClip(audioClip);
+                    
                 
                 if(PhotonNetwork.LocalPlayer.IsMasterClient)
                     PhotonNetwork.Destroy(gameObject);

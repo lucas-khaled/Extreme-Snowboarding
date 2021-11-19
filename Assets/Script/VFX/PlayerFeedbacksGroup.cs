@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ExitGames.Client.Photon;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
@@ -41,7 +42,7 @@ namespace ExtremeSnowboarding.Script.VFX
                 }
 
                 GameObject hashedObj = hashedArray[i].GetFeedback().gameObject;
-                GameObject particleGO = PhotonNetwork.Instantiate(Path.Combine("Feedbacks",hashedObj.name), hashedObj.transform.position, hashedObj.transform.rotation);
+                GameObject particleGO = PhotonNetwork.Instantiate(Path.Combine("Feedbacks/PlayerFeedbacks",hashedObj.name), hashedObj.transform.position, hashedObj.transform.rotation);
 
                 MMFeedbacks instantiatedFeedback = particleGO.GetComponent<MMFeedbacks>();
                 instantiatedFeedback.name = hashedArray[i].ParticleName;
@@ -76,6 +77,7 @@ namespace ExtremeSnowboarding.Script.VFX
             if (index == -1)
                 return null;
 
+            Debug.Log("Hash name: "+name);
             return VFXManager.instance.InstantiatedList.Find(x => x.playerCode == playerCode).playerVfxes[index];
         }
 
