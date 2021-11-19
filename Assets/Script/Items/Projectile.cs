@@ -194,7 +194,7 @@ namespace ExtremeSnowboarding.Script.Items
                     _photonView.RPC("TellMasterToDestroy", RpcTarget.MasterClient);
                 }
             }
-            else if(!other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
+            else if(other.gameObject.CompareTag("Track") && !other.gameObject.CompareTag("Foguete") && !other.gameObject.CompareTag("ItemBox"))
             {
                 InstantiateParticle();
 
