@@ -12,39 +12,31 @@ namespace ExtremeSnowboarding.Script.Player
     [CreateAssetMenu(fileName = "Player Movimentation Feedback Group", menuName = "PlayerFeedbacks/Movimentation", order = 0)]
     public class PlayerMovimentationFeedbacks : ScriptableObject
     {
-        [SerializeField]
-        private MMFeedbacks _normalFallFeedback;
-        [SerializeField]
-        private MMFeedbacks _hardFallFeedback;
-        [SerializeField]
-        private MMFeedbacks _landingFeedback;
-        [SerializeField]
-        private MMFeedbacks _jumpingFeedback;
-        [SerializeField]
-        private MMFeedbacks _skiingFeedback;
-        [SerializeField]
-        private MMFeedbacks _trickFeedback;
-        [SerializeField]
-        private MMFeedbacks _victoryFeedback;
-        [SerializeField]
-        private MMFeedbacks _lostFeedback;
+        [SerializeField] private MMFeedbacks _normalFallFeedback; 
+        [SerializeField] private MMFeedbacks _hardFallFeedback;
+        [SerializeField] private MMFeedbacks _landingFeedback;
+        [SerializeField] private MMFeedbacks _jumpingFeedback;
+        [SerializeField] private MMFeedbacks _skiingFeedback;
+        [SerializeField] private MMFeedbacks _trickFeedback;
+        [SerializeField] private MMFeedbacks _victoryFeedback;
+        [SerializeField] private MMFeedbacks _lostFeedback;
+        [SerializeField] private MMFeedbacks _maleFlyingFeedback;
+        [SerializeField] private MMFeedbacks _femaleFlyingFeedback;
+        [SerializeField] private MMFeedbacks _maleDyingFeedback;
+        [SerializeField] private MMFeedbacks _femaleDyingFeedback;
         
-        [HideInInspector]
-        public MMFeedbacks normalFallFeedback;
-        [HideInInspector]
-        public MMFeedbacks hardFallFeedback;
-        [HideInInspector]
-        public MMFeedbacks landingFeedback;
-        [HideInInspector]
-        public MMFeedbacks jumpingFeedback;
-        [HideInInspector]
-        public MMFeedbacks skiingFeedback;
-        [HideInInspector]
-        public MMFeedbacks trickFeedback;
-        [HideInInspector]
-        public MMFeedbacks victoryFeedback;
-        [HideInInspector]
-        public MMFeedbacks lostFeedback;
+        [HideInInspector] public MMFeedbacks normalFallFeedback;
+        [HideInInspector] public MMFeedbacks hardFallFeedback;
+        [HideInInspector] public MMFeedbacks landingFeedback;
+        [HideInInspector] public MMFeedbacks jumpingFeedback;
+        [HideInInspector] public MMFeedbacks skiingFeedback;
+        [HideInInspector] public MMFeedbacks trickFeedback;
+        [HideInInspector] public MMFeedbacks victoryFeedback;
+        [HideInInspector] public MMFeedbacks lostFeedback;
+        [HideInInspector] public MMFeedbacks maleFlyingFeedback;
+        [HideInInspector] public MMFeedbacks femaleFlyingFeedback;
+        [HideInInspector] public MMFeedbacks maleDyingFeedback;
+        [HideInInspector] public MMFeedbacks femaleDyingFeedback;
 
         public void StartFeedbacks(Transform player)
         {

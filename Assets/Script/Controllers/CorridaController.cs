@@ -362,8 +362,6 @@ namespace ExtremeSnowboarding.Script.Controllers
                     changed = false;
                 }
             }
-            
-            DebugPlayersInGame();
         }
 
         private void DebugPlayersInGame()

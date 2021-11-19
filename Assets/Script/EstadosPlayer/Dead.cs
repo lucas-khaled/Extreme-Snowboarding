@@ -33,6 +33,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
             PlayerGeneralEvents.onPlayerDeath += OnPlayerDeath;
             MonoBehaviour.Destroy(player.GetMeshGameObject()); 
+            
+            if(PlayerPrefs.GetString("Mesh") == "Male")
+                player.GetMovimentationFeedbacks().maleDyingFeedback?.PlayFeedbacks();
+            else
+                player.GetMovimentationFeedbacks().femaleDyingFeedback?.PlayFeedbacks();
         }
 
         public override void StateUpdate()

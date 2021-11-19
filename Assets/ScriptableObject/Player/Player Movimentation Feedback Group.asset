@@ -20,6 +20,10 @@ MonoBehaviour:
   _trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
   _victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
   _lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
+  _maleFlyingFeedback: {fileID: 3008497318704262355, guid: 4881d37c109a45e44bb75aaace82871b, type: 3}
+  _femaleFlyingFeedback: {fileID: 3008497318704262355, guid: 974e2b0390593d44faca0c59bf71d78f, type: 3}
+  _maleDyingFeedback: {fileID: 3008497318704262355, guid: aa677b2fd2990a240b79103cd493c8a6, type: 3}
+  _femaleDyingFeedback: {fileID: 3008497318704262355, guid: 95f9d103302db96479d238ea0d1ca4b6, type: 3}
   normalFallFeedback: {fileID: 3849889674896154441, guid: be52f3c228d77c744bd4ade42566f65f, type: 3}
   hardFallFeedback: {fileID: 6883475650410936822, guid: 4edb925d7af309349aa7a265a038529c, type: 3}
   landingFeedback: {fileID: 4455704544438292866, guid: 6900298ed3d734041846af3e3efd0957, type: 3}
@@ -28,3 +32,7 @@ MonoBehaviour:
   trickFeedback: {fileID: 5763604794512533324, guid: 854b547efa1dcdb4dab69449cb3af400, type: 3}
   victoryFeedback: {fileID: 3008497318704262355, guid: 7549600e1cf24e34e9debae6828169d3, type: 3}
   lostFeedback: {fileID: 6518239122615335413, guid: ac830de208bab5c43b75e93e243af218, type: 3}
+  maleFlyingFeedback: {fileID: 0}
+  femaleFlyingFeedback: {fileID: 0}
+  maleDyingFeedback: {fileID: 0}
+  femaleDyingFeedback: {fileID: 0}

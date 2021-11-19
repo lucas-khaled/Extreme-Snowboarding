@@ -95,21 +95,24 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                         string[] animation = { "CaiuCostas" };
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 2.5f;
+                        player.GetMovimentationFeedbacks().normalFallFeedback?.PlayFeedbacks();
                     }
                     else if (angleDifference <= 160)
                     {
                         string[] animation = { "Caiu-Afunda" };
                         player.ChangeAnimationTo(animation, "hardFall", true);
                         timeFall = 3.5f;
+                        player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
                     }
                     else
                     {
                         string[] animation = { "Caiu-Snowboard-Cabeca" };
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 4.2f;
+                        player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
                     }
 
-                    player.GetMovimentationFeedbacks().hardFallFeedback?.PlayFeedbacks();
+                    
 
                     newPlayerState = new Fallen(timeFall);
 

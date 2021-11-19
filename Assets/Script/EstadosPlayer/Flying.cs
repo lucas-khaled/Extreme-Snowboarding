@@ -30,6 +30,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             path = player.gameObject.GetComponent<PathFollower>();
             PathFollower.onPathFinished += OnPathFinished;
             path.auxOnce = false;
+            
+            if(PlayerPrefs.GetString("Mesh") == "Male")
+                player.GetMovimentationFeedbacks().maleFlyingFeedback?.PlayFeedbacks();
+            else
+                player.GetMovimentationFeedbacks().femaleFlyingFeedback?.PlayFeedbacks();
         }
 
         public override void StateUpdate()

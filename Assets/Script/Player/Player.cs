@@ -67,6 +67,7 @@ namespace ExtremeSnowboarding.Script.Player
         PlayerState playerState = new Stopped();
         
         private GameObject catastropheRef;
+
         
 
         public PlayerMovimentationFeedbacks GetMovimentationFeedbacks()
@@ -81,7 +82,7 @@ namespace ExtremeSnowboarding.Script.Player
         public GameObject GetMeshGameObject()
         {
             if (meshRenderers[0] != null)
-            return meshRenderers[0].transform.parent.gameObject;
+                return meshRenderers[0].transform.parent.gameObject;
 
             return null;
         }

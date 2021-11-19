@@ -3,18 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a4f730f9-082f-4e93-a4c9-7f425fdd0298" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Extreme-Snowboarding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Juices/Esqueleto.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Juices/Esqueleto.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/CristalFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/CristalFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/EscudoFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/EscudoFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/FogueteFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/FogueteFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/GiroRapidoFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/GiroRapidoFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/MolaPowerFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/MolaPowerFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/RelampagoFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/PlayerFeedbacks/RelampagoFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/Projectiles/ExplosionFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/Projectiles/ExplosionFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feedbacks/Projectiles/IceExplosionFeedback.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Feedbacks/Projectiles/IceExplosionFeedback.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Projectiles/Banana.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Projectiles/Banana.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Flying.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Flying.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerMovimentationFeedbacks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerMovimentationFeedbacks.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObject/Player/Player Movimentation Feedback Group.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObject/Player/Player Movimentation Feedback Group.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,20 +37,17 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuCameraPointController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EventSystem/PlayerGeneralEvents.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/RaceEndState.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Application.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VoidReturnTrack.cs" />
       <option value="$PROJECT_DIR$/Assets/AudioSlider.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Catastrophe/Catastrophe.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/Analysis/MovimentationValuesWindow.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/RoadMeshCreator.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Path/PathClamper.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Path/PathClampedObject.cs" />
       <option value="$PROJECT_DIR$/Assets/PathCreator/Examples/Scripts/PathPlacer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/PathClampedObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/PathClamper.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Grounded.cs" />
@@ -68,12 +60,7 @@
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/RoomVisualizationUI.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/InfoLoader.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/PrefsLoader.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/MultiplayerInstantiationSettings.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerMovimentationFeedbacks.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/RoomJoiningUI.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/MenuUIController.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Multiplayer/GameScenes.cs" />
@@ -86,13 +73,21 @@
       <option value="$PROJECT_DIR$/Assets/Script/Items/Effects/Effect.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/FuckFriend.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Item.cs" />
-      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Editor/PlayerFeedbacksTest.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/PlayerFeedbacksTest.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Controllers/SceneAudioSource.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/ItemPickup.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/VFX/PlayerFeedbacksGroup.cs" />
       <option value="$PROJECT_DIR$/Assets/Script/Items/Projectile.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Jumping.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/PlayerMenu.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/UI/Menu/EscolhaController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Flying.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Player/PlayerMovimentationFeedbacks.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/EstadosPlayer/Dead.cs" />
+      <option value="$PROJECT_DIR$/Assets/Script/Controllers/CorridaController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rUbNVSV26J3CmLP3wHL1uRykuK" />
@@ -213,7 +208,7 @@
       <workItem from="1636974357102" duration="548000" />
       <workItem from="1637105074908" duration="4131000" />
       <workItem from="1637280864356" duration="4620000" />
-      <workItem from="1637322935409" duration="7062000" />
+      <workItem from="1637322935409" duration="9586000" />
     </task>
     <servers />
   </component>
