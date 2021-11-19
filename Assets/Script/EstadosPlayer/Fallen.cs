@@ -65,6 +65,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 }
             }
 
+            if (PlayerPrefs.GetString("Mesh") == "Male")
+                player.GetMovimentationFeedbacks().maleNormalFallFeedback.PlayFeedbacks();
+            else
+                player.GetMovimentationFeedbacks().femaleNormalFallFeedback.PlayFeedbacks();
+            
             player.groundedVelocity = Vector3.zero;
 
         }

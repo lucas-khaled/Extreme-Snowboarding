@@ -12,8 +12,10 @@ namespace ExtremeSnowboarding.Script.Player
     [CreateAssetMenu(fileName = "Player Movimentation Feedback Group", menuName = "PlayerFeedbacks/Movimentation", order = 0)]
     public class PlayerMovimentationFeedbacks : ScriptableObject
     {
-        [SerializeField] private MMFeedbacks _normalFallFeedback; 
-        [SerializeField] private MMFeedbacks _hardFallFeedback;
+        [SerializeField] private MMFeedbacks _maleNormalFallFeedback;
+        [SerializeField] private MMFeedbacks _femaleNormalFallFeedback;
+        [SerializeField] private MMFeedbacks _maleHardFallFeedback;
+        [SerializeField] private MMFeedbacks _femaleHardFallFeedback;
         [SerializeField] private MMFeedbacks _landingFeedback;
         [SerializeField] private MMFeedbacks _jumpingFeedback;
         [SerializeField] private MMFeedbacks _skiingFeedback;
@@ -25,8 +27,10 @@ namespace ExtremeSnowboarding.Script.Player
         [SerializeField] private MMFeedbacks _maleDyingFeedback;
         [SerializeField] private MMFeedbacks _femaleDyingFeedback;
         
-        [HideInInspector] public MMFeedbacks normalFallFeedback;
-        [HideInInspector] public MMFeedbacks hardFallFeedback;
+        [HideInInspector] public MMFeedbacks maleNormalFallFeedback;
+        [HideInInspector] public MMFeedbacks femaleNormalFallFeedback;
+        [HideInInspector] public MMFeedbacks maleHardFallFeedback;
+        [HideInInspector] public MMFeedbacks femaleHardFallFeedback;
         [HideInInspector] public MMFeedbacks landingFeedback;
         [HideInInspector] public MMFeedbacks jumpingFeedback;
         [HideInInspector] public MMFeedbacks skiingFeedback;
