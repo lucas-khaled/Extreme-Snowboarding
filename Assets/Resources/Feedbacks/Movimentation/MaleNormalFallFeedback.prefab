@@ -90,7 +90,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3211045709357710244, guid: 252f9c1ee3bc1b240a2edc4e1b87ef90, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.589
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -209,15 +209,15 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  TargetAudioSource: {fileID: 0}
+  TargetAudioSource: {fileID: 3618009164776482476}
   Mode: 0
   RandomSfx:
   - {fileID: 8300000, guid: af5bd2fb163a0f64eb5137269ec2c983, type: 3}
   - {fileID: 8300000, guid: e4b55e8eef9ce844190b6206df67cae9, type: 3}
   - {fileID: 8300000, guid: 043d2af02159aaa48be328b6f1c118d4, type: 3}
   - {fileID: 8300000, guid: ef4b9356814bf9d459029bbad7c4868b, type: 3}
-  MinVolume: 1
-  MaxVolume: 1
+  MinVolume: 0.1
+  MaxVolume: 0.5
   MinPitch: 1
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}

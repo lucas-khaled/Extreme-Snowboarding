@@ -97,34 +97,38 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                         string[] animation = { "CaiuCostas" };
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 2.5f;
-                        
-                        feedbacksToPlay = (PlayerPrefs.GetString("Mesh") == "Male") 
-                            ? player.GetMovimentationFeedbacks().maleNormalFallFeedback 
-                            : player.GetMovimentationFeedbacks().femaleNormalFallFeedback;
+
+                        if (PlayerPrefs.GetString("Mesh") == "Male")
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().maleNormalFallFeedback;
+                        else
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().femaleNormalFallFeedback;
                     }
+                    
                     else if (angleDifference <= 160)
                     {
-                        string[] animation = { "Caiu-Afunda" };
+                        string[] animation = {"Caiu-Afunda"};
                         player.ChangeAnimationTo(animation, "hardFall", true);
                         timeFall = 3.5f;
-                        
-                        feedbacksToPlay = (PlayerPrefs.GetString("Mesh") == "Male") 
-                            ? player.GetMovimentationFeedbacks().maleHardFallFeedback 
-                            : player.GetMovimentationFeedbacks().femaleHardFallFeedback;
+
+                        if (PlayerPrefs.GetString("Mesh") == "Male")
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().maleHardFallFeedback;
+                        else
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().femaleHardFallFeedback;
                     }
+                    
                     else
                     {
                         string[] animation = { "Caiu-Snowboard-Cabeca" };
                         player.ChangeAnimationTo(animation, "fallen", true);
                         timeFall = 4.2f;
-                        feedbacksToPlay = (PlayerPrefs.GetString("Mesh") == "Male") 
-                            ? player.GetMovimentationFeedbacks().maleHardFallFeedback 
-                            : player.GetMovimentationFeedbacks().femaleHardFallFeedback;
+
+                        if (PlayerPrefs.GetString("Mesh") == "Male")
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().maleHardFallFeedback;
+                        else
+                            feedbacksToPlay = player.GetMovimentationFeedbacks().femaleHardFallFeedback;
                     }
-
-                    feedbacksToPlay.PlayFeedbacks();
-                    newPlayerState = new Fallen(timeFall);
-
+                    
+                    newPlayerState = new Fallen(timeFall, feedbacksToPlay);
                 }
 
                 player.ChangeState(newPlayerState);

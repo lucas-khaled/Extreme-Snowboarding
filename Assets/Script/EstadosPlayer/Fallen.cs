@@ -1,4 +1,6 @@
 using System.Collections;
+using ExtremeSnowboarding.Script.Player;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace ExtremeSnowboarding.Script.EstadosPlayer
@@ -18,6 +20,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         private bool shouldDeaccelerateByRigidBody = false;
 
         private Rigidbody rb;
+        private MMFeedbacks feedbackToPlay;
 
         public override void StateEnd()
         {
@@ -65,10 +68,14 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 }
             }
 
-            if (PlayerPrefs.GetString("Mesh") == "Male")
-                player.GetMovimentationFeedbacks().maleNormalFallFeedback.PlayFeedbacks();
-            else
-                player.GetMovimentationFeedbacks().femaleNormalFallFeedback.PlayFeedbacks();
+            if (feedbackToPlay == null)
+            {
+                feedbackToPlay = (PlayerPrefs.GetString("Mesh") == "Male")
+                    ? player.GetMovimentationFeedbacks().maleNormalFallFeedback
+                    : player.GetMovimentationFeedbacks().femaleNormalFallFeedback;
+            }
+            
+            feedbackToPlay.PlayFeedbacks();
             
             player.groundedVelocity = Vector3.zero;
 
@@ -157,9 +164,10 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             }
         }
 
-        public Fallen(float timeFall)
+        public Fallen(float timeFall, MMFeedbacks feedbackToPlay)
         {
             this.timeFall = timeFall;
+            this.feedbackToPlay = feedbackToPlay;
         }
 
         public Fallen(bool isObstacle = false)
