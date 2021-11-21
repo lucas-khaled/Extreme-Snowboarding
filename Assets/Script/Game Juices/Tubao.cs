@@ -5,7 +5,6 @@ using UnityEditor;
 using ExtremeSnowboarding.Script.Player;
 using ExtremeSnowboarding.Script.Controllers;
 using DG.Tweening;
-using Photon.Pun;
 
 namespace ExtremeSnowboarding
 {
@@ -22,7 +21,7 @@ namespace ExtremeSnowboarding
         {
             player = CorridaController.instance.playersClassificated[0];
 
-            tuboInstantiate = PhotonNetwork.Instantiate("TuboPivot", player.transform.position + new Vector3(0, 80, 0), new Quaternion(0, 0, 0, 1));
+            tuboInstantiate = Instantiate(tubao, player.transform.position + new Vector3(0, 80, 0), new Quaternion(0, 0, 0, 1));
 
             tuboInstantiate.transform.DOMove(new Vector3(transform.position.x, player.transform.position.y + 3, transform.position.z), 1.5f);
         }
