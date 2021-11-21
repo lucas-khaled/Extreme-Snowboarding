@@ -30,11 +30,8 @@ namespace ExtremeSnowboarding.Script.Items
             } while (!available);
 
             player.SetItem(item);
-
-            if (EventSystem.PlayerGeneralEvents.onItemUsed != null)
-            {
-                EventSystem.PlayerGeneralEvents.onItemUsed.Invoke(player, item.GetSprite());
-            }
+            
+            EventSystem.PlayerGeneralEvents.onItemUsed?.Invoke(player, item.GetSprite());
         }
 
         private void OnTriggerEnter(Collider other)

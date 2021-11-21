@@ -197,17 +197,10 @@ namespace ExtremeSnowboarding.Script.Player
             if(!PhotonView.IsMine) return;
             
             playerInput.currentActionMap.FindAction("Item").started += ActivateItem;
-            playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;  
-            playerInput.currentActionMap.FindAction("BoostCheat").started += BoostCheat;
+            playerInput.currentActionMap.FindAction("Boost").started += ActivateBoost;
         }
+        
 
-        // The CheatCode method to rise your boost to maximum, it listens to "BoostCheat" input
-        private void BoostCheat(InputAction.CallbackContext context)
-        {
-            if(context.started)
-                AddTurbo(100);
-        }
-    
         // Method that will activate the holded item, empty the item slot and invoke an delegate. It listens to "Item" input
         private void ActivateItem(InputAction.CallbackContext context)
         {
@@ -215,11 +208,9 @@ namespace ExtremeSnowboarding.Script.Player
             {
                 Coletavel.Activate(this);
                 Coletavel = null;
-
-                if (PlayerGeneralEvents.onItemUsed != null)
-                {
-                    PlayerGeneralEvents.onItemUsed.Invoke(this, null);
-                }
+                
+                PlayerGeneralEvents.onItemUsed?.Invoke(this, null);
+                
             }
         }
     

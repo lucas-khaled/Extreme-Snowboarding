@@ -33,10 +33,8 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         private Image refFuckFriendImage;
         [SerializeField]
         private GameObject refFire;
-        [SerializeField]
-        private AudioSource audioSource;
-        [SerializeField]
-        private AudioSource audioSourceEffects;
+        [SerializeField] 
+        private AudioClip usedItemSound;
 
         [Header ("Values")]
         [SerializeField]
@@ -78,7 +76,6 @@ namespace ExtremeSnowboarding.Script.UI.HUD
         public void SetPlayer(Player.Player player)
         {
             this.player = player;
-            audioSource.Play();
         }
 
         private void OnPlayerPass(Player.Player player, int classification)
@@ -110,6 +107,8 @@ namespace ExtremeSnowboarding.Script.UI.HUD
                     refFuckFriendImage.sprite = fuckFriendSprite;
                 else
                     refFuckFriendImage.sprite = null;
+                
+                SceneAudioSource.Instance.PlayClip(usedItemSound);
             }
         }
     }

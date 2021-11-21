@@ -1846,8 +1846,7 @@ MonoBehaviour:
   refTurboBar: {fileID: 4154718780758111104}
   refFuckFriendImage: {fileID: 5582896838941559915}
   refFire: {fileID: 118871851775676837}
-  audioSource: {fileID: 6523166923301057591}
-  audioSourceEffects: {fileID: 4412777148913146613}
+  usedItemSound: {fileID: 8300000, guid: 5f48589794fcb1f49b75c4a3f05a96b3, type: 3}
   classificationSprites:
   - {fileID: -8498217423245823262, guid: 8b3d7c74b92ef884a94d474ff35d809e, type: 3}
   - {fileID: 6669198373698720804, guid: 8b3d7c74b92ef884a94d474ff35d809e, type: 3}
@@ -3032,11 +3031,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6286413946543487566, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
   m_PrefabInstance: {fileID: 989426239135993464}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &6523166923301057591 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6286413946543487567, guid: 51c038b9a31042941827c54f88cb03a1, type: 3}
-  m_PrefabInstance: {fileID: 989426239135993464}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3258703512792628973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3145,10 +3139,5 @@ PrefabInstance:
 --- !u!224 &4412777148913146612 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1154162834943222809, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
-  m_PrefabInstance: {fileID: 3258703512792628973}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &4412777148913146613 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1154162834943222808, guid: c40f5c050aab4b84b92dd87ff6c27306, type: 3}
   m_PrefabInstance: {fileID: 3258703512792628973}
   m_PrefabAsset: {fileID: 0}
