@@ -4,52 +4,52 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 7500482938498694921
-    second: Icones_0
+    second: Mola
   - first:
       213: -3497490083377588883
-    second: Icones_1
+    second: Foguete
   - first:
       213: 449118660652190612
-    second: Icones_2
+    second: Banana
   - first:
       213: -266695726705810894
-    second: Icones_3
+    second: BonecoDeNeve
   - first:
       213: -7486471757834963442
-    second: Icones_4
+    second: Peso
   - first:
       213: -6204373592038431564
-    second: Icones_5
+    second: Raio
   - first:
       213: -5523385716482863579
-    second: Icones_6
+    second: BolaDeNeveFrente
   - first:
       213: -5852701624520966315
-    second: Icones_7
+    second: GiroRapido
   - first:
       213: 3600606922035894489
-    second: Icones_8
+    second: PuloEGiro
   - first:
       213: 5894903144067719344
-    second: Icones_9
+    second: FogueteTras
   - first:
       213: 2002499635295356193
-    second: Icones_10
+    second: BolaDeNeveTras
   - first:
       213: 8652534035657661799
-    second: Icones_11
+    second: EscudoVelocidade
   - first:
       213: -8351516488709631090
-    second: Icones_12
+    second: Escudo
   - first:
       213: -590692904920195221
-    second: Icones_13
+    second: Velocidade
   - first:
       213: 7789523911086819472
-    second: Icones_14
+    second: CoelhoMina
   - first:
       213: 3532971135153583845
-    second: Icones_15
+    second: TiraTurbo
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,7 +163,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icones_0
+      name: Mola
       rect:
         serializedVersion: 2
         x: 0
@@ -171,7 +171,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_1
+      name: Foguete
       rect:
         serializedVersion: 2
         x: 256
@@ -192,7 +192,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_2
+      name: Banana
       rect:
         serializedVersion: 2
         x: 512
@@ -213,7 +213,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,7 +226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_3
+      name: BonecoDeNeve
       rect:
         serializedVersion: 2
         x: 768
@@ -234,7 +234,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,7 +247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_4
+      name: Peso
       rect:
         serializedVersion: 2
         x: 0
@@ -255,7 +255,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_5
+      name: Raio
       rect:
         serializedVersion: 2
         x: 256
@@ -276,7 +276,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,7 +289,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_6
+      name: BolaDeNeveFrente
       rect:
         serializedVersion: 2
         x: 512
@@ -297,7 +297,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,7 +310,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_7
+      name: GiroRapido
       rect:
         serializedVersion: 2
         x: 768
@@ -318,7 +318,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,7 +331,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_8
+      name: PuloEGiro
       rect:
         serializedVersion: 2
         x: 0
@@ -339,7 +339,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_9
+      name: FogueteTras
       rect:
         serializedVersion: 2
         x: 256
@@ -360,7 +360,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_10
+      name: BolaDeNeveTras
       rect:
         serializedVersion: 2
         x: 512
@@ -381,7 +381,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -394,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_11
+      name: EscudoVelocidade
       rect:
         serializedVersion: 2
         x: 768
@@ -402,7 +402,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -415,7 +415,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_12
+      name: Escudo
       rect:
         serializedVersion: 2
         x: 0
@@ -423,7 +423,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -436,7 +436,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_13
+      name: Velocidade
       rect:
         serializedVersion: 2
         x: 256
@@ -444,7 +444,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -457,7 +457,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_14
+      name: CoelhoMina
       rect:
         serializedVersion: 2
         x: 512
@@ -465,7 +465,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -478,7 +478,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icones_15
+      name: TiraTurbo
       rect:
         serializedVersion: 2
         x: 768
@@ -486,7 +486,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
