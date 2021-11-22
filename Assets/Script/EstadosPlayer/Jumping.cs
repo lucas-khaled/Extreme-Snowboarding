@@ -14,12 +14,19 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         float rotatingDirection = 0;
         bool isJumpingPressed;
         private bool canApplyForce;
+        private bool goToFallen = false;
 
         public override void StateEnd()
         {
             airTime = 0;
-            string[] animations = { "SaindoPulo", "AterrisagemVariacao1" };
-            player.ChangeAnimationTo(animations,"jumping", false);
+
+            if (!goToFallen)
+            {
+                string[] animations = { "SaindoPulo", "AterrisagemVariacao1" };
+                player.ChangeAnimationTo(animations,"jumping", false);
+            }
+
+            player.SetOnAnimator("jumping", false);
             player.SetOnAnimator("trick", false);
         
             UnsubscribeOnInputEvents();
@@ -87,15 +94,14 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 }
                 else
                 {
-                    newPlayerState = new Fallen(true);
-                    
                     float timeFall;
+                    goToFallen = true;
 
                     MMFeedbacks feedbacksToPlay;
                     if (angleDifference >= 60 && angleDifference <= 100)
                     {
                         string[] animation = { "CaiuCostas" };
-                        player.ChangeAnimationTo(animation, "fallen", true);
+                        player.ChangeAnimationTo(animation, "fallen");
                         timeFall = 2.5f;
 
                         if (PlayerPrefs.GetString("Mesh") == "Male")
@@ -107,7 +113,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     else if (angleDifference <= 160)
                     {
                         string[] animation = {"Caiu-Afunda"};
-                        player.ChangeAnimationTo(animation, "hardFall", true);
+                        player.ChangeAnimationTo(animation, "hardFall");
                         timeFall = 3.5f;
 
                         if (PlayerPrefs.GetString("Mesh") == "Male")
@@ -118,8 +124,8 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                     
                     else
                     {
-                        string[] animation = { "Caiu-Snowboard-Cabeca" };
-                        player.ChangeAnimationTo(animation, "fallen", true);
+                        string[] animation = { "Caiu-Cabeca" };
+                        player.ChangeAnimationTo(animation, "fallen");
                         timeFall = 4.2f;
 
                         if (PlayerPrefs.GetString("Mesh") == "Male")

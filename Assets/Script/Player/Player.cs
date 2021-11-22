@@ -339,7 +339,12 @@ namespace ExtremeSnowboarding.Script.Player
         /// <param name="value">Value to pass to animator variable</param>
         public void ChangeAnimationTo(string[] possibleAnimations,  string valueSetedOnAnimator = null, bool value = true, float crossFadeLength = 0.15f)
         {
-            PhotonView.RPC("ChangeAnimationTo_RPC", RpcTarget.All, 
+            ChangeAnimationTo(possibleAnimations, crossFadeLength);
+            
+            if(valueSetedOnAnimator != null)
+                CallSetOnAnimator(valueSetedOnAnimator, value);
+
+            PhotonView.RPC("ChangeAnimationTo_RPC", RpcTarget.Others, 
                 SerializeUtilities.StringArray2Byte(possibleAnimations), 
                 valueSetedOnAnimator, value, crossFadeLength);
         }
@@ -348,9 +353,10 @@ namespace ExtremeSnowboarding.Script.Player
         private void ChangeAnimationTo_RPC(byte[] possibleAnimations, string valueSetedOnAnimator, bool value,
             float crossFadeLength)
         {
-            ChangeAnimationTo(SerializeUtilities.Byte2StringArray(possibleAnimations), crossFadeLength);
             if(valueSetedOnAnimator != null)
                 CallSetOnAnimator(valueSetedOnAnimator, value);
+            
+            ChangeAnimationTo(SerializeUtilities.Byte2StringArray(possibleAnimations), crossFadeLength);
         }
         
 
@@ -370,12 +376,7 @@ namespace ExtremeSnowboarding.Script.Player
         private void OnCollisionEnter(Collision collision)
         {
             if (PhotonView.IsMine)
-            {
                 playerState.OnCollisionEnter(collision);
-                Debug.Log("mine");
-            }
-            else
-                Debug.Log("not mine");
         }
 
         private void OnDrawGizmos()
