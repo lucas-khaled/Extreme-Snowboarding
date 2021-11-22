@@ -2039,7 +2039,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Caiu-Snowboard-Cabeca
+  m_Name: Caiu-Cabeca
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4578,10 +4578,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: jumping
+    m_ConditionEvent: fallen
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: fallen
+    m_ConditionEvent: jumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: -9212630582356100379}
   m_DstState: {fileID: 0}
