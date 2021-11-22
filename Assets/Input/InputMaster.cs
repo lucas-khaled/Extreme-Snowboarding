@@ -41,14 +41,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
-                },
-                {
-                    ""name"": ""BoostCheat"",
-                    ""type"": ""Button"",
-                    ""id"": ""7e80c2a3-a079-4868-84fa-50f4d4cf7cf2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -65,33 +57,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c3cd7a0f-f99b-4c2e-9227-4be8dc672013"",
-                    ""path"": ""<Keyboard>/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c06a9a1-4347-4549-a4ea-5bd856243dcb"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1af387d5-13c7-43ed-8fec-a532029be10b"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4"",
+                    ""groups"": ""Player1"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -109,33 +79,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aa08dc0e-a526-4978-986c-b4b83c0ed431"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""Item"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cef3529d-f3ce-4a2e-82ff-37b48479b6de"",
-                    ""path"": ""<Keyboard>/semicolon"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""Item"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c9147477-de78-41ad-a47e-106b1b883fc4"",
+                    ""id"": ""051cd59d-595e-453d-8347-6802151e21f1"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4"",
+                    ""groups"": ""Player1"",
                     ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -153,78 +101,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""98851910-d6c4-4aed-bc32-39da897fb5bd"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""Boost"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc13d79d-18e9-4e54-aabd-ce953b05bd64"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""Boost"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5e504ca3-1434-46a2-b518-abe9419c5798"",
+                    ""id"": ""a87354cf-7f16-481a-95ab-906cda96aed1"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4"",
+                    ""groups"": """",
                     ""action"": ""Boost"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3238733b-19e2-45e7-9ccb-0e81d10c3179"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player1"",
-                    ""action"": ""BoostCheat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""10a71e5b-5843-42e3-9118-2645d9ad7d96"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""BoostCheat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc75b1c5-60f7-48aa-8c12-282902a6c972"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""BoostCheat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""311e3525-cbd0-491f-b3fc-999402efe21e"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player4"",
-                    ""action"": ""BoostCheat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -278,8 +160,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Player2Rotate"",
-                    ""id"": ""b18bf82c-64ca-4d57-9024-55aead433509"",
+                    ""name"": ""Player1RotateArrow"",
+                    ""id"": ""e0c6e986-6f85-4af2-9e0e-f793e1e86f59"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -290,88 +172,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""9666890d-ac3b-48a7-9b5e-985d038c9ec3"",
-                    ""path"": ""<Keyboard>/j"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""a10d29bc-e4c2-4fc5-a0bc-9ba181733168"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Player3Rotate"",
-                    ""id"": ""db3a8ae6-0414-48f0-929b-1859981dfda6"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""827079d3-c7bd-461b-8c94-b02eb86e753c"",
-                    ""path"": ""<Keyboard>/quote"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""bcb63d83-7a4b-49aa-b8cb-ccd8d9cd9a1c"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player3"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Player4Rotate"",
-                    ""id"": ""9600cdca-f10f-4306-ac5a-1999fe2bed6f"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""3e11a8ac-114c-4399-b932-689d098728c6"",
+                    ""id"": ""56aeb2d7-da25-4b8d-bc44-27787afbaf40"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4"",
+                    ""groups"": ""Player1"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""96c2cfba-4161-4e62-aafb-2bf3c60b7f8f"",
+                    ""id"": ""75a66b49-6e86-4f03-bd86-316fe8d106e9"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4"",
+                    ""groups"": ""Player1"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -398,7 +214,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player4;Player3;Player1;Player2"",
+                    ""groups"": ""Player1"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -417,33 +233,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Player2"",
-            ""bindingGroup"": ""Player2"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Player3"",
-            ""bindingGroup"": ""Player3"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Player4"",
-            ""bindingGroup"": ""Player4"",
-            ""devices"": []
         }
     ]
 }");
@@ -452,7 +241,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Grounded_Jump = m_Grounded.FindAction("Jump", throwIfNotFound: true);
         m_Grounded_Item = m_Grounded.FindAction("Item", throwIfNotFound: true);
         m_Grounded_Boost = m_Grounded.FindAction("Boost", throwIfNotFound: true);
-        m_Grounded_BoostCheat = m_Grounded.FindAction("BoostCheat", throwIfNotFound: true);
         // Jumping
         m_Jumping = asset.FindActionMap("Jumping", throwIfNotFound: true);
         m_Jumping_Rotate = m_Jumping.FindAction("Rotate", throwIfNotFound: true);
@@ -511,7 +299,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Grounded_Jump;
     private readonly InputAction m_Grounded_Item;
     private readonly InputAction m_Grounded_Boost;
-    private readonly InputAction m_Grounded_BoostCheat;
     public struct GroundedActions
     {
         private @InputMaster m_Wrapper;
@@ -519,7 +306,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Grounded_Jump;
         public InputAction @Item => m_Wrapper.m_Grounded_Item;
         public InputAction @Boost => m_Wrapper.m_Grounded_Boost;
-        public InputAction @BoostCheat => m_Wrapper.m_Grounded_BoostCheat;
         public InputActionMap Get() { return m_Wrapper.m_Grounded; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -538,9 +324,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Boost.started -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoost;
-                @BoostCheat.started -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoostCheat;
-                @BoostCheat.performed -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoostCheat;
-                @BoostCheat.canceled -= m_Wrapper.m_GroundedActionsCallbackInterface.OnBoostCheat;
             }
             m_Wrapper.m_GroundedActionsCallbackInterface = instance;
             if (instance != null)
@@ -554,9 +337,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
-                @BoostCheat.started += instance.OnBoostCheat;
-                @BoostCheat.performed += instance.OnBoostCheat;
-                @BoostCheat.canceled += instance.OnBoostCheat;
             }
         }
     }
@@ -636,39 +416,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_Player1SchemeIndex];
         }
     }
-    private int m_Player2SchemeIndex = -1;
-    public InputControlScheme Player2Scheme
-    {
-        get
-        {
-            if (m_Player2SchemeIndex == -1) m_Player2SchemeIndex = asset.FindControlSchemeIndex("Player2");
-            return asset.controlSchemes[m_Player2SchemeIndex];
-        }
-    }
-    private int m_Player3SchemeIndex = -1;
-    public InputControlScheme Player3Scheme
-    {
-        get
-        {
-            if (m_Player3SchemeIndex == -1) m_Player3SchemeIndex = asset.FindControlSchemeIndex("Player3");
-            return asset.controlSchemes[m_Player3SchemeIndex];
-        }
-    }
-    private int m_Player4SchemeIndex = -1;
-    public InputControlScheme Player4Scheme
-    {
-        get
-        {
-            if (m_Player4SchemeIndex == -1) m_Player4SchemeIndex = asset.FindControlSchemeIndex("Player4");
-            return asset.controlSchemes[m_Player4SchemeIndex];
-        }
-    }
     public interface IGroundedActions
     {
         void OnJump(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
-        void OnBoostCheat(InputAction.CallbackContext context);
     }
     public interface IJumpingActions
     {
