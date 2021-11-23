@@ -11,6 +11,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace ExtremeSnowboarding.Script.Controllers
@@ -397,7 +398,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             StopAllCoroutines();
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.LoadLevel("MenuPrincipal");
+            SceneManager.LoadScene("MenuPrincipal");
         }
 
         void OnDrawGizmos()

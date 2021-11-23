@@ -8,6 +8,7 @@ using NaughtyAttributes;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Player = Photon.Realtime.Player;
 using Random = System.Random;
 
@@ -96,9 +97,8 @@ namespace ExtremeSnowboarding.Multiplayer
         [PunRPC]
         private void RPC_LoadLevel(string sceneToLoad)
         {
-            Debug.Log("Carregando: "+sceneToLoad);
             GetComponent<MenuUIController>().PressPlay();
-            PhotonNetwork.LoadLevel(sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad);
         }
 
         public override void OnMasterClientSwitched(Player newMasterClient)
@@ -179,7 +179,6 @@ namespace ExtremeSnowboarding.Multiplayer
         private void ConnectToPhoton()
         {
             PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.AutomaticallySyncScene = true;
         }
     }
 }
