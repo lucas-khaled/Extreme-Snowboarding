@@ -129,8 +129,6 @@ namespace ExtremeSnowboarding.Script.Controllers
             
             menuInput.Enable();
             menuInput.started += PauseInput;
-
-            PhotonNetwork.AutomaticallySyncScene = false;
         }
         
         private void OnEnable()
@@ -412,7 +410,13 @@ namespace ExtremeSnowboarding.Script.Controllers
         public void ReturnToMainMenu()
         {
             StopAllCoroutines();
+            PhotonNetwork.AutomaticallySyncScene = false;
             PhotonNetwork.LeaveRoom();
+        }
+
+        public override void OnLeftRoom()
+        {
+            base.OnLeftRoom();
             SceneManager.LoadScene("MenuPrincipal");
         }
 
