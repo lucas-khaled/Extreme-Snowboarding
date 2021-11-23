@@ -113,7 +113,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 rb.velocity = Vector3.zero;
                 player.groundedVelocity = Vector3.zero;
                 player.SetOnAnimator("fallen", false);
-                player.ChangeState(new Grounded(1.2f,true));
+                player.ChangeState(new Grounded(2.7f, true));
             }
 
         }
