@@ -201,6 +201,9 @@ namespace ExtremeSnowboarding.Script.Controllers
             
             if(PhotonNetwork.IsMasterClient)
                 InvokeRepeating("CheckPlayerClassification",0,0.1f);
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void InstancePlayer(Vector3 position, PlayerData playerData)
@@ -384,11 +387,17 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         public void Pause()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             _isPaused = true;
             canvasPauseRef.SetActive(true);
         }
         public void UnPause()
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             _isPaused = false;
             canvasPauseRef.SetActive(false);
         }
