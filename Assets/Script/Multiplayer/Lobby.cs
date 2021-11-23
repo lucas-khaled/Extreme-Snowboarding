@@ -98,7 +98,9 @@ namespace ExtremeSnowboarding.Multiplayer
         private void RPC_LoadLevel(string sceneToLoad)
         {
             GetComponent<MenuUIController>().PressPlay();
-            SceneManager.LoadScene(sceneToLoad);
+            
+            if(PhotonNetwork.IsMasterClient)
+                PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
         public override void OnMasterClientSwitched(Player newMasterClient)
@@ -179,6 +181,7 @@ namespace ExtremeSnowboarding.Multiplayer
         private void ConnectToPhoton()
         {
             PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
     }
 }

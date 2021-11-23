@@ -19,7 +19,7 @@ namespace ExtremeSnowboarding
 
         public void InstantiateTubao()
         {
-            player = CorridaController.instance.playersClassificated[0];
+            player = CorridaController.instance.playersClassified[0];
 
             tuboInstantiate = Instantiate(tubao, player.transform.position + new Vector3(0, 80, 0), new Quaternion(0, 0, 0, 1));
 

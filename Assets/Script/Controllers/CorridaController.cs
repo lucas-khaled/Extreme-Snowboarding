@@ -30,7 +30,8 @@ namespace ExtremeSnowboarding.Script.Controllers
         public InputAction menuInput;
         public GameCamera camera;
         public GameObject catastrophe { get; set; }
-        public List<Player.Player> playersClassificated { get; private set; }
+        public List<Player.Player> playersFinished { get; private set; }
+        public List<Player.Player> playersClassified { get; private set; }
 
         public Action onGameStarted { get; set; }
         public Action<int> onGameCountdown { get; set; }
@@ -42,7 +43,6 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private const int CustomManualInstantiationEventCode = 1;
         private const int PlayerPassEventCode = 3;
-        private List<Player.Player> _playersFinished = new List<Player.Player>();
 
         public static CorridaController instance { get; private set; }
 
@@ -108,9 +108,12 @@ namespace ExtremeSnowboarding.Script.Controllers
         /// Set a player to finish the race
         /// </summary>
         /// <param name="player"> The player who finished the race </param>
-        public void PlayerFinishedRace(Player.Player player)
+        public void PlayerFinishedRace(Player.Player player, bool endedRace = true)
         {
-            playersClassificated.Add(player);
+            playersFinished.Add(player);
+
+            if (endedRace)
+                playersClassified.Add(player);
         }
 
         private void Awake()
@@ -120,7 +123,8 @@ namespace ExtremeSnowboarding.Script.Controllers
             
             instance = this;
 
-            playersClassificated = new List<Player.Player>();
+            playersFinished = new List<Player.Player>();
+            playersClassified = new List<Player.Player>();
             _isPaused = false;
             
             menuInput.Enable();
@@ -325,7 +329,7 @@ namespace ExtremeSnowboarding.Script.Controllers
 
             for (int i = 0; i < _playersInGame.Count - 1; i++)
             {
-                if(playersClassificated.Exists(x => x == _playersInGame[i+1]) || playersClassificated.Exists(x => x == _playersInGame[i]))
+                if(playersFinished.Exists(x => x == _playersInGame[i+1]) || playersFinished.Exists(x => x == _playersInGame[i]))
                     continue;
                 
                 float distanceXPlayer1 = _playersInGame[i].transform.position.x;

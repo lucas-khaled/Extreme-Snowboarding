@@ -65,14 +65,11 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
         
         private void FinishRaceAnimation()
         {
-            //if (CorridaController.instance.playersClassificated[0] != null)
-            //{
-            if (CorridaController.instance.playersClassificated[0] == player)
+            if (CorridaController.instance.playersClassified[0] == player)
             {
                 player.GetMovimentationFeedbacks().victoryFeedback?.PlayFeedbacks();
                 player.SetOnAnimator("highSpeed", false);
                 string[] animations = { "Ganhou-1", "Ganhou-2" };
-                //string[] animations = { "EasterEggPranchaLevada" };
                 player.ChangeAnimationTo(animations);
             }
             else
@@ -82,9 +79,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
                 string[] animations = { "Perdeu-1", "Perdeu-2", "Perdeu-3", "Perdeu-5", "EasterEggPranchaLevada" };
                 player.ChangeAnimationTo(animations);
             }
-            //}
-
-            //player.Invoke("ChangePlayerView",5);
         }
 
         void ClampPlayerRotationByGround(RaycastHit hit)

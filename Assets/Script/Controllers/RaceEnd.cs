@@ -31,7 +31,7 @@ namespace ExtremeSnowboarding.Script.Controllers
             quantityOfActivePlayer--;
 
             Player.Player player = PhotonView.Find(ID).GetComponent<Player.Player>();
-            CorridaController.instance.PlayerFinishedRace(player);
+            CorridaController.instance.PlayerFinishedRace(player, false);
                 
             if (quantityOfActivePlayer <= 0)
             {
