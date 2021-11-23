@@ -25,9 +25,6 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             value = Random.Range(15,30);
 
             player.SharedValues.actualState = "RaceEnd";
-            
-            CorridaController.instance.PlayerFinishedRace(player);
-
         }
 
         public override void StateUpdate()

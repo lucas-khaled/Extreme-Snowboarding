@@ -22,16 +22,16 @@ namespace ExtremeSnowboarding.Script.Controllers
 
         private void OnPlayerDeath(Player.Player player)
         {
-            _photonView.RPC("RPC_ReducePlayerQuantity", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
+            _photonView.RPC("RPC_ReducePlayerQuantity", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, false);
         }
 
         [PunRPC]
-        private void RPC_ReducePlayerQuantity(int ID)
+        private void RPC_ReducePlayerQuantity(int ID, bool endedRace)
         {
             quantityOfActivePlayer--;
 
             Player.Player player = PhotonView.Find(ID).GetComponent<Player.Player>();
-            CorridaController.instance.PlayerFinishedRace(player, false);
+            CorridaController.instance.PlayerFinishedRace(player, endedRace);
                 
             if (quantityOfActivePlayer <= 0)
             {
@@ -54,7 +54,7 @@ namespace ExtremeSnowboarding.Script.Controllers
                 if(!view.IsMine) return;
                 
                 other.gameObject.GetComponent<Player.Player>().ChangeState(new RaceEndState());
-                _photonView.RPC("RPC_ReducePlayerQuantity", RpcTarget.All, view.ViewID);
+                _photonView.RPC("RPC_ReducePlayerQuantity", RpcTarget.All, view.ViewID, true);
             }
         }
     }

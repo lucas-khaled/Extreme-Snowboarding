@@ -411,6 +411,7 @@ namespace ExtremeSnowboarding.Script.Controllers
         {
             StopAllCoroutines();
             PhotonNetwork.LeaveRoom();
+            PhotonNetwork.AutomaticallySyncScene = false;
             SceneManager.LoadScene("MenuPrincipal");
         }
 
