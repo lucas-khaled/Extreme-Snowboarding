@@ -61,6 +61,9 @@ namespace ExtremeSnowboarding.Script.UI.Menu
 
         private void Start()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             escolhaController.ChangeLevel(1);
             escolhaController.ChangeOverrider(instantiationSettings.GetOverriderByName("Base"));
 
