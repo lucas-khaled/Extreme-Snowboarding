@@ -26,6 +26,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
             //rb.useGravity = true;
             //rb.isKinematic = false;
             rb.velocity = Vector3.zero;
+            player.groundedVelocity = Vector3.zero;
             player.StartCoroutine(changeShouldFollowByTimer());
             path = player.gameObject.GetComponent<PathFollower>();
             PathFollower.onPathFinished += OnPathFinished;
@@ -65,7 +66,7 @@ namespace ExtremeSnowboarding.Script.EstadosPlayer
 
         private IEnumerator changeShouldFollowByTimer()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(2f);
             path.shouldFollowPath = true;
             string[] animations = { "RetornandoDoAbismo" };
             player.ChangeAnimationTo(animations, "Flying", true);
